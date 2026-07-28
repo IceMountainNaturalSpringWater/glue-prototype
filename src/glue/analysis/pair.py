@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from itertools import pairwise
-from math import sqrt
 
 from glue.models import DEFAULT_TIME_SIGNATURE, MidiClip
 
@@ -11,10 +10,13 @@ from .compatibility import (
     _EPSILON,
     KeyLike,
     _attack_bins,
+    _local_harmony_candidates,
+    _representative_bass_pitch,
     _resolve_end_beat,
     _resolve_key,
     _score_components,
-    _WindowContext,
+    _simultaneous_activity_fraction,
+    _WindowEvidence,
     scale_pitch_classes,
 )
 from .config import DEFAULT_ANALYSIS_CONFIG, AnalysisConfig
@@ -24,6 +26,8 @@ from .results import (
     BarAnalysis,
     ConflictReason,
     KeyCandidate,
+    KeyEstimate,
+    LocalHarmonyCandidate,
     PairAnalysis,
     WindowAnalysis,
 )
@@ -42,7 +46,10 @@ def _pitch_class_summary(vector: tuple[float, ...]) -> str:
         ),
         key=lambda item: (-item[0], item[1]),
     )
-    return "/".join(PITCH_CLASS_NAMES[pitch_class] for _, pitch_class in ranked[:3]) or "none"
+    return (
+        "/".join(PITCH_CLASS_NAMES[pitch_class] for _, pitch_class in ranked[:4])
+        or "none"
+    )
 
 
 def _midi_pitch_label(pitch: int) -> str:
@@ -53,54 +60,153 @@ def _midi_pitch_label(pitch: int) -> str:
 def _reason_for_harmony(
     score: float,
     index: int,
-    context: _WindowContext,
+    context: _WindowEvidence,
     key: KeyCandidate | None,
+    key_confidence: float | None,
+    harmony_a: tuple[LocalHarmonyCandidate, ...],
+    harmony_b: tuple[LocalHarmonyCandidate, ...],
 ) -> ConflictReason:
+    details = [
+        (
+            f"Clip A suggests {harmony_a[0].label} from "
+            f"{_pitch_class_summary(context.pitch_classes_a)}"
+            if harmony_a
+            else (
+                "Clip A's local harmony is unresolved from "
+                f"{_pitch_class_summary(context.pitch_classes_a)}"
+            )
+        ),
+        (
+            f"Clip B suggests {harmony_b[0].label} from "
+            f"{_pitch_class_summary(context.pitch_classes_b)}"
+            if harmony_b
+            else (
+                "Clip B's local harmony is unresolved from "
+                f"{_pitch_class_summary(context.pitch_classes_b)}"
+            )
+        ),
+    ]
     if key is not None:
         scale = scale_pitch_classes(key)
-        outside = sorted(
-            {
-                pitch_class
-                for pitch_class in range(12)
-                if pitch_class not in scale
-                and (
-                    context.pitch_classes_a[pitch_class]
-                    + context.pitch_classes_b[pitch_class]
-                )
-                > _EPSILON
-            }
+        outside_a = tuple(
+            pitch_class
+            for pitch_class in range(12)
+            if pitch_class not in scale
+            and context.pitch_classes_a[pitch_class] > _EPSILON
+        )
+        outside_b = tuple(
+            pitch_class
+            for pitch_class in range(12)
+            if pitch_class not in scale
+            and context.pitch_classes_b[pitch_class] > _EPSILON
         )
     else:
-        outside = []
-    if outside:
-        pitch_names = ", ".join(PITCH_CLASS_NAMES[pitch_class] for pitch_class in outside)
-        detail = (
-            f"{pitch_names} fall outside the estimated {key.label}; "
-            "the key estimate may itself be ambiguous"
+        outside_a = ()
+        outside_b = ()
+
+    key_qualification = ""
+    if key is not None:
+        key_qualification = (
+            f"low-confidence {key.label} estimate"
+            if key_confidence is not None and key_confidence < 0.25
+            else f"estimated {key.label}"
         )
-    else:
-        detail = (
-            f"local pitch groups {_pitch_class_summary(context.pitch_classes_a)} and "
-            f"{_pitch_class_summary(context.pitch_classes_b)} imply different harmony"
-        )
+    for clip_label, outside in (("Clip A", outside_a), ("Clip B", outside_b)):
+        if not outside:
+            continue
+        names = ", ".join(PITCH_CLASS_NAMES[pitch_class] for pitch_class in outside)
+        verb = "falls" if len(outside) == 1 else "fall"
+        details.append(f"{clip_label}'s {names} {verb} outside the {key_qualification}")
+
+    details.extend(_strong_tension_descriptions(context))
     message = (
-        f"Beats {context.start_beat:.2f}-{context.end_beat:.2f}: possible harmonic "
-        f"tension ({score:.1f}/100); {detail}."
+        f"Beats {context.start_beat:.2f}-{context.end_beat:.2f}: possible local "
+        f"harmony tension ({score:.1f}/100). {'; '.join(details)}."
     )
     return ConflictReason("harmonic", score, index, message)
+
+
+def _strong_tension_descriptions(
+    context: _WindowEvidence,
+) -> tuple[str, ...]:
+    tensions: list[tuple[float, int, int, str]] = []
+    for pitch_class_a, weight_a in enumerate(context.pitch_classes_a):
+        if weight_a <= _EPSILON:
+            continue
+        for pitch_class_b, weight_b in enumerate(context.pitch_classes_b):
+            if weight_b <= _EPSILON:
+                continue
+            distance = (pitch_class_b - pitch_class_a) % 12
+            simple_distance = min(distance, (-distance) % 12)
+            if simple_distance == 1:
+                label = "a semitone"
+            elif simple_distance == 6:
+                label = "a tritone"
+            else:
+                continue
+            tensions.append(
+                (
+                    -(weight_a * weight_b),
+                    pitch_class_a,
+                    pitch_class_b,
+                    label,
+                )
+            )
+    tensions.sort()
+    descriptions = []
+    for _, pitch_class_a, pitch_class_b, label in tensions[:2]:
+        names = sorted(
+            (
+                PITCH_CLASS_NAMES[pitch_class_a],
+                PITCH_CLASS_NAMES[pitch_class_b],
+            )
+        )
+        descriptions.append(f"{names[0]}-{names[1]} forms {label}")
+    return tuple(descriptions)
 
 
 def _reason_for_bass(
     score: float,
     index: int,
-    context: _WindowContext,
+    context: _WindowEvidence,
+    harmony_a: tuple[LocalHarmonyCandidate, ...],
+    harmony_b: tuple[LocalHarmonyCandidate, ...],
 ) -> ConflictReason:
-    lowest_a = min(item.note.pitch for item in context.pitched_a)
-    lowest_b = min(item.note.pitch for item in context.pitched_b)
+    lowest_a = _representative_bass_pitch(context, use_clip_a=True)
+    lowest_b = _representative_bass_pitch(context, use_clip_a=False)
+    if lowest_a is None or lowest_b is None:
+        raise ValueError("bass reasons require simultaneous pitched activity")
+    distance = (lowest_b - lowest_a) % 12
+    simple_distance = min(distance, (-distance) % 12)
+    if simple_distance == 1:
+        interval_detail = "form a semitone"
+    elif simple_distance == 6:
+        interval_detail = "form a tritone"
+    else:
+        interval_detail = "provide uncertain shared-root support"
+    roots = ""
+    if harmony_a and harmony_b:
+        roots = (
+            f"; the local readings suggest {harmony_a[0].label} and "
+            f"{harmony_b[0].label}"
+        )
+    elif harmony_a:
+        roots = (
+            f"; Clip A suggests {harmony_a[0].label} while Clip B's local "
+            "root is unresolved"
+        )
+    elif harmony_b:
+        roots = (
+            f"; Clip B suggests {harmony_b[0].label} while Clip A's local "
+            "root is unresolved"
+        )
+    else:
+        roots = "; both local roots are unresolved"
     message = (
-        f"Beats {context.start_beat:.2f}-{context.end_beat:.2f}: lowest active notes "
-        f"{_midi_pitch_label(lowest_a)} and {_midi_pitch_label(lowest_b)} provide "
-        f"uncertain shared-root support ({score:.1f}/100)."
+        f"Beats {context.start_beat:.2f}-{context.end_beat:.2f}: Clip A's sustained "
+        f"bass {_midi_pitch_label(lowest_a)} and Clip B's "
+        f"{_midi_pitch_label(lowest_b)} {interval_detail}{roots} "
+        f"({score:.1f}/100)."
     )
     return ConflictReason("bass", score, index, message)
 
@@ -108,7 +214,7 @@ def _reason_for_bass(
 def _reason_for_register(
     score: float,
     index: int,
-    context: _WindowContext,
+    context: _WindowEvidence,
 ) -> ConflictReason:
     pitches_a = [item.note.pitch for item in context.pitched_a]
     pitches_b = [item.note.pitch for item in context.pitched_b]
@@ -126,7 +232,7 @@ def _reason_for_rhythm(
     index: int,
     clip_a: MidiClip,
     clip_b: MidiClip,
-    context: _WindowContext,
+    context: _WindowEvidence,
     config: AnalysisConfig,
 ) -> ConflictReason:
     bins_a = _attack_bins(
@@ -157,16 +263,37 @@ def _window_reasons(
     index: int,
     clip_a: MidiClip,
     clip_b: MidiClip,
-    context: _WindowContext,
+    context: _WindowEvidence,
     key: KeyCandidate | None,
+    key_confidence: float | None,
+    harmony_a: tuple[LocalHarmonyCandidate, ...],
+    harmony_b: tuple[LocalHarmonyCandidate, ...],
     config: AnalysisConfig,
 ) -> tuple[ConflictReason, ...]:
     harmonic, bass, register, rhythm = scores
     reasons: list[ConflictReason] = []
     if harmonic < config.reason_threshold and context.pitched_a and context.pitched_b:
-        reasons.append(_reason_for_harmony(harmonic, index, context, key))
+        reasons.append(
+            _reason_for_harmony(
+                harmonic,
+                index,
+                context,
+                key,
+                key_confidence,
+                harmony_a,
+                harmony_b,
+            )
+        )
     if bass < config.reason_threshold and context.pitched_a and context.pitched_b:
-        reasons.append(_reason_for_bass(bass, index, context))
+        reasons.append(
+            _reason_for_bass(
+                bass,
+                index,
+                context,
+                harmony_a,
+                harmony_b,
+            )
+        )
     if register < config.reason_threshold and context.pitched_a and context.pitched_b:
         reasons.append(_reason_for_register(register, index, context))
     if rhythm < config.reason_threshold:
@@ -183,23 +310,6 @@ def _window_reasons(
     return tuple(sorted(reasons, key=lambda reason: (reason.score, reason.component)))
 
 
-def _activity_fraction(
-    clip: MidiClip,
-    start_beat: float,
-    end_beat: float,
-) -> float:
-    window_length = end_beat - start_beat
-    active_duration = 0.0
-    for note in clip.notes:
-        onset = note.onset_ticks / clip.ticks_per_beat
-        note_end = note.end_ticks / clip.ticks_per_beat
-        active_duration += max(
-            0.0,
-            min(note_end, end_beat) - max(onset, start_beat),
-        )
-    return min(1.0, active_duration / window_length)
-
-
 def _activity_weight(
     clip_a: MidiClip,
     clip_b: MidiClip,
@@ -212,9 +322,12 @@ def _activity_weight(
     remain represented in the aggregate score.
     """
 
-    fraction_a = _activity_fraction(clip_a, start_beat, end_beat)
-    fraction_b = _activity_fraction(clip_b, start_beat, end_beat)
-    return sqrt(fraction_a * fraction_b)
+    return _simultaneous_activity_fraction(
+        clip_a,
+        clip_b,
+        start_beat,
+        end_beat,
+    )
 
 
 def analyze_window(
@@ -233,6 +346,11 @@ def analyze_window(
     if index < 0 or bar_index < 0:
         raise ValueError("index and bar_index must be non-negative")
     resolved_end = _resolve_end_beat(clip_a, clip_b, start_beat, end_beat)
+    key_confidence = (
+        key.confidence
+        if isinstance(key, KeyEstimate)
+        else (1.0 if isinstance(key, KeyCandidate) else None)
+    )
     resolved_key = _resolve_key(key)
     harmonic, bass, register, rhythm, context = _score_components(
         clip_a,
@@ -240,6 +358,16 @@ def analyze_window(
         resolved_key,
         start_beat,
         resolved_end,
+        config,
+    )
+    harmony_a = _local_harmony_candidates(
+        context.pitch_classes_a,
+        resolved_key,
+        config,
+    )
+    harmony_b = _local_harmony_candidates(
+        context.pitch_classes_b,
+        resolved_key,
         config,
     )
     overall = _clamp_score(
@@ -271,9 +399,14 @@ def analyze_window(
             clip_b,
             context,
             resolved_key,
+            key_confidence,
+            harmony_a,
+            harmony_b,
             config,
         ),
         bar_index=bar_index,
+        local_harmony_a=harmony_a,
+        local_harmony_b=harmony_b,
     )
 
 

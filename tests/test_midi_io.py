@@ -7,7 +7,16 @@ from pathlib import Path
 import mido
 import pytest
 
-from glue.io import MidiParseError, MidiWriteError, load_midi, read_midi, save_midi, write_midi
+from glue.io import (
+    MidiContentError,
+    MidiParseError,
+    MidiWriteError,
+    load_midi,
+    read_midi,
+    save_midi,
+    validate_for_analysis,
+    write_midi,
+)
 from glue.models import MidiClip, MidiNote, TempoChange, TimeSignatureChange, TrackInfo
 
 
@@ -132,6 +141,106 @@ def test_parser_reports_unmatched_events_without_inventing_notes(tmp_path: Path)
     assert len(document.warnings) == 2
     assert "unmatched note-off" in document.warnings[0]
     assert "unterminated note-on" in document.warnings[1]
+    with pytest.raises(MidiContentError, match="no complete positive-duration notes"):
+        validate_for_analysis(document)
+
+
+def test_analysis_validation_accepts_warning_bearing_midi_with_a_complete_note(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "warning-with-note.mid"
+    midi = mido.MidiFile(type=0, ticks_per_beat=480)
+    track = mido.MidiTrack()
+    midi.tracks.append(track)
+    track.extend(
+        (
+            mido.Message("note_off", note=61, velocity=0, time=0),
+            mido.Message("note_on", note=60, velocity=80, time=0),
+            mido.Message("note_off", note=60, velocity=0, time=480),
+        )
+    )
+    midi.save(filename=source)
+
+    document = load_midi(source)
+
+    assert len(document.warnings) == 1
+    assert validate_for_analysis(document) is document
+
+
+def test_valid_empty_midi_remains_inspectable_but_is_not_analyzable(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "empty-track.mid"
+    midi = mido.MidiFile(type=1, ticks_per_beat=480)
+    midi.tracks.append(mido.MidiTrack([mido.MetaMessage("end_of_track")]))
+    midi.save(filename=source)
+
+    document = load_midi(source)
+
+    assert document.clip.notes == ()
+    assert document.warnings == ()
+    with pytest.raises(MidiContentError, match="empty-track.mid"):
+        validate_for_analysis(document)
+
+
+def test_analysis_validation_accepts_positive_duration_percussion(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "percussion.mid"
+    write_midi(
+        MidiClip(
+            ticks_per_beat=480,
+            notes=(MidiNote(0, 36, 0, 120, 100, 0, 9),),
+            midi_type=0,
+        ),
+        source,
+    )
+
+    document = load_midi(source)
+
+    assert validate_for_analysis(document) is document
+
+
+def test_loader_reports_missing_directory_and_zero_byte_paths_clearly(
+    tmp_path: Path,
+) -> None:
+    missing = tmp_path / "missing.mid"
+    zero_byte = tmp_path / "zero.mid"
+    zero_byte.write_bytes(b"")
+
+    with pytest.raises(MidiParseError, match="does not exist.*missing.mid"):
+        load_midi(missing)
+    with pytest.raises(MidiParseError, match="not a file"):
+        load_midi(tmp_path)
+    with pytest.raises(MidiParseError, match="is empty.*zero.mid"):
+        load_midi(zero_byte)
+
+
+@pytest.mark.parametrize(
+    ("filename", "content"),
+    (
+        ("random.mid", b"this is not a MIDI file"),
+        (
+            "truncated.mid",
+            b"MThd\x00\x00\x00\x06\x00\x00\x00\x01\x01\xe0"
+            + b"MTrk\x00\x00\x00\x04\x00\x90",
+        ),
+    ),
+)
+def test_loader_wraps_malformed_files_with_nonblank_context(
+    tmp_path: Path,
+    filename: str,
+    content: bytes,
+) -> None:
+    source = tmp_path / filename
+    source.write_bytes(content)
+
+    with pytest.raises(MidiParseError) as caught:
+        load_midi(source)
+
+    message = str(caught.value)
+    assert filename in message
+    assert message.split(":", maxsplit=1)[-1].strip()
 
 
 def test_unchanged_template_export_preserves_every_message(tmp_path: Path) -> None:
@@ -146,6 +255,20 @@ def test_unchanged_template_export_preserves_every_message(tmp_path: Path) -> No
     after = mido.MidiFile(filename=output)
     assert (after.type, after.ticks_per_beat) == (before.type, before.ticks_per_beat)
     assert _message_dicts(output) == _message_dicts(source)
+
+
+def test_template_export_refuses_to_overwrite_its_loaded_source(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "source.mid"
+    _write_complex_source(source)
+    before = source.read_bytes()
+    document = load_midi(source)
+
+    with pytest.raises(MidiWriteError, match="Refusing to overwrite"):
+        save_midi(document, source)
+
+    assert source.read_bytes() == before
 
 
 def test_repaired_export_changes_only_bound_note_pitch_fields(tmp_path: Path) -> None:

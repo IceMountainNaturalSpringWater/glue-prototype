@@ -2,14 +2,21 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
+from itertools import pairwise
 from math import exp, floor, sqrt
 from typing import TypeAlias
 
 from glue.models import MidiClip, MidiNote
 
 from .config import DEFAULT_ANALYSIS_CONFIG, AnalysisConfig
-from .results import KeyCandidate, KeyEstimate
+from .results import (
+    ChordQuality,
+    KeyCandidate,
+    KeyEstimate,
+    LocalHarmonyCandidate,
+)
 
 KeyLike: TypeAlias = KeyCandidate | KeyEstimate | None
 
@@ -47,9 +54,10 @@ class _WeightedNote:
 
 
 @dataclass(frozen=True, slots=True)
-class _ChordCandidate:
+class _ChordTemplate:
     root_pc: int
     pitch_classes: frozenset[int]
+    quality: ChordQuality
 
 
 @dataclass(frozen=True, slots=True)
@@ -62,8 +70,33 @@ class _WindowContext:
     pitch_classes_b: tuple[float, ...]
 
 
+@dataclass(frozen=True, slots=True)
+class _WindowEvidence:
+    start_beat: float
+    end_beat: float
+    segments: tuple[_WindowContext, ...]
+    pitched_a: tuple[_WeightedNote, ...]
+    pitched_b: tuple[_WeightedNote, ...]
+    pitch_classes_a: tuple[float, ...]
+    pitch_classes_b: tuple[float, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class _ScoredChord:
+    template: _ChordTemplate
+    probability: float
+    coverage: float
+    completeness: float
+
+
 def _clamp_score(value: float) -> float:
     return max(0.0, min(100.0, value))
+
+
+def _clamp_unit_interval(value: float) -> float:
+    """Bound a mathematically unit-interval calculation against float drift."""
+
+    return max(0.0, min(1.0, value))
 
 
 def _resolve_key(key: KeyLike) -> KeyCandidate | None:
@@ -174,6 +207,189 @@ def _window_context(
     )
 
 
+def _event_boundaries(
+    clip_a: MidiClip,
+    clip_b: MidiClip,
+    start_beat: float,
+    end_beat: float,
+    *,
+    pitched_only: bool,
+) -> tuple[float, ...]:
+    boundaries = [start_beat, end_beat]
+    for clip in (clip_a, clip_b):
+        for note in clip.notes:
+            if note.duration_ticks <= 0 or (pitched_only and note.is_percussion):
+                continue
+            onset = note.onset_ticks / clip.ticks_per_beat
+            note_end = note.end_ticks / clip.ticks_per_beat
+            if note_end <= start_beat + _EPSILON or onset >= end_beat - _EPSILON:
+                continue
+            boundaries.extend(
+                (
+                    max(start_beat, onset),
+                    min(end_beat, note_end),
+                )
+            )
+
+    ordered: list[float] = []
+    for boundary in sorted(boundaries):
+        if not ordered or boundary - ordered[-1] > _EPSILON:
+            ordered.append(boundary)
+    return tuple(ordered)
+
+
+def _combine_segment_notes(
+    segments: tuple[_WindowContext, ...],
+    *,
+    use_clip_a: bool,
+) -> tuple[_WeightedNote, ...]:
+    combined: dict[int, _WeightedNote] = {}
+    for segment in segments:
+        notes = segment.pitched_a if use_clip_a else segment.pitched_b
+        for item in notes:
+            existing = combined.get(item.note.id)
+            if existing is None:
+                combined[item.note.id] = item
+                continue
+            combined[item.note.id] = _WeightedNote(
+                note=item.note,
+                onset_beat=item.onset_beat,
+                end_beat=item.end_beat,
+                overlap_beats=existing.overlap_beats + item.overlap_beats,
+                evidence_weight=existing.evidence_weight + item.evidence_weight,
+                attacked=existing.attacked or item.attacked,
+            )
+    return tuple(
+        sorted(
+            combined.values(),
+            key=lambda item: (
+                item.note.onset_ticks,
+                item.note.track,
+                item.note.id,
+            ),
+        )
+    )
+
+
+def _sum_pitch_class_vectors(
+    segments: tuple[_WindowContext, ...],
+    *,
+    use_clip_a: bool,
+) -> tuple[float, ...]:
+    return tuple(
+        sum(
+            (
+                segment.pitch_classes_a
+                if use_clip_a
+                else segment.pitch_classes_b
+            )[pitch_class]
+            for segment in segments
+        )
+        for pitch_class in range(12)
+    )
+
+
+def _window_evidence(
+    clip_a: MidiClip,
+    clip_b: MidiClip,
+    start_beat: float,
+    end_beat: float,
+    config: AnalysisConfig,
+) -> _WindowEvidence:
+    segments: list[_WindowContext] = []
+    boundaries = _event_boundaries(
+        clip_a,
+        clip_b,
+        start_beat,
+        end_beat,
+        pitched_only=True,
+    )
+    for segment_start, segment_end in pairwise(boundaries):
+        if segment_end - segment_start <= _EPSILON:
+            continue
+        context = _window_context(
+            clip_a,
+            clip_b,
+            segment_start,
+            segment_end,
+            config,
+        )
+        if context.pitched_a and context.pitched_b:
+            segments.append(context)
+
+    resolved_segments = tuple(segments)
+    return _WindowEvidence(
+        start_beat=start_beat,
+        end_beat=end_beat,
+        segments=resolved_segments,
+        pitched_a=_combine_segment_notes(resolved_segments, use_clip_a=True),
+        pitched_b=_combine_segment_notes(resolved_segments, use_clip_a=False),
+        pitch_classes_a=_sum_pitch_class_vectors(
+            resolved_segments,
+            use_clip_a=True,
+        ),
+        pitch_classes_b=_sum_pitch_class_vectors(
+            resolved_segments,
+            use_clip_a=False,
+        ),
+    )
+
+
+def _segment_weighted_score(
+    evidence: _WindowEvidence,
+    scorer: Callable[[_WindowContext], float],
+) -> float:
+    total_duration = sum(
+        segment.end_beat - segment.start_beat for segment in evidence.segments
+    )
+    if total_duration <= _EPSILON:
+        return 100.0
+    return _clamp_score(
+        sum(
+            scorer(segment) * (segment.end_beat - segment.start_beat)
+            for segment in evidence.segments
+        )
+        / total_duration
+    )
+
+
+def _has_active_note(
+    clip: MidiClip,
+    start_beat: float,
+    end_beat: float,
+) -> bool:
+    return any(
+        note.duration_ticks > 0
+        and note.end_ticks / clip.ticks_per_beat > start_beat + _EPSILON
+        and note.onset_ticks / clip.ticks_per_beat < end_beat - _EPSILON
+        for note in clip.notes
+    )
+
+
+def _simultaneous_activity_fraction(
+    clip_a: MidiClip,
+    clip_b: MidiClip,
+    start_beat: float,
+    end_beat: float,
+) -> float:
+    """Return the fraction with any positive-duration activity in both clips."""
+
+    boundaries = _event_boundaries(
+        clip_a,
+        clip_b,
+        start_beat,
+        end_beat,
+        pitched_only=False,
+    )
+    simultaneous = sum(
+        segment_end - segment_start
+        for segment_start, segment_end in pairwise(boundaries)
+        if _has_active_note(clip_a, segment_start, segment_end)
+        and _has_active_note(clip_b, segment_start, segment_end)
+    )
+    return max(0.0, min(1.0, simultaneous / (end_beat - start_beat)))
+
+
 def _normalized(vector: tuple[float, ...]) -> tuple[float, ...]:
     total = sum(vector)
     if total <= _EPSILON:
@@ -198,7 +414,28 @@ def _vertical_compatibility(
     )
 
 
-def _diatonic_chords(key: KeyCandidate) -> tuple[_ChordCandidate, ...]:
+_CHORD_QUALITIES: dict[frozenset[int], ChordQuality] = {
+    frozenset((0, 4, 7)): "major",
+    frozenset((0, 3, 7)): "minor",
+    frozenset((0, 3, 6)): "diminished",
+    frozenset((0, 4, 8)): "augmented",
+    frozenset((0, 4, 7, 11)): "major seventh",
+    frozenset((0, 4, 7, 10)): "dominant seventh",
+    frozenset((0, 3, 7, 10)): "minor seventh",
+    frozenset((0, 3, 6, 10)): "half-diminished seventh",
+    frozenset((0, 3, 6, 9)): "diminished seventh",
+}
+
+
+def _chord_quality(
+    root_pc: int,
+    pitch_classes: frozenset[int],
+) -> ChordQuality:
+    intervals = frozenset((pitch_class - root_pc) % 12 for pitch_class in pitch_classes)
+    return _CHORD_QUALITIES.get(intervals, "other")
+
+
+def _diatonic_chords(key: KeyCandidate) -> tuple[_ChordTemplate, ...]:
     scale = tuple(
         (key.tonic_pc + interval) % 12
         for interval in (
@@ -207,38 +444,177 @@ def _diatonic_chords(key: KeyCandidate) -> tuple[_ChordCandidate, ...]:
             else MINOR_SCALE_INTERVALS
         )
     )
-    chords: list[_ChordCandidate] = []
+    chords: list[_ChordTemplate] = []
     for degree in range(7):
         triad = frozenset(scale[index % 7] for index in (degree, degree + 2, degree + 4))
         seventh = frozenset(
             scale[index % 7]
             for index in (degree, degree + 2, degree + 4, degree + 6)
         )
-        chords.append(_ChordCandidate(root_pc=scale[degree], pitch_classes=triad))
-        chords.append(_ChordCandidate(root_pc=scale[degree], pitch_classes=seventh))
+        chords.append(
+            _ChordTemplate(
+                root_pc=scale[degree],
+                pitch_classes=triad,
+                quality=_chord_quality(scale[degree], triad),
+            )
+        )
+        chords.append(
+            _ChordTemplate(
+                root_pc=scale[degree],
+                pitch_classes=seventh,
+                quality=_chord_quality(scale[degree], seventh),
+            )
+        )
     return tuple(chords)
 
 
-def _chord_distribution(
+def _scored_chords(
     pitch_classes: tuple[float, ...],
-    chords: tuple[_ChordCandidate, ...],
-) -> tuple[float, ...]:
+    chords: tuple[_ChordTemplate, ...],
+    config: AnalysisConfig,
+) -> tuple[_ScoredChord, ...]:
     normalized = _normalized(pitch_classes)
     if sum(normalized) <= _EPSILON:
-        return tuple(1.0 / len(chords) for _ in chords)
+        probability = 1.0 / len(chords)
+        return tuple(
+            _ScoredChord(
+                template=chord,
+                probability=probability,
+                coverage=0.0,
+                completeness=0.0,
+            )
+            for chord in chords
+        )
+
+    observed = frozenset(
+        pitch_class
+        for pitch_class, weight in enumerate(pitch_classes)
+        if weight > _EPSILON
+    )
     likelihoods = []
+    evidence: list[tuple[float, float]] = []
     for chord in chords:
-        coverage = sum(normalized[pitch_class] for pitch_class in chord.pitch_classes)
-        # Equivalent to exp(4*coverage - 3*(1-coverage)); the shared exp(-3)
-        # is omitted because normalization cancels it.
-        likelihoods.append(exp(7.0 * coverage))
+        # This is mathematically at most one, but ordinary humanized velocity
+        # weights can make the floating-point sum 1.0000000000000002.
+        coverage = _clamp_unit_interval(
+            sum(normalized[pitch_class] for pitch_class in chord.pitch_classes)
+        )
+        completeness = len(observed & chord.pitch_classes) / len(chord.pitch_classes)
+        root_mass = normalized[chord.root_pc]
+        likelihoods.append(
+            exp(
+                config.chord_coverage_weight * coverage
+                + config.chord_completeness_weight * completeness
+                + config.chord_root_weight * root_mass
+            )
+        )
+        evidence.append((coverage, completeness))
     total = sum(likelihoods)
-    return tuple(value / total for value in likelihoods)
+    return tuple(
+        _ScoredChord(
+            template=chord,
+            probability=likelihood / total,
+            coverage=coverage,
+            completeness=completeness,
+        )
+        for chord, likelihood, (coverage, completeness) in zip(
+            chords,
+            likelihoods,
+            evidence,
+            strict=True,
+        )
+    )
+
+
+def _local_harmony_candidates(
+    pitch_classes: tuple[float, ...],
+    key: KeyCandidate | None,
+    config: AnalysisConfig,
+) -> tuple[LocalHarmonyCandidate, ...]:
+    if key is None or sum(pitch_classes) <= _EPSILON:
+        return ()
+    scored = _scored_chords(pitch_classes, _diatonic_chords(key), config)
+    if max(item.coverage for item in scored) <= _EPSILON:
+        return ()
+    ranked = sorted(
+        scored,
+        key=lambda item: (
+            -item.probability,
+            -item.coverage,
+            -item.completeness,
+            len(item.template.pitch_classes),
+            item.template.root_pc,
+            item.template.quality,
+        ),
+    )
+    return tuple(
+        LocalHarmonyCandidate(
+            root_pc=item.template.root_pc,
+            quality=item.template.quality,
+            pitch_classes=tuple(sorted(item.template.pitch_classes)),
+            probability=item.probability,
+            coverage=item.coverage,
+            completeness=item.completeness,
+        )
+        for item in ranked[: config.local_harmony_candidate_count]
+    )
+
+
+def infer_local_harmony_candidates(
+    clip: MidiClip,
+    key: KeyLike,
+    *,
+    start_beat: float = 0.0,
+    end_beat: float | None = None,
+    config: AnalysisConfig = DEFAULT_ANALYSIS_CONFIG,
+) -> tuple[LocalHarmonyCandidate, ...]:
+    """Return ranked, qualified local chord interpretations for one clip."""
+
+    if start_beat < 0:
+        raise ValueError("start_beat must be non-negative")
+    resolved_end = (
+        max(float(clip.duration_quarter_notes), start_beat + 1.0)
+        if end_beat is None
+        else end_beat
+    )
+    if resolved_end <= start_beat:
+        raise ValueError("end_beat must be greater than start_beat")
+    notes = _active_pitched_notes(clip, start_beat, resolved_end, config)
+    return _local_harmony_candidates(
+        _pitch_class_vector(notes),
+        _resolve_key(key),
+        config,
+    )
+
+
+def _joint_chord_fit(
+    pitch_classes_a: tuple[float, ...],
+    pitch_classes_b: tuple[float, ...],
+    chords: tuple[_ChordTemplate, ...],
+) -> float:
+    union = tuple(
+        left + right
+        for left, right in zip(
+            pitch_classes_a,
+            pitch_classes_b,
+            strict=True,
+        )
+    )
+    normalized = _normalized(union)
+    if sum(normalized) <= _EPSILON:
+        return 1.0
+    return _clamp_unit_interval(
+        max(
+            sum(normalized[pitch_class] for pitch_class in chord.pitch_classes)
+            for chord in chords
+        )
+    )
 
 
 def _harmonic_from_context(
     context: _WindowContext,
     key: KeyCandidate | None,
+    config: AnalysisConfig,
 ) -> float:
     if not context.pitched_a or not context.pitched_b:
         return 100.0
@@ -260,14 +636,25 @@ def _harmonic_from_context(
         in_scale_evidence / total_evidence if total_evidence > _EPSILON else 1.0
     )
     chords = _diatonic_chords(key)
-    distribution_a = _chord_distribution(context.pitch_classes_a, chords)
-    distribution_b = _chord_distribution(context.pitch_classes_b, chords)
+    distribution_a = _scored_chords(context.pitch_classes_a, chords, config)
+    distribution_b = _scored_chords(context.pitch_classes_b, chords, config)
     chord_agreement = sum(
-        sqrt(left * right)
+        sqrt(left.probability * right.probability)
         for left, right in zip(distribution_a, distribution_b, strict=True)
     )
+    joint_fit = _joint_chord_fit(
+        context.pitch_classes_a,
+        context.pitch_classes_b,
+        chords,
+    )
     return _clamp_score(
-        100.0 * (0.50 * vertical + 0.30 * scale_fit + 0.20 * chord_agreement)
+        100.0
+        * (
+            config.harmonic_vertical_weight * vertical
+            + config.harmonic_scale_weight * scale_fit
+            + config.harmonic_chord_agreement_weight * chord_agreement
+            + config.harmonic_joint_fit_weight * joint_fit
+        )
     )
 
 
@@ -283,8 +670,18 @@ def score_harmonic_compatibility(
     """Score pitch-class, scale, and inferred local-chord compatibility."""
 
     resolved_end = _resolve_end_beat(clip_a, clip_b, start_beat, end_beat)
-    context = _window_context(clip_a, clip_b, start_beat, resolved_end, config)
-    return _harmonic_from_context(context, _resolve_key(key))
+    evidence = _window_evidence(
+        clip_a,
+        clip_b,
+        start_beat,
+        resolved_end,
+        config,
+    )
+    resolved_key = _resolve_key(key)
+    return _segment_weighted_score(
+        evidence,
+        lambda context: _harmonic_from_context(context, resolved_key, config),
+    )
 
 
 def _lowest_note(notes: tuple[_WeightedNote, ...]) -> _WeightedNote:
@@ -302,12 +699,12 @@ def _lowest_note(notes: tuple[_WeightedNote, ...]) -> _WeightedNote:
 def _expected_bass_support(
     bass_pc: int,
     key: KeyCandidate,
-    chords: tuple[_ChordCandidate, ...],
-    distribution: tuple[float, ...],
+    chords: tuple[_ChordTemplate, ...],
+    distribution: tuple[_ScoredChord, ...],
 ) -> float:
     scale = scale_pitch_classes(key)
     expected = 0.0
-    for chord, probability in zip(chords, distribution, strict=True):
+    for chord, scored in zip(chords, distribution, strict=True):
         if bass_pc == chord.root_pc:
             support = 1.0
         elif (bass_pc - chord.root_pc) % 12 == 7:
@@ -318,13 +715,14 @@ def _expected_bass_support(
             support = 0.55
         else:
             support = 0.20
-        expected += probability * support
+        expected += scored.probability * support
     return expected
 
 
 def _bass_from_context(
     context: _WindowContext,
     key: KeyCandidate | None,
+    config: AnalysisConfig,
 ) -> float:
     if not context.pitched_a or not context.pitched_b:
         return 100.0
@@ -344,7 +742,7 @@ def _bass_from_context(
             strict=True,
         )
     )
-    distribution = _chord_distribution(union, chords)
+    distribution = _scored_chords(union, chords, config)
     support_a = _expected_bass_support(bass_a, key, chords, distribution)
     support_b = _expected_bass_support(bass_b, key, chords, distribution)
     return _clamp_score(
@@ -364,8 +762,39 @@ def score_bass_compatibility(
     """Score the two lowest active pitches with probabilistic root support."""
 
     resolved_end = _resolve_end_beat(clip_a, clip_b, start_beat, end_beat)
-    context = _window_context(clip_a, clip_b, start_beat, resolved_end, config)
-    return _bass_from_context(context, _resolve_key(key))
+    evidence = _window_evidence(
+        clip_a,
+        clip_b,
+        start_beat,
+        resolved_end,
+        config,
+    )
+    resolved_key = _resolve_key(key)
+    return _segment_weighted_score(
+        evidence,
+        lambda context: _bass_from_context(context, resolved_key, config),
+    )
+
+
+def _representative_bass_pitch(
+    evidence: _WindowEvidence,
+    *,
+    use_clip_a: bool,
+) -> int | None:
+    durations: dict[int, float] = {}
+    for segment in evidence.segments:
+        notes = segment.pitched_a if use_clip_a else segment.pitched_b
+        if not notes:
+            continue
+        pitch = _lowest_note(notes).note.pitch
+        durations[pitch] = (
+            durations.get(pitch, 0.0)
+            + segment.end_beat
+            - segment.start_beat
+        )
+    if not durations:
+        return None
+    return min(durations, key=lambda pitch: (-durations[pitch], pitch))
 
 
 def _absolute_pitch_distribution(
@@ -423,8 +852,14 @@ def score_register_compatibility(
     """Score dense simultaneous occupation of nearby absolute registers."""
 
     resolved_end = _resolve_end_beat(clip_a, clip_b, start_beat, end_beat)
-    context = _window_context(clip_a, clip_b, start_beat, resolved_end, config)
-    return _register_from_context(context)
+    evidence = _window_evidence(
+        clip_a,
+        clip_b,
+        start_beat,
+        resolved_end,
+        config,
+    )
+    return _segment_weighted_score(evidence, _register_from_context)
 
 
 def _attack_bins(
@@ -497,14 +932,20 @@ def _score_components(
     start_beat: float,
     end_beat: float,
     config: AnalysisConfig,
-) -> tuple[float, float, float, float, _WindowContext]:
+) -> tuple[float, float, float, float, _WindowEvidence]:
     """Score all components while sharing the expensive window evidence."""
 
-    context = _window_context(clip_a, clip_b, start_beat, end_beat, config)
+    evidence = _window_evidence(clip_a, clip_b, start_beat, end_beat, config)
     return (
-        _harmonic_from_context(context, key),
-        _bass_from_context(context, key),
-        _register_from_context(context),
+        _segment_weighted_score(
+            evidence,
+            lambda context: _harmonic_from_context(context, key, config),
+        ),
+        _segment_weighted_score(
+            evidence,
+            lambda context: _bass_from_context(context, key, config),
+        ),
+        _segment_weighted_score(evidence, _register_from_context),
         _rhythm_score(clip_a, clip_b, start_beat, end_beat, config),
-        context,
+        evidence,
     )

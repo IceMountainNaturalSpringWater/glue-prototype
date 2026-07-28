@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from dataclasses import dataclass, replace
+from enum import StrEnum
 from math import floor
 
 from glue.analysis import (
@@ -18,12 +19,57 @@ from glue.models import MidiClip, MidiNote
 ALLOWED_MINIMAL_DELTAS = (-2, -1, 1, 2, -12, 12)
 _NEARBY_DELTAS = (-2, -1, 1, 2)
 _OCTAVE_DELTAS = (-12, 12)
+_BALANCED_DELTAS = (-4, -3, -2, -1, 1, 2, 3, 4)
+_CREATIVE_DELTAS = (
+    -7,
+    -6,
+    -5,
+    -4,
+    -3,
+    -2,
+    -1,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+)
 _EPSILON = 1e-9
+
+
+class RepairPreset(StrEnum):
+    """Named preservation/search policies exposed by the repair API."""
+
+    MINIMAL = "minimal"
+    BALANCED = "balanced"
+    CREATIVE = "creative"
+
+    @property
+    def label(self) -> str:
+        """Return a display-ready preset name."""
+
+        return self.value.title()
+
+
+class OctavePolicy(StrEnum):
+    """Control when one-octave pitch substitutions enter the search."""
+
+    NEVER = "never"
+    REGISTER_CONFLICT = "register-conflict"
+    ALWAYS = "always"
 
 
 @dataclass(frozen=True, slots=True)
 class MinimalRepairConfig:
-    """Transparent search limits and edit penalties for Minimal mode."""
+    """Transparent deterministic search policy for one repair preset.
+
+    The original V0.1 fields intentionally remain first and retain their
+    defaults so existing positional and keyword construction stays compatible.
+    ``preservation=50`` scales every penalty by exactly ``1.0`` and therefore
+    reproduces the V0.1 Minimal objective.
+    """
 
     weak_window_threshold: float = 65.0
     maximum_changes: int = 4
@@ -35,6 +81,12 @@ class MinimalRepairConfig:
     semitone_distance_penalty: float = 0.20
     contour_penalty: float = 0.50
     octave_penalty: float = 1.25
+    preset: RepairPreset = RepairPreset.MINIMAL
+    preservation: int = 50
+    nearby_deltas: tuple[int, ...] = _NEARBY_DELTAS
+    octave_policy: OctavePolicy = OctavePolicy.REGISTER_CONFLICT
+    use_local_harmony_candidates: bool = False
+    maximum_candidate_pitches_per_note: int = len(ALLOWED_MINIMAL_DELTAS)
 
     def __post_init__(self) -> None:
         if not 0 <= self.weak_window_threshold <= 100:
@@ -45,6 +97,8 @@ class MinimalRepairConfig:
             raise ValueError("maximum_change_fraction must be between 0 and 1")
         if self.maximum_candidate_notes_per_step <= 0:
             raise ValueError("maximum_candidate_notes_per_step must be positive")
+        if self.maximum_candidate_pitches_per_note <= 0:
+            raise ValueError("maximum_candidate_pitches_per_note must be positive")
         if self.minimum_score_improvement < 0:
             raise ValueError("minimum_score_improvement must be non-negative")
         for name in (
@@ -55,9 +109,108 @@ class MinimalRepairConfig:
         ):
             if getattr(self, name) < 0:
                 raise ValueError(f"{name} must be non-negative")
+        if not isinstance(self.preset, RepairPreset):
+            raise TypeError("preset must be a RepairPreset")
+        if isinstance(self.preservation, bool) or not isinstance(
+            self.preservation,
+            int,
+        ):
+            raise TypeError("preservation must be an integer between 0 and 100")
+        if not 0 <= self.preservation <= 100:
+            raise ValueError("preservation must be between 0 and 100")
+        if not isinstance(self.octave_policy, OctavePolicy):
+            raise TypeError("octave_policy must be an OctavePolicy")
+        if not isinstance(self.use_local_harmony_candidates, bool):
+            raise TypeError("use_local_harmony_candidates must be a bool")
+        if (
+            not self.nearby_deltas
+            or len(set(self.nearby_deltas)) != len(self.nearby_deltas)
+            or any(
+                isinstance(delta, bool)
+                or not isinstance(delta, int)
+                or delta == 0
+                or abs(delta) >= 12
+                for delta in self.nearby_deltas
+            )
+        ):
+            raise ValueError(
+                "nearby_deltas must contain unique non-zero integer deltas "
+                "strictly within one octave"
+            )
+
+    @property
+    def preservation_scale(self) -> float:
+        """Map 0-100 preservation to a monotonic penalty multiplier.
+
+        A non-zero floor still discourages gratuitous edits at the lowest
+        setting.  The midpoint is the exact V0.1 penalty behavior.
+        """
+
+        return 0.25 + 0.015 * self.preservation
 
 
-DEFAULT_MINIMAL_REPAIR_CONFIG = MinimalRepairConfig()
+# The canonical V0.2 name is additive; the original class name remains valid.
+RepairConfig = MinimalRepairConfig
+
+
+def _normalize_preset(preset: RepairPreset | str) -> RepairPreset:
+    if isinstance(preset, RepairPreset):
+        return preset
+    try:
+        return RepairPreset(preset.lower())
+    except (AttributeError, ValueError) as exc:
+        choices = ", ".join(item.value for item in RepairPreset)
+        raise ValueError(f"preset must be one of: {choices}") from exc
+
+
+def repair_config_for(
+    preset: RepairPreset | str,
+    preservation: int = 50,
+) -> RepairConfig:
+    """Return calibrated deterministic defaults for one repair preset."""
+
+    resolved = _normalize_preset(preset)
+    if resolved is RepairPreset.MINIMAL:
+        return RepairConfig(
+            preset=resolved,
+            preservation=preservation,
+        )
+    if resolved is RepairPreset.BALANCED:
+        return RepairConfig(
+            weak_window_threshold=72.0,
+            maximum_changes=8,
+            maximum_change_fraction=0.50,
+            edit_penalty=0.45,
+            semitone_distance_penalty=0.12,
+            contour_penalty=0.35,
+            octave_penalty=0.50,
+            preset=resolved,
+            preservation=preservation,
+            nearby_deltas=_BALANCED_DELTAS,
+            octave_policy=OctavePolicy.ALWAYS,
+            maximum_candidate_pitches_per_note=10,
+        )
+    return RepairConfig(
+        weak_window_threshold=80.0,
+        maximum_changes=12,
+        maximum_change_fraction=0.75,
+        minimum_score_improvement=0.05,
+        edit_penalty=0.25,
+        semitone_distance_penalty=0.06,
+        contour_penalty=0.20,
+        octave_penalty=0.20,
+        preset=resolved,
+        preservation=preservation,
+        nearby_deltas=_CREATIVE_DELTAS,
+        octave_policy=OctavePolicy.ALWAYS,
+        use_local_harmony_candidates=True,
+        maximum_candidate_pitches_per_note=24,
+    )
+
+
+DEFAULT_MINIMAL_REPAIR_CONFIG = repair_config_for(RepairPreset.MINIMAL)
+DEFAULT_BALANCED_REPAIR_CONFIG = repair_config_for(RepairPreset.BALANCED)
+DEFAULT_CREATIVE_REPAIR_CONFIG = repair_config_for(RepairPreset.CREATIVE)
 
 
 @dataclass(frozen=True, slots=True)
@@ -75,6 +228,7 @@ class NoteEdit:
     score_improvement: float
     penalty: float
     objective_gain: float
+    preset: RepairPreset = RepairPreset.MINIMAL
 
     def __post_init__(self) -> None:
         if self.note_id < 0:
@@ -85,8 +239,15 @@ class NoteEdit:
             raise ValueError("repaired_pitch must be between 0 and 127")
         if self.repaired_pitch == self.original_pitch:
             raise ValueError("an edit must change pitch")
-        if self.delta not in ALLOWED_MINIMAL_DELTAS:
+        if not isinstance(self.preset, RepairPreset):
+            raise TypeError("preset must be a RepairPreset")
+        if (
+            self.preset is RepairPreset.MINIMAL
+            and self.delta not in ALLOWED_MINIMAL_DELTAS
+        ):
             raise ValueError(f"unsupported Minimal-mode pitch delta: {self.delta}")
+        if abs(self.delta) > 12:
+            raise ValueError("repair pitch deltas may not exceed one octave")
         if self.score_improvement <= 0:
             raise ValueError("score_improvement must be positive")
         if self.penalty < 0:
@@ -126,6 +287,8 @@ class MinimalRepairResult:
     after_analysis: PairAnalysis
     edits: tuple[NoteEdit, ...]
     objective_gain: float
+    repair_config: RepairConfig = DEFAULT_MINIMAL_REPAIR_CONFIG
+    analysis_config: AnalysisConfig = DEFAULT_ANALYSIS_CONFIG
 
     @property
     def changed_note_count(self) -> int:
@@ -156,6 +319,18 @@ class MinimalRepairResult:
         """Compatibility alias used by candidate-list UIs."""
 
         return self.repaired_clip
+
+    @property
+    def preset(self) -> RepairPreset:
+        """Return the preset that produced this result."""
+
+        return self.repair_config.preset
+
+    @property
+    def preservation(self) -> int:
+        """Return the preservation-slider value used for this result."""
+
+        return self.repair_config.preservation
 
     @property
     def before(self) -> PairAnalysis:
@@ -316,13 +491,14 @@ def _candidate_penalty(
     config: MinimalRepairConfig,
 ) -> float:
     delta = repaired_pitch - notes[note_index].pitch
-    return (
+    base_penalty = (
         config.edit_penalty
         + config.semitone_distance_penalty * abs(delta)
         + config.contour_penalty
         * _contour_disruption(notes, note_index, repaired_pitch)
         + (config.octave_penalty if abs(delta) == 12 else 0.0)
     )
+    return base_penalty * config.preservation_scale
 
 
 def _candidate_rank(candidate: _ScoredCandidate) -> tuple[float, ...]:
@@ -426,6 +602,85 @@ def _local_window_improvement(
     ) / total_weight
 
 
+def _uses_octave_candidates(
+    windows: tuple[WindowAnalysis, ...],
+    config: RepairConfig,
+) -> bool:
+    if config.octave_policy is OctavePolicy.ALWAYS:
+        return True
+    if config.octave_policy is OctavePolicy.NEVER:
+        return False
+    return any(
+        window.register_score < config.weak_window_threshold
+        for window in windows
+    )
+
+
+def _pitch_class_deltas(pitch: int, pitch_class: int) -> tuple[int, ...]:
+    """Return stable one-octave deltas that reach ``pitch_class``."""
+
+    return tuple(
+        sorted(
+            (
+                delta
+                for delta in range(-12, 13)
+                if delta != 0
+                and 0 <= pitch + delta <= 127
+                and (pitch + delta) % 12 == pitch_class
+            ),
+            key=lambda delta: (abs(delta), delta),
+        )
+    )
+
+
+def _creative_harmony_deltas(
+    note: MidiNote,
+    windows: tuple[WindowAnalysis, ...],
+) -> tuple[int, ...]:
+    """Derive candidates from the locked clip's public local-chord evidence."""
+
+    deltas: list[int] = []
+    seen: set[int] = set()
+    for window in sorted(windows, key=lambda item: item.index):
+        for harmony in window.local_harmony_a:
+            for pitch_class in harmony.pitch_classes:
+                for delta in _pitch_class_deltas(note.pitch, pitch_class):
+                    if delta not in seen:
+                        seen.add(delta)
+                        deltas.append(delta)
+    return tuple(deltas)
+
+
+def _candidate_deltas(
+    note: MidiNote,
+    windows: tuple[WindowAnalysis, ...],
+    config: RepairConfig,
+) -> tuple[int, ...]:
+    """Return a bounded, stable candidate sequence for one note."""
+
+    ordered = list(config.nearby_deltas)
+    use_octaves = _uses_octave_candidates(windows, config)
+    if use_octaves:
+        ordered.extend(_OCTAVE_DELTAS)
+    if config.use_local_harmony_candidates:
+        ordered.extend(
+            delta
+            for delta in _creative_harmony_deltas(note, windows)
+            if use_octaves or abs(delta) != 12
+        )
+
+    deduplicated: list[int] = []
+    seen: set[int] = set()
+    for delta in ordered:
+        if delta in seen or not 0 <= note.pitch + delta <= 127:
+            continue
+        seen.add(delta)
+        deduplicated.append(delta)
+        if len(deduplicated) >= config.maximum_candidate_pitches_per_note:
+            break
+    return tuple(deduplicated)
+
+
 def _best_next_edit(
     locked_clip: MidiClip,
     current_clip: MidiClip,
@@ -448,18 +703,9 @@ def _best_next_edit(
         eligible,
         repair_config,
     ):
-        deltas = _NEARBY_DELTAS
-        if any(
-            window.register_score < repair_config.weak_window_threshold
-            for window in weak_windows
-        ):
-            deltas += _OCTAVE_DELTAS
-
         note_index = note_index_by_id[note.id]
-        for delta in deltas:
+        for delta in _candidate_deltas(note, weak_windows, repair_config):
             repaired_pitch = note.pitch + delta
-            if not 0 <= repaired_pitch <= 127:
-                continue
             if _introduces_pitch_collision(
                 note,
                 repaired_pitch,
@@ -530,22 +776,21 @@ def _change_limit(clip: MidiClip, config: MinimalRepairConfig) -> int:
     return min(config.maximum_changes, fractional_limit)
 
 
-def generate_minimal_repair(
+def generate_repair(
     locked_clip: MidiClip,
     unlocked_clip: MidiClip,
     *,
-    repair_config: MinimalRepairConfig = DEFAULT_MINIMAL_REPAIR_CONFIG,
+    repair_config: RepairConfig = DEFAULT_MINIMAL_REPAIR_CONFIG,
     analysis_config: AnalysisConfig = DEFAULT_ANALYSIS_CONFIG,
-) -> MinimalRepairResult:
-    """Generate one conservative, deterministic pitch-only repair candidate.
+) -> RepairResult:
+    """Generate one deterministic pitch-only repair for the selected preset.
 
     Each greedy step considers only notes intersecting a weak harmonic, bass,
     or register window, with a deterministic cap on candidate notes.  Candidate
     gain is measured over the affected weak windows, while global compatibility
-    may not decrease.  Nearby semitone moves are always available; octave moves
-    are considered only for windows with weak register compatibility.  Rhythm,
-    onset, duration, velocity, track, channel, note identity, and clip metadata
-    are never changed.
+    may not decrease.  The preset controls nearby, octave, and public
+    local-harmony candidates.  Rhythm, onset, duration, velocity, track,
+    channel, note identity, and clip metadata are never changed.
     """
 
     before = analyze_pair(locked_clip, unlocked_clip, config=analysis_config)
@@ -577,6 +822,7 @@ def generate_minimal_repair(
                 score_improvement=candidate.score_improvement,
                 penalty=candidate.penalty,
                 objective_gain=candidate.objective_gain,
+                preset=repair_config.preset,
             )
         )
         edited_ids = frozenset((*edited_ids, candidate.note_id))
@@ -591,4 +837,27 @@ def generate_minimal_repair(
         after_analysis=current_analysis,
         edits=tuple(edits),
         objective_gain=objective_gain,
+        repair_config=repair_config,
+        analysis_config=analysis_config,
+    )
+
+
+def generate_minimal_repair(
+    locked_clip: MidiClip,
+    unlocked_clip: MidiClip,
+    *,
+    repair_config: MinimalRepairConfig = DEFAULT_MINIMAL_REPAIR_CONFIG,
+    analysis_config: AnalysisConfig = DEFAULT_ANALYSIS_CONFIG,
+) -> MinimalRepairResult:
+    """Generate the backward-compatible V0.1 Minimal repair candidate."""
+
+    if repair_config.preset is not RepairPreset.MINIMAL:
+        raise ValueError(
+            "generate_minimal_repair requires a Minimal repair configuration"
+        )
+    return generate_repair(
+        locked_clip,
+        unlocked_clip,
+        repair_config=repair_config,
+        analysis_config=analysis_config,
     )

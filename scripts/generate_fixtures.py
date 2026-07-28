@@ -10,8 +10,10 @@ Example:
 from __future__ import annotations
 
 import argparse
-from collections.abc import Iterable, Sequence
+from collections.abc import Iterable, Mapping, Sequence
+from dataclasses import dataclass
 from pathlib import Path
+from types import MappingProxyType
 
 import mido
 
@@ -20,6 +22,43 @@ from glue.models import MidiClip, MidiNote, TempoChange, TimeSignatureChange, Tr
 
 TICKS_PER_BEAT = 480
 NoteSpec = tuple[int, int, int]
+
+
+@dataclass(frozen=True, slots=True)
+class DemoScenario:
+    """One discoverable pair in the generated V0.2 demo catalog."""
+
+    title: str
+    fixture_a: str
+    fixture_b: str
+    purpose: str
+
+
+DEMO_SCENARIOS: Mapping[str, DemoScenario] = MappingProxyType(
+    {
+        "same_key_clean": DemoScenario(
+            title="Same-key compatible control",
+            fixture_a="demo_same_key_a",
+            fixture_b="demo_same_key_clean_b",
+            purpose="Confident C-major layers with compatible local harmony.",
+        ),
+        "same_key_conflict": DemoScenario(
+            title="Same-key local conflict",
+            fixture_a="demo_same_key_a",
+            fixture_b="demo_same_key_conflict_b",
+            purpose=(
+                "Confident C-major layers whose E-minor and B-diminished "
+                "windows conflict."
+            ),
+        ),
+        "preset_repair": DemoScenario(
+            title="Progressive preset repair",
+            fixture_a="demo_preset_context",
+            fixture_b="demo_preset_source",
+            purpose="Minimal, Balanced, and Creative produce one, two, and three edits.",
+        ),
+    }
+)
 
 
 def _clip(name: str, specs: Iterable[NoteSpec], *, channel: int = 0) -> MidiClip:
@@ -56,8 +95,38 @@ def _chord(pitches: Sequence[int], onset: int, duration: int) -> list[NoteSpec]:
     return [(pitch, onset, duration) for pitch in pitches]
 
 
+_DEMO_CHORDS: Mapping[str, tuple[int, ...]] = MappingProxyType(
+    {
+        "C": (48, 60, 64, 67),
+        "Am": (45, 60, 64),
+        "F": (41, 57, 60),
+        "Em": (40, 55, 59),
+        "Bdim": (47, 62, 65),
+        "G": (43, 59, 62),
+    }
+)
+
+
+def _progression(
+    chord_names: Sequence[str],
+    *,
+    pitch_shift: int = 0,
+    onset_offset: int = 0,
+    duration: int = TICKS_PER_BEAT,
+) -> list[NoteSpec]:
+    return [
+        (
+            pitch + pitch_shift,
+            beat * TICKS_PER_BEAT + onset_offset,
+            duration,
+        )
+        for beat, chord_name in enumerate(chord_names)
+        for pitch in _DEMO_CHORDS[chord_name]
+    ]
+
+
 def fixture_clips() -> dict[str, MidiClip]:
-    """Return the complete deterministic V0.1 fixture set."""
+    """Return the deterministic V0.1 fixtures plus additive V0.2 demos."""
 
     identical = _melody((60, 62, 64, 67))
     c_minor_melody = _melody((60, 63, 67, 65))
@@ -94,6 +163,39 @@ def fixture_clips() -> dict[str, MidiClip]:
     octave_original = _melody((60, 62, 64, 67))
     octave_up = _melody((72, 74, 76, 79))
 
+    same_key_sequence = ("C", "C", "Am", "F", "Em", "Bdim", "G", "C")
+    same_key_conflict_sequence = (
+        "C",
+        "C",
+        "Am",
+        "F",
+        "Bdim",
+        "Em",
+        "G",
+        "C",
+    )
+    demo_same_key_a = _progression(same_key_sequence)
+    demo_same_key_clean_b = _progression(
+        same_key_sequence,
+        pitch_shift=36,
+        onset_offset=TICKS_PER_BEAT // 8,
+        duration=7 * TICKS_PER_BEAT // 8,
+    )
+    demo_same_key_conflict_b = _progression(
+        same_key_conflict_sequence,
+        pitch_shift=36,
+        onset_offset=TICKS_PER_BEAT // 8,
+        duration=7 * TICKS_PER_BEAT // 8,
+    )
+
+    demo_preset_context = [
+        *_chord((48, 52, 55), 0, TICKS_PER_BEAT),
+        *_chord((57, 60, 64), TICKS_PER_BEAT, TICKS_PER_BEAT),
+        *_chord((53, 57, 60), 2 * TICKS_PER_BEAT, TICKS_PER_BEAT),
+        *_chord((55, 59, 62), 3 * TICKS_PER_BEAT, TICKS_PER_BEAT),
+    ]
+    demo_preset_source = _melody((60, 66, 61, 66))
+
     return {
         "identical_a": _clip("identical_a", identical),
         "identical_b": _clip("identical_b", identical),
@@ -111,6 +213,23 @@ def fixture_clips() -> dict[str, MidiClip]:
         "out_of_key_melody": _clip("out_of_key_melody", out_of_key_melody),
         "octave_original": _clip("octave_original", octave_original),
         "octave_up": _clip("octave_up", octave_up),
+        "demo_same_key_a": _clip("demo_same_key_a", demo_same_key_a),
+        "demo_same_key_clean_b": _clip(
+            "demo_same_key_clean_b",
+            demo_same_key_clean_b,
+        ),
+        "demo_same_key_conflict_b": _clip(
+            "demo_same_key_conflict_b",
+            demo_same_key_conflict_b,
+        ),
+        "demo_preset_context": _clip(
+            "demo_preset_context",
+            demo_preset_context,
+        ),
+        "demo_preset_source": _clip(
+            "demo_preset_source",
+            demo_preset_source,
+        ),
     }
 
 

@@ -23,6 +23,11 @@ EXPECTED_FIXTURES = {
     "out_of_key_melody",
     "octave_original",
     "octave_up",
+    "demo_same_key_a",
+    "demo_same_key_clean_b",
+    "demo_same_key_conflict_b",
+    "demo_preset_context",
+    "demo_preset_source",
     "metadata_roundtrip",
 }
 

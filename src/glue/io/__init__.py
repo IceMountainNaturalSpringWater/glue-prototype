@@ -2,6 +2,7 @@
 
 from .midi import (
     EventReference,
+    MidiContentError,
     MidiDocument,
     MidiIOError,
     MidiParseError,
@@ -13,11 +14,13 @@ from .midi import (
     read_midi,
     save_midi,
     tick_to_seconds,
+    validate_for_analysis,
     write_midi,
 )
 
 __all__ = [
     "EventReference",
+    "MidiContentError",
     "MidiDocument",
     "MidiIOError",
     "MidiParseError",
@@ -29,5 +32,6 @@ __all__ = [
     "read_midi",
     "save_midi",
     "tick_to_seconds",
+    "validate_for_analysis",
     "write_midi",
 ]

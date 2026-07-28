@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import struct
 from collections import defaultdict, deque
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
@@ -26,6 +27,10 @@ class MidiParseError(MidiIOError):
 
 class MidiWriteError(MidiIOError):
     """Raised when a clip cannot be exported without violating invariants."""
+
+
+class MidiContentError(MidiIOError):
+    """Raised when a valid MIDI document has no content GLUE can analyze."""
 
 
 @dataclass(frozen=True, slots=True)
@@ -68,6 +73,27 @@ class MidiDocument:
         return self._bindings
 
 
+def validate_for_analysis(document: MidiDocument) -> MidiDocument:
+    """Require at least one complete positive-duration note for pair analysis.
+
+    Parsing remains deliberately permissive so callers can inspect warnings
+    for unmatched or unterminated note events.  The GUI calls this separate
+    policy check before assigning a document to a clip slot.
+    """
+
+    if any(note.duration_ticks > 0 for note in document.clip.notes):
+        return document
+    warning_detail = (
+        f" Parser warnings: {'; '.join(document.warnings)}"
+        if document.warnings
+        else ""
+    )
+    raise MidiContentError(
+        f"MIDI file '{document.source_path}' contains no complete "
+        f"positive-duration notes to analyze.{warning_detail}"
+    )
+
+
 @dataclass(frozen=True, slots=True)
 class _PendingNote:
     pitch: int
@@ -96,12 +122,28 @@ def load_midi(path: PathLike) -> MidiDocument:
 
     source_path = Path(path)
     try:
+        if not source_path.exists():
+            raise MidiParseError(f"MIDI file does not exist: '{source_path}'")
+        if not source_path.is_file():
+            raise MidiParseError(f"MIDI path is not a file: '{source_path}'")
+        if source_path.stat().st_size == 0:
+            raise MidiParseError(f"MIDI file is empty: '{source_path}'")
         midi = mido.MidiFile(filename=source_path)
         return _parse_loaded_midi(midi, source_path)
     except MidiParseError:
         raise
-    except (EOFError, OSError, TypeError, ValueError) as exc:
-        raise MidiParseError(f"Could not read MIDI file '{source_path}': {exc}") from exc
+    except (
+        EOFError,
+        OSError,
+        TypeError,
+        ValueError,
+        KeyError,
+        struct.error,
+    ) as exc:
+        detail = str(exc).strip() or type(exc).__name__
+        raise MidiParseError(
+            f"Could not read MIDI file '{source_path}': {detail}"
+        ) from exc
 
 
 def parse_midi(path: PathLike) -> MidiDocument:
@@ -318,6 +360,14 @@ def write_midi(
     """
 
     output_path = Path(destination)
+    if template is not None and _paths_refer_to_same_file(
+        output_path,
+        template.source_path,
+    ):
+        raise MidiWriteError(
+            "Refusing to overwrite the loaded source MIDI file; "
+            "choose a different export path"
+        )
     if template is None:
         midi = _build_midi(clip)
     else:
@@ -329,6 +379,15 @@ def write_midi(
     except (OSError, TypeError, ValueError) as exc:
         raise MidiWriteError(f"Could not write MIDI file '{output_path}': {exc}") from exc
     return output_path
+
+
+def _paths_refer_to_same_file(left: Path, right: Path) -> bool:
+    """Compare existing files by identity and other paths by resolved name."""
+
+    try:
+        return left.samefile(right)
+    except OSError:
+        return left.resolve(strict=False) == right.resolve(strict=False)
 
 
 def save_midi(

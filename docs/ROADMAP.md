@@ -3,8 +3,10 @@
 ## V0.1 - Working standalone prototype
 MIDI A/B import, diagnostics, compatibility heatmap, Minimal repair, MIDI export.
 
-## V0.2 - Demo quality
-Better local harmony inference, preservation control, three repair modes, stronger explanations, before/after visualization.
+## V0.2 - Demo quality (current prototype)
+Simultaneous-note and local-harmony inference, preservation control, three
+deterministic pitch-repair modes, specific explanations, before/after
+visualization, hardened MIDI errors, and generated demo scenarios.
 
 ## V0.3 - Producer validation
 Test with real producers; collect failure cases; tune scoring from feedback; improve workflow.

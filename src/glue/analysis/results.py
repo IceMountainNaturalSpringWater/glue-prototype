@@ -7,6 +7,18 @@ from typing import Literal
 
 KeyMode = Literal["major", "minor"]
 ComponentName = Literal["harmonic", "bass", "register", "rhythm"]
+ChordQuality = Literal[
+    "major",
+    "minor",
+    "diminished",
+    "augmented",
+    "major seventh",
+    "dominant seventh",
+    "minor seventh",
+    "half-diminished seventh",
+    "diminished seventh",
+    "other",
+]
 
 PITCH_CLASS_NAMES = (
     "C",
@@ -96,6 +108,44 @@ class KeyEstimate:
 
 
 @dataclass(frozen=True, slots=True)
+class LocalHarmonyCandidate:
+    """One transparent local chord interpretation for a clip window."""
+
+    root_pc: int
+    quality: ChordQuality
+    pitch_classes: tuple[int, ...]
+    probability: float
+    coverage: float
+    completeness: float
+
+    def __post_init__(self) -> None:
+        if not 0 <= self.root_pc <= 11:
+            raise ValueError("root_pc must be between 0 and 11")
+        if (
+            not self.pitch_classes
+            or tuple(sorted(set(self.pitch_classes))) != self.pitch_classes
+            or any(not 0 <= pitch_class <= 11 for pitch_class in self.pitch_classes)
+        ):
+            raise ValueError(
+                "pitch_classes must be a non-empty sorted tuple of unique values "
+                "between 0 and 11"
+            )
+        for name, value in (
+            ("probability", self.probability),
+            ("coverage", self.coverage),
+            ("completeness", self.completeness),
+        ):
+            if not 0 <= value <= 1:
+                raise ValueError(f"{name} must be between 0 and 1")
+
+    @property
+    def label(self) -> str:
+        """Return a deterministic canonical-sharp chord label."""
+
+        return f"{PITCH_CLASS_NAMES[self.root_pc]} {self.quality}"
+
+
+@dataclass(frozen=True, slots=True)
 class ConflictReason:
     """A transparent heuristic warning attached to one analysis window."""
 
@@ -120,6 +170,8 @@ class WindowAnalysis:
     activity_weight: float
     reasons: tuple[ConflictReason, ...] = ()
     bar_index: int = 0
+    local_harmony_a: tuple[LocalHarmonyCandidate, ...] = ()
+    local_harmony_b: tuple[LocalHarmonyCandidate, ...] = ()
 
     @property
     def score(self) -> float:
