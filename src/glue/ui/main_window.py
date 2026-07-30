@@ -1,4 +1,4 @@
-"""Main PySide6 window for the GLUE V0.2 workflow."""
+"""Main PySide6 window for the GLUE V0.3 two-clip workflow."""
 
 from __future__ import annotations
 
@@ -7,9 +7,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal, TypeVar, cast
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import QSignalBlocker, Qt
 from PySide6.QtWidgets import (
-    QButtonGroup,
+    QApplication,
     QComboBox,
     QFileDialog,
     QGridLayout,
@@ -20,8 +20,10 @@ from PySide6.QtWidgets import (
     QListWidgetItem,
     QMainWindow,
     QMessageBox,
+    QProgressBar,
     QPushButton,
-    QRadioButton,
+    QScrollArea,
+    QSizePolicy,
     QSlider,
     QSplitter,
     QVBoxLayout,
@@ -29,18 +31,34 @@ from PySide6.QtWidgets import (
 )
 
 from glue.analysis import KeyEstimate, PairAnalysis, analyze_pair, estimate_key
+from glue.exporting import (
+    RepairExportPaths,
+    RepairExportResult,
+)
+from glue.exporting import (
+    export_change_report as write_change_report,
+)
+from glue.exporting import (
+    export_combined_repair_preview as write_combined_repair_preview,
+)
+from glue.exporting import (
+    export_repair_bundle as write_repair_bundle,
+)
+from glue.exporting import (
+    export_revised_clip as write_revised_clip,
+)
 from glue.fixes import (
-    MinimalRepairResult,
+    BalanceSuggestion,
+    EditingStrategy,
     NoteEdit,
+    PairRepairResult,
     RepairPreset,
-    generate_minimal_repair,
-    generate_repair,
-    repair_config_for,
+    generate_pair_repair,
+    suggest_preservation_balance,
 )
 from glue.io import (
     MidiDocument,
     load_midi,
-    save_midi,
     validate_for_analysis,
 )
 from glue.models import MidiClip
@@ -49,14 +67,18 @@ from .visualizations import CompatibilityTimelineWidget, PianoRollWidget
 
 ClipSlot = Literal["A", "B"]
 _ResultT = TypeVar("_ResultT")
+_BOTH_LOCKED_MESSAGE = (
+    "Both clips are fully preserved. Lower at least one preservation value "
+    "to generate a repair."
+)
 
 
 @dataclass(frozen=True, slots=True)
 class _CandidatePreview:
-    """One generated repair and the slot it is safe to export for."""
+    """One complete pair candidate plus its optional legacy export slot."""
 
-    result: MinimalRepairResult
-    repaired_slot: ClipSlot
+    result: PairRepairResult
+    repaired_slot: ClipSlot | None
 
 
 class MainWindow(QMainWindow):
@@ -67,9 +89,12 @@ class MainWindow(QMainWindow):
         self.document_a: MidiDocument | None = None
         self.document_b: MidiDocument | None = None
         self.pair_analysis: PairAnalysis | None = None
-        self.repair_result: MinimalRepairResult | None = None
+        self.repair_result: PairRepairResult | None = None
         self.repaired_slot: ClipSlot | None = None
         self._repair_candidates: list[_CandidatePreview] = []
+        self._analysis_cache: dict[tuple[MidiClip, MidiClip], PairAnalysis] = {}
+        self._busy_depth = 0
+        self._pending_balance_suggestion: BalanceSuggestion | None = None
 
         self.setWindowTitle("GLUE — MIDI Compatibility")
         self.resize(1180, 820)
@@ -77,12 +102,6 @@ class MainWindow(QMainWindow):
         self._build_ui()
         self._connect_signals()
         self._reset_analysis()
-
-    @property
-    def locked_slot(self) -> ClipSlot:
-        """Return the clip currently protected from repair."""
-
-        return "A" if self.lock_a_radio.isChecked() else "B"
 
     def load_clip(self, slot: ClipSlot | str, path: str | Path) -> MidiDocument:
         """Load one MIDI file into slot A or B without opening a dialog."""
@@ -113,32 +132,118 @@ class MainWindow(QMainWindow):
         """Analyze the loaded clips and update every analysis display."""
 
         document_a, document_b = self._require_documents()
-        result = analyze_pair(document_a.clip, document_b.clip)
+        cache_key = (document_a.clip, document_b.clip)
+        result = self._analysis_cache.get(cache_key)
+        reused = result is not None
+        if result is None:
+            result = self._run_busy(
+                "Analyzing compatibility…",
+                lambda: analyze_pair(document_a.clip, document_b.clip),
+            )
+            # A small content-keyed cache handles repeated button events and
+            # reloading the same immutable clips without growing indefinitely.
+            if len(self._analysis_cache) >= 4:
+                self._analysis_cache.pop(next(iter(self._analysis_cache)))
+            self._analysis_cache[cache_key] = result
         self.pair_analysis = result
         self._clear_candidate(restore_original=False)
         self.piano_roll.set_clips(document_a.clip, document_b.clip)
         self._display_analysis(result, update_keys=True)
         self._update_repair_enabled()
         status = (
-            f"Analysis complete: {result.overall_score:.1f}/100."
+            f"Analysis {'reused' if reused else 'complete'}: "
+            f"{result.overall_score:.1f}/100."
             if _has_comparable_overlap(result)
-            else "Analysis complete: no comparable overlap."
+            else (
+                "Analysis reused: no comparable overlap."
+                if reused
+                else "Analysis complete: no comparable overlap."
+            )
         )
         self.statusBar().showMessage(status, 5000)
         return result
 
-    def repair_minimal(self) -> MinimalRepairResult:
+    def repair_minimal(self) -> PairRepairResult:
         """Generate the backward-compatible V0.1 Minimal repair candidate."""
 
-        return self._generate_repair_candidate(RepairPreset.MINIMAL, 50)
+        return self._generate_repair_candidate(RepairPreset.MINIMAL)
 
-    def repair_selected(self) -> MinimalRepairResult:
+    def repair_selected(self) -> PairRepairResult:
         """Generate and preview a repair using the selected UI controls."""
 
-        return self._generate_repair_candidate(
-            self.selected_preset,
-            self.preservation_slider.value(),
+        return self._generate_repair_candidate(self.selected_preset)
+
+    @property
+    def pending_balance_suggestion(self) -> BalanceSuggestion | None:
+        """Return the unapplied preservation suggestion, if one is previewed."""
+
+        return self._pending_balance_suggestion
+
+    def suggest_balance(self) -> BalanceSuggestion:
+        """Analyze the loaded pair and preview a deterministic balance suggestion."""
+
+        document_a, document_b = self._require_documents()
+        analysis = self.pair_analysis or self.analyze()
+        suggestion = self._run_busy(
+            "Suggesting preservation balance…",
+            lambda: suggest_preservation_balance(
+                document_a.clip,
+                document_b.clip,
+                analysis,
+            ),
         )
+        if not suggestion.is_confident and (
+            suggestion.preservation_a,
+            suggestion.preservation_b,
+        ) != (50, 50):
+            suggestion = BalanceSuggestion(
+                preservation_a=50,
+                preservation_b=50,
+                confidence=suggestion.confidence,
+                explanation=(
+                    "No strong recommendation: GLUE is previewing the balanced "
+                    f"50/50 fallback. {suggestion.explanation}"
+                ),
+            )
+        self._pending_balance_suggestion = suggestion
+        confidence_text = (
+            f"{suggestion.confidence_label} "
+            f"({suggestion.confidence * 100:.0f}% confidence)"
+        )
+        prefix = (
+            "Low-confidence balanced fallback"
+            if not suggestion.is_confident
+            else "Suggested preservation"
+        )
+        self.balance_suggestion_label.setText(
+            f"{prefix}: A {suggestion.preservation_a}% · "
+            f"B {suggestion.preservation_b}% · {confidence_text}.\n"
+            f"{suggestion.explanation}\n"
+            "Preview only—click Apply suggestion to change the sliders."
+        )
+        self.apply_suggestion_button.setEnabled(True)
+        self.statusBar().showMessage(
+            "Balance suggestion ready; preservation controls are unchanged.",
+            5000,
+        )
+        return suggestion
+
+    def apply_balance_suggestion(self) -> tuple[int, int]:
+        """Apply the currently previewed suggestion to both sliders."""
+
+        suggestion = self._pending_balance_suggestion
+        if suggestion is None:
+            raise RuntimeError("Generate a balance suggestion before applying it")
+        values = (suggestion.preservation_a, suggestion.preservation_b)
+        self.set_preservation_values(*values)
+        self._pending_balance_suggestion = None
+        self.apply_suggestion_button.setEnabled(False)
+        self.balance_suggestion_label.setText(
+            f"Applied preservation balance: A {values[0]}% · B {values[1]}%. "
+            "You can still adjust either slider manually."
+        )
+        self.statusBar().showMessage("Applied the preservation suggestion.", 5000)
+        return values
 
     @property
     def selected_preset(self) -> RepairPreset:
@@ -150,6 +255,34 @@ class MainWindow(QMainWindow):
             raise RuntimeError("The selected repair preset is invalid")
         return presets[index]
 
+    def set_preservation_values(
+        self,
+        preservation_a: int,
+        preservation_b: int,
+    ) -> None:
+        """Set both preservation controls as one coordinated user action."""
+
+        for name, value in (
+            ("preservation_a", preservation_a),
+            ("preservation_b", preservation_b),
+        ):
+            if isinstance(value, bool) or not isinstance(value, int):
+                raise TypeError(f"{name} must be an integer between 0 and 100")
+            if not 0 <= value <= 100:
+                raise ValueError(f"{name} must be between 0 and 100")
+        blockers = (
+            QSignalBlocker(self.preservation_a_slider),
+            QSignalBlocker(self.preservation_b_slider),
+        )
+        try:
+            self.preservation_a_slider.setValue(preservation_a)
+            self.preservation_b_slider.setValue(preservation_b)
+        finally:
+            del blockers
+        self._sync_preservation_labels()
+        self._clear_active_candidate(restore_original=True)
+        self._update_repair_enabled()
+
     @property
     def repair_candidate_count(self) -> int:
         """Return the number of retained repair candidates."""
@@ -159,9 +292,23 @@ class MainWindow(QMainWindow):
     def _generate_repair_candidate(
         self,
         preset: RepairPreset,
-        preservation: int,
-    ) -> MinimalRepairResult:
+    ) -> PairRepairResult:
         document_a, document_b = self._require_documents()
+        preservation_a, preservation_b = self._effective_preservation()
+        editable_a = preservation_a < 100 and _has_editable_pitched_notes(
+            document_a.clip
+        )
+        editable_b = preservation_b < 100 and _has_editable_pitched_notes(
+            document_b.clip
+        )
+        if not editable_a and not editable_b:
+            if preservation_a == preservation_b == 100:
+                raise RuntimeError(
+                    "Both clips are fully preserved; lower preservation for at least "
+                    "one clip before generating a repair"
+                )
+            raise RuntimeError("The editable MIDI clips have no pitched notes available")
+
         if self.pair_analysis is None:
             self.analyze()
         if self.pair_analysis is None or not _has_comparable_overlap(
@@ -171,27 +318,22 @@ class MainWindow(QMainWindow):
                 "The clips have no comparable overlap to repair"
             )
 
-        if self.locked_slot == "A":
-            locked_clip = document_a.clip
-            unlocked_clip = document_b.clip
-            repaired_slot: ClipSlot = "B"
-        else:
-            locked_clip = document_b.clip
-            unlocked_clip = document_a.clip
-            repaired_slot = "A"
-        if not _has_editable_pitched_notes(unlocked_clip):
-            raise RuntimeError(
-                f"MIDI {repaired_slot} has no pitched notes available for repair"
-            )
+        result = self._run_busy(
+            f"Generating {preset.label} repair…",
+            lambda: generate_pair_repair(
+                document_a.clip,
+                document_b.clip,
+                strategy=EditingStrategy.CUSTOM,
+                preset=preset,
+                preservation_a=preservation_a,
+                preservation_b=preservation_b,
+            ),
+        )
+        if not self._is_improving_repair(result):
+            self._display_no_improvement(result)
+            return result
 
-        if preset is RepairPreset.MINIMAL and preservation == 50:
-            result = generate_minimal_repair(locked_clip, unlocked_clip)
-        else:
-            result = generate_repair(
-                locked_clip,
-                unlocked_clip,
-                repair_config=repair_config_for(preset, preservation),
-            )
+        repaired_slot = self._repaired_slot_from_edits(result)
         preview = _CandidatePreview(result=result, repaired_slot=repaired_slot)
         self._repair_candidates.append(preview)
         item = QListWidgetItem(self._candidate_list_text(preview))
@@ -203,23 +345,71 @@ class MainWindow(QMainWindow):
         self.candidate_list.setCurrentItem(item)
         self._select_candidate(preview)
         self.statusBar().showMessage(
-            f"{preset.label} candidate generated with {result.changed_note_count} pitch "
+            f"{preset.label} candidate generated with "
+            f"{result.changed_note_count} pitch "
             f"change{'s' if result.changed_note_count != 1 else ''}.",
             5000,
         )
         return result
+
+    @staticmethod
+    def _is_improving_repair(result: PairRepairResult) -> bool:
+        """Return whether a result is safe to present as a repair candidate."""
+
+        engine_decision = getattr(result, "has_improvement", None)
+        if engine_decision is not None:
+            return bool(engine_decision)
+        return result.changed_note_count > 0 and result.score_improvement > 1e-9
+
+    def _display_no_improvement(self, result: PairRepairResult) -> None:
+        """Explain a bounded search miss without retaining unchanged MIDI."""
+
+        self._clear_active_candidate(restore_original=True)
+        engine_reason = getattr(result, "no_improvement_reason", None)
+        if not isinstance(engine_reason, str) or not engine_reason.strip():
+            engine_reason = "No valid pitch edit improved the estimated result."
+        elif "no valid pitch edit improved" not in engine_reason.lower():
+            engine_reason = (
+                f"{engine_reason.rstrip()} "
+                "No valid pitch edit improved the estimated result."
+            )
+        self.candidate_label.setText(
+            f"No improving {result.preset.label} candidate found.\n{engine_reason} "
+            "Preservation may be too high, or the selected preset may be too "
+            "restrictive."
+        )
+        self.repair_score_summary_label.setText(
+            f"Estimated compatibility before: {result.original_score:.1f}/100  |  "
+            "after: —  |  improvement: none"
+        )
+        self.edit_a_list.addItem("No improving pitch edit was retained for Clip A.")
+        self.edit_b_list.addItem("No improving pitch edit was retained for Clip B.")
+        self.statusBar().showMessage(
+            "No improving candidate found; try lower preservation or a broader preset.",
+            7000,
+        )
+
+    def _effective_preservation(self) -> tuple[int, int]:
+        return (
+            self.preservation_a_slider.value(),
+            self.preservation_b_slider.value(),
+        )
+
+    @staticmethod
+    def _repaired_slot_from_edits(result: PairRepairResult) -> ClipSlot | None:
+        """Return the sole edited clip, independent of repair strategy labels."""
+
+        if result.changed_note_count_a and not result.changed_note_count_b:
+            return "A"
+        if result.changed_note_count_b and not result.changed_note_count_a:
+            return "B"
+        return None
 
     def export_candidate(self, path: str | Path) -> Path:
         """Export the current repaired clip without opening a dialog."""
 
         if self.repair_result is None or self.repaired_slot is None:
             raise RuntimeError("Generate and select a repair candidate before exporting")
-        source_document = (
-            self.document_a if self.repaired_slot == "A" else self.document_b
-        )
-        if source_document is None:
-            raise RuntimeError("The source document for the repaired clip is unavailable")
-
         destination = Path(path)
         loaded_sources = tuple(
             document.source_path
@@ -234,21 +424,119 @@ class MainWindow(QMainWindow):
                 "Refusing to overwrite loaded MIDI A or MIDI B; "
                 "choose a different export path"
             )
-        output_path = save_midi(
-            source_document,
+        document_a, document_b = self._require_documents()
+        output_path = write_revised_clip(
+            self.repair_result,
+            document_a,
+            document_b,
+            self.repaired_slot,
             destination,
-            clip=self.repair_result.repaired_clip,
         )
         self.statusBar().showMessage(f"Exported repaired MIDI to {output_path}.", 7000)
         return output_path
+
+    def export_revised_clip(
+        self,
+        slot: ClipSlot | str,
+        path: str | Path,
+        *,
+        overwrite: bool = False,
+    ) -> Path:
+        """Export revised A or B without opening a dialog."""
+
+        if self.repair_result is None:
+            raise RuntimeError("Generate and select a repair candidate before exporting")
+        document_a, document_b = self._require_documents()
+        normalized = self._normalize_slot(slot)
+        output = write_revised_clip(
+            self.repair_result,
+            document_a,
+            document_b,
+            normalized,
+            path,
+            overwrite=overwrite,
+        )
+        self.statusBar().showMessage(f"Exported revised Clip {normalized} to {output}.", 7000)
+        return output
+
+    def export_combined_preview(
+        self,
+        path: str | Path,
+        *,
+        overwrite: bool = False,
+    ) -> Path:
+        """Export the selected repaired pair on two preview tracks."""
+
+        if self.repair_result is None:
+            raise RuntimeError("Generate and select a repair candidate before exporting")
+        document_a, document_b = self._require_documents()
+        output = write_combined_repair_preview(
+            self.repair_result,
+            document_a,
+            document_b,
+            path,
+            overwrite=overwrite,
+        )
+        self.statusBar().showMessage(f"Exported combined preview to {output}.", 7000)
+        return output
+
+    def export_change_report(
+        self,
+        path: str | Path,
+        *,
+        overwrite: bool = False,
+    ) -> Path:
+        """Export deterministic JSON for the selected candidate."""
+
+        if self.repair_result is None:
+            raise RuntimeError("Generate and select a repair candidate before exporting")
+        document_a, document_b = self._require_documents()
+        output = write_change_report(
+            self.repair_result,
+            document_a,
+            document_b,
+            path,
+            overwrite=overwrite,
+        )
+        self.statusBar().showMessage(f"Exported change report to {output}.", 7000)
+        return output
+
+    def export_repair_bundle(
+        self,
+        base_path: str | Path,
+        *,
+        overwrite: bool = False,
+    ) -> RepairExportResult:
+        """Export revised A/B, combined preview, and JSON from one base name."""
+
+        if self.repair_result is None:
+            raise RuntimeError("Generate and select a repair candidate before exporting")
+        document_a, document_b = self._require_documents()
+        exported = write_repair_bundle(
+            self.repair_result,
+            document_a,
+            document_b,
+            RepairExportPaths.from_base(base_path),
+            overwrite=overwrite,
+        )
+        self.statusBar().showMessage(
+            f"Exported four repair artifacts beside {exported.revised_a}.",
+            7000,
+        )
+        return exported
 
     def _build_ui(self) -> None:
         central = QWidget(self)
         root = QVBoxLayout(central)
         root.addLayout(self._build_file_controls())
-        root.addLayout(self._build_score_row())
+
+        self.analysis_details_panel = self._build_analysis_details(central)
+        self.analysis_details_panel.setObjectName("analysisDetailsPanel")
+        self.analysis_details_panel.hide()
+        root.addWidget(self.analysis_details_panel)
 
         workspace = QSplitter(Qt.Orientation.Horizontal, central)
+        workspace.setObjectName("workspaceSplitter")
         visual_panel = QWidget(workspace)
         visual_layout = QVBoxLayout(visual_panel)
         piano_group = QGroupBox("Overlay piano roll", visual_panel)
@@ -256,32 +544,80 @@ class MainWindow(QMainWindow):
         self.piano_roll = PianoRollWidget(piano_group)
         self.piano_roll.setObjectName("pianoRoll")
         piano_layout.addWidget(self.piano_roll)
-        visual_layout.addWidget(piano_group, 3)
+        visual_layout.addWidget(piano_group, 1)
 
-        timeline_group = QGroupBox("Compatibility timeline", visual_panel)
+        self.details_scroll_area = QScrollArea(workspace)
+        self.details_scroll_area.setObjectName("detailsScrollArea")
+        self.details_scroll_area.setWidgetResizable(True)
+        self.details_scroll_area.setHorizontalScrollBarPolicy(
+            Qt.ScrollBarPolicy.ScrollBarAlwaysOff
+        )
+        details_panel = QWidget(self.details_scroll_area)
+        details_layout = QVBoxLayout(details_panel)
+        self.repair_group = self._build_repair_group(details_panel)
+        details_layout.addWidget(self.repair_group, 1)
+        # Preserve usable list/control heights on smaller displays; the scroll
+        # area, rather than the child layout, absorbs the vertical shortfall.
+        details_panel.setMinimumHeight(details_panel.minimumSizeHint().height())
+        details_panel.setMinimumWidth(1)
+        details_panel.setSizePolicy(
+            QSizePolicy.Policy.Ignored,
+            QSizePolicy.Policy.Preferred,
+        )
+        self.details_scroll_area.setWidget(details_panel)
+
+        workspace.addWidget(visual_panel)
+        workspace.addWidget(self.details_scroll_area)
+        workspace.setStretchFactor(0, 5)
+        workspace.setStretchFactor(1, 4)
+        root.addWidget(workspace, 1)
+        self.setCentralWidget(central)
+
+    def _build_busy_row(self, parent: QWidget) -> QHBoxLayout:
+        row = QHBoxLayout()
+        self.busy_status_label = QLabel("Ready", parent)
+        self.busy_status_label.setObjectName("busyStatusLabel")
+        row.addWidget(self.busy_status_label)
+        self.busy_indicator = QProgressBar(parent)
+        self.busy_indicator.setObjectName("busyIndicator")
+        self.busy_indicator.setRange(0, 0)
+        self.busy_indicator.setTextVisible(False)
+        self.busy_indicator.setFixedWidth(96)
+        self.busy_indicator.hide()
+        row.addWidget(self.busy_indicator)
+        row.addStretch(1)
+        return row
+
+    def _build_analysis_details(self, parent: QWidget) -> QWidget:
+        panel = QWidget(parent)
+        layout = QVBoxLayout(panel)
+
+        key_group = QGroupBox("Estimated keys", panel)
+        key_layout = QHBoxLayout(key_group)
+        key_layout.addWidget(self.key_a_label)
+        key_layout.addWidget(self.key_b_label)
+        layout.addWidget(key_group)
+        layout.addLayout(self._build_score_row())
+
+        detail_row = QHBoxLayout()
+        timeline_group = QGroupBox("Compatibility timeline", panel)
         timeline_layout = QVBoxLayout(timeline_group)
         self.timeline = CompatibilityTimelineWidget(timeline_group)
         self.timeline.setObjectName("compatibilityTimeline")
+        self.timeline.setMinimumHeight(150)
         timeline_layout.addWidget(self.timeline)
-        visual_layout.addWidget(timeline_group, 1)
+        detail_row.addWidget(timeline_group, 3)
 
-        details_panel = QWidget(workspace)
-        details_layout = QVBoxLayout(details_panel)
-        diagnosis_group = QGroupBox("Diagnosis", details_panel)
+        diagnosis_group = QGroupBox("Diagnosis", panel)
         diagnosis_layout = QVBoxLayout(diagnosis_group)
         self.diagnosis_list = QListWidget(diagnosis_group)
         self.diagnosis_list.setObjectName("diagnosisList")
         self.diagnosis_list.setWordWrap(True)
+        self.diagnosis_list.setMinimumHeight(120)
         diagnosis_layout.addWidget(self.diagnosis_list)
-        details_layout.addWidget(diagnosis_group, 2)
-        details_layout.addWidget(self._build_repair_group(details_panel), 2)
-
-        workspace.addWidget(visual_panel)
-        workspace.addWidget(details_panel)
-        workspace.setStretchFactor(0, 3)
-        workspace.setStretchFactor(1, 2)
-        root.addWidget(workspace, 1)
-        self.setCentralWidget(central)
+        detail_row.addWidget(diagnosis_group, 2)
+        layout.addLayout(detail_row)
+        return panel
 
     def _build_file_controls(self) -> QHBoxLayout:
         row = QHBoxLayout()
@@ -290,12 +626,42 @@ class MainWindow(QMainWindow):
         row.addWidget(group_a)
         row.addWidget(group_b)
 
-        controls = QVBoxLayout()
-        self.analyze_button = QPushButton("Analyze compatibility")
+        self.compatibility_estimate_group = QGroupBox("Compatibility estimate")
+        self.compatibility_estimate_group.setObjectName("compatibilityEstimateGroup")
+        controls = QVBoxLayout(self.compatibility_estimate_group)
+        self.analyze_button = QPushButton(
+            "Estimate compatibility",
+            self.compatibility_estimate_group,
+        )
         self.analyze_button.setObjectName("analyzeButton")
         controls.addWidget(self.analyze_button)
+
+        overall_row = QHBoxLayout()
+        overall_row.addWidget(QLabel("Overall:", self.compatibility_estimate_group))
+        self.overall_score_label = QLabel("—", self.compatibility_estimate_group)
+        self.overall_score_label.setObjectName("overallScore")
+        self.overall_score_label.setAlignment(
+            Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter
+        )
+        self.overall_score_label.setMinimumWidth(90)
+        overall_row.addWidget(self.overall_score_label, 1)
+        controls.addLayout(overall_row)
+
+        self.analysis_toggle_button = QPushButton(
+            "Show analysis details",
+            self.compatibility_estimate_group,
+        )
+        self.analysis_toggle_button.setObjectName("analysisDetailsToggle")
+        self.analysis_toggle_button.setCheckable(True)
+        self.analysis_toggle_button.setChecked(False)
+        controls.addWidget(self.analysis_toggle_button)
+        controls.addLayout(self._build_busy_row(self.compatibility_estimate_group))
         controls.addStretch(1)
-        row.addLayout(controls)
+        row.addWidget(
+            self.compatibility_estimate_group,
+            0,
+            Qt.AlignmentFlag.AlignTop,
+        )
         return row
 
     def _build_clip_group(self, slot: ClipSlot) -> QGroupBox:
@@ -303,33 +669,27 @@ class MainWindow(QMainWindow):
         layout = QGridLayout(group)
         load_button = QPushButton(f"Load MIDI {slot}…", group)
         load_button.setObjectName(f"load{slot}Button")
-        lock_radio = QRadioButton(f"Lock {slot}", group)
-        lock_radio.setObjectName(f"lock{slot}Radio")
         path_label = QLabel("No file loaded", group)
         path_label.setObjectName(f"path{slot}Label")
         path_label.setWordWrap(True)
         metadata_label = QLabel("Notes: —  |  Length: —  |  Tempo: —  |  Meter: —", group)
         metadata_label.setObjectName(f"metadata{slot}Label")
         metadata_label.setWordWrap(True)
-        key_label = QLabel("Estimated key: —", group)
+        key_label = QLabel(f"Clip {slot} estimated key: —", group)
         key_label.setObjectName(f"key{slot}Label")
 
-        layout.addWidget(load_button, 0, 0)
-        layout.addWidget(lock_radio, 0, 1)
+        layout.addWidget(load_button, 0, 0, 1, 2)
         layout.addWidget(path_label, 1, 0, 1, 2)
         layout.addWidget(metadata_label, 2, 0, 1, 2)
-        layout.addWidget(key_label, 3, 0, 1, 2)
         layout.setColumnStretch(0, 1)
 
         if slot == "A":
             self.file_a_button = load_button
-            self.lock_a_radio = lock_radio
             self.path_a_label = path_label
             self.metadata_a_label = metadata_label
             self.key_a_label = key_label
         else:
             self.file_b_button = load_button
-            self.lock_b_radio = lock_radio
             self.path_b_label = path_label
             self.metadata_b_label = metadata_label
             self.key_b_label = key_label
@@ -337,7 +697,6 @@ class MainWindow(QMainWindow):
 
     def _build_score_row(self) -> QHBoxLayout:
         row = QHBoxLayout()
-        self.overall_score_label = self._score_group(row, "Overall", "overallScore")
         self.harmonic_score_label = self._score_group(row, "Harmonic", "harmonicScore")
         self.bass_score_label = self._score_group(row, "Bass / root", "bassScore")
         self.register_score_label = self._score_group(row, "Register", "registerScore")
@@ -357,7 +716,8 @@ class MainWindow(QMainWindow):
         return label
 
     def _build_repair_group(self, parent: QWidget) -> QGroupBox:
-        group = QGroupBox("Repair candidates", parent)
+        group = QGroupBox("Repair workflow", parent)
+        group.setObjectName("repairWorkflowGroup")
         layout = QVBoxLayout(group)
 
         preset_row = QHBoxLayout()
@@ -369,23 +729,45 @@ class MainWindow(QMainWindow):
         preset_row.addWidget(self.preset_combo, 1)
         layout.addLayout(preset_row)
 
-        preservation_row = QHBoxLayout()
-        preservation_row.addWidget(QLabel("Preservation:", group))
-        self.preservation_slider = QSlider(Qt.Orientation.Horizontal, group)
-        self.preservation_slider.setObjectName("preservationSlider")
-        self.preservation_slider.setRange(0, 100)
-        self.preservation_slider.setValue(50)
-        self.preservation_slider.setSingleStep(1)
-        self.preservation_slider.setPageStep(10)
-        self.preservation_slider.setToolTip(
-            "Higher values penalize pitch edits more strongly."
+        (
+            self.preservation_a_slider,
+            self.preservation_a_value_label,
+            self.preservation_a_locked_indicator,
+        ) = self._build_preservation_row(layout, group, "A", 100)
+        (
+            self.preservation_b_slider,
+            self.preservation_b_value_label,
+            self.preservation_b_locked_indicator,
+        ) = self._build_preservation_row(layout, group, "B", 100)
+        shortcut_row = QHBoxLayout()
+        shortcut_row.addWidget(QLabel("Quick balance:", group))
+        self.keep_a_button = QPushButton("Keep A", group)
+        self.keep_a_button.setObjectName("keepAShortcutButton")
+        self.balanced_button = QPushButton("Balanced", group)
+        self.balanced_button.setObjectName("balancedShortcutButton")
+        self.keep_b_button = QPushButton("Keep B", group)
+        self.keep_b_button.setObjectName("keepBShortcutButton")
+        shortcut_row.addWidget(self.keep_a_button)
+        shortcut_row.addWidget(self.balanced_button)
+        shortcut_row.addWidget(self.keep_b_button)
+        layout.addLayout(shortcut_row)
+
+        suggestion_row = QHBoxLayout()
+        self.suggest_balance_button = QPushButton("Suggest balance", group)
+        self.suggest_balance_button.setObjectName("suggestBalanceButton")
+        self.apply_suggestion_button = QPushButton("Apply suggestion", group)
+        self.apply_suggestion_button.setObjectName("applyBalanceSuggestionButton")
+        self.apply_suggestion_button.setEnabled(False)
+        suggestion_row.addWidget(self.suggest_balance_button)
+        suggestion_row.addWidget(self.apply_suggestion_button)
+        layout.addLayout(suggestion_row)
+        self.balance_suggestion_label = QLabel(
+            "No balance suggestion yet. Your preservation values remain in control.",
+            group,
         )
-        self.preservation_value_label = QLabel("50%", group)
-        self.preservation_value_label.setObjectName("preservationValue")
-        self.preservation_value_label.setMinimumWidth(36)
-        preservation_row.addWidget(self.preservation_slider, 1)
-        preservation_row.addWidget(self.preservation_value_label)
-        layout.addLayout(preservation_row)
+        self.balance_suggestion_label.setObjectName("balanceSuggestionSummary")
+        self.balance_suggestion_label.setWordWrap(True)
+        layout.addWidget(self.balance_suggestion_label)
 
         self.repair_button = QPushButton("Generate Minimal repair", group)
         self.repair_button.setObjectName("minimalRepairButton")
@@ -393,42 +775,144 @@ class MainWindow(QMainWindow):
         self.candidate_list.setObjectName("candidateList")
         self.candidate_list.setWordWrap(True)
         self.candidate_list.setMaximumHeight(105)
+        self.repair_score_summary_label = QLabel(
+            "Estimated compatibility before: —  |  after: —  |  improvement: —",
+            group,
+        )
+        self.repair_score_summary_label.setObjectName("repairCompatibilitySummary")
+        self.repair_score_summary_label.setWordWrap(True)
         self.candidate_label = QLabel("No candidate generated.", group)
         self.candidate_label.setObjectName("candidateSummary")
         self.candidate_label.setWordWrap(True)
         self.edit_list = QListWidget(group)
         self.edit_list.setObjectName("editList")
         self.edit_list.setWordWrap(True)
+        edit_rows = QHBoxLayout()
+        edit_a_column = QVBoxLayout()
+        edit_a_column.addWidget(QLabel("Clip A edits", group))
+        self.edit_a_list = QListWidget(group)
+        self.edit_a_list.setObjectName("editAList")
+        self.edit_a_list.setWordWrap(True)
+        edit_a_column.addWidget(self.edit_a_list)
+        edit_b_column = QVBoxLayout()
+        edit_b_column.addWidget(QLabel("Clip B edits", group))
+        self.edit_b_list = QListWidget(group)
+        self.edit_b_list.setObjectName("editBList")
+        self.edit_b_list.setWordWrap(True)
+        edit_b_column.addWidget(self.edit_b_list)
+        edit_rows.addLayout(edit_a_column)
+        edit_rows.addLayout(edit_b_column)
         self.export_button = QPushButton("Export repaired MIDI…", group)
         self.export_button.setObjectName("exportButton")
+        export_grid = QGridLayout()
+        self.export_a_button = QPushButton("Export revised A…", group)
+        self.export_a_button.setObjectName("exportAButton")
+        self.export_b_button = QPushButton("Export revised B…", group)
+        self.export_b_button.setObjectName("exportBButton")
+        self.export_combined_button = QPushButton("Export combined preview…", group)
+        self.export_combined_button.setObjectName("exportCombinedButton")
+        self.export_report_button = QPushButton("Export JSON report…", group)
+        self.export_report_button.setObjectName("exportReportButton")
+        self.export_bundle_button = QPushButton("Export all four artifacts…", group)
+        self.export_bundle_button.setObjectName("exportBundleButton")
+        export_grid.addWidget(self.export_a_button, 0, 0)
+        export_grid.addWidget(self.export_b_button, 0, 1)
+        export_grid.addWidget(self.export_combined_button, 1, 0)
+        export_grid.addWidget(self.export_report_button, 1, 1)
+        export_grid.addWidget(self.export_bundle_button, 2, 0, 1, 2)
         layout.addWidget(self.repair_button)
         layout.addWidget(self.candidate_list)
+        layout.addWidget(self.repair_score_summary_label)
         layout.addWidget(self.candidate_label)
-        layout.addWidget(self.edit_list, 1)
+        # Keep the original combined edit list available to V0.2 callers while
+        # the visible pair lists make file ownership explicit.
+        self.edit_list.hide()
+        layout.addLayout(edit_rows, 1)
+        layout.addWidget(self.edit_list)
         layout.addWidget(self.export_button)
+        layout.addLayout(export_grid)
         return group
 
-    def _connect_signals(self) -> None:
-        self.lock_group = QButtonGroup(self)
-        self.lock_group.setExclusive(True)
-        self.lock_group.addButton(self.lock_a_radio)
-        self.lock_group.addButton(self.lock_b_radio)
-        self.lock_a_radio.setChecked(True)
+    @staticmethod
+    def _build_preservation_row(
+        layout: QVBoxLayout,
+        parent: QWidget,
+        slot: ClipSlot,
+        value: int,
+    ) -> tuple[QSlider, QLabel, QLabel]:
+        row = QHBoxLayout()
+        row.addWidget(QLabel(f"Preserve {slot}:", parent))
+        slider = QSlider(Qt.Orientation.Horizontal, parent)
+        slider.setObjectName(f"preservation{slot}Slider")
+        slider.setRange(0, 100)
+        slider.setValue(value)
+        slider.setSingleStep(1)
+        slider.setPageStep(10)
+        slider.setToolTip(
+            "Higher values make pitch edits to this clip more expensive; "
+            "100% locks it."
+        )
+        value_label = QLabel(f"{value}%", parent)
+        value_label.setObjectName(f"preservation{slot}Value")
+        value_label.setMinimumWidth(42)
+        locked_indicator = QLabel("Locked", parent)
+        locked_indicator.setObjectName(f"preservation{slot}LockedIndicator")
+        locked_indicator.setToolTip(
+            f"Clip {slot} is fully preserved and will receive zero pitch edits."
+        )
+        locked_indicator.hide()
+        row.addWidget(slider, 1)
+        row.addWidget(value_label)
+        row.addWidget(locked_indicator)
+        layout.addLayout(row)
+        return slider, value_label, locked_indicator
 
+    def _connect_signals(self) -> None:
         self.file_a_button.clicked.connect(lambda _checked=False: self._choose_clip("A"))
         self.file_b_button.clicked.connect(lambda _checked=False: self._choose_clip("B"))
         self.analyze_button.clicked.connect(self._analyze_interactive)
         self.repair_button.clicked.connect(self._repair_interactive)
+        self.keep_a_button.clicked.connect(
+            lambda _checked=False: self.set_preservation_values(100, 0)
+        )
+        self.balanced_button.clicked.connect(
+            lambda _checked=False: self.set_preservation_values(50, 50)
+        )
+        self.keep_b_button.clicked.connect(
+            lambda _checked=False: self.set_preservation_values(0, 100)
+        )
+        self.suggest_balance_button.clicked.connect(
+            self._suggest_balance_interactive
+        )
+        self.apply_suggestion_button.clicked.connect(
+            self._apply_balance_suggestion_interactive
+        )
         self.export_button.clicked.connect(self._export_interactive)
-        self.lock_a_radio.toggled.connect(self._on_lock_toggled)
-        self.lock_b_radio.toggled.connect(self._on_lock_toggled)
+        self.export_a_button.clicked.connect(
+            lambda _checked=False: self._export_revised_interactive("A")
+        )
+        self.export_b_button.clicked.connect(
+            lambda _checked=False: self._export_revised_interactive("B")
+        )
+        self.export_combined_button.clicked.connect(
+            self._export_combined_interactive
+        )
+        self.export_report_button.clicked.connect(self._export_report_interactive)
+        self.export_bundle_button.clicked.connect(self._export_bundle_interactive)
         self.preset_combo.currentIndexChanged.connect(self._on_preset_changed)
-        self.preservation_slider.valueChanged.connect(
-            self._on_preservation_changed
+        self.preservation_a_slider.valueChanged.connect(
+            lambda value: self._on_preservation_changed("A", value)
+        )
+        self.preservation_b_slider.valueChanged.connect(
+            lambda value: self._on_preservation_changed("B", value)
         )
         self.candidate_list.currentItemChanged.connect(
             self._on_candidate_item_changed
         )
+        self.analysis_toggle_button.toggled.connect(
+            self._on_analysis_details_toggled
+        )
+        self._sync_preservation_labels()
 
     def _choose_clip(self, slot: ClipSlot) -> None:
         filename, _ = QFileDialog.getOpenFileName(
@@ -445,12 +929,32 @@ class MainWindow(QMainWindow):
         )
 
     def _analyze_interactive(self) -> None:
+        if self.is_busy:
+            return
         self._run_interactive("Could not analyze these MIDI files", self.analyze)
 
     def _repair_interactive(self) -> None:
+        if self.is_busy:
+            return
         self._run_interactive(
             f"Could not generate a {self.selected_preset.label} repair",
             self.repair_selected,
+        )
+
+    def _suggest_balance_interactive(self) -> None:
+        if self.is_busy:
+            return
+        self._run_interactive(
+            "Could not suggest a preservation balance",
+            self.suggest_balance,
+        )
+
+    def _apply_balance_suggestion_interactive(self) -> None:
+        if self.is_busy:
+            return
+        self._run_interactive(
+            "Could not apply the preservation suggestion",
+            self.apply_balance_suggestion,
         )
 
     def _export_interactive(self) -> None:
@@ -470,6 +974,109 @@ class MainWindow(QMainWindow):
             lambda: self.export_candidate(destination),
         )
 
+    def _export_revised_interactive(self, slot: ClipSlot) -> None:
+        filename, _ = QFileDialog.getSaveFileName(
+            self,
+            f"Export revised Clip {slot}",
+            f"glue_revised_{slot.lower()}.mid",
+            "MIDI files (*.mid *.midi);;All files (*)",
+        )
+        if not filename:
+            return
+        destination = Path(filename)
+        if destination.suffix.lower() not in {".mid", ".midi"}:
+            destination = destination.with_suffix(".mid")
+        overwrite = self._confirm_overwrite((destination,))
+        if overwrite is None:
+            return
+        self._run_interactive(
+            f"Could not export revised Clip {slot}",
+            lambda: self.export_revised_clip(
+                slot,
+                destination,
+                overwrite=overwrite,
+            ),
+        )
+
+    def _export_combined_interactive(self) -> None:
+        filename, _ = QFileDialog.getSaveFileName(
+            self,
+            "Export combined preview",
+            "glue_combined.mid",
+            "MIDI files (*.mid *.midi);;All files (*)",
+        )
+        if not filename:
+            return
+        destination = Path(filename)
+        if destination.suffix.lower() not in {".mid", ".midi"}:
+            destination = destination.with_suffix(".mid")
+        overwrite = self._confirm_overwrite((destination,))
+        if overwrite is None:
+            return
+        self._run_interactive(
+            "Could not export combined preview",
+            lambda: self.export_combined_preview(
+                destination,
+                overwrite=overwrite,
+            ),
+        )
+
+    def _export_report_interactive(self) -> None:
+        filename, _ = QFileDialog.getSaveFileName(
+            self,
+            "Export JSON change report",
+            "glue_changes.json",
+            "JSON files (*.json);;All files (*)",
+        )
+        if not filename:
+            return
+        destination = Path(filename)
+        if destination.suffix.lower() != ".json":
+            destination = destination.with_suffix(".json")
+        overwrite = self._confirm_overwrite((destination,))
+        if overwrite is None:
+            return
+        self._run_interactive(
+            "Could not export change report",
+            lambda: self.export_change_report(
+                destination,
+                overwrite=overwrite,
+            ),
+        )
+
+    def _export_bundle_interactive(self) -> None:
+        filename, _ = QFileDialog.getSaveFileName(
+            self,
+            "Choose repair export base name",
+            "glue_repair.mid",
+            "MIDI files (*.mid *.midi);;All files (*)",
+        )
+        if not filename:
+            return
+        paths = RepairExportPaths.from_base(filename)
+        overwrite = self._confirm_overwrite(paths.all_paths)
+        if overwrite is None:
+            return
+        self._run_interactive(
+            "Could not export repair artifacts",
+            lambda: self.export_repair_bundle(filename, overwrite=overwrite),
+        )
+
+    def _confirm_overwrite(self, paths: tuple[Path, ...]) -> bool | None:
+        existing = tuple(path for path in paths if path.exists())
+        if not existing:
+            return False
+        names = "\n".join(str(path) for path in existing)
+        answer = QMessageBox.warning(
+            self,
+            "Confirm export overwrite",
+            "The following export files already exist and will be replaced:\n"
+            f"{names}",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        return True if answer is QMessageBox.StandardButton.Yes else None
+
     def _run_interactive(
         self,
         title: str,
@@ -481,18 +1088,91 @@ class MainWindow(QMainWindow):
             QMessageBox.critical(self, title, str(exc))
             return None
 
-    def _on_lock_toggled(self, checked: bool) -> None:
-        if checked:
-            self._clear_candidate(restore_original=True)
-            self._update_repair_enabled()
+    @property
+    def is_busy(self) -> bool:
+        """Whether a foreground analysis or repair operation is active."""
+
+        return self._busy_depth > 0
+
+    def _run_busy(
+        self,
+        message: str,
+        operation: Callable[[], _ResultT],
+    ) -> _ResultT:
+        """Run a synchronous operation with a visible, re-entry-safe indicator."""
+
+        outermost = self._busy_depth == 0
+        self._busy_depth += 1
+        if outermost:
+            self.busy_status_label.setText(message)
+            self.busy_indicator.show()
+            self.analyze_button.setEnabled(False)
+            self.repair_button.setEnabled(False)
+            self.suggest_balance_button.setEnabled(False)
+            self.apply_suggestion_button.setEnabled(False)
+            self.keep_a_button.setEnabled(False)
+            self.balanced_button.setEnabled(False)
+            self.keep_b_button.setEnabled(False)
+            self.preservation_a_slider.setEnabled(False)
+            self.preservation_b_slider.setEnabled(False)
+            self.preset_combo.setEnabled(False)
+            self.file_a_button.setEnabled(False)
+            self.file_b_button.setEnabled(False)
+            QApplication.processEvents()
+        try:
+            return operation()
+        finally:
+            self._busy_depth -= 1
+            if outermost:
+                self.busy_indicator.hide()
+                self.busy_status_label.setText("Ready")
+                self.file_a_button.setEnabled(True)
+                self.file_b_button.setEnabled(True)
+                self.preservation_a_slider.setEnabled(True)
+                self.preservation_b_slider.setEnabled(True)
+                self.preset_combo.setEnabled(True)
+                self.keep_a_button.setEnabled(True)
+                self.balanced_button.setEnabled(True)
+                self.keep_b_button.setEnabled(True)
+                self.analyze_button.setEnabled(
+                    self.document_a is not None and self.document_b is not None
+                )
+                self._update_repair_enabled()
+
+    def _on_analysis_details_toggled(self, expanded: bool) -> None:
+        self.analysis_details_panel.setVisible(expanded)
+        self.analysis_toggle_button.setText(
+            "Hide analysis details" if expanded else "Show analysis details"
+        )
 
     def _on_preset_changed(self, _index: int) -> None:
         self.repair_button.setText(
             f"Generate {self.selected_preset.label} repair"
         )
+        self._clear_active_candidate(restore_original=True)
 
-    def _on_preservation_changed(self, value: int) -> None:
-        self.preservation_value_label.setText(f"{value}%")
+    def _on_preservation_changed(self, slot: ClipSlot, value: int) -> None:
+        del slot, value
+        self._sync_preservation_labels()
+        self._clear_active_candidate(restore_original=True)
+        self._update_repair_enabled()
+
+    def _sync_preservation_labels(self) -> None:
+        for slider, value_label, locked_indicator in (
+            (
+                self.preservation_a_slider,
+                self.preservation_a_value_label,
+                self.preservation_a_locked_indicator,
+            ),
+            (
+                self.preservation_b_slider,
+                self.preservation_b_value_label,
+                self.preservation_b_locked_indicator,
+            ),
+        ):
+            value = slider.value()
+            value_label.setText(f"{value}%")
+            locked_indicator.setVisible(value == 100)
 
     def _on_candidate_item_changed(
         self,
@@ -519,23 +1199,34 @@ class MainWindow(QMainWindow):
             result.before_analysis,
             result.after_analysis,
         )
-        self.piano_roll.set_comparison(
+        self.piano_roll.set_pair_comparison(
             document_a.clip,
             document_b.clip,
-            preview.repaired_slot,
-            result.repaired_clip,
+            result.repaired_clip_a,
+            result.repaired_clip_b,
         )
         self._display_candidate(result)
-        self.export_button.setEnabled(True)
+        self.export_button.setEnabled(preview.repaired_slot is not None)
+        for button in (
+            self.export_a_button,
+            self.export_b_button,
+            self.export_combined_button,
+            self.export_report_button,
+            self.export_bundle_button,
+        ):
+            button.setEnabled(True)
 
     @staticmethod
     def _candidate_list_text(preview: _CandidatePreview) -> str:
         result = preview.result
         return (
-            f"{result.preset.label} | preservation {result.preservation}% | "
-            f"repair {preview.repaired_slot} | "
-            f"{result.original_score:.1f} -> {result.repaired_score:.1f} | "
-            f"{result.changed_note_count} changed"
+            f"{result.preset.label} | preserve A "
+            f"{result.preservation_a * 100:.0f}%, B "
+            f"{result.preservation_b * 100:.0f}% | estimated "
+            f"{result.original_score:.1f} → {result.repaired_score:.1f} "
+            f"({result.score_improvement:+.1f}) | "
+            f"A {result.changed_note_count_a}, B {result.changed_note_count_b} edits | "
+            f"displacement {result.total_pitch_displacement}"
         )
 
     def _require_documents(self) -> tuple[MidiDocument, MidiDocument]:
@@ -579,17 +1270,27 @@ class MainWindow(QMainWindow):
             if document.warnings
             else "No parser warnings."
         )
-        self._set_key_label(key_label, estimate_key(clip))
+        self._set_key_label(key_label, estimate_key(clip), slot=slot)
 
     @staticmethod
-    def _set_key_label(label: QLabel, estimate: KeyEstimate) -> None:
+    def _set_key_label(
+        label: QLabel,
+        estimate: KeyEstimate,
+        *,
+        slot: ClipSlot,
+    ) -> None:
         label.setText(
-            f"Estimated key: {estimate.label} "
+            f"Clip {slot} estimated key: {estimate.label} "
             f"({estimate.confidence * 100:.0f}% confidence)"
         )
 
     def _reset_analysis(self) -> None:
         self.pair_analysis = None
+        self._pending_balance_suggestion = None
+        self.apply_suggestion_button.setEnabled(False)
+        self.balance_suggestion_label.setText(
+            "No balance suggestion yet. Your preservation values remain in control."
+        )
         self._clear_candidate(restore_original=False)
         self._set_score_labels(None)
         self.timeline.set_analysis(None)
@@ -601,16 +1302,33 @@ class MainWindow(QMainWindow):
         )
         ready = self.document_a is not None and self.document_b is not None
         self.analyze_button.setEnabled(ready)
-        self.repair_button.setEnabled(False)
+        self._update_repair_enabled()
 
     def _clear_candidate(self, *, restore_original: bool) -> None:
-        self.repair_result = None
-        self.repaired_slot = None
+        self._clear_active_candidate(restore_original=restore_original)
         self._repair_candidates.clear()
         self.candidate_list.clear()
+
+    def _clear_active_candidate(self, *, restore_original: bool) -> None:
+        self.repair_result = None
+        self.repaired_slot = None
+        self.candidate_list.setCurrentItem(None)
         self.candidate_label.setText("No candidate generated.")
+        self.repair_score_summary_label.setText(
+            "Estimated compatibility before: —  |  after: —  |  improvement: —"
+        )
         self.edit_list.clear()
+        self.edit_a_list.clear()
+        self.edit_b_list.clear()
         self.export_button.setEnabled(False)
+        for button in (
+            self.export_a_button,
+            self.export_b_button,
+            self.export_combined_button,
+            self.export_report_button,
+            self.export_bundle_button,
+        ):
+            button.setEnabled(False)
         if restore_original and self.pair_analysis is not None:
             self._display_analysis(self.pair_analysis, update_keys=False)
             self.piano_roll.set_clips(
@@ -619,18 +1337,45 @@ class MainWindow(QMainWindow):
             )
 
     def _update_repair_enabled(self) -> None:
-        enabled = (
-            self.pair_analysis is not None
-            and _has_comparable_overlap(self.pair_analysis)
-            and _has_editable_pitched_notes(self._unlocked_clip())
+        preservation_a, preservation_b = self._effective_preservation()
+        editable = (
+            preservation_a < 100
+            and _has_editable_pitched_notes(
+                self.document_a.clip if self.document_a is not None else None
+            )
+        ) or (
+            preservation_b < 100
+            and _has_editable_pitched_notes(
+                self.document_b.clip if self.document_b is not None else None
+            )
         )
+        documents_ready = self.document_a is not None and self.document_b is not None
+        overlap_allows_repair = self.pair_analysis is None or _has_comparable_overlap(
+            self.pair_analysis
+        )
+        enabled = documents_ready and overlap_allows_repair and editable
+        if self.is_busy:
+            enabled = False
         self.repair_button.setEnabled(enabled)
-
-    def _unlocked_clip(self) -> MidiClip | None:
-        document = (
-            self.document_b if self.locked_slot == "A" else self.document_a
+        self.suggest_balance_button.setEnabled(documents_ready and not self.is_busy)
+        self.apply_suggestion_button.setEnabled(
+            self._pending_balance_suggestion is not None and not self.is_busy
         )
-        return document.clip if document is not None else None
+        if preservation_a == preservation_b == 100:
+            self.repair_button.setToolTip(_BOTH_LOCKED_MESSAGE)
+            if self.repair_result is None:
+                self.candidate_label.setText(_BOTH_LOCKED_MESSAGE)
+        else:
+            self.repair_button.setToolTip(
+                "Compatibility will be estimated automatically before repair."
+                if enabled and self.pair_analysis is None
+                else ""
+            )
+            if (
+                self.repair_result is None
+                and self.candidate_label.text() == _BOTH_LOCKED_MESSAGE
+            ):
+                self.candidate_label.setText("No candidate generated.")
 
     def _display_analysis(
         self,
@@ -654,8 +1399,8 @@ class MainWindow(QMainWindow):
                 "No strong conflict was detected by the current heuristics."
             )
         if update_keys:
-            self._set_key_label(self.key_a_label, result.key_a)
-            self._set_key_label(self.key_b_label, result.key_b)
+            self._set_key_label(self.key_a_label, result.key_a, slot="A")
+            self._set_key_label(self.key_b_label, result.key_b, slot="B")
 
     def _set_score_labels(self, result: PairAnalysis | None) -> None:
         if result is not None and not _has_comparable_overlap(result):
@@ -679,32 +1424,70 @@ class MainWindow(QMainWindow):
         for label, value in labels_and_values:
             label.setText("—" if value is None else f"{value:.1f}/100")
 
-    def _display_candidate(self, result: MinimalRepairResult) -> None:
-        changed = (
-            f"{result.changed_note_count} note"
-            f"{'s' if result.changed_note_count != 1 else ''} changed"
-        )
+    def _display_candidate(self, result: PairRepairResult) -> None:
         if _has_comparable_overlap(result.before_analysis):
+            self.repair_score_summary_label.setText(
+                f"Estimated compatibility before: {result.original_score:.1f}/100  |  "
+                f"after: {result.repaired_score:.1f}/100  |  "
+                f"improvement: {result.score_improvement:+.1f}"
+            )
             self.candidate_label.setText(
-                f"{result.preset.label} (preservation {result.preservation}%): "
-                f"{result.original_score:.1f} → "
-                f"{result.repaired_score:.1f} / 100  |  {changed}"
+                f"{result.preset.label} repair\n"
+                f"Clip A: {result.changed_note_count_a} changed, "
+                f"{result.retention_a * 100:.1f}% retained, "
+                f"preservation {result.preservation_a * 100:.0f}%  |  "
+                f"Clip B: {result.changed_note_count_b} changed, "
+                f"{result.retention_b * 100:.1f}% retained, "
+                f"preservation {result.preservation_b * 100:.0f}%\n"
+                f"Total: {result.changed_note_count} changed, "
+                f"{result.total_pitch_displacement} semitones displacement"
             )
         else:
             self.candidate_label.setText(
-                f"{result.preset.label}: no comparable overlap  |  {changed}"
+                f"{result.preset.label} repair: no comparable overlap"
             )
         self.edit_list.clear()
-        if not result.edits:
-            self.edit_list.addItem(
-                "No pitch edit cleared the preservation penalty; the candidate is unchanged."
-            )
+        self.edit_a_list.clear()
+        self.edit_b_list.clear()
+        self._populate_edit_list(
+            "A",
+            result.original_clip_a,
+            result.edits_a,
+            self.edit_a_list,
+        )
+        self._populate_edit_list(
+            "B",
+            result.original_clip_b,
+            result.edits_b,
+            self.edit_b_list,
+        )
+        for slot, clip, edits in (
+            ("A", result.original_clip_a, result.edits_a),
+            ("B", result.original_clip_b, result.edits_b),
+        ):
+            original_by_id = {note.id: note for note in clip.notes}
+            for edit in edits:
+                note = original_by_id[edit.note_id]
+                onset = note.onset_ticks / clip.ticks_per_beat
+                self.edit_list.addItem(
+                    f"Clip {slot}: {self._edit_description(edit, onset)}"
+                )
+
+    def _populate_edit_list(
+        self,
+        slot: ClipSlot,
+        clip: MidiClip,
+        edits: tuple[NoteEdit, ...],
+        widget: QListWidget,
+    ) -> None:
+        if not edits:
+            widget.addItem(f"Clip {slot} unchanged.")
             return
-        original_by_id = {note.id: note for note in result.original_clip.notes}
-        for edit in result.edits:
+        original_by_id = {note.id: note for note in clip.notes}
+        for edit in edits:
             note = original_by_id[edit.note_id]
-            onset = note.onset_ticks / result.original_clip.ticks_per_beat
-            self.edit_list.addItem(self._edit_description(edit, onset))
+            onset = note.onset_ticks / clip.ticks_per_beat
+            widget.addItem(self._edit_description(edit, onset))
 
     @staticmethod
     def _edit_description(edit: NoteEdit, onset: float) -> str:

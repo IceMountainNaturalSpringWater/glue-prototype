@@ -16,7 +16,7 @@ os.environ.setdefault("QT_API", "pyside6")
 from PySide6.QtWidgets import QApplication, QMessageBox
 
 from glue.analysis import analyze_pair
-from glue.fixes import RepairPreset
+from glue.fixes import EditingStrategy, RepairPreset
 from glue.io import MidiContentError, MidiParseError, load_midi, write_midi
 from glue.ui import MainWindow
 from scripts.generate_fixtures import fixture_clips, generate_fixtures
@@ -58,6 +58,10 @@ def test_offscreen_module_smoke_runs_full_repair_and_export_workflow(
             str(source_a),
             "--file-b",
             str(source_b),
+            "--preserve-a",
+            "85",
+            "--preserve-b",
+            "85",
             "--export",
             str(exported),
         ],
@@ -142,6 +146,7 @@ def test_no_comparable_overlap_is_not_presented_as_a_perfect_score(
 
     application = QApplication.instance() or QApplication([])
     window = MainWindow()
+    window.show()
     window.load_clip("A", path_a)
     window.load_clip("B", path_b)
     result = window.analyze()
@@ -150,6 +155,8 @@ def test_no_comparable_overlap_is_not_presented_as_a_perfect_score(
     assert result.overall_score == 100
     assert not any(item.activity_weight > 0 for item in result.windows)
     assert window.overall_score_label.text() == "No comparable overlap"
+    assert window.overall_score_label.isVisible()
+    assert window.analysis_details_panel.isHidden()
     assert {
         window.harmonic_score_label.text(),
         window.bass_score_label.text(),
@@ -177,9 +184,18 @@ def test_repair_controls_retain_and_select_before_after_candidates(
         for index in range(window.preset_combo.count())
     ] == [preset.value for preset in RepairPreset]
     assert window.selected_preset is RepairPreset.MINIMAL
-    assert window.preservation_slider.minimum() == 0
-    assert window.preservation_slider.maximum() == 100
-    assert window.preservation_slider.value() == 50
+    assert not hasattr(window, "strategy_combo")
+    assert not hasattr(window, "lock_a_radio")
+    assert not hasattr(window, "lock_b_radio")
+    assert not hasattr(window, "compare_strategies_button")
+    assert window.preservation_a_slider.value() == 100
+    assert window.preservation_b_slider.value() == 100
+    window.set_preservation_values(100, 70)
+    application.processEvents()
+    assert window.preservation_a_slider.value() == 100
+    assert window.preservation_b_slider.minimum() == 0
+    assert window.preservation_b_slider.maximum() == 100
+    assert window.preservation_b_slider.value() == 70
     assert window.repair_button.objectName() == "minimalRepairButton"
 
     window.load_clip("A", generated["out_of_key_context"])
@@ -192,6 +208,9 @@ def test_repair_controls_retain_and_select_before_after_candidates(
     assert window.candidate_list.count() == 1
     assert window.repair_result is first
     assert window.repaired_slot == "B"
+    assert first.strategy is EditingStrategy.CUSTOM
+    assert first.preservation_a == pytest.approx(1.0)
+    assert first.preservation_b == pytest.approx(0.70)
     assert window.timeline.is_comparing
     assert window.timeline.before_analysis == before
     assert window.timeline.after_analysis == first.after_analysis
@@ -201,7 +220,7 @@ def test_repair_controls_retain_and_select_before_after_candidates(
 
     balanced_index = window.preset_combo.findData(RepairPreset.BALANCED.value)
     window.preset_combo.setCurrentIndex(balanced_index)
-    window.preservation_slider.setValue(25)
+    window.preservation_b_slider.setValue(25)
     second = window.repair_selected()
     application.processEvents()
 
@@ -220,12 +239,14 @@ def test_repair_controls_retain_and_select_before_after_candidates(
     assert window.timeline.after_analysis == first.after_analysis
     assert window.piano_roll.comparison_clip == first.repaired_clip
 
-    window.lock_b_radio.setChecked(True)
+    window.preservation_b_slider.setValue(100)
     application.processEvents()
 
-    assert window.repair_candidate_count == 0
-    assert window.candidate_list.count() == 0
+    assert window.repair_candidate_count == 2
+    assert window.candidate_list.count() == 2
     assert window.repair_result is None
+    assert not window.repair_button.isEnabled()
+    assert "Both clips are fully preserved" in window.candidate_label.text()
     assert not window.timeline.is_comparing
     assert not window.piano_roll.is_comparing
     window.close()
@@ -311,7 +332,7 @@ def test_gui_surfaces_nonfatal_parser_warning_details(tmp_path: Path) -> None:
     window.close()
 
 
-def test_gui_disables_repair_when_unlocked_clip_has_only_percussion(
+def test_gui_full_preservation_disables_repair_when_editable_clip_is_percussion(
     tmp_path: Path,
 ) -> None:
     clips = fixture_clips()
@@ -329,10 +350,14 @@ def test_gui_disables_repair_when_unlocked_clip_has_only_percussion(
     window = MainWindow()
     window.load_clip("A", path_a)
     window.load_clip("B", path_b)
+    window.set_preservation_values(85, 85)
     result = window.analyze()
     application.processEvents()
 
     assert any(item.activity_weight > 0 for item in result.windows)
+    assert window.repair_button.isEnabled()
+    window.preservation_a_slider.setValue(100)
+    application.processEvents()
     assert not window.repair_button.isEnabled()
     with pytest.raises(RuntimeError, match="no pitched notes"):
         window.repair_minimal()
@@ -350,6 +375,7 @@ def test_gui_export_never_overwrites_either_loaded_source(tmp_path: Path) -> Non
     window = MainWindow()
     window.load_clip("A", source_a)
     window.load_clip("B", source_b)
+    window.set_preservation_values(85, 85)
     window.analyze()
     window.repair_minimal()
     application.processEvents()

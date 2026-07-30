@@ -21,6 +21,12 @@ EXPECTED_FIXTURES = {
     "rhythm_staggered_b",
     "out_of_key_context",
     "out_of_key_melody",
+    "repair_one_note_context",
+    "repair_one_note_source",
+    "repair_two_note_context",
+    "repair_two_note_source",
+    "coordinated_same_side_a",
+    "coordinated_same_side_b",
     "octave_original",
     "octave_up",
     "demo_same_key_a",
@@ -28,6 +34,16 @@ EXPECTED_FIXTURES = {
     "demo_same_key_conflict_b",
     "demo_preset_context",
     "demo_preset_source",
+    "shared_better_a",
+    "shared_better_b",
+    "preservation_bias_a",
+    "preservation_bias_b",
+    "both_locked_a",
+    "both_locked_b",
+    "unison_collapse_a",
+    "unison_collapse_b",
+    "dual_export_a",
+    "dual_export_b",
     "metadata_roundtrip",
 }
 
@@ -47,6 +63,20 @@ def test_fixture_catalog_covers_required_v01_scenarios() -> None:
     assert [note.pitch + 12 for note in clips["octave_original"].notes] == [
         note.pitch for note in clips["octave_up"].notes
     ]
+    assert [note.pitch for note in clips["coordinated_same_side_a"].notes] == [
+        45,
+        46,
+        51,
+    ]
+    assert [note.pitch for note in clips["coordinated_same_side_b"].notes] == [
+        54,
+        66,
+    ]
+    assert {
+        (note.onset_ticks, note.duration_ticks)
+        for name in ("coordinated_same_side_a", "coordinated_same_side_b")
+        for note in clips[name].notes
+    } == {(0, 480)}
     assert 6 in {note.pitch % 12 for note in clips["out_of_key_melody"].notes}
 
 

@@ -26,7 +26,7 @@ NoteSpec = tuple[int, int, int]
 
 @dataclass(frozen=True, slots=True)
 class DemoScenario:
-    """One discoverable pair in the generated V0.2 demo catalog."""
+    """One discoverable pair in the generated demo catalog."""
 
     title: str
     fixture_a: str
@@ -56,6 +56,24 @@ DEMO_SCENARIOS: Mapping[str, DemoScenario] = MappingProxyType(
             fixture_a="demo_preset_context",
             fixture_b="demo_preset_source",
             purpose="Minimal, Balanced, and Creative produce one, two, and three edits.",
+        ),
+        "shared_compromise": DemoScenario(
+            title="Shared Compromise advantage",
+            fixture_a="shared_better_a",
+            fixture_b="shared_better_b",
+            purpose="One small pitch edit in each clip beats a forced one-sided repair.",
+        ),
+        "preservation_bias": DemoScenario(
+            title="Independent preservation bias",
+            fixture_a="preservation_bias_a",
+            fixture_b="preservation_bias_b",
+            purpose="Changing A/B preservation moves the preferred edit between clips.",
+        ),
+        "unison_collapse": DemoScenario(
+            title="Unison-collapse safeguard",
+            fixture_a="unison_collapse_a",
+            fixture_b="unison_collapse_b",
+            purpose="Parallel semitone lines exercise the line-independence penalty.",
         ),
     }
 )
@@ -126,7 +144,7 @@ def _progression(
 
 
 def fixture_clips() -> dict[str, MidiClip]:
-    """Return the deterministic V0.1 fixtures plus additive V0.2 demos."""
+    """Return deterministic fixtures through the V0.3 joint-repair scenarios."""
 
     identical = _melody((60, 62, 64, 67))
     c_minor_melody = _melody((60, 63, 67, 65))
@@ -160,6 +178,25 @@ def fixture_clips() -> dict[str, MidiClip]:
 
     out_of_key_context = _chord((48, 52, 55), 0, 4 * TICKS_PER_BEAT)
     out_of_key_melody = _melody((60, 62, 66, 67))
+
+    # Repair-search regressions.  The one-note source doubles the context's E3
+    # in the same register, so Minimal should consider an octave alternative.
+    # The two-note source places A3 against C major twice; Balanced can improve
+    # both notes with the symmetric +3-semitone alternatives in its vocabulary.
+    repair_one_note_context = _chord((48, 52, 55), 0, TICKS_PER_BEAT)
+    repair_one_note_source = _chord((52,), 0, TICKS_PER_BEAT)
+    repair_two_note_context = _chord(
+        (48, 52, 55),
+        0,
+        4 * TICKS_PER_BEAT,
+    )
+    repair_two_note_source = _melody((57, 60, 57, 60))
+    # Creative same-side coordination regression.  Neither of the final two
+    # Clip B edits improves the complete pair by itself; their combination
+    # does.  Keep these notes simultaneous so the fixture isolates coupled
+    # pitch search rather than timing or rhythmic changes.
+    coordinated_same_side_a = _chord((45, 46, 51), 0, TICKS_PER_BEAT)
+    coordinated_same_side_b = _chord((54, 66), 0, TICKS_PER_BEAT)
     octave_original = _melody((60, 62, 64, 67))
     octave_up = _melody((72, 74, 76, 79))
 
@@ -196,6 +233,22 @@ def fixture_clips() -> dict[str, MidiClip]:
     ]
     demo_preset_source = _melody((60, 66, 61, 66))
 
+    # The crossed conflict places one F# against C major in each timeline
+    # half. A one-sided repair can address only its editable F#, while Shared
+    # Compromise can change one F# in each clip for a stronger two-edit result.
+    shared_better_a = [
+        *_chord((48, 52, 55), 0, TICKS_PER_BEAT),
+        (66, TICKS_PER_BEAT, TICKS_PER_BEAT),
+    ]
+    shared_better_b = [
+        (66, 0, TICKS_PER_BEAT),
+        *_chord((48, 52, 55), TICKS_PER_BEAT, TICKS_PER_BEAT),
+    ]
+    preservation_bias_a = _melody((60, 60, 60, 60))
+    preservation_bias_b = _melody((66, 66, 66, 66))
+    unison_collapse_a = _melody((60, 62, 64, 65))
+    unison_collapse_b = _melody((61, 63, 65, 66))
+
     return {
         "identical_a": _clip("identical_a", identical),
         "identical_b": _clip("identical_b", identical),
@@ -211,6 +264,30 @@ def fixture_clips() -> dict[str, MidiClip]:
         "rhythm_staggered_b": _clip("rhythm_staggered_b", rhythm_staggered),
         "out_of_key_context": _clip("out_of_key_context", out_of_key_context),
         "out_of_key_melody": _clip("out_of_key_melody", out_of_key_melody),
+        "repair_one_note_context": _clip(
+            "repair_one_note_context",
+            repair_one_note_context,
+        ),
+        "repair_one_note_source": _clip(
+            "repair_one_note_source",
+            repair_one_note_source,
+        ),
+        "repair_two_note_context": _clip(
+            "repair_two_note_context",
+            repair_two_note_context,
+        ),
+        "repair_two_note_source": _clip(
+            "repair_two_note_source",
+            repair_two_note_source,
+        ),
+        "coordinated_same_side_a": _clip(
+            "coordinated_same_side_a",
+            coordinated_same_side_a,
+        ),
+        "coordinated_same_side_b": _clip(
+            "coordinated_same_side_b",
+            coordinated_same_side_b,
+        ),
         "octave_original": _clip("octave_original", octave_original),
         "octave_up": _clip("octave_up", octave_up),
         "demo_same_key_a": _clip("demo_same_key_a", demo_same_key_a),
@@ -230,6 +307,22 @@ def fixture_clips() -> dict[str, MidiClip]:
             "demo_preset_source",
             demo_preset_source,
         ),
+        "shared_better_a": _clip("shared_better_a", shared_better_a),
+        "shared_better_b": _clip("shared_better_b", shared_better_b),
+        "preservation_bias_a": _clip(
+            "preservation_bias_a",
+            preservation_bias_a,
+        ),
+        "preservation_bias_b": _clip(
+            "preservation_bias_b",
+            preservation_bias_b,
+        ),
+        "both_locked_a": _clip("both_locked_a", preservation_bias_a),
+        "both_locked_b": _clip("both_locked_b", preservation_bias_b),
+        "unison_collapse_a": _clip("unison_collapse_a", unison_collapse_a),
+        "unison_collapse_b": _clip("unison_collapse_b", unison_collapse_b),
+        "dual_export_a": _clip("dual_export_a", shared_better_a),
+        "dual_export_b": _clip("dual_export_b", shared_better_b),
     }
 
 

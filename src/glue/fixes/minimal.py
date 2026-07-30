@@ -6,6 +6,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass, replace
 from enum import StrEnum
 from math import floor
+from typing import Literal
 
 from glue.analysis import (
     DEFAULT_ANALYSIS_CONFIG,
@@ -142,11 +143,14 @@ class MinimalRepairConfig:
     def preservation_scale(self) -> float:
         """Map 0-100 preservation to a monotonic penalty multiplier.
 
-        A non-zero floor still discourages gratuitous edits at the lowest
-        setting.  The midpoint is the exact V0.1 penalty behavior.
+        Zero preservation removes ordinary edit-disruption costs. The midpoint
+        remains the exact V0.1 penalty behavior, while the upper half retains
+        the original V0.2 high-preservation slope.
         """
 
-        return 0.25 + 0.015 * self.preservation
+        if self.preservation <= 50:
+            return self.preservation / 50.0
+        return 1.0 + 0.015 * (self.preservation - 50)
 
 
 # The canonical V0.2 name is additive; the original class name remains valid.
@@ -215,11 +219,12 @@ DEFAULT_CREATIVE_REPAIR_CONFIG = repair_config_for(RepairPreset.CREATIVE)
 
 @dataclass(frozen=True, slots=True)
 class NoteEdit:
-    """One accepted pitch-only edit and its local-window objective evidence.
+    """One accepted pitch-only edit and its positive objective evidence.
 
-    ``score_improvement`` is measured over the weak windows intersected by this
-    note.  The result object separately exposes the transparent global
-    before/after compatibility scores.
+    One-sided repair measures ``score_improvement`` over the weak windows
+    intersected by this note. Pair repair documents its joint-step attribution
+    on :class:`~glue.fixes.pair.PairRepairResult`. Result objects separately
+    expose transparent global before/after compatibility scores.
     """
 
     note_id: int
@@ -313,6 +318,40 @@ class MinimalRepairResult:
         """Return the unpenalized global compatibility improvement."""
 
         return self.repaired_score - self.original_score
+
+    @property
+    def has_improvement(self) -> bool:
+        """Return whether this result is a genuine improving repair.
+
+        An unchanged clip is a valid *search outcome*, but it is not a repair
+        candidate that should be presented or exported as a success.
+        """
+
+        return self.changed_note_count > 0 and self.score_improvement > _EPSILON
+
+    @property
+    def is_improving(self) -> bool:
+        """Compatibility alias for :attr:`has_improvement`."""
+
+        return self.has_improvement
+
+    @property
+    def no_improvement_reason(self) -> str | None:
+        """Return actionable guidance when the bounded search changed nothing."""
+
+        if self.has_improvement:
+            return None
+        if self.changed_note_count:
+            return "No valid pitch edit improved the estimated result."
+        if self.repair_config.preservation >= 75:
+            return (
+                "No improving candidate found. Preservation may be too high; "
+                "lower it or choose a broader repair preset."
+            )
+        return (
+            "No improving candidate found. The selected preset may be too "
+            "restrictive, or no valid pitch edit improved the estimated result."
+        )
 
     @property
     def candidate_clip(self) -> MidiClip:
@@ -636,13 +675,19 @@ def _pitch_class_deltas(pitch: int, pitch_class: int) -> tuple[int, ...]:
 def _creative_harmony_deltas(
     note: MidiNote,
     windows: tuple[WindowAnalysis, ...],
+    locked_slot: Literal["A", "B"] = "A",
 ) -> tuple[int, ...]:
     """Derive candidates from the locked clip's public local-chord evidence."""
 
     deltas: list[int] = []
     seen: set[int] = set()
     for window in sorted(windows, key=lambda item: item.index):
-        for harmony in window.local_harmony_a:
+        harmonies = (
+            window.local_harmony_a
+            if locked_slot == "A"
+            else window.local_harmony_b
+        )
+        for harmony in harmonies:
             for pitch_class in harmony.pitch_classes:
                 for delta in _pitch_class_deltas(note.pitch, pitch_class):
                     if delta not in seen:
@@ -655,6 +700,7 @@ def _candidate_deltas(
     note: MidiNote,
     windows: tuple[WindowAnalysis, ...],
     config: RepairConfig,
+    locked_slot: Literal["A", "B"] = "A",
 ) -> tuple[int, ...]:
     """Return a bounded, stable candidate sequence for one note."""
 
@@ -665,7 +711,11 @@ def _candidate_deltas(
     if config.use_local_harmony_candidates:
         ordered.extend(
             delta
-            for delta in _creative_harmony_deltas(note, windows)
+            for delta in _creative_harmony_deltas(
+                note,
+                windows,
+                locked_slot,
+            )
             if use_octaves or abs(delta) != 12
         )
 
@@ -689,6 +739,7 @@ def _best_next_edit(
     original_pitch_by_id: Mapping[int, int],
     repair_config: MinimalRepairConfig,
     analysis_config: AnalysisConfig,
+    editable_slot: Literal["A", "B"] = "B",
 ) -> _ScoredCandidate | None:
     note_index_by_id = {note.id: index for index, note in enumerate(current_clip.notes)}
     best: _ScoredCandidate | None = None
@@ -704,7 +755,13 @@ def _best_next_edit(
         repair_config,
     ):
         note_index = note_index_by_id[note.id]
-        for delta in _candidate_deltas(note, weak_windows, repair_config):
+        locked_slot: Literal["A", "B"] = "B" if editable_slot == "A" else "A"
+        for delta in _candidate_deltas(
+            note,
+            weak_windows,
+            repair_config,
+            locked_slot,
+        ):
             repaired_pitch = note.pitch + delta
             if _introduces_pitch_collision(
                 note,
@@ -717,15 +774,27 @@ def _best_next_edit(
             candidate_notes = list(current_clip.notes)
             candidate_notes[note_index] = repaired_note
             candidate_clip = current_clip.with_notes(candidate_notes)
-            candidate_analysis = analyze_pair(
-                locked_clip,
-                candidate_clip,
-                config=analysis_config,
+            candidate_analysis = (
+                analyze_pair(
+                    candidate_clip,
+                    locked_clip,
+                    config=analysis_config,
+                )
+                if editable_slot == "A"
+                else analyze_pair(
+                    locked_clip,
+                    candidate_clip,
+                    config=analysis_config,
+                )
             )
             global_score_change = (
                 candidate_analysis.overall_score - current_analysis.overall_score
             )
-            if global_score_change < -_EPSILON:
+            # Local-window evidence helps rank an edit, but an accepted edit
+            # must also improve the fully rescored canonical clip pair.  This
+            # prevents a locally attractive yet globally unchanged MIDI file
+            # from being returned as a repair.
+            if global_score_change <= _EPSILON:
                 continue
             improvement = _local_window_improvement(
                 current_analysis,
@@ -776,24 +845,30 @@ def _change_limit(clip: MidiClip, config: MinimalRepairConfig) -> int:
     return min(config.maximum_changes, fractional_limit)
 
 
-def generate_repair(
-    locked_clip: MidiClip,
-    unlocked_clip: MidiClip,
+def generate_repair_for_slot(
+    clip_a: MidiClip,
+    clip_b: MidiClip,
+    editable_slot: Literal["A", "B"],
     *,
     repair_config: RepairConfig = DEFAULT_MINIMAL_REPAIR_CONFIG,
     analysis_config: AnalysisConfig = DEFAULT_ANALYSIS_CONFIG,
 ) -> RepairResult:
-    """Generate one deterministic pitch-only repair for the selected preset.
+    """Repair one slot while preserving canonical Clip A + Clip B analysis.
 
     Each greedy step considers only notes intersecting a weak harmonic, bass,
     or register window, with a deterministic cap on candidate notes.  Candidate
-    gain is measured over the affected weak windows, while global compatibility
-    may not decrease.  The preset controls nearby, octave, and public
+    gain is measured over the affected weak windows, while compatibility for
+    the fully rescored canonical clip pair must improve.  The preset controls
+    nearby, octave, and public
     local-harmony candidates.  Rhythm, onset, duration, velocity, track,
     channel, note identity, and clip metadata are never changed.
     """
 
-    before = analyze_pair(locked_clip, unlocked_clip, config=analysis_config)
+    if editable_slot not in ("A", "B"):
+        raise ValueError("editable_slot must be 'A' or 'B'")
+    locked_clip = clip_b if editable_slot == "A" else clip_a
+    unlocked_clip = clip_a if editable_slot == "A" else clip_b
+    before = analyze_pair(clip_a, clip_b, config=analysis_config)
     current_clip = unlocked_clip
     current_analysis = before
     edits: list[NoteEdit] = []
@@ -811,6 +886,7 @@ def generate_repair(
             original_pitch_by_id,
             repair_config,
             analysis_config,
+            editable_slot,
         )
         if candidate is None:
             break
@@ -837,6 +913,28 @@ def generate_repair(
         after_analysis=current_analysis,
         edits=tuple(edits),
         objective_gain=objective_gain,
+        repair_config=repair_config,
+        analysis_config=analysis_config,
+    )
+
+
+def generate_repair(
+    locked_clip: MidiClip,
+    unlocked_clip: MidiClip,
+    *,
+    repair_config: RepairConfig = DEFAULT_MINIMAL_REPAIR_CONFIG,
+    analysis_config: AnalysisConfig = DEFAULT_ANALYSIS_CONFIG,
+) -> RepairResult:
+    """Generate a backward-compatible repair with the first clip locked.
+
+    The positional arguments retain their V0.1/V0.2 meaning: ``locked_clip``
+    is canonical Clip A and ``unlocked_clip`` is canonical Clip B.
+    """
+
+    return generate_repair_for_slot(
+        locked_clip,
+        unlocked_clip,
+        "B",
         repair_config=repair_config,
         analysis_config=analysis_config,
     )

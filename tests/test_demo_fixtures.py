@@ -51,6 +51,24 @@ def test_demo_catalog_is_discoverable_immutable_and_exact() -> None:
             fixture_b="demo_preset_source",
             purpose="Minimal, Balanced, and Creative produce one, two, and three edits.",
         ),
+        "shared_compromise": DemoScenario(
+            title="Shared Compromise advantage",
+            fixture_a="shared_better_a",
+            fixture_b="shared_better_b",
+            purpose="One small pitch edit in each clip beats a forced one-sided repair.",
+        ),
+        "preservation_bias": DemoScenario(
+            title="Independent preservation bias",
+            fixture_a="preservation_bias_a",
+            fixture_b="preservation_bias_b",
+            purpose="Changing A/B preservation moves the preferred edit between clips.",
+        ),
+        "unison_collapse": DemoScenario(
+            title="Unison-collapse safeguard",
+            fixture_a="unison_collapse_a",
+            fixture_b="unison_collapse_b",
+            purpose="Parallel semitone lines exercise the line-independence penalty.",
+        ),
     }
     with pytest.raises(TypeError):
         DEMO_SCENARIOS["other"] = DEMO_SCENARIOS["same_key_clean"]  # type: ignore[index]

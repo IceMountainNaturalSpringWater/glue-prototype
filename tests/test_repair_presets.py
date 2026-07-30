@@ -46,7 +46,7 @@ def test_preset_configs_are_typed_bounded_and_preservation_scaled() -> None:
         > balanced.edit_penalty
         > creative.edit_penalty
     )
-    assert repair_config_for("minimal", 0).preservation_scale == pytest.approx(0.25)
+    assert repair_config_for("minimal", 0).preservation_scale == pytest.approx(0.0)
     assert repair_config_for("minimal", 50).preservation_scale == pytest.approx(1.0)
     assert repair_config_for("minimal", 100).preservation_scale == pytest.approx(1.75)
 
