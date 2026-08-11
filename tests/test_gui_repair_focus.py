@@ -96,7 +96,7 @@ def test_repair_is_primary_auto_analyzes_and_reuses_cached_analysis(
         QPushButton,
         "analysisDetailsToggle",
     ) == [window.analysis_toggle_button]
-    root_layout = window.centralWidget().layout()
+    root_layout = window.combine_page.layout()
     workspace = window.details_scroll_area.parentWidget()
     assert root_layout.indexOf(window.analysis_details_panel) < root_layout.indexOf(
         workspace

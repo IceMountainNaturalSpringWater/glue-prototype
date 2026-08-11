@@ -1,6 +1,6 @@
 # Deterministic MIDI fixtures
 
-Generate the copyright-free regression fixtures and additive V0.2/V0.3 demo
+Generate the copyright-free regression fixtures and additive V0.2–V0.4 demo
 catalog into an explicit directory:
 
 ```powershell
@@ -29,3 +29,22 @@ analysis, repair, and metadata fixtures, the catalog includes:
 
 `DEMO_SCENARIOS` in `generate_fixtures.py` exposes these pairings to tools and
 tests without writing any files.
+
+V0.4 also provides one-file fixtures for the **Polish One Clip** workflow:
+
+- `single_obvious_accidental`: sustained F-sharp against clear C-major
+  evidence.
+- `single_intentional_chromatic`: a short stepwise D-sharp passing tone that
+  conservative repair must retain.
+- `single_awkward_leap`: an unresolved melodic leap larger than one octave.
+- `single_poor_voice_leading`: a second chord voiced unnecessarily far above
+  the first.
+- `single_duplicate_overlap`: overlapping duplicate note events.
+- `single_bass_conflict`: C-sharp bass beneath repeated C-major harmony.
+- `single_motif_inconsistency`: one altered note inside a repeated phrase.
+- `single_register_crowding`: five simultaneous notes compressed into a narrow
+  register.
+- `single_coordinated_repair`: repeated material with two deviations for
+  multi-note search.
+- `single_no_improvement`: stable C-major material with no enabled repair
+  suggestion.

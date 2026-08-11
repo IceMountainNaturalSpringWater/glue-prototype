@@ -1,4 +1,4 @@
-"""Main PySide6 window for the GLUE V0.3 two-clip workflow."""
+"""Main PySide6 shell for GLUE's single-clip and two-clip workflows."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ from typing import Literal, TypeVar, cast
 from PySide6.QtCore import QSignalBlocker, Qt
 from PySide6.QtWidgets import (
     QApplication,
+    QButtonGroup,
     QComboBox,
     QFileDialog,
     QGridLayout,
@@ -26,11 +27,18 @@ from PySide6.QtWidgets import (
     QSizePolicy,
     QSlider,
     QSplitter,
+    QStackedWidget,
     QVBoxLayout,
     QWidget,
 )
 
-from glue.analysis import KeyEstimate, PairAnalysis, analyze_pair, estimate_key
+from glue.analysis import (
+    KeyEstimate,
+    PairAnalysis,
+    SingleClipAnalysis,
+    analyze_pair,
+    estimate_key,
+)
 from glue.exporting import (
     RepairExportPaths,
     RepairExportResult,
@@ -53,6 +61,7 @@ from glue.fixes import (
     NoteEdit,
     PairRepairResult,
     RepairPreset,
+    SingleRepairResult,
     generate_pair_repair,
     suggest_preservation_balance,
 )
@@ -63,6 +72,7 @@ from glue.io import (
 )
 from glue.models import MidiClip
 
+from .single_workflow import SingleClipWorkflowWidget
 from .visualizations import CompatibilityTimelineWidget, PianoRollWidget
 
 ClipSlot = Literal["A", "B"]
@@ -103,11 +113,72 @@ class MainWindow(QMainWindow):
         self._connect_signals()
         self._reset_analysis()
 
+    @property
+    def current_workflow(self) -> Literal["combine", "polish"]:
+        """Return the workflow page currently shown."""
+
+        return (
+            "polish"
+            if self.workflow_stack.currentWidget() is self.polish_page
+            else "combine"
+        )
+
+    def select_combine_workflow(self) -> None:
+        """Show the existing two-file workflow without changing its state."""
+
+        self.workflow_stack.setCurrentWidget(self.combine_page)
+        self.combine_workflow_button.setChecked(True)
+
+    def select_polish_workflow(self) -> None:
+        """Show the single-file workflow without changing its state."""
+
+        self.workflow_stack.setCurrentWidget(self.polish_page)
+        self.polish_workflow_button.setChecked(True)
+
+    def load_single_clip(self, path: str | Path) -> MidiDocument:
+        """Load one MIDI document into the Polish One Clip workflow."""
+
+        self.select_polish_workflow()
+        return self.polish_page.load_clip(path)
+
+    def analyze_single_clip(self) -> SingleClipAnalysis:
+        """Analyze the loaded Polish One Clip document."""
+
+        self.select_polish_workflow()
+        return self.polish_page.analyze()
+
+    def repair_single_clip(self) -> SingleRepairResult:
+        """Generate the currently requested Polish One Clip repair."""
+
+        self.select_polish_workflow()
+        return self.polish_page.generate_repair()
+
+    def export_single_repaired(
+        self,
+        path: str | Path,
+        *,
+        overwrite: bool = False,
+    ) -> Path:
+        """Export the active single-file repaired MIDI."""
+
+        return self.polish_page.export_repaired(path, overwrite=overwrite)
+
+    def export_single_report(
+        self,
+        path: str | Path,
+        *,
+        overwrite: bool = False,
+    ) -> Path:
+        """Export the active single-file JSON report."""
+
+        return self.polish_page.export_report(path, overwrite=overwrite)
+
     def load_clip(self, slot: ClipSlot | str, path: str | Path) -> MidiDocument:
         """Load one MIDI file into slot A or B without opening a dialog."""
 
         normalized_slot = self._normalize_slot(slot)
         document = validate_for_analysis(load_midi(path))
+        self.select_combine_workflow()
         if normalized_slot == "A":
             self.document_a = document
         else:
@@ -528,14 +599,66 @@ class MainWindow(QMainWindow):
     def _build_ui(self) -> None:
         central = QWidget(self)
         root = QVBoxLayout(central)
+        navigation = QHBoxLayout()
+        navigation.addWidget(QLabel("Workflow:", central))
+        self.combine_workflow_button = QPushButton(
+            "Combine Two Clips",
+            central,
+        )
+        self.combine_workflow_button.setObjectName(
+            "combineTwoClipsWorkflowButton"
+        )
+        self.combine_workflow_button.setCheckable(True)
+        self.combine_workflow_button.setToolTip(
+            "Open the two-file compatibility and repair workflow."
+        )
+        self.polish_workflow_button = QPushButton("Polish One Clip", central)
+        self.polish_workflow_button.setObjectName("polishOneClipWorkflowButton")
+        self.polish_workflow_button.setCheckable(True)
+        self.polish_workflow_button.setToolTip(
+            "Analyze one MIDI clip, review suggestions, and export a pitch-only repair."
+        )
+        self.workflow_button_group = QButtonGroup(central)
+        self.workflow_button_group.setExclusive(True)
+        self.workflow_button_group.addButton(self.combine_workflow_button)
+        self.workflow_button_group.addButton(self.polish_workflow_button)
+        navigation.addWidget(self.combine_workflow_button)
+        navigation.addWidget(self.polish_workflow_button)
+        navigation.addStretch(1)
+        root.addLayout(navigation)
+
+        self.workflow_stack = QStackedWidget(central)
+        self.workflow_stack.setObjectName("workflowStack")
+        self.combine_page = self._build_combine_page(self.workflow_stack)
+        self.polish_page = SingleClipWorkflowWidget(
+            self.workflow_stack,
+            status_callback=self.statusBar().showMessage,
+        )
+        self.workflow_stack.addWidget(self.combine_page)
+        self.workflow_stack.addWidget(self.polish_page)
+        self.workflow_stack.setCurrentWidget(self.combine_page)
+        self.combine_workflow_button.setChecked(True)
+        root.addWidget(self.workflow_stack)
+        self.setCentralWidget(central)
+
+    def _build_combine_page(self, parent: QWidget) -> QWidget:
+        page = QWidget(parent)
+        page.setObjectName("combineTwoClipsPage")
+        root = QVBoxLayout(page)
+        header = QHBoxLayout()
+        title = QLabel("Combine Two Clips", page)
+        title.setObjectName("combineWorkflowTitle")
+        header.addWidget(title)
+        header.addStretch(1)
+        root.addLayout(header)
         root.addLayout(self._build_file_controls())
 
-        self.analysis_details_panel = self._build_analysis_details(central)
+        self.analysis_details_panel = self._build_analysis_details(page)
         self.analysis_details_panel.setObjectName("analysisDetailsPanel")
         self.analysis_details_panel.hide()
         root.addWidget(self.analysis_details_panel)
 
-        workspace = QSplitter(Qt.Orientation.Horizontal, central)
+        workspace = QSplitter(Qt.Orientation.Horizontal, page)
         workspace.setObjectName("workspaceSplitter")
         visual_panel = QWidget(workspace)
         visual_layout = QVBoxLayout(visual_panel)
@@ -571,7 +694,7 @@ class MainWindow(QMainWindow):
         workspace.setStretchFactor(0, 5)
         workspace.setStretchFactor(1, 4)
         root.addWidget(workspace, 1)
-        self.setCentralWidget(central)
+        return page
 
     def _build_busy_row(self, parent: QWidget) -> QHBoxLayout:
         row = QHBoxLayout()
@@ -868,6 +991,12 @@ class MainWindow(QMainWindow):
         return slider, value_label, locked_indicator
 
     def _connect_signals(self) -> None:
+        self.polish_workflow_button.clicked.connect(
+            self.select_polish_workflow
+        )
+        self.combine_workflow_button.clicked.connect(
+            self.select_combine_workflow
+        )
         self.file_a_button.clicked.connect(lambda _checked=False: self._choose_clip("A"))
         self.file_b_button.clicked.connect(lambda _checked=False: self._choose_clip("B"))
         self.analyze_button.clicked.connect(self._analyze_interactive)

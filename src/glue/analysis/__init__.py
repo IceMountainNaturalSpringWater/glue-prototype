@@ -11,7 +11,12 @@ from .compatibility import (
     score_register_compatibility,
     score_rhythm_compatibility,
 )
-from .config import DEFAULT_ANALYSIS_CONFIG, AnalysisConfig
+from .config import (
+    DEFAULT_ANALYSIS_CONFIG,
+    DEFAULT_SINGLE_ANALYSIS_CONFIG,
+    AnalysisConfig,
+    SingleAnalysisConfig,
+)
 from .key import (
     MAJOR_PROFILE,
     MINOR_PROFILE,
@@ -30,11 +35,16 @@ from .results import (
     KeyEstimate,
     LocalHarmonyCandidate,
     PairAnalysis,
+    SingleClipAnalysis,
+    SingleClipSuggestion,
+    SingleSuggestionCategory,
     WindowAnalysis,
 )
+from .single import analyze_single, analyze_single_clip
 
 __all__ = [
     "DEFAULT_ANALYSIS_CONFIG",
+    "DEFAULT_SINGLE_ANALYSIS_CONFIG",
     "INTERVAL_COMPATIBILITY",
     "MAJOR_PROFILE",
     "MAJOR_SCALE_INTERVALS",
@@ -49,9 +59,15 @@ __all__ = [
     "KeyEstimate",
     "LocalHarmonyCandidate",
     "PairAnalysis",
+    "SingleAnalysisConfig",
+    "SingleClipAnalysis",
+    "SingleClipSuggestion",
+    "SingleSuggestionCategory",
     "WindowAnalysis",
     "analyze_compatibility",
     "analyze_pair",
+    "analyze_single",
+    "analyze_single_clip",
     "analyze_window",
     "duration_weighted_histogram",
     "estimate_combined_key",

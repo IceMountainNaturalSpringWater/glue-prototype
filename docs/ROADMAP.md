@@ -8,19 +8,26 @@ Simultaneous-note and local-harmony inference, preservation control, three
 deterministic pitch-repair modes, specific explanations, before/after
 visualization, hardened MIDI errors, and generated demo scenarios.
 
-## V0.3 - Shared Compromise (current prototype)
-Four editing strategies, independent A/B preservation constraints, bounded
-full-pair optimization, unison/line-independence safeguards, dual-clip
-visualization, revised A/B exports, separate-track preview, JSON report, and
-joint-optimization fixtures.
+## V0.3 - Controlled two-clip repair (complete)
+Independent A/B preservation constraints, bounded full-pair optimization,
+unison/line-independence safeguards, dual-clip visualization, revised A/B
+exports, separate-track preview, JSON report, and joint-optimization fixtures.
 
-## V0.3.x - Producer validation and Polish research
-Test with real producers, collect failure cases, calibrate scoring/objective
-weights, and improve workflow. Single-file Polish mode remains deferred until
-its preservation contract and user value are validated.
+## V0.4 - Single MIDI Repair (current prototype)
+Persistent top-level **Combine Two Clips** and **Polish One Clip** switching,
+conservative single-clip suggestions, suggestion-level opt-in controls,
+preservation-aware Minimal/Balanced/Creative pitch repair, before/after
+inspection, and source-preserving MIDI plus optional JSON export. Combine mode
+is the initial workspace and retains its established behavior.
 
-## V0.4 - Plugin architecture experiment
-Port or expose the proven analysis core for a JUCE VST3/standalone shell. Do not start here.
+## V0.4.x - Producer validation
+Test both workflows with real producer material, collect false-positive and
+missed-repair cases, calibrate confidence and objective weights, and improve
+bounded-search progress/cancellation.
+
+## Future - Plugin architecture experiment
+Only after standalone producer value is validated, evaluate exposing the
+analysis core through a suitable native plugin/standalone architecture.
 
 ## V1
 Commercial-quality VST3/AU + standalone application, licensing/storefront only after producer demand is validated.

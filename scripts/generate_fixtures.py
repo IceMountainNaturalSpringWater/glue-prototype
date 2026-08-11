@@ -22,6 +22,7 @@ from glue.models import MidiClip, MidiNote, TempoChange, TimeSignatureChange, Tr
 
 TICKS_PER_BEAT = 480
 NoteSpec = tuple[int, int, int]
+DetailedNoteSpec = tuple[int, int, int, int, int, int]
 
 
 @dataclass(frozen=True, slots=True)
@@ -105,6 +106,48 @@ def _clip(name: str, specs: Iterable[NoteSpec], *, channel: int = 0) -> MidiClip
     )
 
 
+def _detailed_clip(
+    name: str,
+    specs: Iterable[DetailedNoteSpec],
+) -> MidiClip:
+    """Build a fixture whose musical roles use explicit tracks and channels."""
+
+    notes = tuple(
+        MidiNote(
+            id=note_id,
+            pitch=pitch,
+            onset_ticks=onset,
+            duration_ticks=duration,
+            velocity=velocity,
+            track=track,
+            channel=channel,
+        )
+        for note_id, (
+            pitch,
+            onset,
+            duration,
+            velocity,
+            track,
+            channel,
+        ) in enumerate(specs)
+    )
+    track_indices = tuple(sorted({note.track for note in notes} or {0}))
+    length_ticks = max((note.end_ticks for note in notes), default=4 * TICKS_PER_BEAT)
+    return MidiClip(
+        ticks_per_beat=TICKS_PER_BEAT,
+        notes=notes,
+        tempo_changes=(TempoChange(0, 500_000),),
+        time_signature_changes=(TimeSignatureChange(0, 4, 4),),
+        tracks=tuple(
+            TrackInfo(index, f"GLUE fixture track {index}", length_ticks)
+            for index in track_indices
+        ),
+        length_ticks=length_ticks,
+        name=name,
+        midi_type=0 if track_indices == (0,) else 1,
+    )
+
+
 def _melody(pitches: Sequence[int], *, step: int = TICKS_PER_BEAT) -> list[NoteSpec]:
     return [(pitch, index * step, step) for index, pitch in enumerate(pitches)]
 
@@ -144,7 +187,7 @@ def _progression(
 
 
 def fixture_clips() -> dict[str, MidiClip]:
-    """Return deterministic fixtures through the V0.3 joint-repair scenarios."""
+    """Return deterministic V0.1–V0.4 analysis and repair fixtures."""
 
     identical = _melody((60, 62, 64, 67))
     c_minor_melody = _melody((60, 63, 67, 65))
@@ -249,6 +292,85 @@ def fixture_clips() -> dict[str, MidiClip]:
     unison_collapse_a = _melody((60, 62, 64, 65))
     unison_collapse_b = _melody((61, 63, 65, 66))
 
+    # V0.4 single-clip analysis and repair fixtures.  Separate tracks keep
+    # accompaniment, melody, and bass roles explicit without relying on GUI
+    # state or file names during analysis.
+    single_obvious_accidental = [
+        *((pitch, 0, 4 * TICKS_PER_BEAT, 88, 0, 0) for pitch in (48, 52, 55)),
+        (72, 0, TICKS_PER_BEAT, 92, 1, 1),
+        (76, TICKS_PER_BEAT, TICKS_PER_BEAT, 92, 1, 1),
+        (78, 2 * TICKS_PER_BEAT, TICKS_PER_BEAT, 108, 1, 1),
+        (79, 3 * TICKS_PER_BEAT, TICKS_PER_BEAT, 92, 1, 1),
+    ]
+    single_intentional_chromatic = [
+        *((pitch, 0, 4 * TICKS_PER_BEAT, 84, 0, 0) for pitch in (48, 52, 55)),
+        (60, 0, TICKS_PER_BEAT, 88, 1, 1),
+        (62, TICKS_PER_BEAT, TICKS_PER_BEAT // 2, 84, 1, 1),
+        (
+            63,
+            3 * TICKS_PER_BEAT // 2,
+            TICKS_PER_BEAT // 4,
+            68,
+            1,
+            1,
+        ),
+        (
+            64,
+            7 * TICKS_PER_BEAT // 4,
+            5 * TICKS_PER_BEAT // 4,
+            88,
+            1,
+            1,
+        ),
+        (67, 3 * TICKS_PER_BEAT, TICKS_PER_BEAT, 88, 1, 1),
+    ]
+    single_awkward_leap = [
+        (pitch, beat * TICKS_PER_BEAT, TICKS_PER_BEAT, 88, 0, 0)
+        for beat, pitch in enumerate((60, 62, 79, 64, 65, 67))
+    ]
+    single_poor_voice_leading = [
+        *((pitch, 0, TICKS_PER_BEAT, 88, 0, 0) for pitch in (60, 64, 67)),
+        *(
+            (pitch, TICKS_PER_BEAT, TICKS_PER_BEAT, 88, 0, 0)
+            for pitch in (79, 83, 86)
+        ),
+    ]
+    single_duplicate_overlap = [
+        (60, 0, 2 * TICKS_PER_BEAT, 88, 0, 0),
+        (60, 0, 2 * TICKS_PER_BEAT, 76, 0, 0),
+        (64, 0, 2 * TICKS_PER_BEAT, 88, 0, 0),
+        (67, 0, 2 * TICKS_PER_BEAT, 88, 0, 0),
+    ]
+    single_bass_conflict = [
+        (49, 0, TICKS_PER_BEAT, 104, 0, 0),
+        *((pitch, 0, TICKS_PER_BEAT, 88, 1, 1) for pitch in (60, 64, 67)),
+        *(
+            (pitch, beat * TICKS_PER_BEAT, TICKS_PER_BEAT, 88, 1, 1)
+            for beat in (1, 2, 3)
+            for pitch in (60, 64, 67)
+        ),
+        *(
+            (48, beat * TICKS_PER_BEAT, TICKS_PER_BEAT, 92, 0, 0)
+            for beat in (1, 2, 3)
+        ),
+    ]
+    single_motif_inconsistency = [
+        (pitch, beat * TICKS_PER_BEAT, TICKS_PER_BEAT, 88, 0, 0)
+        for beat, pitch in enumerate((60, 62, 64, 67, 60, 62, 65, 67))
+    ]
+    single_register_crowding = [
+        (pitch, 0, 2 * TICKS_PER_BEAT, 88, 0, 0)
+        for pitch in (60, 62, 64, 65, 67)
+    ]
+    single_coordinated_repair = [
+        (pitch, beat * TICKS_PER_BEAT, TICKS_PER_BEAT, 88, 0, 0)
+        for beat, pitch in enumerate((60, 62, 64, 67, 60, 63, 65, 67))
+    ]
+    single_no_improvement = [
+        (pitch, beat * TICKS_PER_BEAT, TICKS_PER_BEAT, 88, 0, 0)
+        for beat, pitch in enumerate((60, 64, 67, 72))
+    ]
+
     return {
         "identical_a": _clip("identical_a", identical),
         "identical_b": _clip("identical_b", identical),
@@ -323,6 +445,46 @@ def fixture_clips() -> dict[str, MidiClip]:
         "unison_collapse_b": _clip("unison_collapse_b", unison_collapse_b),
         "dual_export_a": _clip("dual_export_a", shared_better_a),
         "dual_export_b": _clip("dual_export_b", shared_better_b),
+        "single_obvious_accidental": _detailed_clip(
+            "single_obvious_accidental",
+            single_obvious_accidental,
+        ),
+        "single_intentional_chromatic": _detailed_clip(
+            "single_intentional_chromatic",
+            single_intentional_chromatic,
+        ),
+        "single_awkward_leap": _detailed_clip(
+            "single_awkward_leap",
+            single_awkward_leap,
+        ),
+        "single_poor_voice_leading": _detailed_clip(
+            "single_poor_voice_leading",
+            single_poor_voice_leading,
+        ),
+        "single_duplicate_overlap": _detailed_clip(
+            "single_duplicate_overlap",
+            single_duplicate_overlap,
+        ),
+        "single_bass_conflict": _detailed_clip(
+            "single_bass_conflict",
+            single_bass_conflict,
+        ),
+        "single_motif_inconsistency": _detailed_clip(
+            "single_motif_inconsistency",
+            single_motif_inconsistency,
+        ),
+        "single_register_crowding": _detailed_clip(
+            "single_register_crowding",
+            single_register_crowding,
+        ),
+        "single_coordinated_repair": _detailed_clip(
+            "single_coordinated_repair",
+            single_coordinated_repair,
+        ),
+        "single_no_improvement": _detailed_clip(
+            "single_no_improvement",
+            single_no_improvement,
+        ),
     }
 
 

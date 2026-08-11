@@ -2,6 +2,7 @@
 
 from .app import SMOKE_SUCCESS_SENTINEL, run
 from .main_window import MainWindow
+from .single_workflow import SingleClipWorkflowWidget
 from .visualizations import CompatibilityTimelineWidget, PianoRollWidget
 
 __all__ = [
@@ -9,5 +10,6 @@ __all__ = [
     "CompatibilityTimelineWidget",
     "MainWindow",
     "PianoRollWidget",
+    "SingleClipWorkflowWidget",
     "run",
 ]

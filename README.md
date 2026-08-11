@@ -1,19 +1,31 @@
-# GLUE V0.3 Prototype
+# GLUE V0.4 Prototype
 
-GLUE is a preservation-first MIDI compatibility tool. It compares two Standard
-MIDI Files, explains where their harmony, bass, register, or attacks may
-compete, and proposes deterministic pitch-only repairs without changing the
-loaded source files.
+GLUE is a deterministic, preservation-first MIDI analysis and repair tool. Its
+**Polish One Clip** workflow reviews possible inconsistencies inside one
+Standard MIDI File. Its established **Combine Two Clips** workflow explains
+where two files may compete and proposes compatible pitch-only changes.
 
-V0.3 adds controlled two-clip repair. It remains a standalone desktop
-prototype with no cloud services, accounts, telemetry, AI calls, or network
-features. Scores and chord labels are transparent estimates, not objective
-musical diagnoses.
+V0.4 keeps both workflows separate behind two persistent buttons at the top of
+the window. **Combine Two Clips** opens by default. It remains a
+standalone desktop prototype with no cloud services, accounts, telemetry, AI
+calls, or network features. Scores, chord labels, and repair suggestions are
+transparent estimates, not objective musical diagnoses.
 
 ## What works
 
 - Load type-0 and type-1 MIDI while retaining each source event stream for
   preservation-first export.
+- Analyze one clip for possible harmonic, melodic, voice-leading, overlap,
+  register, bass, and repeated-motif inconsistencies. Suggestions include
+  stable locations, confidence, neutral explanations, and pitch alternatives.
+- Review, enable, or disable individual single-clip suggestions. Conservative
+  high-confidence suggestions are enabled by default, while lower-confidence
+  items remain available in a collapsed secondary section.
+- Generate preservation-aware Minimal, Balanced, or Creative single-clip
+  repairs. Creative can evaluate bounded coordinated multi-note changes.
+- Compare original/repaired piano rolls, exact edits, internal consistency
+  estimates, and the search stop reason; export a source-preserving repaired
+  MIDI or optional advanced JSON report.
 - Estimate duration-weighted major/natural-minor keys, expose ambiguity, and
   analyze simultaneous one-beat windows.
 - Score and explain harmonic, bass/root, register, and attack-rhythm
@@ -66,7 +78,31 @@ If the Windows `python` alias is unavailable, create the environment with
 `py -3.11 -m venv .venv`, then use `.\.venv\Scripts\python.exe` explicitly.
 The optional `start_windows.ps1` script performs environment setup and tests.
 
-## Desktop workflow
+## Desktop workflows
+
+Top-level **Combine Two Clips** and **Polish One Clip** buttons switch the main
+workspace without an intermediate screen. Combine mode is selected initially,
+and switching does not discard either workflow's loaded state.
+
+### Polish One Clip
+
+1. Load one MIDI file.
+2. Review the detected suggestions and enable only the changes you want the
+   search to consider. Low-confidence suggestions are secondary and disabled
+   by default.
+3. Set preservation from 0–100% and choose Minimal, Balanced, or Creative.
+   At 100%, repair is hard-locked to zero edits.
+4. Generate one bounded repair. Analysis is cached and does not need to be run
+   manually first.
+5. Inspect the before/after rolls, exact pitch edits, estimated consistency
+   improvement, and stop reason.
+6. Export the repaired MIDI. JSON is available only under **Advanced Export**.
+
+An unchanged search outcome is explained and is not offered as a successful
+repair. Short stepwise chromatic notes are treated conservatively so an
+intentional passing tone is not automatically removed.
+
+### Combine Two Clips
 
 1. Load MIDI A and MIDI B.
 2. Set Preserve A and Preserve B directly, optionally starting from **Keep
@@ -109,6 +145,12 @@ strategy variants to recommend a balance.
 
 ## Export artifacts
 
+Polish mode's primary artifact is one repaired MIDI based on the original
+source template. It changes approved note-on/note-off pitches only. An optional
+deterministic JSON change report is available under **Advanced Export**.
+
+Combine mode retains its four artifacts:
+
 | Artifact | Contents |
 |---|---|
 | Revised A | Clip A's source MIDI structure with only approved paired note pitches changed |
@@ -143,7 +185,21 @@ Dedicated aliases also exist for the both-locked and dual-export test cases.
 
 ## Automated GUI smoke tests
 
-The backward-compatible one-sided workflow remains available:
+Run a complete single-file workflow, including repaired-MIDI and advanced JSON
+export:
+
+```powershell
+$env:QT_QPA_PLATFORM = "offscreen"
+$env:QT_OPENGL = "software"
+python -m glue --smoke-test `
+  --single-file .generated-fixtures\single_obvious_accidental.mid `
+  --single-preservation 0 `
+  --single-preset minimal `
+  --single-export .generated-fixtures\single-repaired.mid `
+  --single-export-report .generated-fixtures\single-changes.json
+```
+
+The backward-compatible one-sided pair workflow remains available:
 
 ```powershell
 $env:QT_QPA_PLATFORM = "offscreen"
@@ -175,9 +231,10 @@ Remove-Item Env:QT_QPA_PLATFORM, Env:QT_OPENGL
 ```text
 src/glue/models/     immutable MIDI domain models
 src/glue/io/         parsing, template-preserving MIDI I/O, combined previews
-src/glue/analysis/   key/local-harmony inference, scoring, explanations
-src/glue/fixes/      constraint-driven joint search plus legacy public APIs
+src/glue/analysis/   pair compatibility and conservative single-clip suggestions
+src/glue/fixes/      bounded single-clip and joint-pair pitch search
 src/glue/exporting.py staged pair export and deterministic report serialization
+src/glue/single_exporting.py source-preserving single MIDI and JSON export
 src/glue/ui/         PySide6 orchestration and visualizations only
 scripts/             deterministic, copyright-free fixture generation
 tests/               unit, regression, integration, GUI, and end-to-end coverage
@@ -219,7 +276,9 @@ The analysis, repair, and export layers do not import the GUI.
   transaction. A rare OS failure during promotion can leave a partial bundle.
 - Compatibility weights and edit penalties still need validation against real
   producer material.
-- Single-file Polish mode is deferred future work.
+- Single-clip harmony, voice-leading, and motif detectors are bounded
+  heuristics. They can miss context or surface intentional tension; confidence
+  tiers and explicit suggestion selection keep producer judgment primary.
 
-V0.3 is deterministic MIDI analysis and pitch repair—not a DAW plugin and not
+V0.4 is deterministic MIDI analysis and pitch repair—not a DAW plugin and not
 an AI music generator.
