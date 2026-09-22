@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "glue-midi"
-version = "0.4.0"
+version = "0.5.0"
 description = "Deterministic single-clip and two-clip MIDI analysis and repair prototype"
 readme = "README.md"
 requires-python = ">=3.11"

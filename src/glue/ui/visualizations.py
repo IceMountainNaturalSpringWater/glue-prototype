@@ -471,8 +471,10 @@ class PianoRollWidget(QWidget):
     ) -> frozenset[int]:
         if original is None or repaired is None:
             return frozenset()
-        original_pitches = {note.id: note.pitch for note in original.notes}
-        repaired_pitches = {note.id: note.pitch for note in repaired.notes}
+        original_pitches = {note.id: (note.pitch, note.onset_ticks, note.duration_ticks)
+                            for note in original.notes}
+        repaired_pitches = {note.id: (note.pitch, note.onset_ticks, note.duration_ticks)
+                            for note in repaired.notes}
         all_note_ids = original_pitches.keys() | repaired_pitches.keys()
         return frozenset(
             note_id

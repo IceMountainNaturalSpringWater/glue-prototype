@@ -1,15 +1,39 @@
-# GLUE V0.4 Prototype
+# GLUE V0.5 Prototype
 
 GLUE is a deterministic, preservation-first MIDI analysis and repair tool. Its
 **Polish One Clip** workflow reviews possible inconsistencies inside one
 Standard MIDI File. Its established **Combine Two Clips** workflow explains
-where two files may compete and proposes compatible pitch-only changes.
+where two files may compete and proposes bounded musical changes.
 
-V0.4 keeps both workflows separate behind two persistent buttons at the top of
+GLUE keeps both workflows separate behind two persistent buttons at the top of
 the window. **Combine Two Clips** opens by default. It remains a
 standalone desktop prototype with no cloud services, accounts, telemetry, AI
 calls, or network features. Scores, chord labels, and repair suggestions are
 transparent estimates, not objective musical diagnoses.
+
+## New in V0.5
+
+The desktop Generate buttons now use one shared passage-repair engine for
+pitch, optional onset movement, and optional duration changes. **Pitch is on;
+Timing and Duration are off** until explicitly enabled, independently for each
+clip. Presets never change those permissions. Both pair preservation sliders
+still start at 100%; quick balance remains 100:0, 50:50, and 0:100.
+
+Sequence harmony uses duration/accent/bass evidence and Viterbi inference over
+triads, sevenths, suspended chords and supported dominant resolutions. Phrase,
+contour, motif, metric, ornament, voice-leading and rhythmic evidence feed a
+bounded beam search that compares complete passages and full clip pairs.
+Intentional chromaticism and syncopation are not automatically mistakes.
+
+Up to three distinct improving alternatives are available in a compact
+selector. **Change inspector** exposes exact pitch/onset/duration changes and
+qualified reasons. Advanced component scores and calibration JSON remain
+collapsed. The new musical-fit estimate includes rhythm and structure and is
+not directly comparable to the separate, legacy compatibility estimate.
+
+See [V0.5 design and validation](docs/V05_IMPLEMENTATION.md) and
+[musical fixtures](docs/V05_FIXTURES.md). Existing V0.4 public pitch-only repair
+APIs and command-line smoke options remain supported for regression testing.
 
 ## What works
 
@@ -22,12 +46,12 @@ transparent estimates, not objective musical diagnoses.
   high-confidence suggestions are enabled by default, while lower-confidence
   items remain available in a collapsed secondary section.
 - Generate preservation-aware Minimal, Balanced, or Creative single-clip
-  repairs. Creative can evaluate bounded coordinated multi-note changes.
+  repairs. Creative evaluates bounded coordinated multi-note and multi-field changes.
 - Compare original/repaired piano rolls, exact edits, internal consistency
   estimates, and the search stop reason; export a source-preserving repaired
   MIDI or optional advanced JSON report.
 - Estimate duration-weighted major/natural-minor keys, expose ambiguity, and
-  analyze simultaneous one-beat windows.
+  infer a time-varying harmonic sequence with confidence and alternatives.
 - Score and explain harmonic, bass/root, register, and attack-rhythm
   compatibility using centralized deterministic weights.
 - Generate Minimal, Balanced, and Creative pitch-repair candidates from one
@@ -35,10 +59,9 @@ transparent estimates, not objective musical diagnoses.
   edits to every permitted clip from one bounded frontier and rescores every
   complete A+B pair.
 - Treat 100% preservation as an automatic hard zero-edit constraint. Values
-  below 100% permit pitch edits while increasing their cost as preservation
-  rises. At 0%, ordinary edit, displacement, octave, contour, and motif
-  penalties are removed while MIDI safety and line-independence guards remain.
-  Rhythm editing remains disabled.
+  below 100% permit authorized edits while increasing their cost as preservation
+  rises. At 0%, ordinary preservation/displacement penalties disappear, but
+  motif, contour, groove and MIDI safety constraints remain active.
 - Offer **Keep A**, **Balanced**, and **Keep B** as value shortcuts, not repair
   modes, while leaving both preservation sliders freely adjustable afterward.
 - Suggest a preservation balance from cached conflict analysis without running
@@ -92,11 +115,11 @@ and switching does not discard either workflow's loaded state.
    by default.
 3. Set preservation from 0–100% and choose Minimal, Balanced, or Creative.
    At 100%, repair is hard-locked to zero edits.
-4. Generate one bounded repair. Analysis is cached and does not need to be run
+4. Set edit permissions and generate bounded alternatives. Analysis is cached and need not be run
    manually first.
-5. Inspect the before/after rolls, exact pitch edits, estimated consistency
+5. Inspect the before/after rolls, exact authorized edits, estimated musical-fit
    improvement, and stop reason.
-6. Export the repaired MIDI. JSON is available only under **Advanced Export**.
+6. Export the repaired MIDI. JSON is under **Advanced exports / musical evidence**.
 
 An unchanged search outcome is explained and is not offered as a successful
 repair. Short stepwise chromatic notes are treated conservatively so an
@@ -109,9 +132,8 @@ intentional passing tone is not automatically removed.
    A**, **Balanced**, or **Keep B**.
 3. Optionally select **Suggest balance** to preview an analysis-based
    recommendation, then explicitly apply it or keep the current values.
-4. Choose Minimal, Balanced, or Creative and generate the one repair requested
-   by the current preservation values. Compatibility is estimated
-   automatically when needed.
+4. Choose Minimal, Balanced, or Creative, set edit permissions, and generate
+   alternatives for the current preservation values. Manual estimation is optional.
 5. Inspect the compact before/after estimate, exact A/B edits, and note ghosts,
    then export an individual artifact or all four artifacts from one base name.
 6. Expand **Analysis details** when keys, component scores, timeline, and
@@ -132,8 +154,8 @@ Minimal has the smallest joint budget, candidate pool, pitch neighborhood, and
 search depth. Balanced expands all four. Creative expands them again, can use
 local-harmony targets, and at low preservation evaluates bounded coordinated
 same-side note bundles. Per-clip edit budgets and search breadth grow
-progressively as preservation falls. All presets are deterministic; none
-changes onsets, durations, velocities, channels, controllers, or tempo.
+progressively as preservation falls. Timing and duration can change only with
+explicit permission; velocities, channels, controllers and tempo never change.
 
 The joint optimizer is not “repair A, then repair B.” Every search child is a
 complete candidate pair, analyzed canonically as revised A plus revised B. A
@@ -146,17 +168,17 @@ strategy variants to recommend a balance.
 ## Export artifacts
 
 Polish mode's primary artifact is one repaired MIDI based on the original
-source template. It changes approved note-on/note-off pitches only. An optional
-deterministic JSON change report is available under **Advanced Export**.
+source template. Only approved note pitches and bound note-event times change.
+An optional deterministic JSON report includes reasons and calibration scores.
 
 Combine mode retains its four artifacts:
 
 | Artifact | Contents |
 |---|---|
-| Revised A | Clip A's source MIDI structure with only approved paired note pitches changed |
-| Revised B | Clip B's source MIDI structure with only approved paired note pitches changed |
-| Combined preview | Type-1 MIDI with revised A and B on two clearly named tracks |
-| JSON report | Version, strategy, preset, scores, preservation/retention, and traceable per-note edits |
+| Revised A | Original event stream with only authorized note pitch/onset/duration changes |
+| Revised B | Original event stream with only authorized note pitch/onset/duration changes |
+| Combined preview | Type-1 MIDI retaining both clips' separate original tracks and events |
+| JSON report | Version, permissions, preset, component scores, preservation and per-note reasons |
 
 The combined preview accepts differing PPQ values when they can be rescaled
 exactly. It rejects incompatible effective tempo or time-signature maps rather
@@ -184,6 +206,15 @@ python scripts\generate_fixtures.py --output-dir .generated-fixtures
 Dedicated aliases also exist for the both-locked and dual-export test cases.
 
 ## Automated GUI smoke tests
+
+Exercise the V0.5 desktop buttons, five repair types, export/reload, screenshots
+and a bounded-search profile (choose a fresh output directory on each run):
+
+```powershell
+python -m scripts.validate_v05 --output-dir .test-tmp\v05-smoke --profile
+```
+
+The commands below intentionally exercise the retained V0.4 pitch-only APIs.
 
 Run a complete single-file workflow, including repaired-MIDI and advanced JSON
 export:
@@ -231,10 +262,11 @@ Remove-Item Env:QT_QPA_PLATFORM, Env:QT_OPENGL
 ```text
 src/glue/models/     immutable MIDI domain models
 src/glue/io/         parsing, template-preserving MIDI I/O, combined previews
-src/glue/analysis/   pair compatibility and conservative single-clip suggestions
-src/glue/fixes/      bounded single-clip and joint-pair pitch search
+src/glue/analysis/   cached sequence harmony, phrase/motif/context evidence; legacy analysis
+src/glue/fixes/      shared bounded musical passage search; legacy pitch-only APIs
 src/glue/exporting.py staged pair export and deterministic report serialization
 src/glue/single_exporting.py source-preserving single MIDI and JSON export
+src/glue/musical_exporting.py V0.5 staged exports, rollback-capable bundles, calibration JSON
 src/glue/ui/         PySide6 orchestration and visualizations only
 scripts/             deterministic, copyright-free fixture generation
 tests/               unit, regression, integration, GUI, and end-to-end coverage
@@ -246,10 +278,11 @@ The analysis, repair, and export layers do not import the GUI.
 
 - MIDI only: no audio audition, WAV analysis, live MIDI ports, DAW control, or
   VST/AU plugin formats.
-- Repair is pitch-only. It never creates notes or changes rhythm, timing,
-  velocity, channel, controller, or tempo data.
-- Key estimation models one global major or natural-minor center. Local harmony
-  is limited to diatonic triad/seventh candidates.
+- Repair never creates/deletes notes or changes velocity, channels, controllers
+  or tempo. Timing and duration are optional, bounded and off by default.
+- Key likelihood still uses major/natural-minor profiles. Sequence harmony
+  uses eight candidates per frame, at most 128 frames, and heuristic confidence;
+  rapid changes, unusual modes and dense polyphony remain difficult.
 - Clips are compared at beat-zero alignment; there is no offset detection,
   warping, or automatic quantization.
 - Joint repair is explicitly bounded and runs on the GUI thread. The window
@@ -257,28 +290,25 @@ The analysis, repair, and export layers do not import the GUI.
   cancellation and dense clips can take noticeable time. An improvement
   outside the beam/search limits may be missed. Dense searches can exhaust the
   shared evaluation ceiling before every later frontier branch is expanded.
-- Coordinated bundles inspect a bounded high-priority subset. Their sequential
-  collision guard is safe but can conservatively reject a simultaneous pitch
-  swap whose intermediate state would collide.
-- Repeated-note consistency and counterpoint preservation use modest
-  heuristics, not general motif recognition; producer judgment remains
-  necessary.
+- Coordinated bundles inspect a bounded subset and validate final states. Some
+  coordinated solutions remain outside the shortlist/beam. Movement cannot
+  extend beyond the original track end; imported ambiguous overlaps are conservative.
+- Voice identity uses track/channel and pitch rank. Motif recognition uses
+  bounded four-attack patterns, not general musical understanding.
 - Balance suggestion is an analysis-only heuristic. Ambiguous evidence returns
   an honest low-confidence 50% / 50% fallback rather than testing repairs or
   claiming a strong directional recommendation.
-- Combined previews flatten each clip's source tracks into one named preview
-  track. Ambiguous overlapping equal-pitch/channel notes across source tracks
-  are rejected rather than altered. Effective tempo/meter transitions are
-  normalized, and source controllers, programs, markers, and SysEx are not
-  included. Revised individual files preserve those source events.
-- A four-file export is fully staged and validated before promotion, but the
-  final four filesystem replacements are sequential rather than a
-  transaction. A rare OS failure during promotion can leave a partial bundle.
+- New combined previews retain original tracks and events. Clips using equal
+  channel numbers may share instrument/controller state in a downstream player.
+  Incompatible tempo/meter maps are rejected. Legacy CLI previews keep their
+  original two-track, note-only contract.
+- V0.5 bundles stage every artifact and roll back ordinary publication errors.
+  A process crash or an OS failure during rollback cannot be made transactional.
 - Compatibility weights and edit penalties still need validation against real
   producer material.
 - Single-clip harmony, voice-leading, and motif detectors are bounded
   heuristics. They can miss context or surface intentional tension; confidence
   tiers and explicit suggestion selection keep producer judgment primary.
 
-V0.4 is deterministic MIDI analysis and pitch repair—not a DAW plugin and not
+V0.5 is deterministic MIDI analysis and controlled repair—not a DAW plugin and not
 an AI music generator.

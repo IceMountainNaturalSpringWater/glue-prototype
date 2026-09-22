@@ -107,7 +107,9 @@ def test_repair_is_primary_auto_analyzes_and_reuses_cached_analysis(
     assert window.details_scroll_area.height() >= central_size.height() * 0.65
     assert window.details_scroll_area.width() >= central_size.width() * 0.25
 
-    window.repair_button.click()
+    # Retain the V0.4 public pitch-only API/cache regression coverage.
+    # The V0.5 button and permission path has its own end-to-end tests.
+    window.repair_selected()
     application.processEvents()
 
     result = window.repair_result

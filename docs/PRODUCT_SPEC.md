@@ -1,4 +1,115 @@
-# GLUE V0.4 Product Specification
+# GLUE V0.5 Product Specification
+
+## V0.5 active contract: Advanced Musical Repair
+
+V0.5 keeps Combine Two Clips as the initial tab and Polish One Clip as the
+other persistent top-level tab. Loading, preservation shortcuts (100:0,
+50:50, 0:100), optional cached compatibility estimation and explicit export
+remain. No audio, live MIDI, DAW/plugin, cloud, telemetry or AI integration.
+
+The desktop Generate buttons call the same deterministic musical repair
+engine with one clip or a complete pair. Existing V0.4 public pitch-only APIs
+and CLI smoke options retain their contracts. The baseline specification
+below documents those older APIs; this section takes precedence for the V0.5
+desktop and `generate_musical_repairs`.
+
+### Permissions and preservation
+
+- Each clip has independent Pitch, Timing and Duration permissions.
+- Pitch defaults on; Timing and Duration default off for every preset.
+- Preset selection never enables either timing permission silently.
+- 100% preservation means zero edits to that clip. Both pair sliders start
+  at 100%; both locked disables Generate with an explanation.
+- Lower preservation increases note/edit/evaluation budgets and lowers
+  ordinary edit cost. At 0% ordinary preservation penalties are zero, but
+  motif, contour, groove and structural safety remain active.
+
+### Musical evidence and harmony
+
+Immutable cached analyses include meter strength, rest/cadence phrase
+boundaries, contour, four-attack motifs/variations, independent rhythmic
+repetition, density/syncopation, note overlaps, technical equal-pitch
+collisions, bass movement and pitch-rank voice leading/parallel motion.
+Stepwise passing/neighbor tones, prepared resolving suspensions, anticipations
+and recurring chromatic material receive contextual protection. Non-diatonic
+pitch alone is not sufficient evidence for a repair.
+
+Harmony uses duration- and accent-weighted pitch evidence, bass/inversion
+evidence and key likelihood. All roots are considered for major, minor,
+diminished, dominant/major/minor seventh and suspended-second/fourth chords.
+An eight-candidate-per-frame Viterbi sequence rewards continuity and supported
+dominant resolution while considering voice-leading distance. Forward/backward
+max-marginal confidence is heuristic, not a calibrated probability. Both
+neighbors influence the final path. One-beat frames coarsen on long clips to
+at most 128 frames; weak evidence retains alternative labels.
+
+### Bounded passage optimization
+
+Every valid searched state is a full modified clip or pair with complete
+rescoring. Non-improving intermediate states may remain in the beam, and
+coordinated same-measure bundles can cross single-edit objective barriers.
+The optimizer includes harmony, resolution, melodic continuity, voice leading,
+bass movement, rhythmic complementarity, register, unisons/collisions, weak
+motif-consistency evidence, relative motif/contour/groove retention, and weighted
+edit/displacement/preservation costs. Weights live in `musical_config.py`.
+
+| Maximum at 0% preservation | Minimal | Balanced | Creative |
+|---|---:|---:|---:|
+| Edited notes per editable clip | 2 | 4 | 8 |
+| Candidate-note pool per clip | 6 | 10 | 16 |
+| Ordinary pitch radius, semitones | 2 | 4 | 7 |
+| Beam width / search rounds | 4 / 2 | 7 / 3 | 10 / 4 |
+| Complete state evaluations, including baseline | 100 | 220 | 420 |
+| Onset displacement, quarter-note beats | 0.125 | 0.25 | 0.5 |
+| Duration displacement, quarter-note beats | 0.125 | 0.5 | 1.0 |
+| Duration displacement, fraction of original | 25% | 50% | 75% |
+
+High-confidence octave-error candidates can use a 12-semitone correction.
+Timing and duration limits always apply relative to the original source,
+not cumulatively per search step. Both duration bounds must hold. Shifts use
+musical subdivisions while preserving the source's off-grid offset; integer
+tick checks avoid rounding drift. Minimal timing/duration edits require
+explicit permission and technical collision evidence. Other presets may
+separate competing attacks, trim sustained clashes or close an isolated small
+gap in an otherwise legato line. They do not freely quantize or normalize it.
+
+Only candidates improving both estimated musical cost and the retention-aware
+objective are presented. Unchanged/no-improvement outcomes cannot be exported
+as repairs. Up to three non-dominated, differing note/field alternatives are
+retained; gratuitous extra edits and near-duplicate signatures are excluded.
+
+### UI, rationale, exports and calibration
+
+Repair stays primary. Permissions and alternatives are compact; the change
+inspector and advanced evidence/export panel start collapsed. Single-clip
+suggestion opt-outs remain respected for pitch edits. Piano-roll ghosts
+represent pitch, onset and duration differences. The optional compatibility
+button stays adjacent to its overall score and collapsed analysis details;
+running it does not discard an existing musical repair.
+
+Every changed note records source/revised pitch, onset, duration, ownership and
+qualified reasons. Musical-fit estimates are labeled separately from legacy
+compatibility and must not be compared as the same metric. JSON calibration
+reports include component scores, weights, preservation, permissions, reasons,
+search budget outcome and a future human-rating field.
+
+Export updates paired source note events and reconstructs delta times while
+preserving all unrelated events at their absolute ticks. No note is created
+or removed; pitches stay in 0–127, changed durations are positive, and new
+same-track/channel/pitch overlaps or motion beyond source track ends are
+rejected. Imported unchanged zero-length notes retain their event pairing.
+Velocity, release velocity, channels, tempo, controllers, programs, SysEx and
+other source events remain unchanged. Outputs are staged and reloaded for
+semantic validation, with source-path protection and explicit overwrite.
+Combined previews preserve original tracks/events at an exact shared PPQ and
+reject incompatible tempo/meter maps. Four-artifact bundles are staged before
+publication and roll back ordinary publication failures.
+
+Producer ratings and listening validation remain necessary. See
+[implementation and validation](V05_IMPLEMENTATION.md) and
+[musical fixtures](V05_FIXTURES.md) for limitations and reproducible checks.
+
+## V0.4 baseline reference
 
 ## Problem
 

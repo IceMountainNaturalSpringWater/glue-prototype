@@ -31,6 +31,7 @@ from PySide6.QtWidgets import (
 
 from glue.analysis import SingleClipAnalysis, SingleClipSuggestion, analyze_single_clip
 from glue.fixes import RepairPreset, SingleRepairResult, generate_single_repair
+from glue.fixes.musical import MusicalCandidate, MusicalRepair, generate_musical_repairs
 from glue.io import MidiDocument, load_midi, validate_for_analysis
 from glue.models import MidiClip
 from glue.single_exporting import (
@@ -38,6 +39,7 @@ from glue.single_exporting import (
     export_single_repaired_midi,
 )
 
+from .musical_controls import MusicalControls
 from .visualizations import PianoRollWidget, midi_pitch_name
 
 _ResultT = TypeVar("_ResultT")
@@ -172,6 +174,8 @@ class SingleClipWorkflowWidget(QWidget):
         """Generate one repair using only the currently enabled suggestions."""
 
         document = self._require_document()
+        self.musical_controls.clear()
+        self.legacy_results.show()
         analysis = self.analysis or self.analyze()
         result = self._run_busy(
             f"Generating {self.selected_preset.label} repair...",
@@ -206,6 +210,31 @@ class SingleClipWorkflowWidget(QWidget):
             self._show_status(result.stop_reason, 7000)
         self._update_enabled()
         return result
+
+    def repair_musical(self) -> MusicalRepair:
+        """Compare musical passages under the current independent permissions."""
+        document = self._require_document()
+        analysis = self.analysis or self.analyze()
+        choices: dict[int, set[int]] = {s.target_note_id: set() for s in analysis.suggestions}
+        for suggestion in analysis.suggestions:
+            if suggestion.suggestion_id in self.enabled_suggestion_ids:
+                choices[suggestion.target_note_id].update(suggestion.alternatives)
+        self._clear_repair_display()
+        result = self._run_busy(
+            "Comparing bounded musical passages…",
+            lambda: generate_musical_repairs(
+                document.clip, permissions=self.musical_controls.permissions,
+                pitch_choices={key: frozenset(values) for key, values in choices.items()},
+                preservation=(self.preservation,), preset=self.selected_preset),
+        )
+        self.legacy_results.hide()
+        self.musical_controls.display(result, (document,))
+        return result
+
+    def _preview_musical(self, candidate: MusicalCandidate) -> None:
+        self.after_piano_roll.set_single_comparison(self._require_document().clip, candidate.clips[0])
+        self.piano_roll_tabs.setTabEnabled(1, True)
+        self.piano_roll_tabs.setCurrentIndex(1)
 
     def export_repaired(
         self,
@@ -332,6 +361,7 @@ class SingleClipWorkflowWidget(QWidget):
 
         controls_scroll = QScrollArea(workspace)
         controls_scroll.setObjectName("singleControlsScrollArea")
+        controls_scroll.setMinimumWidth(360)
         controls_scroll.setWidgetResizable(True)
         controls_scroll.setHorizontalScrollBarPolicy(
             Qt.ScrollBarPolicy.ScrollBarAlwaysOff
@@ -339,8 +369,8 @@ class SingleClipWorkflowWidget(QWidget):
         controls = QWidget(controls_scroll)
         controls_layout = QVBoxLayout(controls)
         controls_layout.addWidget(self._build_repair_controls(controls))
-        controls_layout.addWidget(self._build_suggestions(controls), 1)
         controls_layout.addWidget(self._build_result_group(controls))
+        controls_layout.addWidget(self._build_suggestions(controls), 1)
         controls.setMinimumHeight(controls.minimumSizeHint().height())
         controls.setMinimumWidth(1)
         controls.setSizePolicy(
@@ -353,6 +383,7 @@ class SingleClipWorkflowWidget(QWidget):
         workspace.addWidget(controls_scroll)
         workspace.setStretchFactor(0, 5)
         workspace.setStretchFactor(1, 4)
+        workspace.setSizes([700, 440])
         root.addWidget(workspace, 1)
 
     def _build_analysis_details(self) -> QWidget:
@@ -404,6 +435,11 @@ class SingleClipWorkflowWidget(QWidget):
         for preset in RepairPreset:
             self.preset_combo.addItem(preset.label, preset.value)
         layout.addWidget(self.preset_combo, 1, 1, 1, 3)
+        self.musical_controls = MusicalControls(1, group)
+        self.musical_controls.permissions_changed.connect(self._clear_repair_display)
+        self.musical_controls.permissions_changed.connect(self._update_enabled)
+        self.musical_controls.candidate_changed.connect(self._preview_musical)
+        layout.addWidget(self.musical_controls, 2, 0, 1, 4)
         return group
 
     def _build_suggestions(self, parent: QWidget) -> QGroupBox:
@@ -423,6 +459,7 @@ class SingleClipWorkflowWidget(QWidget):
         self.primary_suggestion_list.setObjectName("singlePrimarySuggestionList")
         self.primary_suggestion_list.setWordWrap(True)
         self.primary_suggestion_list.setMinimumHeight(115)
+        self.primary_suggestion_list.setMaximumHeight(160)
         layout.addWidget(self.primary_suggestion_list)
 
         self.secondary_toggle_button = QPushButton(
@@ -496,6 +533,11 @@ class SingleClipWorkflowWidget(QWidget):
         advanced_layout.addWidget(self.export_json_button)
         self.advanced_export_panel.hide()
         layout.addWidget(self.generate_button)
+        layout.addWidget(self.musical_controls.results)
+        self.legacy_results = QWidget(group)
+        layout.addWidget(self.legacy_results)
+        layout = QVBoxLayout(self.legacy_results)
+        layout.setContentsMargins(0, 0, 0, 0)
         layout.addWidget(self.score_summary_label)
         layout.addWidget(self.stop_reason_label)
         layout.addWidget(QLabel("Exact pitch edits", group))
@@ -555,7 +597,7 @@ class SingleClipWorkflowWidget(QWidget):
         if not self.is_busy:
             self._run_interactive(
                 f"Could not generate a {self.selected_preset.label} repair",
-                self.generate_repair,
+                self.repair_musical,
             )
 
     def _export_midi_interactive(self) -> None:
@@ -644,6 +686,7 @@ class SingleClipWorkflowWidget(QWidget):
                 self._update_enabled()
 
     def _set_controls_busy(self, busy: bool) -> None:
+        self.musical_controls.setEnabled(not busy)
         for widget in (
             self.load_button,
             self.analysis_toggle_button,
@@ -905,6 +948,8 @@ class SingleClipWorkflowWidget(QWidget):
         )
 
     def _clear_repair_display(self) -> None:
+        self.musical_controls.clear()
+        self.legacy_results.hide()
         self.repair_result = None
         self.last_repair_attempt = None
         self.score_summary_label.setText(
@@ -924,13 +969,20 @@ class SingleClipWorkflowWidget(QWidget):
     def _update_enabled(self) -> None:
         ready = self.document is not None and self.analysis is not None
         has_enabled_suggestions = bool(self.enabled_suggestion_ids)
+        permissions = self.musical_controls.permissions[0]
+        has_permission = permissions.pitch or permissions.timing or permissions.duration
         can_repair = (
             ready
             and self.preservation < 100
-            and has_enabled_suggestions
+            and has_permission
+            and (has_enabled_suggestions or not self._suggestion_items
+                 or permissions.timing or permissions.duration)
             and not self.is_busy
         )
         self.generate_button.setEnabled(can_repair)
+        self.musical_controls.hint.setText(
+            _FULLY_PRESERVED_MESSAGE if self.preservation == 100 else
+            "Timing and Duration remain off unless you enable them.")
         self.select_all_button.setEnabled(
             bool(self._suggestion_items) and not self.is_busy
         )
