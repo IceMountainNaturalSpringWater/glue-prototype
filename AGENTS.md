@@ -1,4 +1,4 @@
-# Codex instructions for GLUE
+# instructions for GLUE
 
 ## Mission
 Build GLUE as a testable MIDI-analysis application. Prioritize correctness, interpretability, and minimal edits over flashy generative features.
