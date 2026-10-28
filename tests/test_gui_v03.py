@@ -54,6 +54,10 @@ def _window_with_pair(
 def test_details_panel_scrolls_at_the_supported_minimum_window_size() -> None:
     application = QApplication.instance() or QApplication([])
     window = MainWindow()
+    window.select_combine_workflow()
+    # V0.5 collapses unused legacy results. Preserve the legacy export-panel
+    # sizing contract when that panel is shown by the V0.4 public repair API.
+    window.legacy_results.show()
     window.resize(900, 650)
     window.show()
     application.processEvents()
@@ -66,7 +70,7 @@ def test_details_panel_scrolls_at_the_supported_minimum_window_size() -> None:
     assert window.compatibility_estimate_group.isVisible()
     assert window.overall_score_label.isVisible()
     assert window.analysis_details_panel.isHidden()
-    root_layout = window.centralWidget().layout()
+    root_layout = window.combine_page.layout()
     workspace = scroll_area.parentWidget()
     assert root_layout.indexOf(window.analysis_details_panel) < root_layout.indexOf(
         workspace
@@ -360,4 +364,4 @@ def test_v03_offscreen_smoke_runs_shared_analysis_repair_and_four_exports(
     assert "changes_b=1" in completed.stdout, diagnostic
     assert all(path.is_file() for path in (revised_a, revised_b, combined, report))
     assert len(load_midi(combined).clip.tracks) == 2
-    assert json.loads(report.read_text(encoding="utf-8"))["version"] == "0.3.0"
+    assert json.loads(report.read_text(encoding="utf-8"))["version"] == "0.5.0"

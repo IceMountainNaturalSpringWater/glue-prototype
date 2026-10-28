@@ -1,4 +1,4 @@
-"""Main PySide6 window for the GLUE V0.3 two-clip workflow."""
+"""Main PySide6 shell for GLUE's single-clip and two-clip workflows."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ from typing import Literal, TypeVar, cast
 from PySide6.QtCore import QSignalBlocker, Qt
 from PySide6.QtWidgets import (
     QApplication,
+    QButtonGroup,
     QComboBox,
     QFileDialog,
     QGridLayout,
@@ -26,11 +27,18 @@ from PySide6.QtWidgets import (
     QSizePolicy,
     QSlider,
     QSplitter,
+    QStackedWidget,
     QVBoxLayout,
     QWidget,
 )
 
-from glue.analysis import KeyEstimate, PairAnalysis, analyze_pair, estimate_key
+from glue.analysis import (
+    KeyEstimate,
+    PairAnalysis,
+    SingleClipAnalysis,
+    analyze_pair,
+    estimate_key,
+)
 from glue.exporting import (
     RepairExportPaths,
     RepairExportResult,
@@ -53,9 +61,11 @@ from glue.fixes import (
     NoteEdit,
     PairRepairResult,
     RepairPreset,
+    SingleRepairResult,
     generate_pair_repair,
     suggest_preservation_balance,
 )
+from glue.fixes.musical import MusicalCandidate, MusicalRepair, generate_musical_repairs
 from glue.io import (
     MidiDocument,
     load_midi,
@@ -63,6 +73,8 @@ from glue.io import (
 )
 from glue.models import MidiClip
 
+from .musical_controls import MusicalControls
+from .single_workflow import SingleClipWorkflowWidget
 from .visualizations import CompatibilityTimelineWidget, PianoRollWidget
 
 ClipSlot = Literal["A", "B"]
@@ -103,11 +115,72 @@ class MainWindow(QMainWindow):
         self._connect_signals()
         self._reset_analysis()
 
+    @property
+    def current_workflow(self) -> Literal["combine", "polish"]:
+        """Return the workflow page currently shown."""
+
+        return (
+            "polish"
+            if self.workflow_stack.currentWidget() is self.polish_page
+            else "combine"
+        )
+
+    def select_combine_workflow(self) -> None:
+        """Show the existing two-file workflow without changing its state."""
+
+        self.workflow_stack.setCurrentWidget(self.combine_page)
+        self.combine_workflow_button.setChecked(True)
+
+    def select_polish_workflow(self) -> None:
+        """Show the single-file workflow without changing its state."""
+
+        self.workflow_stack.setCurrentWidget(self.polish_page)
+        self.polish_workflow_button.setChecked(True)
+
+    def load_single_clip(self, path: str | Path) -> MidiDocument:
+        """Load one MIDI document into the Polish One Clip workflow."""
+
+        self.select_polish_workflow()
+        return self.polish_page.load_clip(path)
+
+    def analyze_single_clip(self) -> SingleClipAnalysis:
+        """Analyze the loaded Polish One Clip document."""
+
+        self.select_polish_workflow()
+        return self.polish_page.analyze()
+
+    def repair_single_clip(self) -> SingleRepairResult:
+        """Generate the currently requested Polish One Clip repair."""
+
+        self.select_polish_workflow()
+        return self.polish_page.generate_repair()
+
+    def export_single_repaired(
+        self,
+        path: str | Path,
+        *,
+        overwrite: bool = False,
+    ) -> Path:
+        """Export the active single-file repaired MIDI."""
+
+        return self.polish_page.export_repaired(path, overwrite=overwrite)
+
+    def export_single_report(
+        self,
+        path: str | Path,
+        *,
+        overwrite: bool = False,
+    ) -> Path:
+        """Export the active single-file JSON report."""
+
+        return self.polish_page.export_report(path, overwrite=overwrite)
+
     def load_clip(self, slot: ClipSlot | str, path: str | Path) -> MidiDocument:
         """Load one MIDI file into slot A or B without opening a dialog."""
 
         normalized_slot = self._normalize_slot(slot)
         document = validate_for_analysis(load_midi(path))
+        self.select_combine_workflow()
         if normalized_slot == "A":
             self.document_a = document
         else:
@@ -146,8 +219,9 @@ class MainWindow(QMainWindow):
                 self._analysis_cache.pop(next(iter(self._analysis_cache)))
             self._analysis_cache[cache_key] = result
         self.pair_analysis = result
-        self._clear_candidate(restore_original=False)
-        self.piano_roll.set_clips(document_a.clip, document_b.clip)
+        if self.musical_controls.result is None:
+            self._clear_candidate(restore_original=False)
+            self.piano_roll.set_clips(document_a.clip, document_b.clip)
         self._display_analysis(result, update_keys=True)
         self._update_repair_enabled()
         status = (
@@ -172,6 +246,25 @@ class MainWindow(QMainWindow):
         """Generate and preview a repair using the selected UI controls."""
 
         return self._generate_repair_candidate(self.selected_preset)
+
+    def repair_musical(self) -> MusicalRepair:
+        """V0.5 interactive passage repair; legacy pitch-only APIs stay available."""
+        documents = self._require_documents()
+        self._clear_candidate(restore_original=True)
+        result = self._run_busy(
+            "Comparing bounded musical passages…",
+            lambda: generate_musical_repairs(
+                *(d.clip for d in documents), permissions=self.musical_controls.permissions,
+                preservation=self._effective_preservation(), preset=self.selected_preset),
+        )
+        self.legacy_results.hide()
+        self.musical_controls.display(result, documents)
+        return result
+
+    def _preview_musical(self, candidate: MusicalCandidate) -> None:
+        documents = self._require_documents()
+        self.piano_roll.set_pair_comparison(
+            documents[0].clip, documents[1].clip, *candidate.clips)
 
     @property
     def pending_balance_suggestion(self) -> BalanceSuggestion | None:
@@ -528,14 +621,66 @@ class MainWindow(QMainWindow):
     def _build_ui(self) -> None:
         central = QWidget(self)
         root = QVBoxLayout(central)
+        navigation = QHBoxLayout()
+        navigation.addWidget(QLabel("Workflow:", central))
+        self.combine_workflow_button = QPushButton(
+            "Combine Two Clips",
+            central,
+        )
+        self.combine_workflow_button.setObjectName(
+            "combineTwoClipsWorkflowButton"
+        )
+        self.combine_workflow_button.setCheckable(True)
+        self.combine_workflow_button.setToolTip(
+            "Open the two-file compatibility and repair workflow."
+        )
+        self.polish_workflow_button = QPushButton("Polish One Clip", central)
+        self.polish_workflow_button.setObjectName("polishOneClipWorkflowButton")
+        self.polish_workflow_button.setCheckable(True)
+        self.polish_workflow_button.setToolTip(
+            "Analyze one MIDI clip, review suggestions, and export a pitch-only repair."
+        )
+        self.workflow_button_group = QButtonGroup(central)
+        self.workflow_button_group.setExclusive(True)
+        self.workflow_button_group.addButton(self.combine_workflow_button)
+        self.workflow_button_group.addButton(self.polish_workflow_button)
+        navigation.addWidget(self.combine_workflow_button)
+        navigation.addWidget(self.polish_workflow_button)
+        navigation.addStretch(1)
+        root.addLayout(navigation)
+
+        self.workflow_stack = QStackedWidget(central)
+        self.workflow_stack.setObjectName("workflowStack")
+        self.combine_page = self._build_combine_page(self.workflow_stack)
+        self.polish_page = SingleClipWorkflowWidget(
+            self.workflow_stack,
+            status_callback=self.statusBar().showMessage,
+        )
+        self.workflow_stack.addWidget(self.combine_page)
+        self.workflow_stack.addWidget(self.polish_page)
+        self.workflow_stack.setCurrentWidget(self.combine_page)
+        self.combine_workflow_button.setChecked(True)
+        root.addWidget(self.workflow_stack)
+        self.setCentralWidget(central)
+
+    def _build_combine_page(self, parent: QWidget) -> QWidget:
+        page = QWidget(parent)
+        page.setObjectName("combineTwoClipsPage")
+        root = QVBoxLayout(page)
+        header = QHBoxLayout()
+        title = QLabel("Combine Two Clips", page)
+        title.setObjectName("combineWorkflowTitle")
+        header.addWidget(title)
+        header.addStretch(1)
+        root.addLayout(header)
         root.addLayout(self._build_file_controls())
 
-        self.analysis_details_panel = self._build_analysis_details(central)
+        self.analysis_details_panel = self._build_analysis_details(page)
         self.analysis_details_panel.setObjectName("analysisDetailsPanel")
         self.analysis_details_panel.hide()
         root.addWidget(self.analysis_details_panel)
 
-        workspace = QSplitter(Qt.Orientation.Horizontal, central)
+        workspace = QSplitter(Qt.Orientation.Horizontal, page)
         workspace.setObjectName("workspaceSplitter")
         visual_panel = QWidget(workspace)
         visual_layout = QVBoxLayout(visual_panel)
@@ -571,7 +716,7 @@ class MainWindow(QMainWindow):
         workspace.setStretchFactor(0, 5)
         workspace.setStretchFactor(1, 4)
         root.addWidget(workspace, 1)
-        self.setCentralWidget(central)
+        return page
 
     def _build_busy_row(self, parent: QWidget) -> QHBoxLayout:
         row = QHBoxLayout()
@@ -769,6 +914,13 @@ class MainWindow(QMainWindow):
         self.balance_suggestion_label.setWordWrap(True)
         layout.addWidget(self.balance_suggestion_label)
 
+        self.musical_controls = MusicalControls(2, group)
+        self.musical_controls.permissions_changed.connect(
+            lambda: self._clear_active_candidate(restore_original=True))
+        self.musical_controls.permissions_changed.connect(self._update_repair_enabled)
+        self.musical_controls.candidate_changed.connect(self._preview_musical)
+        layout.addWidget(self.musical_controls)
+
         self.repair_button = QPushButton("Generate Minimal repair", group)
         self.repair_button.setObjectName("minimalRepairButton")
         self.candidate_list = QListWidget(group)
@@ -791,12 +943,14 @@ class MainWindow(QMainWindow):
         edit_a_column = QVBoxLayout()
         edit_a_column.addWidget(QLabel("Clip A edits", group))
         self.edit_a_list = QListWidget(group)
+        self.edit_a_list.setMinimumHeight(60)
         self.edit_a_list.setObjectName("editAList")
         self.edit_a_list.setWordWrap(True)
         edit_a_column.addWidget(self.edit_a_list)
         edit_b_column = QVBoxLayout()
         edit_b_column.addWidget(QLabel("Clip B edits", group))
         self.edit_b_list = QListWidget(group)
+        self.edit_b_list.setMinimumHeight(60)
         self.edit_b_list.setObjectName("editBList")
         self.edit_b_list.setWordWrap(True)
         edit_b_column.addWidget(self.edit_b_list)
@@ -821,6 +975,11 @@ class MainWindow(QMainWindow):
         export_grid.addWidget(self.export_report_button, 1, 1)
         export_grid.addWidget(self.export_bundle_button, 2, 0, 1, 2)
         layout.addWidget(self.repair_button)
+        layout.addWidget(self.musical_controls.results)
+        self.legacy_results = QWidget(group)
+        layout.addWidget(self.legacy_results)
+        layout = QVBoxLayout(self.legacy_results)
+        layout.setContentsMargins(0, 0, 0, 0)
         layout.addWidget(self.candidate_list)
         layout.addWidget(self.repair_score_summary_label)
         layout.addWidget(self.candidate_label)
@@ -868,6 +1027,12 @@ class MainWindow(QMainWindow):
         return slider, value_label, locked_indicator
 
     def _connect_signals(self) -> None:
+        self.polish_workflow_button.clicked.connect(
+            self.select_polish_workflow
+        )
+        self.combine_workflow_button.clicked.connect(
+            self.select_combine_workflow
+        )
         self.file_a_button.clicked.connect(lambda _checked=False: self._choose_clip("A"))
         self.file_b_button.clicked.connect(lambda _checked=False: self._choose_clip("B"))
         self.analyze_button.clicked.connect(self._analyze_interactive)
@@ -938,7 +1103,7 @@ class MainWindow(QMainWindow):
             return
         self._run_interactive(
             f"Could not generate a {self.selected_preset.label} repair",
-            self.repair_selected,
+            self.repair_musical,
         )
 
     def _suggest_balance_interactive(self) -> None:
@@ -1104,6 +1269,7 @@ class MainWindow(QMainWindow):
         outermost = self._busy_depth == 0
         self._busy_depth += 1
         if outermost:
+            self.musical_controls.setEnabled(False)
             self.busy_status_label.setText(message)
             self.busy_indicator.show()
             self.analyze_button.setEnabled(False)
@@ -1124,6 +1290,7 @@ class MainWindow(QMainWindow):
         finally:
             self._busy_depth -= 1
             if outermost:
+                self.musical_controls.setEnabled(True)
                 self.busy_indicator.hide()
                 self.busy_status_label.setText("Ready")
                 self.file_a_button.setEnabled(True)
@@ -1190,6 +1357,8 @@ class MainWindow(QMainWindow):
         self._select_candidate(self._repair_candidates[index])
 
     def _select_candidate(self, preview: _CandidatePreview) -> None:
+        self.musical_controls.clear()
+        self.legacy_results.show()
         document_a, document_b = self._require_documents()
         result = preview.result
         self.repair_result = result
@@ -1310,6 +1479,8 @@ class MainWindow(QMainWindow):
         self.candidate_list.clear()
 
     def _clear_active_candidate(self, *, restore_original: bool) -> None:
+        self.musical_controls.clear()
+        self.legacy_results.hide()
         self.repair_result = None
         self.repaired_slot = None
         self.candidate_list.setCurrentItem(None)
@@ -1329,8 +1500,9 @@ class MainWindow(QMainWindow):
             self.export_bundle_button,
         ):
             button.setEnabled(False)
-        if restore_original and self.pair_analysis is not None:
-            self._display_analysis(self.pair_analysis, update_keys=False)
+        if restore_original:
+            if self.pair_analysis is not None:
+                self._display_analysis(self.pair_analysis, update_keys=False)
             self.piano_roll.set_clips(
                 self.document_a.clip if self.document_a is not None else None,
                 self.document_b.clip if self.document_b is not None else None,
@@ -1354,6 +1526,10 @@ class MainWindow(QMainWindow):
             self.pair_analysis
         )
         enabled = documents_ready and overlap_allows_repair and editable
+        enabled = enabled and any(
+            preserve < 100 and (allow.pitch or allow.timing or allow.duration)
+            for preserve, allow in zip(self._effective_preservation(),
+                                       self.musical_controls.permissions, strict=True))
         if self.is_busy:
             enabled = False
         self.repair_button.setEnabled(enabled)
@@ -1362,10 +1538,13 @@ class MainWindow(QMainWindow):
             self._pending_balance_suggestion is not None and not self.is_busy
         )
         if preservation_a == preservation_b == 100:
+            self.musical_controls.hint.setText(_BOTH_LOCKED_MESSAGE)
             self.repair_button.setToolTip(_BOTH_LOCKED_MESSAGE)
             if self.repair_result is None:
                 self.candidate_label.setText(_BOTH_LOCKED_MESSAGE)
         else:
+            self.musical_controls.hint.setText(
+                "Timing and Duration remain off unless you enable them.")
             self.repair_button.setToolTip(
                 "Compatibility will be estimated automatically before repair."
                 if enabled and self.pair_analysis is None

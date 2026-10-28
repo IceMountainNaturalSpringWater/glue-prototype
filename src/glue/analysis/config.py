@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import isclose
+from math import isclose, isfinite
+from numbers import Real
 
 
 @dataclass(frozen=True, slots=True)
@@ -86,3 +87,101 @@ class AnalysisConfig:
 
 
 DEFAULT_ANALYSIS_CONFIG = AnalysisConfig()
+
+
+@dataclass(frozen=True, slots=True)
+class SingleAnalysisConfig:
+    """Central policy for deterministic, conservative one-clip analysis.
+
+    The thresholds are intentionally cautious.  They identify material worth
+    reviewing, not notes that are objectively incorrect.
+    """
+
+    window_beats: float = 1.0
+    high_confidence_threshold: float = 0.65
+    minimum_key_confidence: float = 0.18
+    maximum_alternatives: int = 6
+    maximum_suggestions: int = 96
+    leap_threshold_semitones: int = 12
+    step_resolution_semitones: int = 2
+    voice_leading_threshold_semitones: int = 8
+    crowding_minimum_notes: int = 4
+    crowding_span_semitones: int = 12
+    motif_minimum_length: int = 3
+    motif_maximum_length: int = 4
+    motif_maximum_mismatches: int = 2
+    harmonic_weight: float = 0.30
+    melodic_weight: float = 0.18
+    voice_leading_weight: float = 0.14
+    overlap_weight: float = 0.12
+    register_weight: float = 0.10
+    bass_weight: float = 0.10
+    motif_weight: float = 0.06
+
+    def __post_init__(self) -> None:
+        if (
+            isinstance(self.window_beats, bool)
+            or not isinstance(self.window_beats, Real)
+        ):
+            raise TypeError("window_beats must be a finite number")
+        if not isfinite(self.window_beats) or self.window_beats <= 0:
+            raise ValueError("window_beats must be positive")
+        for name in (
+            "high_confidence_threshold",
+            "minimum_key_confidence",
+        ):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, Real):
+                raise TypeError(f"{name} must be a finite number")
+            if not isfinite(value) or not 0 <= value <= 1:
+                raise ValueError(f"{name} must be between 0 and 1")
+        for name in (
+            "maximum_alternatives",
+            "maximum_suggestions",
+            "leap_threshold_semitones",
+            "step_resolution_semitones",
+            "voice_leading_threshold_semitones",
+            "crowding_minimum_notes",
+            "crowding_span_semitones",
+            "motif_minimum_length",
+            "motif_maximum_length",
+            "motif_maximum_mismatches",
+        ):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, int):
+                raise TypeError(f"{name} must be an integer")
+            if value <= 0:
+                raise ValueError(f"{name} must be positive")
+        if self.motif_minimum_length > self.motif_maximum_length:
+            raise ValueError(
+                "motif_minimum_length must not exceed motif_maximum_length"
+            )
+        weights = self.component_weights
+        if any(
+            isinstance(weight, bool)
+            or not isinstance(weight, Real)
+            or not isfinite(weight)
+            for weight in weights
+        ):
+            raise TypeError("single-analysis component weights must be finite numbers")
+        if any(weight < 0 for weight in weights):
+            raise ValueError("single-analysis component weights must be non-negative")
+        if not isclose(sum(weights), 1.0, abs_tol=1e-9):
+            raise ValueError("single-analysis component weights must sum to 1")
+
+    @property
+    def component_weights(self) -> tuple[float, ...]:
+        """Return weights in the same order as single-analysis score fields."""
+
+        return (
+            self.harmonic_weight,
+            self.melodic_weight,
+            self.voice_leading_weight,
+            self.overlap_weight,
+            self.register_weight,
+            self.bass_weight,
+            self.motif_weight,
+        )
+
+
+DEFAULT_SINGLE_ANALYSIS_CONFIG = SingleAnalysisConfig()

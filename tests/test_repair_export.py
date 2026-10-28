@@ -179,7 +179,7 @@ def test_bundle_exports_two_revised_midis_preview_and_traceable_json(
     ]
 
     report = json.loads(paths.change_report.read_text(encoding="utf-8"))
-    assert report["version"] == "0.3.0"
+    assert report["version"] == "0.5.0"
     assert report["strategy"] == "shared"
     assert report["preset"] == "minimal"
     assert report["before_score"] == pytest.approx(repair.original_score)

@@ -89,6 +89,7 @@ class PianoRollWidget(QWidget):
         # dual-edit comparison there is deliberately no single repaired slot.
         self._comparison_slot: str | None = None
         self._comparison_clip: MidiClip | None = None
+        self._single_clip_mode = False
         self.setMinimumHeight(260)
         self.setAccessibleName("Overlay piano roll")
 
@@ -111,7 +112,48 @@ class PianoRollWidget(QWidget):
         self._pair_comparison_active = False
         self._comparison_slot = None
         self._comparison_clip = None
+        self._single_clip_mode = False
         self.setAccessibleDescription("Original MIDI A and MIDI B notes.")
+        self.update()
+
+    def set_single_clip(self, clip: MidiClip | None) -> None:
+        """Show one clip without assigning it a two-file workflow label."""
+
+        self._clip_a = clip
+        self._clip_b = None
+        self._comparison_clip_a = None
+        self._comparison_clip_b = None
+        self._pair_comparison_active = False
+        self._comparison_slot = None
+        self._comparison_clip = None
+        self._single_clip_mode = True
+        self.setAccessibleDescription(
+            "Original single MIDI clip."
+            if clip is not None
+            else "No single MIDI clip loaded."
+        )
+        self.update()
+
+    def set_single_comparison(
+        self,
+        original: MidiClip,
+        repaired: MidiClip,
+    ) -> None:
+        """Show one clip's original notes and pitch-only repaired notes."""
+
+        self._clip_a = original
+        self._clip_b = None
+        self._comparison_clip_a = repaired
+        self._comparison_clip_b = None
+        self._pair_comparison_active = True
+        self._comparison_slot = "A"
+        self._comparison_clip = repaired
+        self._single_clip_mode = True
+        changed_count = len(self.changed_note_ids_a)
+        self.setAccessibleDescription(
+            "Before and after comparison for one MIDI clip; "
+            f"{changed_count} changed note{'s' if changed_count != 1 else ''}."
+        )
         self.update()
 
     def set_comparison(
@@ -159,6 +201,7 @@ class PianoRollWidget(QWidget):
         self._comparison_clip_a = repaired_a
         self._comparison_clip_b = repaired_b
         self._pair_comparison_active = True
+        self._single_clip_mode = False
 
         changed_a = self.changed_note_ids_a
         changed_b = self.changed_note_ids_b
@@ -312,7 +355,11 @@ class PianoRollWidget(QWidget):
             painter.drawText(
                 QRectF(self.rect()),
                 Qt.AlignmentFlag.AlignCenter,
-                "Load two MIDI files to view their notes.",
+                (
+                    "Load a MIDI file to view its notes."
+                    if self._single_clip_mode
+                    else "Load two MIDI files to view their notes."
+                ),
             )
             return
 
@@ -424,8 +471,10 @@ class PianoRollWidget(QWidget):
     ) -> frozenset[int]:
         if original is None or repaired is None:
             return frozenset()
-        original_pitches = {note.id: note.pitch for note in original.notes}
-        repaired_pitches = {note.id: note.pitch for note in repaired.notes}
+        original_pitches = {note.id: (note.pitch, note.onset_ticks, note.duration_ticks)
+                            for note in original.notes}
+        repaired_pitches = {note.id: (note.pitch, note.onset_ticks, note.duration_ticks)
+                            for note in repaired.notes}
         all_note_ids = original_pitches.keys() | repaired_pitches.keys()
         return frozenset(
             note_id
@@ -647,6 +696,32 @@ class PianoRollWidget(QWidget):
             painter.drawRect(note_rect)
 
     def _paint_legend(self, painter: QPainter, *, comparing: bool) -> None:
+        if self._single_clip_mode:
+            if not comparing:
+                self._paint_legend_item(
+                    painter,
+                    52.0,
+                    "MIDI",
+                    self._CLIP_A_FILL,
+                    self._CLIP_A_EDGE,
+                )
+                return
+            self._paint_legend_item(
+                painter,
+                52.0,
+                "Original",
+                self._CLIP_A_BEFORE_FILL,
+                self._CLIP_A_EDGE,
+                pen_style=Qt.PenStyle.DashLine,
+            )
+            self._paint_legend_item(
+                painter,
+                142.0,
+                "Repaired",
+                self._CLIP_A_AFTER_FILL,
+                self._CLIP_A_AFTER_EDGE,
+            )
+            return
         self._paint_legend_item(
             painter,
             52.0,

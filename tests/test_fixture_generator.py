@@ -44,6 +44,16 @@ EXPECTED_FIXTURES = {
     "unison_collapse_b",
     "dual_export_a",
     "dual_export_b",
+    "single_obvious_accidental",
+    "single_intentional_chromatic",
+    "single_awkward_leap",
+    "single_poor_voice_leading",
+    "single_duplicate_overlap",
+    "single_bass_conflict",
+    "single_motif_inconsistency",
+    "single_register_crowding",
+    "single_coordinated_repair",
+    "single_no_improvement",
     "metadata_roundtrip",
 }
 
@@ -77,6 +87,26 @@ def test_fixture_catalog_covers_required_v01_scenarios() -> None:
         for name in ("coordinated_same_side_a", "coordinated_same_side_b")
         for note in clips[name].notes
     } == {(0, 480)}
+    assert {name for name in clips if name.startswith("single_")} == {
+        "single_obvious_accidental",
+        "single_intentional_chromatic",
+        "single_awkward_leap",
+        "single_poor_voice_leading",
+        "single_duplicate_overlap",
+        "single_bass_conflict",
+        "single_motif_inconsistency",
+        "single_register_crowding",
+        "single_coordinated_repair",
+        "single_no_improvement",
+    }
+    intentional = clips["single_intentional_chromatic"]
+    chromatic = next(note for note in intentional.notes if note.pitch == 63)
+    assert (
+        chromatic.onset_ticks,
+        chromatic.duration_ticks,
+        chromatic.track,
+        chromatic.channel,
+    ) == (720, 120, 1, 1)
     assert 6 in {note.pitch % 12 for note in clips["out_of_key_melody"].notes}
 
 

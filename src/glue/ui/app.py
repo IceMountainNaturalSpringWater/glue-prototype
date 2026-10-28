@@ -10,6 +10,7 @@ from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QApplication
 
 from glue import __version__
+from glue.fixes import RepairPreset
 
 from .main_window import MainWindow
 
@@ -28,6 +29,11 @@ def run(
     smoke_test: bool = False,
     file_a: Path | None = None,
     file_b: Path | None = None,
+    single_file: Path | None = None,
+    single_preservation: int | None = None,
+    single_preset: str | None = None,
+    single_export: Path | None = None,
+    single_export_report: Path | None = None,
     export_path: Path | None = None,
     strategy: str | None = None,
     preservation_a: int | None = None,
@@ -62,6 +68,11 @@ def run(
                 window,
                 file_a=file_a,
                 file_b=file_b,
+                single_file=single_file,
+                single_preservation=single_preservation,
+                single_preset=single_preset,
+                single_export=single_export,
+                single_export_report=single_export_report,
                 export_path=export_path,
                 strategy=strategy,
                 preservation_a=preservation_a,
@@ -82,6 +93,11 @@ def _run_smoke_workflow(
     *,
     file_a: Path | None,
     file_b: Path | None,
+    single_file: Path | None,
+    single_preservation: int | None,
+    single_preset: str | None,
+    single_export: Path | None,
+    single_export_report: Path | None,
     export_path: Path | None,
     strategy: str | None,
     preservation_a: int | None,
@@ -95,7 +111,7 @@ def _run_smoke_workflow(
     try:
         if (file_a is None) != (file_b is None):
             raise ValueError("smoke workflow requires both --file-a and --file-b")
-        outputs = (
+        pair_outputs = (
             export_path,
             export_a,
             export_b,
@@ -103,8 +119,52 @@ def _run_smoke_workflow(
             export_report,
             export_base,
         )
-        if any(value is not None for value in outputs) and file_a is None:
+        if any(value is not None for value in pair_outputs) and file_a is None:
             raise ValueError("export options require --file-a and --file-b")
+        single_values = (
+            single_preservation,
+            single_preset,
+            single_export,
+            single_export_report,
+        )
+        if any(value is not None for value in single_values) and single_file is None:
+            raise ValueError("single-file options require --single-file")
+        if single_file is not None and file_a is not None:
+            raise ValueError("single-file and two-file workflows cannot be combined")
+
+        if single_file is not None:
+            window.select_polish_workflow()
+            selected_preservation = (
+                window.polish_page.preservation
+                if single_preservation is None
+                else single_preservation
+            )
+            window.polish_page.set_preservation(selected_preservation)
+            preset = RepairPreset(single_preset or RepairPreset.MINIMAL.value)
+            preset_index = window.polish_page.preset_combo.findData(preset.value)
+            if preset_index < 0:
+                raise RuntimeError("The requested single-file preset is unavailable")
+            window.polish_page.preset_combo.setCurrentIndex(preset_index)
+            window.load_single_clip(single_file)
+            analysis = window.polish_page.analysis
+            if analysis is None:
+                analysis = window.analyze_single_clip()
+            result = window.repair_single_clip()
+            if single_export is not None:
+                window.export_single_repaired(single_export)
+            if single_export_report is not None:
+                window.export_single_report(single_export_report)
+            print(
+                f"{SMOKE_SUCCESS_SENTINEL} workflow=polish"
+                f" preservation={selected_preservation}"
+                f" preset={preset.value}"
+                f" before={analysis.internal_consistency_score:.3f}"
+                f" after={result.repaired_score:.3f}"
+                f" changes={result.changed_note_count}",
+                flush=True,
+            )
+            QTimer.singleShot(150, lambda: application.exit(0))
+            return
 
         selected_a, selected_b = (
             _LEGACY_STRATEGY_VALUES[strategy]
@@ -122,6 +182,7 @@ def _run_smoke_workflow(
 
         detail = f" preservation_a={selected_a} preservation_b={selected_b}"
         if file_a is not None and file_b is not None:
+            window.select_combine_workflow()
             window.load_clip("A", file_a)
             window.load_clip("B", file_b)
             before = window.analyze()
