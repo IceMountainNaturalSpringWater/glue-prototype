@@ -1,0 +1,5021 @@
+{
+  "algorithm_sha256": "04e1428013ad46e2f3c0b2838429d5a841763db64a6ebf5221d7d16bc2c5df96",
+  "by_kind": {
+    "accidental": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": null,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 0,
+      "clean_octave_displacement_rate": null,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 0,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.016666666666666666,
+      "corrupted_notes": 120,
+      "duration_error_beats_after": 0.0,
+      "duration_error_beats_before": 0.0,
+      "edit_type_diagnostics": {
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.1,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 70.0,
+            "recovered": 1.6666666666666667,
+            "scoring_preferred_another_result": 8.333333333333334
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 89.36170212765957,
+            "scoring_preferred_another_result": 10.638297872340425
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.125,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 24,
+            "correct_candidate_never_generated": 84,
+            "recovered": 2,
+            "scoring_preferred_another_result": 10
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.016666666666666666,
+      "made_worse_runs": 20,
+      "mean_distance_after": 4.333333333333333,
+      "mean_distance_before": 1.0,
+      "mean_runtime_seconds": 0.19877454499995414,
+      "onset_error_beats_after": 0.0,
+      "onset_error_beats_before": 0.0,
+      "partial_field_recovery": 0.016666666666666666,
+      "runs": 120,
+      "total_runtime_seconds": 23.852945399994496,
+      "unnecessary_edit_count": 57,
+      "unnecessary_field_edits": 57,
+      "untouched_note_preservation": 0.9825688073394495
+    },
+    "clean": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": 0.016519174041297935,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 3390,
+      "clean_octave_displacement_rate": 0.007079646017699115,
+      "clean_octave_displacements": 24,
+      "clean_pitch_edits": 56,
+      "clean_runs": 120,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": null,
+      "corrupted_notes": 0,
+      "duration_error_beats_after": 0,
+      "duration_error_beats_before": 0,
+      "edit_type_diagnostics": {},
+      "errors": 0,
+      "exact_recovery_rate": null,
+      "made_worse_runs": 20,
+      "mean_distance_after": null,
+      "mean_distance_before": null,
+      "mean_runtime_seconds": 0.19122949750041396,
+      "onset_error_beats_after": 0,
+      "onset_error_beats_before": 0,
+      "partial_field_recovery": null,
+      "runs": 120,
+      "total_runtime_seconds": 22.947539700049674,
+      "unnecessary_edit_count": 56,
+      "unnecessary_field_edits": 56,
+      "untouched_note_preservation": null
+    },
+    "coordinated": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": null,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 0,
+      "clean_octave_displacement_rate": null,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 0,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.03333333333333333,
+      "corrupted_notes": 240,
+      "duration_error_beats_after": 120.0,
+      "duration_error_beats_before": 120.0,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 240,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 192,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 48,
+            "correct_candidate_never_generated": 192
+          }
+        },
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.19583333333333333,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 60.416666666666664,
+            "recovered": 3.3333333333333335,
+            "required_combination_not_discovered": 12.083333333333334,
+            "scoring_preferred_another_result": 4.166666666666667
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 78.80434782608695,
+            "required_combination_not_discovered": 15.76086956521739,
+            "scoring_preferred_another_result": 5.434782608695652
+          },
+          "corrupted_fields": 240,
+          "eligible_candidate_recall": 0.24479166666666666,
+          "eligible_fields": 192,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 48,
+            "correct_candidate_never_generated": 145,
+            "recovered": 8,
+            "required_combination_not_discovered": 29,
+            "scoring_preferred_another_result": 10
+          }
+        },
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 240,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 192,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 48,
+            "correct_candidate_never_generated": 192
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0,
+      "made_worse_runs": 20,
+      "mean_distance_after": 5.941666666666666,
+      "mean_distance_before": 3.25,
+      "mean_runtime_seconds": 0.2089347633329453,
+      "onset_error_beats_after": 30.0,
+      "onset_error_beats_before": 30.0,
+      "partial_field_recovery": 0.011111111111111112,
+      "runs": 120,
+      "total_runtime_seconds": 25.072171599953435,
+      "unnecessary_edit_count": 58,
+      "unnecessary_field_edits": 58,
+      "untouched_note_preservation": 0.9815873015873016
+    },
+    "early": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": null,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 0,
+      "clean_octave_displacement_rate": null,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 0,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.0,
+      "corrupted_notes": 120,
+      "duration_error_beats_after": 0.0,
+      "duration_error_beats_before": 0.0,
+      "edit_type_diagnostics": {
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 24,
+            "correct_candidate_never_generated": 96
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0,
+      "made_worse_runs": 20,
+      "mean_distance_after": 3.35,
+      "mean_distance_before": 0.125,
+      "mean_runtime_seconds": 0.19041186333403554,
+      "onset_error_beats_after": 15.0,
+      "onset_error_beats_before": 15.0,
+      "partial_field_recovery": 0.0,
+      "runs": 120,
+      "total_runtime_seconds": 22.849423600084265,
+      "unnecessary_edit_count": 52,
+      "unnecessary_field_edits": 55,
+      "untouched_note_preservation": 0.9840978593272172
+    },
+    "groove": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": null,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 0,
+      "clean_octave_displacement_rate": null,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 0,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.0,
+      "corrupted_notes": 120,
+      "duration_error_beats_after": 0.0,
+      "duration_error_beats_before": 0.0,
+      "edit_type_diagnostics": {
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 24,
+            "correct_candidate_never_generated": 96
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0,
+      "made_worse_runs": 20,
+      "mean_distance_after": 3.225,
+      "mean_distance_before": 0.125,
+      "mean_runtime_seconds": 0.19108268666689884,
+      "onset_error_beats_after": 15.0,
+      "onset_error_beats_before": 15.0,
+      "partial_field_recovery": 0.0,
+      "runs": 120,
+      "total_runtime_seconds": 22.929922400027863,
+      "unnecessary_edit_count": 56,
+      "unnecessary_field_edits": 58,
+      "untouched_note_preservation": 0.982874617737003
+    },
+    "late": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": null,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 0,
+      "clean_octave_displacement_rate": null,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 0,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.0,
+      "corrupted_notes": 120,
+      "duration_error_beats_after": 0.0,
+      "duration_error_beats_before": 0.0,
+      "edit_type_diagnostics": {
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 24,
+            "correct_candidate_never_generated": 96
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0,
+      "made_worse_runs": 20,
+      "mean_distance_after": 3.316666666666667,
+      "mean_distance_before": 0.125,
+      "mean_runtime_seconds": 0.18602316416678757,
+      "onset_error_beats_after": 15.0,
+      "onset_error_beats_before": 15.0,
+      "partial_field_recovery": 0.0,
+      "runs": 120,
+      "total_runtime_seconds": 22.322779700014507,
+      "unnecessary_edit_count": 54,
+      "unnecessary_field_edits": 56,
+      "untouched_note_preservation": 0.9834862385321101
+    },
+    "octave": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": null,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 0,
+      "clean_octave_displacement_rate": null,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 0,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.05,
+      "corrupted_notes": 120,
+      "duration_error_beats_after": 0.0,
+      "duration_error_beats_before": 0.0,
+      "edit_type_diagnostics": {
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.2,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_generated_but_pruned": 3.3333333333333335,
+            "correct_candidate_never_generated": 60.0,
+            "recovered": 5.0,
+            "scoring_preferred_another_result": 11.666666666666666
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_generated_but_pruned": 4.444444444444445,
+            "correct_candidate_never_generated": 80.0,
+            "scoring_preferred_another_result": 15.555555555555555
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.25,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 24,
+            "correct_candidate_generated_but_pruned": 4,
+            "correct_candidate_never_generated": 72,
+            "recovered": 6,
+            "scoring_preferred_another_result": 14
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.05,
+      "made_worse_runs": 18,
+      "mean_distance_after": 14.2,
+      "mean_distance_before": 12.0,
+      "mean_runtime_seconds": 0.17805124749926715,
+      "onset_error_beats_after": 0.0,
+      "onset_error_beats_before": 0.0,
+      "partial_field_recovery": 0.05,
+      "runs": 120,
+      "total_runtime_seconds": 21.366149699912057,
+      "unnecessary_edit_count": 53,
+      "unnecessary_field_edits": 53,
+      "untouched_note_preservation": 0.9837920489296637
+    },
+    "short": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": null,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 0,
+      "clean_octave_displacement_rate": null,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 0,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.0,
+      "corrupted_notes": 120,
+      "duration_error_beats_after": 26.1328125,
+      "duration_error_beats_before": 26.1328125,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 24,
+            "correct_candidate_never_generated": 96
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0,
+      "made_worse_runs": 19,
+      "mean_distance_after": 3.3844401041666665,
+      "mean_distance_before": 0.2177734375,
+      "mean_runtime_seconds": 0.18581321583357446,
+      "onset_error_beats_after": 0.0,
+      "onset_error_beats_before": 0.0,
+      "partial_field_recovery": 0.0,
+      "runs": 120,
+      "total_runtime_seconds": 22.297585900028935,
+      "unnecessary_edit_count": 54,
+      "unnecessary_field_edits": 54,
+      "untouched_note_preservation": 0.9834862385321101
+    },
+    "sustain": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": null,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 0,
+      "clean_octave_displacement_rate": null,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 0,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.0,
+      "corrupted_notes": 120,
+      "duration_error_beats_after": 60.0,
+      "duration_error_beats_before": 60.0,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 24,
+            "correct_candidate_never_generated": 96
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0,
+      "made_worse_runs": 20,
+      "mean_distance_after": 3.6083333333333334,
+      "mean_distance_before": 0.5,
+      "mean_runtime_seconds": 0.19926563833396357,
+      "onset_error_beats_after": 0.0,
+      "onset_error_beats_before": 0.0,
+      "partial_field_recovery": 0.0,
+      "runs": 120,
+      "total_runtime_seconds": 23.91187660007563,
+      "unnecessary_edit_count": 56,
+      "unnecessary_field_edits": 58,
+      "untouched_note_preservation": 0.982874617737003
+    },
+    "timing_duration": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": null,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 0,
+      "clean_octave_displacement_rate": null,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 0,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.0,
+      "corrupted_notes": 120,
+      "duration_error_beats_after": 60.0,
+      "duration_error_beats_before": 60.0,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 24,
+            "correct_candidate_never_generated": 96
+          }
+        },
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 24,
+            "correct_candidate_never_generated": 96
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0,
+      "made_worse_runs": 20,
+      "mean_distance_after": 3.7583333333333333,
+      "mean_distance_before": 0.625,
+      "mean_runtime_seconds": 0.1801698824997099,
+      "onset_error_beats_after": 15.0,
+      "onset_error_beats_before": 15.0,
+      "partial_field_recovery": 0.0,
+      "runs": 120,
+      "total_runtime_seconds": 21.620385899965186,
+      "unnecessary_edit_count": 54,
+      "unnecessary_field_edits": 54,
+      "untouched_note_preservation": 0.9834862385321101
+    }
+  },
+  "by_preservation": {
+    "0": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": 0.08259587020648967,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 678,
+      "clean_octave_displacement_rate": 0.035398230088495575,
+      "clean_octave_displacements": 24,
+      "clean_pitch_edits": 56,
+      "clean_runs": 24,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.05416666666666667,
+      "corrupted_notes": 240,
+      "duration_error_beats_after": 53.2265625,
+      "duration_error_beats_before": 53.2265625,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 120,
+          "failure_counts": {
+            "correct_candidate_never_generated": 120
+          }
+        },
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.21875,
+          "category_percent_of_all_targets": {
+            "correct_candidate_never_generated": 78.125,
+            "recovered": 13.541666666666666,
+            "scoring_preferred_another_result": 8.333333333333334
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 90.36144578313252,
+            "scoring_preferred_another_result": 9.63855421686747
+          },
+          "corrupted_fields": 96,
+          "eligible_candidate_recall": 0.21875,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "correct_candidate_never_generated": 75,
+            "recovered": 13,
+            "scoring_preferred_another_result": 8
+          }
+        },
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 144,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 144,
+          "failure_counts": {
+            "correct_candidate_never_generated": 144
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.03333333333333333,
+      "made_worse_runs": 197,
+      "mean_distance_after": 17.093641493055557,
+      "mean_distance_before": 1.9964192708333333,
+      "mean_runtime_seconds": 0.3227765004166334,
+      "onset_error_beats_after": 18.0,
+      "onset_error_beats_before": 18.0,
+      "partial_field_recovery": 0.03611111111111111,
+      "runs": 240,
+      "total_runtime_seconds": 77.46636009999202,
+      "unnecessary_edit_count": 550,
+      "unnecessary_field_edits": 559,
+      "untouched_note_preservation": 0.9157284203343569
+    },
+    "100": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": 0.0,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 678,
+      "clean_octave_displacement_rate": 0.0,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 24,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.0,
+      "corrupted_notes": 240,
+      "duration_error_beats_after": 53.2265625,
+      "duration_error_beats_before": 53.2265625,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 100.0
+          },
+          "category_percent_of_eligible_failures": {},
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": null,
+          "eligible_fields": 0,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 120
+          }
+        },
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 100.0
+          },
+          "category_percent_of_eligible_failures": {},
+          "corrupted_fields": 96,
+          "eligible_candidate_recall": null,
+          "eligible_fields": 0,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 96
+          }
+        },
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 100.0
+          },
+          "category_percent_of_eligible_failures": {},
+          "corrupted_fields": 144,
+          "eligible_candidate_recall": null,
+          "eligible_fields": 0,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 144
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0,
+      "made_worse_runs": 0,
+      "mean_distance_after": 1.9964192708333333,
+      "mean_distance_before": 1.9964192708333333,
+      "mean_runtime_seconds": 0.0032294612508849243,
+      "onset_error_beats_after": 18.0,
+      "onset_error_beats_before": 18.0,
+      "partial_field_recovery": 0.0,
+      "runs": 240,
+      "total_runtime_seconds": 0.7750707002123818,
+      "unnecessary_edit_count": 0,
+      "unnecessary_field_edits": 0,
+      "untouched_note_preservation": 1.0
+    },
+    "25": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": 0.0,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 678,
+      "clean_octave_displacement_rate": 0.0,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 24,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.0125,
+      "corrupted_notes": 240,
+      "duration_error_beats_after": 53.2265625,
+      "duration_error_beats_before": 53.2265625,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 120,
+          "failure_counts": {
+            "correct_candidate_never_generated": 120
+          }
+        },
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.21875,
+          "category_percent_of_all_targets": {
+            "correct_candidate_generated_but_pruned": 1.0416666666666667,
+            "correct_candidate_never_generated": 78.125,
+            "recovered": 3.125,
+            "required_combination_not_discovered": 6.25,
+            "scoring_preferred_another_result": 11.458333333333334
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_generated_but_pruned": 1.075268817204301,
+            "correct_candidate_never_generated": 80.64516129032258,
+            "required_combination_not_discovered": 6.451612903225806,
+            "scoring_preferred_another_result": 11.827956989247312
+          },
+          "corrupted_fields": 96,
+          "eligible_candidate_recall": 0.21875,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "correct_candidate_generated_but_pruned": 1,
+            "correct_candidate_never_generated": 75,
+            "recovered": 3,
+            "required_combination_not_discovered": 6,
+            "scoring_preferred_another_result": 11
+          }
+        },
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 144,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 144,
+          "failure_counts": {
+            "correct_candidate_never_generated": 144
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0,
+      "made_worse_runs": 0,
+      "mean_distance_after": 1.9825303819444444,
+      "mean_distance_before": 1.9964192708333333,
+      "mean_runtime_seconds": 0.32242493749993933,
+      "onset_error_beats_after": 18.0,
+      "onset_error_beats_before": 18.0,
+      "partial_field_recovery": 0.008333333333333333,
+      "runs": 240,
+      "total_runtime_seconds": 77.38198499998543,
+      "unnecessary_edit_count": 0,
+      "unnecessary_field_edits": 0,
+      "untouched_note_preservation": 1.0
+    },
+    "50": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": 0.0,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 678,
+      "clean_octave_displacement_rate": 0.0,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 24,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.0,
+      "corrupted_notes": 240,
+      "duration_error_beats_after": 53.2265625,
+      "duration_error_beats_before": 53.2265625,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 120,
+          "failure_counts": {
+            "correct_candidate_never_generated": 120
+          }
+        },
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.21875,
+          "category_percent_of_all_targets": {
+            "correct_candidate_generated_but_pruned": 2.0833333333333335,
+            "correct_candidate_never_generated": 78.125,
+            "required_combination_not_discovered": 12.5,
+            "scoring_preferred_another_result": 7.291666666666667
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_generated_but_pruned": 2.0833333333333335,
+            "correct_candidate_never_generated": 78.125,
+            "required_combination_not_discovered": 12.5,
+            "scoring_preferred_another_result": 7.291666666666667
+          },
+          "corrupted_fields": 96,
+          "eligible_candidate_recall": 0.21875,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "correct_candidate_generated_but_pruned": 2,
+            "correct_candidate_never_generated": 75,
+            "required_combination_not_discovered": 12,
+            "scoring_preferred_another_result": 7
+          }
+        },
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 144,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 144,
+          "failure_counts": {
+            "correct_candidate_never_generated": 144
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0,
+      "made_worse_runs": 0,
+      "mean_distance_after": 1.9964192708333333,
+      "mean_distance_before": 1.9964192708333333,
+      "mean_runtime_seconds": 0.21873722958353028,
+      "onset_error_beats_after": 18.0,
+      "onset_error_beats_before": 18.0,
+      "partial_field_recovery": 0.0,
+      "runs": 240,
+      "total_runtime_seconds": 52.49693510004727,
+      "unnecessary_edit_count": 0,
+      "unnecessary_field_edits": 0,
+      "untouched_note_preservation": 1.0
+    },
+    "75": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": 0.0,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 678,
+      "clean_octave_displacement_rate": 0.0,
+      "clean_octave_displacements": 0,
+      "clean_pitch_edits": 0,
+      "clean_runs": 24,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.0,
+      "corrupted_notes": 240,
+      "duration_error_beats_after": 53.2265625,
+      "duration_error_beats_before": 53.2265625,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 120,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 120,
+          "failure_counts": {
+            "correct_candidate_never_generated": 120
+          }
+        },
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.20833333333333334,
+          "category_percent_of_all_targets": {
+            "correct_candidate_generated_but_pruned": 1.0416666666666667,
+            "correct_candidate_never_generated": 79.16666666666667,
+            "required_combination_not_discovered": 11.458333333333334,
+            "scoring_preferred_another_result": 8.333333333333334
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_generated_but_pruned": 1.0416666666666667,
+            "correct_candidate_never_generated": 79.16666666666667,
+            "required_combination_not_discovered": 11.458333333333334,
+            "scoring_preferred_another_result": 8.333333333333334
+          },
+          "corrupted_fields": 96,
+          "eligible_candidate_recall": 0.20833333333333334,
+          "eligible_fields": 96,
+          "failure_counts": {
+            "correct_candidate_generated_but_pruned": 1,
+            "correct_candidate_never_generated": 76,
+            "required_combination_not_discovered": 11,
+            "scoring_preferred_another_result": 8
+          }
+        },
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 144,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 144,
+          "failure_counts": {
+            "correct_candidate_never_generated": 144
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0,
+      "made_worse_runs": 0,
+      "mean_distance_after": 1.9964192708333333,
+      "mean_distance_before": 1.9964192708333333,
+      "mean_runtime_seconds": 0.08771012333278728,
+      "onset_error_beats_after": 18.0,
+      "onset_error_beats_before": 18.0,
+      "partial_field_recovery": 0.0,
+      "runs": 240,
+      "total_runtime_seconds": 21.05042959986895,
+      "unnecessary_edit_count": 0,
+      "unnecessary_field_edits": 0,
+      "untouched_note_preservation": 1.0
+    }
+  },
+  "by_preset": {
+    "balanced": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": 0.016814159292035398,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 1130,
+      "clean_octave_displacement_rate": 0.007079646017699115,
+      "clean_octave_displacements": 8,
+      "clean_pitch_edits": 19,
+      "clean_runs": 40,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.0125,
+      "corrupted_notes": 400,
+      "duration_error_beats_after": 88.7109375,
+      "duration_error_beats_before": 88.7109375,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 200,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 160,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 40,
+            "correct_candidate_never_generated": 160
+          }
+        },
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.175,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_generated_but_pruned": 1.25,
+            "correct_candidate_never_generated": 62.5,
+            "recovered": 3.125,
+            "required_combination_not_discovered": 6.25,
+            "scoring_preferred_another_result": 6.875
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_generated_but_pruned": 1.6260162601626016,
+            "correct_candidate_never_generated": 81.30081300813008,
+            "required_combination_not_discovered": 8.130081300813009,
+            "scoring_preferred_another_result": 8.94308943089431
+          },
+          "corrupted_fields": 160,
+          "eligible_candidate_recall": 0.21875,
+          "eligible_fields": 128,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 32,
+            "correct_candidate_generated_but_pruned": 2,
+            "correct_candidate_never_generated": 100,
+            "recovered": 5,
+            "required_combination_not_discovered": 10,
+            "scoring_preferred_another_result": 11
+          }
+        },
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 240,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 192,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 48,
+            "correct_candidate_never_generated": 192
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0075,
+      "made_worse_runs": 69,
+      "mean_distance_after": 4.974197048611111,
+      "mean_distance_before": 1.9964192708333333,
+      "mean_runtime_seconds": 0.14042516850004177,
+      "onset_error_beats_after": 30.0,
+      "onset_error_beats_before": 30.0,
+      "partial_field_recovery": 0.008333333333333333,
+      "runs": 400,
+      "total_runtime_seconds": 56.170067400016706,
+      "unnecessary_edit_count": 189,
+      "unnecessary_field_edits": 193,
+      "untouched_note_preservation": 0.9825997952917093
+    },
+    "creative": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": 0.023008849557522124,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 1130,
+      "clean_octave_displacement_rate": 0.007079646017699115,
+      "clean_octave_displacements": 8,
+      "clean_pitch_edits": 26,
+      "clean_runs": 40,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.0125,
+      "corrupted_notes": 400,
+      "duration_error_beats_after": 88.7109375,
+      "duration_error_beats_before": 88.7109375,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 200,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 160,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 40,
+            "correct_candidate_never_generated": 160
+          }
+        },
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.175,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_generated_but_pruned": 1.25,
+            "correct_candidate_never_generated": 62.5,
+            "recovered": 3.125,
+            "required_combination_not_discovered": 6.25,
+            "scoring_preferred_another_result": 6.875
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_generated_but_pruned": 1.6260162601626016,
+            "correct_candidate_never_generated": 81.30081300813008,
+            "required_combination_not_discovered": 8.130081300813009,
+            "scoring_preferred_another_result": 8.94308943089431
+          },
+          "corrupted_fields": 160,
+          "eligible_candidate_recall": 0.21875,
+          "eligible_fields": 128,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 32,
+            "correct_candidate_generated_but_pruned": 2,
+            "correct_candidate_never_generated": 100,
+            "recovered": 5,
+            "required_combination_not_discovered": 10,
+            "scoring_preferred_another_result": 11
+          }
+        },
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 240,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 192,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 48,
+            "correct_candidate_never_generated": 192
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0075,
+      "made_worse_runs": 71,
+      "mean_distance_after": 5.890863715277778,
+      "mean_distance_before": 1.9964192708333333,
+      "mean_runtime_seconds": 0.40155949474981756,
+      "onset_error_beats_after": 30.0,
+      "onset_error_beats_before": 30.0,
+      "partial_field_recovery": 0.008333333333333333,
+      "runs": 400,
+      "total_runtime_seconds": 160.623797899927,
+      "unnecessary_edit_count": 259,
+      "unnecessary_field_edits": 263,
+      "untouched_note_preservation": 0.9761514841351074
+    },
+    "minimal": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": 0.009734513274336283,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 1130,
+      "clean_octave_displacement_rate": 0.007079646017699115,
+      "clean_octave_displacements": 8,
+      "clean_pitch_edits": 11,
+      "clean_runs": 40,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.015,
+      "corrupted_notes": 400,
+      "duration_error_beats_after": 88.7109375,
+      "duration_error_beats_before": 88.7109375,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 200,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 160,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 40,
+            "correct_candidate_never_generated": 160
+          }
+        },
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.16875,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 63.125,
+            "recovered": 3.75,
+            "required_combination_not_discovered": 5.625,
+            "scoring_preferred_another_result": 7.5
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 82.78688524590164,
+            "required_combination_not_discovered": 7.377049180327869,
+            "scoring_preferred_another_result": 9.836065573770492
+          },
+          "corrupted_fields": 160,
+          "eligible_candidate_recall": 0.2109375,
+          "eligible_fields": 128,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 32,
+            "correct_candidate_never_generated": 101,
+            "recovered": 6,
+            "required_combination_not_discovered": 9,
+            "scoring_preferred_another_result": 12
+          }
+        },
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 240,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 192,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 48,
+            "correct_candidate_never_generated": 192
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.005,
+      "made_worse_runs": 57,
+      "mean_distance_after": 4.174197048611111,
+      "mean_distance_before": 1.9964192708333333,
+      "mean_runtime_seconds": 0.030942288000405823,
+      "onset_error_beats_after": 30.0,
+      "onset_error_beats_before": 30.0,
+      "partial_field_recovery": 0.01,
+      "runs": 400,
+      "total_runtime_seconds": 12.37691520016233,
+      "unnecessary_edit_count": 102,
+      "unnecessary_field_edits": 103,
+      "untouched_note_preservation": 0.9906857727737973
+    }
+  },
+  "by_split": {
+    "calibration": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": 0.017261904761904763,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 1680,
+      "clean_octave_displacement_rate": 0.002380952380952381,
+      "clean_octave_displacements": 4,
+      "clean_pitch_edits": 29,
+      "clean_runs": 60,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.011666666666666667,
+      "corrupted_notes": 600,
+      "duration_error_beats_after": 135.0546875,
+      "duration_error_beats_before": 135.0546875,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 300,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 240,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 60,
+            "correct_candidate_never_generated": 240
+          }
+        },
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.15,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_generated_but_pruned": 1.6666666666666667,
+            "correct_candidate_never_generated": 65.0,
+            "recovered": 2.9166666666666665,
+            "required_combination_not_discovered": 3.75,
+            "scoring_preferred_another_result": 6.666666666666667
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_generated_but_pruned": 2.1621621621621623,
+            "correct_candidate_never_generated": 84.32432432432432,
+            "required_combination_not_discovered": 4.864864864864865,
+            "scoring_preferred_another_result": 8.64864864864865
+          },
+          "corrupted_fields": 240,
+          "eligible_candidate_recall": 0.1875,
+          "eligible_fields": 192,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 48,
+            "correct_candidate_generated_but_pruned": 4,
+            "correct_candidate_never_generated": 156,
+            "recovered": 7,
+            "required_combination_not_discovered": 9,
+            "scoring_preferred_another_result": 16
+          }
+        },
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 360,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 288,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 72,
+            "correct_candidate_never_generated": 288
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.01,
+      "made_worse_runs": 78,
+      "mean_distance_after": 3.8241753472222224,
+      "mean_distance_before": 2.000101273148148,
+      "mean_runtime_seconds": 0.2641780576666012,
+      "onset_error_beats_after": 45.0,
+      "onset_error_beats_before": 45.0,
+      "partial_field_recovery": 0.0077777777777777776,
+      "runs": 600,
+      "total_runtime_seconds": 158.5068345999607,
+      "unnecessary_edit_count": 278,
+      "unnecessary_field_edits": 287,
+      "untouched_note_preservation": 0.9828512396694215
+    },
+    "evaluation": {
+      "clean_duration_edits": 0,
+      "clean_false_positive_rate": 0.015789473684210527,
+      "clean_motif_disturbance_runs": 0,
+      "clean_notes": 1710,
+      "clean_octave_displacement_rate": 0.011695906432748537,
+      "clean_octave_displacements": 20,
+      "clean_pitch_edits": 27,
+      "clean_runs": 60,
+      "clean_timing_edits": 0,
+      "corrupted_note_improvement_rate": 0.015,
+      "corrupted_notes": 600,
+      "duration_error_beats_after": 131.078125,
+      "duration_error_beats_before": 131.078125,
+      "edit_type_diagnostics": {
+        "duration": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 300,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 240,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 60,
+            "correct_candidate_never_generated": 240
+          }
+        },
+        "pitch": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.19583333333333333,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 60.416666666666664,
+            "recovered": 3.75,
+            "required_combination_not_discovered": 8.333333333333334,
+            "scoring_preferred_another_result": 7.5
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 79.23497267759562,
+            "required_combination_not_discovered": 10.92896174863388,
+            "scoring_preferred_another_result": 9.836065573770492
+          },
+          "corrupted_fields": 240,
+          "eligible_candidate_recall": 0.24479166666666666,
+          "eligible_fields": 192,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 48,
+            "correct_candidate_never_generated": 145,
+            "recovered": 9,
+            "required_combination_not_discovered": 20,
+            "scoring_preferred_another_result": 18
+          }
+        },
+        "timing": {
+          "analysis_failure_percent": null,
+          "candidate_recall": 0.0,
+          "category_percent_of_all_targets": {
+            "blocked_by_permissions_or_lock": 20.0,
+            "correct_candidate_never_generated": 80.0
+          },
+          "category_percent_of_eligible_failures": {
+            "correct_candidate_never_generated": 100.0
+          },
+          "corrupted_fields": 360,
+          "eligible_candidate_recall": 0.0,
+          "eligible_fields": 288,
+          "failure_counts": {
+            "blocked_by_permissions_or_lock": 72,
+            "correct_candidate_never_generated": 288
+          }
+        }
+      },
+      "errors": 0,
+      "exact_recovery_rate": 0.0033333333333333335,
+      "made_worse_runs": 119,
+      "mean_distance_after": 6.201996527777778,
+      "mean_distance_before": 1.9927372685185185,
+      "mean_runtime_seconds": 0.11777324316690889,
+      "onset_error_beats_after": 45.0,
+      "onset_error_beats_before": 45.0,
+      "partial_field_recovery": 0.01,
+      "runs": 600,
+      "total_runtime_seconds": 70.66394590014534,
+      "unnecessary_edit_count": 272,
+      "unnecessary_field_edits": 272,
+      "untouched_note_preservation": 0.9834347532116294
+    }
+  },
+  "counts": {
+    "benchmark_eligible": 1264,
+    "canonical_or_metadata_listed": 1276,
+    "clean_runs": 120,
+    "corrupted_runs": 1080,
+    "detected_midi": 1276,
+    "eligible_splits": {
+      "calibration": 1093,
+      "evaluation": 171
+    },
+    "excluded_variants": 0,
+    "parse_valid": 1275,
+    "runs": 1200,
+    "sample_splits": {
+      "calibration": 4,
+      "evaluation": 4
+    },
+    "sampled_pieces": 8,
+    "sampled_windows": 8,
+    "skipped_cases": 0,
+    "split_quarantined": 11,
+    "unique_window_notes": 226
+  },
+  "dataset": "maestro",
+  "failure_categories": {
+    "duration": {
+      "analysis_failure": null,
+      "analysis_note": "Not independently attributable from note recovery alone; unknown, not zero.",
+      "candidate_pruned": 0,
+      "coordinated_search_failure": 0,
+      "correct_candidate_missing": 480,
+      "other_outcomes": {
+        "blocked_by_permissions_or_lock": 120
+      },
+      "percentages": {
+        "blocked_by_permissions_or_lock": 20.0,
+        "correct_candidate_never_generated": 80.0
+      },
+      "scoring_rejected_correct_candidate": 0
+    },
+    "pitch": {
+      "analysis_failure": null,
+      "analysis_note": "Not independently attributable from note recovery alone; unknown, not zero.",
+      "candidate_pruned": 4,
+      "coordinated_search_failure": 29,
+      "correct_candidate_missing": 301,
+      "other_outcomes": {
+        "blocked_by_permissions_or_lock": 96,
+        "recovered": 16
+      },
+      "percentages": {
+        "blocked_by_permissions_or_lock": 20.0,
+        "correct_candidate_generated_but_pruned": 0.8333333333333334,
+        "correct_candidate_never_generated": 62.708333333333336,
+        "recovered": 3.3333333333333335,
+        "required_combination_not_discovered": 6.041666666666667,
+        "scoring_preferred_another_result": 7.083333333333333
+      },
+      "scoring_rejected_correct_candidate": 34
+    },
+    "timing": {
+      "analysis_failure": null,
+      "analysis_note": "Not independently attributable from note recovery alone; unknown, not zero.",
+      "candidate_pruned": 0,
+      "coordinated_search_failure": 0,
+      "correct_candidate_missing": 576,
+      "other_outcomes": {
+        "blocked_by_permissions_or_lock": 144
+      },
+      "percentages": {
+        "blocked_by_permissions_or_lock": 20.0,
+        "correct_candidate_never_generated": 80.0
+      },
+      "scoring_rejected_correct_candidate": 0
+    }
+  },
+  "limits": [
+    "Eight short passages, not full-corpus musical validation.",
+    "Density-stratified, count-bounded windows omit preceding sustained notes.",
+    "Professional performance is a reference, not a proof every original note is correct.",
+    "Clean/corrupted observations repeat across settings; not independent compositions.",
+    "Analysis failure attribution remains unknown without independent context labels."
+  ],
+  "overall": {
+    "clean_duration_edits": 0,
+    "clean_false_positive_rate": 0.016519174041297935,
+    "clean_motif_disturbance_runs": 0,
+    "clean_notes": 3390,
+    "clean_octave_displacement_rate": 0.007079646017699115,
+    "clean_octave_displacements": 24,
+    "clean_pitch_edits": 56,
+    "clean_runs": 120,
+    "clean_timing_edits": 0,
+    "corrupted_note_improvement_rate": 0.013333333333333334,
+    "corrupted_notes": 1200,
+    "duration_error_beats_after": 266.1328125,
+    "duration_error_beats_before": 266.1328125,
+    "edit_type_diagnostics": {
+      "duration": {
+        "analysis_failure_percent": null,
+        "candidate_recall": 0.0,
+        "category_percent_of_all_targets": {
+          "blocked_by_permissions_or_lock": 20.0,
+          "correct_candidate_never_generated": 80.0
+        },
+        "category_percent_of_eligible_failures": {
+          "correct_candidate_never_generated": 100.0
+        },
+        "corrupted_fields": 600,
+        "eligible_candidate_recall": 0.0,
+        "eligible_fields": 480,
+        "failure_counts": {
+          "blocked_by_permissions_or_lock": 120,
+          "correct_candidate_never_generated": 480
+        }
+      },
+      "pitch": {
+        "analysis_failure_percent": null,
+        "candidate_recall": 0.17291666666666666,
+        "category_percent_of_all_targets": {
+          "blocked_by_permissions_or_lock": 20.0,
+          "correct_candidate_generated_but_pruned": 0.8333333333333334,
+          "correct_candidate_never_generated": 62.708333333333336,
+          "recovered": 3.3333333333333335,
+          "required_combination_not_discovered": 6.041666666666667,
+          "scoring_preferred_another_result": 7.083333333333333
+        },
+        "category_percent_of_eligible_failures": {
+          "correct_candidate_generated_but_pruned": 1.0869565217391304,
+          "correct_candidate_never_generated": 81.79347826086956,
+          "required_combination_not_discovered": 7.880434782608695,
+          "scoring_preferred_another_result": 9.23913043478261
+        },
+        "corrupted_fields": 480,
+        "eligible_candidate_recall": 0.21614583333333334,
+        "eligible_fields": 384,
+        "failure_counts": {
+          "blocked_by_permissions_or_lock": 96,
+          "correct_candidate_generated_but_pruned": 4,
+          "correct_candidate_never_generated": 301,
+          "recovered": 16,
+          "required_combination_not_discovered": 29,
+          "scoring_preferred_another_result": 34
+        }
+      },
+      "timing": {
+        "analysis_failure_percent": null,
+        "candidate_recall": 0.0,
+        "category_percent_of_all_targets": {
+          "blocked_by_permissions_or_lock": 20.0,
+          "correct_candidate_never_generated": 80.0
+        },
+        "category_percent_of_eligible_failures": {
+          "correct_candidate_never_generated": 100.0
+        },
+        "corrupted_fields": 720,
+        "eligible_candidate_recall": 0.0,
+        "eligible_fields": 576,
+        "failure_counts": {
+          "blocked_by_permissions_or_lock": 144,
+          "correct_candidate_never_generated": 576
+        }
+      }
+    },
+    "errors": 0,
+    "exact_recovery_rate": 0.006666666666666667,
+    "made_worse_runs": 197,
+    "mean_distance_after": 5.0130859375,
+    "mean_distance_before": 1.9964192708333333,
+    "mean_runtime_seconds": 0.19097565041675504,
+    "onset_error_beats_after": 90.0,
+    "onset_error_beats_before": 90.0,
+    "partial_field_recovery": 0.008888888888888889,
+    "runs": 1200,
+    "total_runtime_seconds": 229.17078050010605,
+    "unnecessary_edit_count": 550,
+    "unnecessary_field_edits": 559,
+    "untouched_note_preservation": 0.9831456840668714
+  },
+  "runtime": {
+    "max_seconds": 1.7851582000002963,
+    "median_seconds": 0.034227500000270084,
+    "p95_seconds": 1.0588647999975365,
+    "repair_seconds": 229.17078050010605,
+    "scope": "repair invocation including trace, excluding loading/corruption/metrics"
+  },
+  "worst_examples": [
+    {
+      "edits": [
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 66,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 54,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "note_id": 1174,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F5 to F#3 spans 23 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.559896; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 57,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "note_id": 1177,
+          "reasons": [
+            "Possible melodic discontinuity. The move from G5 to A3 spans 22 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.976562; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 64,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 76,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "note_id": 1178,
+          "reasons": [
+            "Possible melodic discontinuity. The move from A3 to E5 spans 19 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 1.05729; metric strength 0.20, local A minor seventh (52% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 431,
+            "id": 1185,
+            "onset_ticks": 707,
+            "pitch": 55,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 54
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 431,
+            "id": 1185,
+            "onset_ticks": 707,
+            "pitch": 53,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 54
+          },
+          "note_id": 1185,
+          "reasons": [
+            "Possible bass conflict. F3 sits below an estimated E minor sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible unresolved tension at beat 1.84115; metric strength 0.20, local A minor seventh (52% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 125,
+            "id": 1188,
+            "onset_ticks": 888,
+            "pitch": 50,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 48
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 125,
+            "id": 1188,
+            "onset_ticks": 888,
+            "pitch": 46,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 48
+          },
+          "note_id": 1188,
+          "reasons": [
+            "Possible bass conflict. A#2 sits below an estimated G dominant seventh sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible chord tone at beat 2.3125; metric strength 0.20, local G minor seventh/A# (30% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 60,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 56,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "note_id": 1205,
+          "reasons": [
+            "Possible bass conflict. G#3 sits below an estimated A minor sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible unresolved tension at beat 5.44531; metric strength 0.20, local A minor seventh/G (41% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 50,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 48,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "note_id": 1220,
+          "reasons": [
+            "Possible bass conflict. C3 sits below an estimated B diminished sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible chord tone at beat 7.66406; metric strength 0.20, local D minor seventh/C (63% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        }
+      ],
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "kind": "coordinated",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8490566037735849,
+        "clean_false_positive_rate": null,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 6,
+        "corrupted_notes": 2,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.018867924528301886,
+        "duration_error_beats_before": 0.018867924528301886,
+        "duration_error_beats_total_after": 1.0,
+        "duration_error_beats_total_before": 1.0,
+        "edit_distance_after": 51.25,
+        "edit_distance_before": 3.25,
+        "edited_notes": 7,
+        "exact_note_recovery": 0.0,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9104011194029851,
+        "harmony_compatibility_proxy_before": 0.7984701492537314,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9807692307692307,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 3,
+        "onset_error_beats_after": 0.0047169811320754715,
+        "onset_error_beats_before": 0.0047169811320754715,
+        "onset_error_beats_total_after": 0.25,
+        "onset_error_beats_total_before": 0.25,
+        "pitch_class_recovery": 0.0,
+        "pitch_corrupted_notes": 2,
+        "pitch_edits": 7,
+        "pitch_error_semitones_after": 0.9433962264150944,
+        "pitch_error_semitones_before": 0.03773584905660377,
+        "pitch_error_semitones_total_after": 50,
+        "pitch_error_semitones_total_before": 2,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": 0.0,
+        "preservation_penalized_distance": 111.25,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 6,
+        "unnecessary_field_edits": 6,
+        "untouched_note_preservation": 0.8823529411764706,
+        "untouched_notes": 51
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative",
+      "search_trace": {
+        "analysis_failure": "Undetermined without independently annotated musical context.",
+        "coordinated": {
+          "all_generated": false,
+          "beam_pruned": false,
+          "entered_search": false,
+          "scored": false,
+          "survived_beam": false,
+          "target_fields": 6
+        },
+        "retained": [
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1185,
+              "pitch",
+              55
+            ],
+            [
+              0,
+              1188,
+              "pitch",
+              50
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1175,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1185,
+              "pitch",
+              55
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1175,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1185,
+              "pitch",
+              55
+            ],
+            [
+              0,
+              1188,
+              "pitch",
+              50
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ]
+        ],
+        "state_count": 400,
+        "targets": [
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "pitch",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "pitch",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1198,
+            "reference_value": 84,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          },
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "timing",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "onset_ticks",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1198,
+            "reference_value": 1720,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          },
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "duration",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "duration_ticks",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1198,
+            "reference_value": 73,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          },
+          {
+            "beam_pruned": true,
+            "best_scored_state": {
+              "beam_pruned": false,
+              "changes": [
+                [
+                  0,
+                  1174,
+                  "pitch",
+                  66
+                ],
+                [
+                  0,
+                  1175,
+                  "pitch",
+                  69
+                ],
+                [
+                  0,
+                  1177,
+                  "pitch",
+                  69
+                ],
+                [
+                  0,
+                  1178,
+                  "pitch",
+                  64
+                ],
+                [
+                  0,
+                  1185,
+                  "pitch",
+                  52
+                ],
+                [
+                  0,
+                  1188,
+                  "pitch",
+                  50
+                ],
+                [
+                  0,
+                  1205,
+                  "pitch",
+                  60
+                ],
+                [
+                  0,
+                  1220,
+                  "pitch",
+                  50
+                ]
+              ],
+              "components": {
+                "Bass movement": 0.6586538461538461,
+                "Collisions": 0.0,
+                "Harmony": 0.08352987421383644,
+                "Melodic continuity": 0.7075471698113207,
+                "Motif consistency (ambiguous)": 0.0,
+                "Register": 0.0,
+                "Resolution": 0.007370283018867925,
+                "Rhythm complementarity": 0.0,
+                "Unnecessary unisons": 0.0,
+                "Voice leading": 0.0
+              },
+              "edit_cost": 0.0,
+              "objective": 1.4377932994678277,
+              "outcomes": [
+                "improving"
+              ],
+              "retention_cost": 0.0,
+              "rounds": [
+                4
+              ],
+              "scored": true,
+              "survived_beam": true
+            },
+            "edit_type": "pitch",
+            "eligible": true,
+            "entered_search": true,
+            "failure_category": "scoring_preferred_another_result",
+            "field": "pitch",
+            "field_rank": 1,
+            "generated": true,
+            "global_rank": 3,
+            "note_id": 1185,
+            "reference_value": 52,
+            "rejection_reasons": [
+              "duplicate_state",
+              "round_budget"
+            ],
+            "scored": true,
+            "scored_state_count": 42,
+            "slot": 0,
+            "survived_beam": true
+          },
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "timing",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "onset_ticks",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1185,
+            "reference_value": 659,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          },
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "duration",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "duration_ticks",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1185,
+            "reference_value": 239,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          }
+        ],
+        "truncated": false,
+        "winner": [
+          [
+            0,
+            1174,
+            "pitch",
+            66
+          ],
+          [
+            0,
+            1177,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1178,
+            "pitch",
+            64
+          ],
+          [
+            0,
+            1185,
+            "pitch",
+            55
+          ],
+          [
+            0,
+            1188,
+            "pitch",
+            50
+          ],
+          [
+            0,
+            1205,
+            "pitch",
+            60
+          ],
+          [
+            0,
+            1220,
+            "pitch",
+            50
+          ]
+        ]
+      }
+    },
+    {
+      "edits": [
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 66,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 54,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "note_id": 1174,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F5 to F#3 spans 23 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.559896; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 72,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "note_id": 1175,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F#3 to C5 spans 18 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.627604; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 57,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "note_id": 1177,
+          "reasons": [
+            "Possible melodic discontinuity. The move from G5 to A3 spans 22 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.976562; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 64,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 76,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "note_id": 1178,
+          "reasons": [
+            "Possible melodic discontinuity. The move from A3 to E5 spans 19 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 1.05729; metric strength 0.20, local A minor seventh/E (66% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 60,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 56,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "note_id": 1205,
+          "reasons": [
+            "Possible bass conflict. G#3 sits below an estimated A minor sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible unresolved tension at beat 5.44531; metric strength 0.20, local A minor seventh/G (53% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 50,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 48,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "note_id": 1220,
+          "reasons": [
+            "Possible bass conflict. C3 sits below an estimated B diminished sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible chord tone at beat 7.66406; metric strength 0.20, local D minor seventh/C (63% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        }
+      ],
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "kind": "accidental",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8679245283018868,
+        "clean_false_positive_rate": null,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 1,
+        "corrupted_notes": 1,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 46.0,
+        "edit_distance_before": 1.0,
+        "edited_notes": 6,
+        "exact_note_recovery": 0.0,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9752770673486786,
+        "harmony_compatibility_proxy_before": 0.8735294117647059,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9807692307692307,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 3,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": 0.0,
+        "pitch_corrupted_notes": 1,
+        "pitch_edits": 6,
+        "pitch_error_semitones_after": 0.8679245283018868,
+        "pitch_error_semitones_before": 0.018867924528301886,
+        "pitch_error_semitones_total_after": 46,
+        "pitch_error_semitones_total_before": 1,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": 0.0,
+        "preservation_penalized_distance": 106.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 6,
+        "unnecessary_field_edits": 6,
+        "untouched_note_preservation": 0.8846153846153846,
+        "untouched_notes": 52
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative",
+      "search_trace": {
+        "analysis_failure": "Undetermined without independently annotated musical context.",
+        "coordinated": {
+          "all_generated": false,
+          "beam_pruned": false,
+          "entered_search": false,
+          "scored": false,
+          "survived_beam": false,
+          "target_fields": 1
+        },
+        "retained": [
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1175,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ]
+          ]
+        ],
+        "state_count": 233,
+        "targets": [
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "pitch",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "pitch",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1196,
+            "reference_value": 81,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          }
+        ],
+        "truncated": false,
+        "winner": [
+          [
+            0,
+            1174,
+            "pitch",
+            66
+          ],
+          [
+            0,
+            1175,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1177,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1178,
+            "pitch",
+            64
+          ],
+          [
+            0,
+            1205,
+            "pitch",
+            60
+          ],
+          [
+            0,
+            1220,
+            "pitch",
+            50
+          ]
+        ]
+      }
+    },
+    {
+      "edits": [
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 66,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 54,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "note_id": 1174,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F5 to F#3 spans 23 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.559896; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 72,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "note_id": 1175,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F#3 to C5 spans 18 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.627604; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 57,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "note_id": 1177,
+          "reasons": [
+            "Possible melodic discontinuity. The move from G5 to A3 spans 22 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.976562; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 64,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 76,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "note_id": 1178,
+          "reasons": [
+            "Possible melodic discontinuity. The move from A3 to E5 spans 19 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 1.05729; metric strength 0.20, local A minor seventh/E (66% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 60,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 56,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "note_id": 1205,
+          "reasons": [
+            "Possible bass conflict. G#3 sits below an estimated A minor sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible unresolved tension at beat 5.44531; metric strength 0.20, local A minor seventh/G (53% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 50,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 48,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "note_id": 1220,
+          "reasons": [
+            "Possible bass conflict. C3 sits below an estimated B diminished sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible chord tone at beat 7.66406; metric strength 0.20, local D minor seventh/C (63% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        }
+      ],
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "kind": "timing_duration",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8679245283018868,
+        "clean_false_positive_rate": null,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 2,
+        "corrupted_notes": 1,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.009433962264150943,
+        "duration_error_beats_before": 0.009433962264150943,
+        "duration_error_beats_total_after": 0.5,
+        "duration_error_beats_total_before": 0.5,
+        "edit_distance_after": 45.625,
+        "edit_distance_before": 0.625,
+        "edited_notes": 6,
+        "exact_note_recovery": 0.0,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9758383670068735,
+        "harmony_compatibility_proxy_before": 0.8764007498437826,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9807692307692307,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 3,
+        "onset_error_beats_after": 0.0023584905660377358,
+        "onset_error_beats_before": 0.0023584905660377358,
+        "onset_error_beats_total_after": 0.125,
+        "onset_error_beats_total_before": 0.125,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 6,
+        "pitch_error_semitones_after": 0.8490566037735849,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 45,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 105.625,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 6,
+        "unnecessary_field_edits": 6,
+        "untouched_note_preservation": 0.8846153846153846,
+        "untouched_notes": 52
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative",
+      "search_trace": {
+        "analysis_failure": "Undetermined without independently annotated musical context.",
+        "coordinated": {
+          "all_generated": false,
+          "beam_pruned": false,
+          "entered_search": false,
+          "scored": false,
+          "survived_beam": false,
+          "target_fields": 2
+        },
+        "retained": [
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1175,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ]
+          ]
+        ],
+        "state_count": 233,
+        "targets": [
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "timing",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "onset_ticks",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1191,
+            "reference_value": 1067,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          },
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "duration",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "duration_ticks",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1191,
+            "reference_value": 31,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          }
+        ],
+        "truncated": false,
+        "winner": [
+          [
+            0,
+            1174,
+            "pitch",
+            66
+          ],
+          [
+            0,
+            1175,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1177,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1178,
+            "pitch",
+            64
+          ],
+          [
+            0,
+            1205,
+            "pitch",
+            60
+          ],
+          [
+            0,
+            1220,
+            "pitch",
+            50
+          ]
+        ]
+      }
+    },
+    {
+      "edits": [
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 66,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 54,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "note_id": 1174,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F5 to F#3 spans 23 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.559896; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 72,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "note_id": 1175,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F#3 to C5 spans 18 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.627604; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 57,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "note_id": 1177,
+          "reasons": [
+            "Possible melodic discontinuity. The move from G5 to A3 spans 22 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.976562; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 64,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 76,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "note_id": 1178,
+          "reasons": [
+            "Possible melodic discontinuity. The move from A3 to E5 spans 19 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 1.05729; metric strength 0.20, local A minor seventh/E (66% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 60,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 56,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "note_id": 1205,
+          "reasons": [
+            "Possible bass conflict. G#3 sits below an estimated A minor sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible unresolved tension at beat 5.44531; metric strength 0.20, local A minor seventh/G (53% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 50,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 48,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "note_id": 1220,
+          "reasons": [
+            "Possible bass conflict. C3 sits below an estimated B diminished sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible chord tone at beat 7.66406; metric strength 0.20, local D minor seventh/C (59% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        }
+      ],
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "kind": "sustain",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8679245283018868,
+        "clean_false_positive_rate": null,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 1,
+        "corrupted_notes": 1,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.009433962264150943,
+        "duration_error_beats_before": 0.009433962264150943,
+        "duration_error_beats_total_after": 0.5,
+        "duration_error_beats_total_before": 0.5,
+        "edit_distance_after": 45.5,
+        "edit_distance_before": 0.5,
+        "edited_notes": 6,
+        "exact_note_recovery": 0.0,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9598794243485026,
+        "harmony_compatibility_proxy_before": 0.8670361726954493,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9807692307692307,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 3,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 6,
+        "pitch_error_semitones_after": 0.8490566037735849,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 45,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 105.5,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 6,
+        "unnecessary_field_edits": 6,
+        "untouched_note_preservation": 0.8846153846153846,
+        "untouched_notes": 52
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative",
+      "search_trace": {
+        "analysis_failure": "Undetermined without independently annotated musical context.",
+        "coordinated": {
+          "all_generated": false,
+          "beam_pruned": false,
+          "entered_search": false,
+          "scored": false,
+          "survived_beam": false,
+          "target_fields": 1
+        },
+        "retained": [
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1175,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ]
+          ]
+        ],
+        "state_count": 228,
+        "targets": [
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "duration",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "duration_ticks",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1219,
+            "reference_value": 58,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          }
+        ],
+        "truncated": false,
+        "winner": [
+          [
+            0,
+            1174,
+            "pitch",
+            66
+          ],
+          [
+            0,
+            1175,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1177,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1178,
+            "pitch",
+            64
+          ],
+          [
+            0,
+            1205,
+            "pitch",
+            60
+          ],
+          [
+            0,
+            1220,
+            "pitch",
+            50
+          ]
+        ]
+      }
+    },
+    {
+      "edits": [
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 66,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 54,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "note_id": 1174,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F5 to F#3 spans 23 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.559896; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 72,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "note_id": 1175,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F#3 to C5 spans 18 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.627604; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 57,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "note_id": 1177,
+          "reasons": [
+            "Possible melodic discontinuity. The move from G5 to A3 spans 22 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.976562; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 64,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 76,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "note_id": 1178,
+          "reasons": [
+            "Possible melodic discontinuity. The move from A3 to E5 spans 19 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 1.05729; metric strength 0.20, local A minor seventh/E (66% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 60,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 56,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "note_id": 1205,
+          "reasons": [
+            "Possible bass conflict. G#3 sits below an estimated A minor sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible unresolved tension at beat 5.44531; metric strength 0.20, local A minor seventh/G (53% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 50,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 48,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "note_id": 1220,
+          "reasons": [
+            "Possible bass conflict. C3 sits below an estimated B diminished sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible chord tone at beat 7.66406; metric strength 0.20, local D minor seventh/C (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        }
+      ],
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "kind": "early",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8679245283018868,
+        "clean_false_positive_rate": null,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 1,
+        "corrupted_notes": 1,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 45.125,
+        "edit_distance_before": 0.125,
+        "edited_notes": 6,
+        "exact_note_recovery": 0.0,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9635667854896205,
+        "harmony_compatibility_proxy_before": 0.8689138184105683,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9807692307692307,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 3,
+        "onset_error_beats_after": 0.0023584905660377358,
+        "onset_error_beats_before": 0.0023584905660377358,
+        "onset_error_beats_total_after": 0.125,
+        "onset_error_beats_total_before": 0.125,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 6,
+        "pitch_error_semitones_after": 0.8490566037735849,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 45,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 105.125,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 6,
+        "unnecessary_field_edits": 6,
+        "untouched_note_preservation": 0.8846153846153846,
+        "untouched_notes": 52
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative",
+      "search_trace": {
+        "analysis_failure": "Undetermined without independently annotated musical context.",
+        "coordinated": {
+          "all_generated": false,
+          "beam_pruned": false,
+          "entered_search": false,
+          "scored": false,
+          "survived_beam": false,
+          "target_fields": 1
+        },
+        "retained": [
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1175,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ]
+        ],
+        "state_count": 228,
+        "targets": [
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "timing",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "onset_ticks",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1221,
+            "reference_value": 2965,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          }
+        ],
+        "truncated": false,
+        "winner": [
+          [
+            0,
+            1174,
+            "pitch",
+            66
+          ],
+          [
+            0,
+            1175,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1177,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1178,
+            "pitch",
+            64
+          ],
+          [
+            0,
+            1205,
+            "pitch",
+            60
+          ],
+          [
+            0,
+            1220,
+            "pitch",
+            50
+          ]
+        ]
+      }
+    },
+    {
+      "edits": [
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 66,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 54,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "note_id": 1174,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F5 to F#3 spans 23 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.559896; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 72,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "note_id": 1175,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F#3 to C5 spans 18 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.627604; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 57,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "note_id": 1177,
+          "reasons": [
+            "Possible melodic discontinuity. The move from G5 to A3 spans 22 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.976562; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 64,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 76,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "note_id": 1178,
+          "reasons": [
+            "Possible melodic discontinuity. The move from A3 to E5 spans 19 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 1.05729; metric strength 0.20, local A minor seventh/E (66% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 60,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 56,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "note_id": 1205,
+          "reasons": [
+            "Possible bass conflict. G#3 sits below an estimated A minor sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible unresolved tension at beat 5.44531; metric strength 0.20, local A minor seventh/G (53% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 50,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 48,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "note_id": 1220,
+          "reasons": [
+            "Possible bass conflict. C3 sits below an estimated B diminished sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible chord tone at beat 7.66406; metric strength 0.20, local D minor seventh/C (63% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        }
+      ],
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "kind": "groove",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8679245283018868,
+        "clean_false_positive_rate": null,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 1,
+        "corrupted_notes": 1,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 45.125,
+        "edit_distance_before": 0.125,
+        "edited_notes": 6,
+        "exact_note_recovery": 0.0,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9753033851394507,
+        "harmony_compatibility_proxy_before": 0.8736640408771557,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9807692307692307,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 3,
+        "onset_error_beats_after": 0.0023584905660377358,
+        "onset_error_beats_before": 0.0023584905660377358,
+        "onset_error_beats_total_after": 0.125,
+        "onset_error_beats_total_before": 0.125,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 6,
+        "pitch_error_semitones_after": 0.8490566037735849,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 45,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 105.125,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 6,
+        "unnecessary_field_edits": 6,
+        "untouched_note_preservation": 0.8846153846153846,
+        "untouched_notes": 52
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative",
+      "search_trace": {
+        "analysis_failure": "Undetermined without independently annotated musical context.",
+        "coordinated": {
+          "all_generated": false,
+          "beam_pruned": false,
+          "entered_search": false,
+          "scored": false,
+          "survived_beam": false,
+          "target_fields": 1
+        },
+        "retained": [
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1175,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ]
+          ]
+        ],
+        "state_count": 233,
+        "targets": [
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "timing",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "onset_ticks",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1194,
+            "reference_value": 1424,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          }
+        ],
+        "truncated": false,
+        "winner": [
+          [
+            0,
+            1174,
+            "pitch",
+            66
+          ],
+          [
+            0,
+            1175,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1177,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1178,
+            "pitch",
+            64
+          ],
+          [
+            0,
+            1205,
+            "pitch",
+            60
+          ],
+          [
+            0,
+            1220,
+            "pitch",
+            50
+          ]
+        ]
+      }
+    },
+    {
+      "edits": [
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 66,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 54,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "note_id": 1174,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F5 to F#3 spans 23 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.559896; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 72,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "note_id": 1175,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F#3 to C5 spans 18 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.627604; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 57,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "note_id": 1177,
+          "reasons": [
+            "Possible melodic discontinuity. The move from G5 to A3 spans 22 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.976562; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 64,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 76,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "note_id": 1178,
+          "reasons": [
+            "Possible melodic discontinuity. The move from A3 to E5 spans 19 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 1.05729; metric strength 0.20, local A minor seventh/E (69% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 60,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 56,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "note_id": 1205,
+          "reasons": [
+            "Possible bass conflict. G#3 sits below an estimated A minor sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible unresolved tension at beat 5.44531; metric strength 0.20, local A minor seventh/G (53% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 50,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 48,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "note_id": 1220,
+          "reasons": [
+            "Possible bass conflict. C3 sits below an estimated B diminished sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible chord tone at beat 7.66406; metric strength 0.20, local D minor seventh/C (63% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        }
+      ],
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "kind": "late",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8679245283018868,
+        "clean_false_positive_rate": null,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 1,
+        "corrupted_notes": 1,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 45.125,
+        "edit_distance_before": 0.125,
+        "edited_notes": 6,
+        "exact_note_recovery": 0.0,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9678832116788322,
+        "harmony_compatibility_proxy_before": 0.8653928724774582,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9807692307692307,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 3,
+        "onset_error_beats_after": 0.0023584905660377358,
+        "onset_error_beats_before": 0.0023584905660377358,
+        "onset_error_beats_total_after": 0.125,
+        "onset_error_beats_total_before": 0.125,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 6,
+        "pitch_error_semitones_after": 0.8490566037735849,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 45,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 105.125,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 6,
+        "unnecessary_field_edits": 6,
+        "untouched_note_preservation": 0.8846153846153846,
+        "untouched_notes": 52
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative",
+      "search_trace": {
+        "analysis_failure": "Undetermined without independently annotated musical context.",
+        "coordinated": {
+          "all_generated": false,
+          "beam_pruned": false,
+          "entered_search": false,
+          "scored": false,
+          "survived_beam": false,
+          "target_fields": 1
+        },
+        "retained": [
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1175,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ]
+          ]
+        ],
+        "state_count": 233,
+        "targets": [
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "timing",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "onset_ticks",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1185,
+            "reference_value": 659,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          }
+        ],
+        "truncated": false,
+        "winner": [
+          [
+            0,
+            1174,
+            "pitch",
+            66
+          ],
+          [
+            0,
+            1175,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1177,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1178,
+            "pitch",
+            64
+          ],
+          [
+            0,
+            1205,
+            "pitch",
+            60
+          ],
+          [
+            0,
+            1220,
+            "pitch",
+            50
+          ]
+        ]
+      }
+    },
+    {
+      "edits": [
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 66,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 158,
+            "id": 1174,
+            "onset_ticks": 215,
+            "pitch": 54,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 59
+          },
+          "note_id": 1174,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F5 to F#3 spans 23 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.559896; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 89,
+            "id": 1175,
+            "onset_ticks": 241,
+            "pitch": 72,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 49
+          },
+          "note_id": 1175,
+          "reasons": [
+            "Possible melodic discontinuity. The move from F#3 to C5 spans 18 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.627604; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 69,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 64,
+            "id": 1177,
+            "onset_ticks": 375,
+            "pitch": 57,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 66
+          },
+          "note_id": 1177,
+          "reasons": [
+            "Possible melodic discontinuity. The move from G5 to A3 spans 22 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 0.976562; metric strength 0.20, local F# diminished (62% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 64,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 29,
+            "id": 1178,
+            "onset_ticks": 406,
+            "pitch": 76,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 42
+          },
+          "note_id": 1178,
+          "reasons": [
+            "Possible melodic discontinuity. The move from A3 to E5 spans 19 semitones without a nearby contrary resolution; a smaller contour is one possible interpretation. Possible chord tone at beat 1.05729; metric strength 0.20, local A minor seventh/E (66% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 60,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 457,
+            "id": 1205,
+            "onset_ticks": 2091,
+            "pitch": 56,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 39
+          },
+          "note_id": 1205,
+          "reasons": [
+            "Possible bass conflict. G#3 sits below an estimated A minor sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible unresolved tension at beat 5.44531; metric strength 0.20, local A minor seventh/G (53% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        },
+        {
+          "after": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 50,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "before": {
+            "channel": 0,
+            "duration_ticks": 414,
+            "id": 1220,
+            "onset_ticks": 2943,
+            "pitch": 48,
+            "release_velocity": 0,
+            "track": 1,
+            "velocity": 60
+          },
+          "note_id": 1220,
+          "reasons": [
+            "Possible bass conflict. C3 sits below an estimated B diminished sonority with limited root or chord-tone support; an inversion or intentional tension may still be valid. Possible chord tone at beat 7.66406; metric strength 0.20, local D minor seventh/C (63% confidence). Full-passage harmony and phrase/motif retention favor this alternative."
+          ],
+          "slot": 0
+        }
+      ],
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "kind": "short",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8679245283018868,
+        "clean_false_positive_rate": null,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 1,
+        "corrupted_notes": 1,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0005404874213836478,
+        "duration_error_beats_before": 0.0005404874213836478,
+        "duration_error_beats_total_after": 0.028645833333333332,
+        "duration_error_beats_total_before": 0.028645833333333332,
+        "edit_distance_after": 45.028645833333336,
+        "edit_distance_before": 0.028645833333333332,
+        "edited_notes": 6,
+        "exact_note_recovery": 0.0,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9752189703054903,
+        "harmony_compatibility_proxy_before": 0.8732322153386028,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9807692307692307,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 3,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 6,
+        "pitch_error_semitones_after": 0.8490566037735849,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 45,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 105.02864583333334,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 6,
+        "unnecessary_field_edits": 6,
+        "untouched_note_preservation": 0.8846153846153846,
+        "untouched_notes": 52
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative",
+      "search_trace": {
+        "analysis_failure": "Undetermined without independently annotated musical context.",
+        "coordinated": {
+          "all_generated": false,
+          "beam_pruned": false,
+          "entered_search": false,
+          "scored": false,
+          "survived_beam": false,
+          "target_fields": 1
+        },
+        "retained": [
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1175,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ],
+            [
+              0,
+              1220,
+              "pitch",
+              50
+            ]
+          ],
+          [
+            [
+              0,
+              1174,
+              "pitch",
+              66
+            ],
+            [
+              0,
+              1177,
+              "pitch",
+              69
+            ],
+            [
+              0,
+              1178,
+              "pitch",
+              64
+            ],
+            [
+              0,
+              1205,
+              "pitch",
+              60
+            ]
+          ]
+        ],
+        "state_count": 233,
+        "targets": [
+          {
+            "beam_pruned": false,
+            "best_scored_state": null,
+            "edit_type": "duration",
+            "eligible": true,
+            "entered_search": false,
+            "failure_category": "correct_candidate_never_generated",
+            "field": "duration_ticks",
+            "field_rank": null,
+            "generated": false,
+            "global_rank": null,
+            "note_id": 1215,
+            "reference_value": 22,
+            "rejection_reasons": [],
+            "scored": false,
+            "scored_state_count": 0,
+            "slot": 0,
+            "survived_beam": false
+          }
+        ],
+        "truncated": false,
+        "winner": [
+          [
+            0,
+            1174,
+            "pitch",
+            66
+          ],
+          [
+            0,
+            1175,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1177,
+            "pitch",
+            69
+          ],
+          [
+            0,
+            1178,
+            "pitch",
+            64
+          ],
+          [
+            0,
+            1205,
+            "pitch",
+            60
+          ],
+          [
+            0,
+            1220,
+            "pitch",
+            50
+          ]
+        ]
+      }
+    }
+  ]
+}

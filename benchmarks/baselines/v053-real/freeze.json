@@ -1,0 +1,15 @@
+{
+  "glue_version": "0.5.3",
+  "algorithm_sha256": "66e7374af98dc90556c96d64875d42803b7cea58f6b0a21149468cc7a9b98c53",
+  "baseline_algorithm_sha256": "04e1428013ad46e2f3c0b2838429d5a841763db64a6ebf5221d7d16bc2c5df96",
+  "manifests": "benchmarks/baselines/v052-real/{pop909,maestro}/benchmark-manifest.json",
+  "development_split": "calibration",
+  "frozen_before_held_out_inspection": true,
+  "scoring_weights_changed": false,
+  "score_passage_and_retention_changed": false,
+  "pre_freeze_tests_passed": 342,
+  "ruff_passed": true,
+  "superseded_measurement": ".test-tmp/v053-pre-tiebreak",
+  "freeze_note": "A synthetic cross-process test detected unstable ordering of tied provenance labels. Added reason as a final sort key before inspecting any held-out results. Previous measurements archived without reading held-out metrics; entire final matrix rerun.",
+  "protocol": "Same manifests, seed 52, presets, preservation 0/25/50/75/100, corruption kinds/severity, and explicit pitch/timing/duration permissions as V0.5.2. No held-out-driven tuning."
+}

@@ -19,14 +19,23 @@ from glue.analysis.musical import (
     harmony_at,
     joint_chord_spans,
     supported_joint_overlap,
-    voices,
 )
+from glue.analysis.relationships import performance_relations
 from glue.analysis.single import analyze_single_clip
+from glue.analysis.voices import (
+    octave_confidence,
+    octave_supported,
+    pitch_supported,
+    voice_ornaments,
+    voice_paths,
+)
 from glue.io.edited import validate_note_edits
 from glue.models import MidiClip, MidiNote
 
+from .context_candidates import context_options
 from .minimal import RepairPreset
 from .musical_config import EditPermissions, MusicalSearch, MusicalWeights, musical_search_for
+from .search_trace import SearchTrace
 
 
 @dataclass(frozen=True)
@@ -116,6 +125,9 @@ def score_passage(clips: tuple[MidiClip, ...], weights: MusicalWeights) -> Music
             "Collisions",
             "Unnecessary unisons",
             "Motif consistency (ambiguous)",
+            "Performance rhythm",
+            "Contextual articulation",
+            "Octave context",
         ),
         0.0,
     )
@@ -143,7 +155,13 @@ def score_passage(clips: tuple[MidiClip, ...], weights: MusicalWeights) -> Music
         totals["Melodic continuity"] += sum(
             gap / clip.ticks_per_beat for _, gap in model.legato_gaps
         )
-        for voice in voices(clip):
+        for relation in performance_relations(clip):
+            label = "Performance rhythm" if relation.field == "onset_ticks" else "Contextual articulation"
+            totals[label] += relation.confidence * relation.deviation
+        for note in clip.notes:
+            totals["Octave context"] += max(octave_confidence(clip, note, note.pitch + delta)
+                                            for delta in (-12, 12))
+        for voice in voice_paths(clip):
             totals["Melodic continuity"] += (
                 sum(
                     max(0, abs(a.pitch - b.pitch) - 9) / 12
@@ -200,9 +218,11 @@ def score_passage(clips: tuple[MidiClip, ...], weights: MusicalWeights) -> Music
                 totals["Harmony"] += overlap * conflict * (0.15 if protected else 1) / norm
                 # Same attacks are evidence only when parts crowd the same
                 # register or create tension; aligned accompaniment is valid.
+                competing_lines = (len(voice_paths(left)) == len(voice_paths(right)) == 1
+                                   and close and conflict > 0)
                 totals["Rhythm complementarity"] += (
                     max(0, 1 - difference / 0.125)
-                    * (0.5 if close and not joint_support else 0)
+                    * (0.5 if close and not joint_support and (conflict >= .7 or competing_lines) else 0)
                     / norm
                 )
                 totals["Register"] += overlap * max(0, 3 - abs(a.pitch - b.pitch)) / 3 / norm
@@ -218,6 +238,9 @@ def score_passage(clips: tuple[MidiClip, ...], weights: MusicalWeights) -> Music
         weights.collision,
         weights.unison,
         weights.motif_consistency,
+        weights.performance_rhythm,
+        weights.articulation,
+        weights.octave_context,
     )
     return MusicalScore(
         tuple(totals.items()), sum(v * w for v, w in zip(totals.values(), factors, strict=True))
@@ -237,7 +260,8 @@ def _retention(
         before = {n.id: n for n in original.notes}
         after = {n.id: n for n in clip.notes}
         model = analyze_musical(original)
-        for voice in voices(original):
+        rhythmic_evidence = {r.note_id: r for r in performance_relations(original) if r.field == "onset_ticks"}
+        for voice in voice_paths(original):
             if (
                 len(voice) >= 4
                 and len({n.onset_ticks for n in voice}) == len(voice)
@@ -257,7 +281,10 @@ def _retention(
                 new_gap = after[b.id].onset_ticks - after[a.id].onset_ticks
                 if new_gap <= 0:
                     return float("inf")
-                cost += weights.groove * abs(new_gap - old_gap) / original.ticks_per_beat * 0.1
+                supported = any(n.id in rhythmic_evidence and after[n.id].onset_ticks in rhythmic_evidence[n.id].values
+                                for n in (a, b))
+                if not supported:
+                    cost += weights.groove * abs(new_gap - old_gap) / original.ticks_per_beat * 0.1
         for motif in model.motifs:
             variation = set(motif.pitch_variations)
             damage = 0
@@ -310,6 +337,7 @@ class _Option:
     field: str
     value: int
     reason: str
+    provenance: tuple[str, ...] = ()
 
 
 @lru_cache(maxsize=64)
@@ -336,10 +364,23 @@ def _options(
         model = analyze_musical(clip)
         contexts = {n.note_id: n for n in model.notes}
         old_suggestions = _suggestions(clip)
+        ornaments = voice_ornaments(clip)
         suggestions = defaultdict(list)
+        notes_by_id = {n.id: n for n in clip.notes}
         for s in old_suggestions:
+            if (s.category.value in {"harmonic-conflict", "bass-conflict"}
+                    and contexts[s.target_note_id].function == "chord tone"):
+                continue  # Global-key disagreement alone must not override local chord support.
             if s.confidence >= 0.65:
-                suggestions[s.target_note_id].extend(s.alternatives)
+                suggestions[s.target_note_id].extend(
+                    p for p in s.alternatives
+                    if octave_supported(clip, notes_by_id[s.target_note_id], p)
+                )
+        contextual = context_options(clip, allow, config)
+        context_strength = defaultdict(int)
+        for option in contextual:
+            field_key = (option.note_id, option.field)
+            context_strength[field_key] = max(context_strength[field_key], option.strength)
         evidence = {n.id: contexts[n.id].tension if n.id in contexts else 0 for n in clip.notes}
         for a, b in model.collisions:
             evidence[a] += 6
@@ -353,11 +394,14 @@ def _options(
                     for b in other.notes
                     if not b.is_percussion
                 )
-        ranked = sorted(
-            clip.notes, key=lambda n: (-2 * bool(suggestions[n.id]) - evidence[n.id], n.id)
-        )
         pool = max(2, ceil(config.note_pool * (1 - preserve / 150)))
-        for n in ranked[:pool]:
+        fields = ("pitch", "onset_ticks", "duration_ticks")
+        ranked_fields = {field: sorted(clip.notes, key=lambda n: (
+            -2 * bool(suggestions[n.id]) * (field == "pitch") - evidence[n.id]
+            - context_strength[n.id, field], n.id))[:pool] for field in fields}
+        selected = {field: {n.id for n in notes} for field, notes in ranked_fields.items()}
+        ranked = list(dict.fromkeys(n for field in fields for n in ranked_fields[field]))
+        for n in ranked:
             if (
                 n.is_percussion
                 or n.duration_ticks <= 0
@@ -401,13 +445,15 @@ def _options(
                             for d in (-2, -1, 1, 2)
                             if _tension(n.pitch + d, b.pitch) == 0
                         ]
-            if allow.pitch and not context.protected and n.id not in disabled_pitch_ids:
-                for p in dict.fromkeys(targets):
+            if (allow.pitch and n.id in selected["pitch"]
+                    and not context.protected and n.id not in ornaments and n.id not in disabled_pitch_ids):
+                for p in sorted(set(targets), key=lambda p: (abs(p - n.pitch) >= 12, abs(p - n.pitch), p)):
                     if (
                         p != n.pitch
                         and 0 <= p <= 127
                         and (n.id not in pitch_choices or p in pitch_choices[n.id])
                         and (abs(p - n.pitch) <= config.pitch_range or abs(p - n.pitch) == 12)
+                        and pitch_supported(clip, n, p)
                     ):
                         support = next(
                             (
@@ -439,7 +485,8 @@ def _options(
                                 o.slot == slot and o.note_id == n.id and o.field == "pitch"
                                 for o in options
                             )
-                            >= 4
+                            >= {RepairPreset.MINIMAL: 4, RepairPreset.BALANCED: 8,
+                                RepairPreset.CREATIVE: 12}[config.preset]
                         ):
                             break
             technical = any(n.id in pair for pair in model.collisions)
@@ -450,14 +497,30 @@ def _options(
                 )
                 < 0.125
                 and abs(n.pitch - b.pitch) < 12
+                # Coincidence alone is not a mistake. Require actual dissonance
+                # or competing monophonic second-interval lines, not doubling.
+                and (_tension(n.pitch, b.pitch) >= 0.7 or
+                     _tension(n.pitch, b.pitch) > 0
+                     and len(voice_paths(clip)) == len(voice_paths(clips[1 - slot])) == 1)
                 and not supported_joint_overlap(
                     n, b, clip.ticks_per_beat, clips[1 - slot].ticks_per_beat, joint_spans
                 )
                 for b in clips[1 - slot].notes
                 if not b.is_percussion
             )
-            timing_ok = technical or (config.preset is not RepairPreset.MINIMAL and crowding)
-            if allow.timing and timing_ok:
+            # A nearby dissonant attack can justify moving a short linked
+            # response phrase, including its consonant tail. This is evidence
+            # from the phrase, not permission based on unison alone.
+            linked_clash = len(clips) == 2 and any(
+                a.id != n.id and a.track == n.track and a.channel == n.channel
+                and abs(a.onset_ticks - n.onset_ticks) <= clip.ticks_per_beat
+                and _tension(a.pitch, b.pitch) >= 0.7
+                and abs(a.onset_ticks / clip.ticks_per_beat
+                        - b.onset_ticks / clips[1 - slot].ticks_per_beat) < 0.125
+                for a in clip.notes for b in clips[1 - slot].notes)
+            timing_ok = technical or (config.preset is not RepairPreset.MINIMAL
+                                      and (crowding or linked_clash))
+            if allow.timing and timing_ok and n.id in selected["onset_ticks"]:
                 for shift in sorted({config.grid_beats, config.onset_beats}):
                     ticks = shift * clip.ticks_per_beat
                     if ticks != int(ticks):
@@ -492,7 +555,20 @@ def _options(
                 and sustain_conflict
                 and not context.protected
             )
-            if allow.duration and duration_ok:
+            if allow.duration and duration_ok and n.id in selected["duration_ticks"]:
+                if len(clips) == 2:
+                    other = clips[1 - slot]
+                    for b in other.notes:
+                        boundary = b.onset_ticks * clip.ticks_per_beat / other.ticks_per_beat
+                        value = boundary - n.onset_ticks
+                        if (boundary == int(boundary) and value > 0
+                                and _tension(n.pitch, b.pitch) >= 0.7
+                                and abs(value - n.duration_ticks) <= min(
+                                    config.duration_beats * clip.ticks_per_beat,
+                                    config.duration_fraction * n.duration_ticks)):
+                            options.append(_Option(slot, n.id, "duration_ticks", int(value),
+                                "Sustain ends at a conflicting other-voice attack boundary.",
+                                ("collision resolution", "voice release")))
                 amounts = {
                     min(
                         config.duration_beats * clip.ticks_per_beat,
@@ -500,6 +576,8 @@ def _options(
                     ),
                     clip.ticks_per_beat / 8,
                 }
+                if config.preset is not RepairPreset.MINIMAL:
+                    amounts.update((clip.ticks_per_beat / 4, clip.ticks_per_beat / 2))
                 for amount in sorted(amounts):
                     if amount != int(amount):
                         continue
@@ -516,7 +594,8 @@ def _options(
                                 )
                             )
             gap = dict(model.legato_gaps).get(n.id)
-            if allow.duration and gap and config.preset is not RepairPreset.MINIMAL:
+            if (allow.duration and gap and config.preset is not RepairPreset.MINIMAL
+                    and n.id in selected["duration_ticks"]):
                 options.append(
                     _Option(
                         slot,
@@ -527,7 +606,42 @@ def _options(
                         "retains its attacks and leaves repeated articulation unchanged.",
                     )
                 )
-    return tuple(options)
+            extra = [o for o in contextual if o.note_id == n.id
+                     and n.id in selected[o.field]
+                     and (o.field != "pitch" or n.id not in disabled_pitch_ids
+                          and (n.id not in pitch_choices or o.value in pitch_choices[n.id]))]
+            for option in extra:
+                options.append(_Option(slot, n.id, option.field, option.value, option.reason,
+                                       (option.reason,)))
+    # Merge evidence for identical values and bound each field independently.
+    # The unchanged value remains the starting search state, never a fake edit.
+    merged: dict[tuple, _Option] = {}
+    counts: Counter = Counter()
+    caps = {RepairPreset.MINIMAL: (4, 2, 2), RepairPreset.BALANCED: (8, 4, 6),
+            RepairPreset.CREATIVE: (12, 6, 8)}[config.preset]
+    for option in options:
+        key = (option.slot, option.note_id, option.field, option.value)
+        provenance = option.provenance or ("legacy contextual evidence: " + option.reason,)
+        if key in merged:
+            merged[key] = replace(merged[key], provenance=tuple(dict.fromkeys(
+                merged[key].provenance + provenance)))
+            continue
+        field = key[:3]
+        cap = caps[("pitch", "onset_ticks", "duration_ticks").index(option.field)]
+        if counts[field] < cap:
+            merged[key] = replace(option, provenance=provenance)
+            counts[field] += 1
+    # Share the same fixed evaluation budget across target fields and clips.
+    # Round-robin first alternatives before spending it on one note's rank 8.
+    groups: dict[tuple, list[_Option]] = {}
+    for option in merged.values():
+        groups.setdefault((option.slot, option.note_id, option.field), []).append(option)
+    lanes = [[values for (s, _, f), values in groups.items() if s == slot and f == field]
+             for slot in range(len(clips)) for field in ("pitch", "onset_ticks", "duration_ticks")]
+    return tuple(lane[target][rank]
+                 for rank in range(max(caps))
+                 for target in range(max((len(lane) for lane in lanes), default=0))
+                 for lane in lanes if target < len(lane) and rank < len(lane[target]))
 
 
 def _apply(clips: tuple[MidiClip, ...], options: tuple[_Option, ...]) -> tuple[MidiClip, ...]:
@@ -538,6 +652,41 @@ def _apply(clips: tuple[MidiClip, ...], options: tuple[_Option, ...]) -> tuple[M
             for n in revised[option.slot].notes
         )
     return tuple(revised)
+
+
+def _linked_options(options: tuple[_Option, ...]) -> tuple[tuple[_Option, ...], ...]:
+    """Bounded evidence-linked bundles, before generic local combinations.
+
+    Corresponding motif pitch/onset/release values describe one unit. Keep
+    several ranked alternatives rather than an unconstrained cross product.
+    All bundles still pass the ordinary full-state validation and rescoring.
+    """
+    units: dict[tuple[int, int], dict[str, _Option]] = {}
+    for option in options:
+        if any("motif" in p or "voice" in p or "articulation" in p for p in option.provenance):
+            fields = units.setdefault((option.slot, option.note_id), {})
+            fields.setdefault(option.field, option)
+    bundles = []
+    for fields in units.values():
+        if len(fields) > 1:
+            bundles.append(tuple(fields.values()))
+        if len(bundles) >= 8:
+            break
+    return tuple(bundles)
+
+
+def _rhythmic_bundles(clips: tuple[MidiClip, ...], options: tuple[_Option, ...], limit: int) -> tuple:
+    """Move a short, already-targeted line coherently rather than destroy its IOIs."""
+    grouped: dict[tuple, list[_Option]] = {}
+    for slot, clip in enumerate(clips):
+        notes = {n.id: n for n in clip.notes}
+        identities = {n.id: i for i, line in enumerate(voice_paths(clip)) for n in line}
+        for option in options:
+            if option.slot == slot and option.field == "onset_ticks":
+                delta = option.value - notes[option.note_id].onset_ticks
+                grouped.setdefault((slot, identities.get(option.note_id), delta), []).append(option)
+    return tuple(tuple(values[:limit]) for _, values in sorted(grouped.items())
+                 if 2 <= len(values) <= limit)[:4]
 
 
 def _candidate(
@@ -613,6 +762,7 @@ def generate_musical_repairs(
     disabled_pitch_ids: frozenset[int] = frozenset(),
     pitch_choices: Mapping[int, frozenset[int]] | None = None,
     weights: MusicalWeights | None = None,
+    trace: SearchTrace | None = None,
 ) -> MusicalRepair:
     """Return diverse improving passage candidates under explicit permissions."""
     clips = (clip_a,) if clip_b is None else (clip_a, clip_b)
@@ -633,6 +783,8 @@ def generate_musical_repairs(
     options = _options(
         clips, allows, preserves, config, enabled_note_ids, disabled_pitch_ids, pitch_choices or {}
     )
+    if trace is not None:
+        trace.reset(options, clips)
     budget = max(1, ceil(config.evaluations * (1 - min(preserves) / 150)))
     limits = tuple(
         0 if p == 100 else max(1, ceil(config.max_edits * (1 - p / 100))) for p in preserves
@@ -641,12 +793,16 @@ def generate_musical_repairs(
     initial = _candidate(clips, clips, (), before, preserves, config)
     frontier = [(initial, ())]
     improving: dict[tuple[MidiClip, ...], MusicalCandidate] = {}
+    round_budget = budget
 
     def evaluate(
         parent: MusicalCandidate, history: tuple[_Option, ...], additions: tuple[_Option, ...]
     ) -> tuple[MusicalCandidate, tuple[_Option, ...]] | None:
         revised = _apply(parent.clips, additions)
-        if revised in evaluated or len(evaluated) >= budget:
+        if revised in evaluated or len(evaluated) >= round_budget:
+            if trace is not None:
+                trace.record(history + additions, "duplicate_state" if revised in evaluated
+                             else "evaluation_budget" if round_budget == budget else "round_budget")
             return None
         try:
             for slot, (source, target, allow) in enumerate(
@@ -661,6 +817,8 @@ def generate_musical_repairs(
                     )
                 )
                 if count > limits[slot]:
+                    if trace is not None:
+                        trace.record(history + additions, f"clip_{slot}_edit_limit")
                     return None
                 validate_note_edits(
                     source,
@@ -672,25 +830,43 @@ def generate_musical_repairs(
                     duration_limit=config.duration_beats,
                     duration_fraction=config.duration_fraction,
                 )
-        except ValueError:
+        except ValueError as exc:
+            if trace is not None:
+                trace.record(history + additions, f"safety: {exc}")
             return None
         if _retention(clips, revised, config.weights) == float("inf"):
+            if trace is not None:
+                trace.record(history + additions, "structural_retention")
             return None  # Structural rejection precedes expensive full rescoring.
         score = score_passage(revised, config.weights)
         evaluated[revised] = score
         candidate = _candidate(clips, revised, history + additions, score, preserves, config)
         if candidate.objective < before.cost - 0.01 and score.cost < before.cost - 0.01:
             improving[revised] = candidate
+        if trace is not None:
+            trace.record(history + additions, "improving" if revised in improving
+                         else "not_improving_objective", candidate)
         return candidate, history + additions
 
     for _ in range(config.depth):
+        # Reserve evaluations for later coordinated rounds; widening options
+        # must not spend the entire budget on shallow one/two-note variations.
+        round_start = len(evaluated)
+        round_budget = min(budget, max(round_start + 1, ceil(budget * (_ + 1) / config.depth)))
+        if trace is not None:
+            trace.round = _ + 1
         successors = []
         for parent, history in frontier:
             touched = {(o.slot, o.note_id, o.field) for o in history}
             available = tuple(o for o in options if (o.slot, o.note_id, o.field) not in touched)
+            if config.preset is not RepairPreset.MINIMAL:
+                for bundle in _rhythmic_bundles(clips, available, config.max_edits):
+                    result = evaluate(parent, history, bundle)
+                    if result:
+                        successors.append(result)
             atomic = []
             for option in available:
-                if len(evaluated) >= budget * 0.75 and not history:
+                if len(evaluated) >= round_start + (round_budget - round_start) * 0.75:
                     break
                 result = evaluate(parent, history, (option,))
                 if result:
@@ -700,7 +876,23 @@ def generate_musical_repairs(
             # atomic options. Distinct fields on the same note can cooperate.
             best_options = [o for _, o in sorted(atomic, key=lambda x: x[0])[:8]]
             if config.preset is not RepairPreset.MINIMAL:
-                for a, b in combinations(best_options, 2):
+                for bundle in _linked_options(available):
+                    result = evaluate(parent, history, bundle)
+                    if result:
+                        successors.append(result)
+                # Reserve bounded proposals even when their isolated states
+                # violate a collision/retention constraint. A simultaneous swap
+                # or coordinated movement can be valid as a complete passage.
+                seeds = []
+                seen_fields = set()
+                for option in available:
+                    field = (option.slot, option.note_id, option.field)
+                    if field not in seen_fields:
+                        seeds.append(option)
+                        seen_fields.add(field)
+                seed_cap = 4 if config.preset is RepairPreset.BALANCED else 8
+                bundle_options = list(dict.fromkeys(best_options + seeds[:seed_cap]))
+                for a, b in combinations(bundle_options, 2):
                     if (a.slot, a.note_id, a.field) == (b.slot, b.note_id, b.field):
                         continue
                     na = next(n for n in clips[a.slot].notes if n.id == a.note_id)
@@ -716,11 +908,11 @@ def generate_musical_repairs(
                     result = evaluate(parent, history, (a, b))
                     if result:
                         successors.append(result)
-            if len(evaluated) >= budget:
+            if len(evaluated) >= round_budget:
                 break
         if not successors:
             break
-        frontier = sorted(
+        ordered = sorted(
             successors,
             key=lambda r: (
                 r[0].objective,
@@ -730,7 +922,27 @@ def generate_musical_repairs(
                     for e in r[0].edits
                 ),
             ),
-        )[: config.beam]
+        )
+        frontier = ordered[: config.beam]
+        if config.preset is RepairPreset.CREATIVE and min(preserves) < 50:
+            # Keep the best objective state, but reserve two slots for a
+            # different note/field footprint. Neutral enabling edits should not
+            # all lose to many near-identical alternatives of the same note.
+            core = ordered[: max(1, config.beam - 2)]
+            footprints = {_signature(candidate) for candidate, _ in core}
+            probes = []
+            for item in ordered[len(core):]:
+                footprint = _signature(item[0])
+                if footprint not in footprints:
+                    probes.append(item)
+                    footprints.add(footprint)
+                    if len(probes) == 2:
+                        break
+            frontier = (core + probes)
+            frontier += [item for item in ordered if item not in frontier][
+                :config.beam - len(frontier)]
+        if trace is not None:
+            trace.beam(successors, frontier)
         if len(evaluated) >= budget:
             break
     retained = []
@@ -767,6 +979,8 @@ def generate_musical_repairs(
         reason = "Preservation is 100%; no edits are allowed."
     if len(evaluated) >= budget:
         reason += " Evaluation budget reached."
+    if trace is not None:
+        trace.finish(retained)
     return MusicalRepair(
         clips, before, tuple(retained), allows, preserves, config, len(evaluated), reason
     )

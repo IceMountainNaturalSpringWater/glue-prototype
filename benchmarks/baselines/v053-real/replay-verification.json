@@ -1,0 +1,13 @@
+{
+  "algorithm_sha256": "66e7374af98dc90556c96d64875d42803b7cea58f6b0a21149468cc7a9b98c53",
+  "corpora": {
+    "pop909": {
+      "entry": "253/253.mid@60:68",
+      "matched": 45
+    },
+    "maestro": {
+      "entry": "2015/MIDI-Unprocessed_R2_D2-12-13-15_mid--AUDIO-from_mp3_12_R2_2015_wav--1.midi@256:264",
+      "matched": 45
+    }
+  }
+}

@@ -1,0 +1,3230 @@
+{
+  "failure_stage_mentions": {
+    "analysis": 15,
+    "scoring": 19
+  },
+  "groups": {
+    "dataset": {
+      "pop909": {
+        "clean_duration_edits": 4,
+        "clean_false_positive_rate": 0.019428571428571427,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 2625,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 17,
+        "clean_runs": 60,
+        "clean_timing_edits": 33,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 15,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.2801813883331003,
+        "partial_field_recovery": null,
+        "runs": 60,
+        "total_runtime_seconds": 16.810883299986017,
+        "unnecessary_edit_count": 51,
+        "unnecessary_field_edits": 54
+      }
+    },
+    "kind": {
+      "clean": {
+        "clean_duration_edits": 4,
+        "clean_false_positive_rate": 0.019428571428571427,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 2625,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 17,
+        "clean_runs": 60,
+        "clean_timing_edits": 33,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 15,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.2801813883331003,
+        "partial_field_recovery": null,
+        "runs": 60,
+        "total_runtime_seconds": 16.810883299986017,
+        "unnecessary_edit_count": 51,
+        "unnecessary_field_edits": 54
+      }
+    },
+    "preservation": {
+      "(0, 0)": {
+        "clean_duration_edits": 4,
+        "clean_false_positive_rate": 0.06476190476190476,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 525,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 16,
+        "clean_runs": 12,
+        "clean_timing_edits": 17,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 9,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.4621794666666877,
+        "partial_field_recovery": null,
+        "runs": 12,
+        "total_runtime_seconds": 5.5461536000002525,
+        "unnecessary_edit_count": 34,
+        "unnecessary_field_edits": 37
+      },
+      "(100, 100)": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.0,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 525,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 0,
+        "clean_runs": 12,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 0,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.006255475000216393,
+        "partial_field_recovery": null,
+        "runs": 12,
+        "total_runtime_seconds": 0.07506570000259671,
+        "unnecessary_edit_count": 0,
+        "unnecessary_field_edits": 0
+      },
+      "(25, 25)": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.03238095238095238,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 525,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 1,
+        "clean_runs": 12,
+        "clean_timing_edits": 16,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 6,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.3846388833335368,
+        "partial_field_recovery": null,
+        "runs": 12,
+        "total_runtime_seconds": 4.6156666000024416,
+        "unnecessary_edit_count": 17,
+        "unnecessary_field_edits": 17
+      },
+      "(50, 50)": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.0,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 525,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 0,
+        "clean_runs": 12,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 0,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.31479584999942745,
+        "partial_field_recovery": null,
+        "runs": 12,
+        "total_runtime_seconds": 3.7775501999931294,
+        "unnecessary_edit_count": 0,
+        "unnecessary_field_edits": 0
+      },
+      "(75, 75)": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.0,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 525,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 0,
+        "clean_runs": 12,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 0,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.23303726666563307,
+        "partial_field_recovery": null,
+        "runs": 12,
+        "total_runtime_seconds": 2.796447199987597,
+        "unnecessary_edit_count": 0,
+        "unnecessary_field_edits": 0
+      }
+    },
+    "preset": {
+      "balanced": {
+        "clean_duration_edits": 2,
+        "clean_false_positive_rate": 0.019428571428571427,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 875,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 5,
+        "clean_runs": 20,
+        "clean_timing_edits": 12,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 5,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.2803508150002017,
+        "partial_field_recovery": null,
+        "runs": 20,
+        "total_runtime_seconds": 5.607016300004034,
+        "unnecessary_edit_count": 17,
+        "unnecessary_field_edits": 19
+      },
+      "creative": {
+        "clean_duration_edits": 2,
+        "clean_false_positive_rate": 0.032,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 875,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 6,
+        "clean_runs": 20,
+        "clean_timing_edits": 21,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 6,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.4946564699996088,
+        "partial_field_recovery": null,
+        "runs": 20,
+        "total_runtime_seconds": 9.893129399992176,
+        "unnecessary_edit_count": 28,
+        "unnecessary_field_edits": 29
+      },
+      "minimal": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.006857142857142857,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 875,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 6,
+        "clean_runs": 20,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 4,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.06553687999949034,
+        "partial_field_recovery": null,
+        "runs": 20,
+        "total_runtime_seconds": 1.3107375999898068,
+        "unnecessary_edit_count": 6,
+        "unnecessary_field_edits": 6
+      }
+    },
+    "workflow": {
+      "pair": {
+        "clean_duration_edits": 4,
+        "clean_false_positive_rate": 0.019428571428571427,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 2625,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 17,
+        "clean_runs": 60,
+        "clean_timing_edits": 33,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 15,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.2801813883331003,
+        "partial_field_recovery": null,
+        "runs": 60,
+        "total_runtime_seconds": 16.810883299986017,
+        "unnecessary_edit_count": 51,
+        "unnecessary_field_edits": 54
+      }
+    }
+  },
+  "made_worse_examples": [
+    {
+      "entry": "105/105.mid@312:320",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9743589743589743,
+        "clean_false_positive_rate": 0.02564102564102564,
+        "contour_comparisons_after": 25,
+        "contour_comparisons_before": 25,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 1.0,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9600228310502283,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 2.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 1,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.988824003221909,
+        "harmony_compatibility_proxy_before": 0.977070747751376,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.96,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 39,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.05128205128205128,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 2,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 12.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9600228310502283,
+          "harmony_compatibility_proxy": 0.977070747751376,
+          "register_separation_semitones": 25.033333333333335,
+          "rhythmic_complementarity_proxy": 0.9556451612903226,
+          "simultaneous_attack_density": 0.04435483870967742
+        },
+        "register_separation_semitones_after": 24.833333333333332,
+        "register_separation_semitones_before": 25.033333333333335,
+        "rhythmic_complementarity_proxy_after": 0.9556451612903226,
+        "rhythmic_complementarity_proxy_before": 0.9556451612903226,
+        "simultaneous_attack_density_after": 0.04435483870967742,
+        "simultaneous_attack_density_before": 0.04435483870967742,
+        "timing_edits": 0,
+        "unnecessary_edit_count": 1,
+        "unnecessary_field_edits": 1,
+        "untouched_note_preservation": 0.9743589743589743,
+        "untouched_notes": 39
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "minimal"
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9487179487179487,
+        "clean_false_positive_rate": 0.05128205128205128,
+        "contour_comparisons_after": 25,
+        "contour_comparisons_before": 25,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9966001813236628,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9600228310502283,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 2.25,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9878432685867381,
+        "harmony_compatibility_proxy_before": 0.977070747751376,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.96,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 39,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.00641025641025641,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.25,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.05128205128205128,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 2,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 22.25,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9600228310502283,
+          "harmony_compatibility_proxy": 0.977070747751376,
+          "register_separation_semitones": 25.033333333333335,
+          "rhythmic_complementarity_proxy": 0.9556451612903226,
+          "simultaneous_attack_density": 0.04435483870967742
+        },
+        "register_separation_semitones_after": 25.393939393939394,
+        "register_separation_semitones_before": 25.033333333333335,
+        "rhythmic_complementarity_proxy_after": 0.9596774193548387,
+        "rhythmic_complementarity_proxy_before": 0.9556451612903226,
+        "simultaneous_attack_density_after": 0.04032258064516129,
+        "simultaneous_attack_density_before": 0.04435483870967742,
+        "timing_edits": 1,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9487179487179487,
+        "untouched_notes": 39
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9743589743589743,
+        "clean_false_positive_rate": 0.02564102564102564,
+        "contour_comparisons_after": 25,
+        "contour_comparisons_before": 25,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9569129646418857,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9600228310502283,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 0.25,
+        "edit_distance_before": 0.0,
+        "edited_notes": 1,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9761152042866711,
+        "harmony_compatibility_proxy_before": 0.977070747751376,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 39,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.00641025641025641,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.25,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 0,
+        "pitch_error_semitones_after": 0,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 0,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 10.25,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9600228310502283,
+          "harmony_compatibility_proxy": 0.977070747751376,
+          "register_separation_semitones": 25.033333333333335,
+          "rhythmic_complementarity_proxy": 0.9556451612903226,
+          "simultaneous_attack_density": 0.04435483870967742
+        },
+        "register_separation_semitones_after": 25.575757575757574,
+        "register_separation_semitones_before": 25.033333333333335,
+        "rhythmic_complementarity_proxy_after": 0.9596774193548387,
+        "rhythmic_complementarity_proxy_before": 0.9556451612903226,
+        "simultaneous_attack_density_after": 0.04032258064516129,
+        "simultaneous_attack_density_before": 0.04435483870967742,
+        "timing_edits": 1,
+        "unnecessary_edit_count": 1,
+        "unnecessary_field_edits": 1,
+        "untouched_note_preservation": 0.9743589743589743,
+        "untouched_notes": 39
+      },
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9230769230769231,
+        "clean_false_positive_rate": 0.07692307692307693,
+        "contour_comparisons_after": 25,
+        "contour_comparisons_before": 25,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 1.0,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9600228310502283,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 2.25,
+        "edit_distance_before": 0.0,
+        "edited_notes": 3,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9836716976091893,
+        "harmony_compatibility_proxy_before": 0.977070747751376,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.96,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 39,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.00641025641025641,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.25,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.05128205128205128,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 2,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 32.25,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9600228310502283,
+          "harmony_compatibility_proxy": 0.977070747751376,
+          "register_separation_semitones": 25.033333333333335,
+          "rhythmic_complementarity_proxy": 0.9556451612903226,
+          "simultaneous_attack_density": 0.04435483870967742
+        },
+        "register_separation_semitones_after": 26.464285714285715,
+        "register_separation_semitones_before": 25.033333333333335,
+        "rhythmic_complementarity_proxy_after": 0.9556451612903226,
+        "rhythmic_complementarity_proxy_before": 0.9556451612903226,
+        "simultaneous_attack_density_after": 0.04435483870967742,
+        "simultaneous_attack_density_before": 0.04435483870967742,
+        "timing_edits": 2,
+        "unnecessary_edit_count": 3,
+        "unnecessary_field_edits": 3,
+        "untouched_note_preservation": 0.9230769230769231,
+        "untouched_notes": 39
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9743589743589743,
+        "clean_false_positive_rate": 0.02564102564102564,
+        "contour_comparisons_after": 25,
+        "contour_comparisons_before": 25,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9600228310502283,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9600228310502283,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 0.125,
+        "edit_distance_before": 0.0,
+        "edited_notes": 1,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.977070747751376,
+        "harmony_compatibility_proxy_before": 0.977070747751376,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 39,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.003205128205128205,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.125,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 0,
+        "pitch_error_semitones_after": 0,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 0,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 10.125,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9600228310502283,
+          "harmony_compatibility_proxy": 0.977070747751376,
+          "register_separation_semitones": 25.033333333333335,
+          "rhythmic_complementarity_proxy": 0.9556451612903226,
+          "simultaneous_attack_density": 0.04435483870967742
+        },
+        "register_separation_semitones_after": 25.033333333333335,
+        "register_separation_semitones_before": 25.033333333333335,
+        "rhythmic_complementarity_proxy_after": 0.9596774193548387,
+        "rhythmic_complementarity_proxy_before": 0.9556451612903226,
+        "simultaneous_attack_density_after": 0.04032258064516129,
+        "simultaneous_attack_density_before": 0.04435483870967742,
+        "timing_edits": 1,
+        "unnecessary_edit_count": 1,
+        "unnecessary_field_edits": 1,
+        "untouched_note_preservation": 0.9743589743589743,
+        "untouched_notes": 39
+      },
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9672131147540983,
+        "clean_false_positive_rate": 0.03278688524590164,
+        "contour_comparisons_after": 45,
+        "contour_comparisons_before": 45,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9349210242323163,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9183557343274795,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 2.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.948251773218451,
+        "harmony_compatibility_proxy_before": 0.9442328747560337,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 61,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 0.03278688524590164,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 2,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 22.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9183557343274795,
+          "harmony_compatibility_proxy": 0.9442328747560337,
+          "register_separation_semitones": 13.89090909090909,
+          "rhythmic_complementarity_proxy": 0.9576719576719577,
+          "simultaneous_attack_density": 0.042328042328042326
+        },
+        "register_separation_semitones_after": 14.072727272727272,
+        "register_separation_semitones_before": 13.89090909090909,
+        "rhythmic_complementarity_proxy_after": 0.9576719576719577,
+        "rhythmic_complementarity_proxy_before": 0.9576719576719577,
+        "simultaneous_attack_density_after": 0.042328042328042326,
+        "simultaneous_attack_density_before": 0.042328042328042326,
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9672131147540983,
+        "untouched_notes": 61
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "minimal"
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9836065573770492,
+        "clean_false_positive_rate": 0.01639344262295082,
+        "contour_comparisons_after": 45,
+        "contour_comparisons_before": 45,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9434268615716668,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9183557343274795,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 1.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 1,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9503153710667873,
+        "harmony_compatibility_proxy_before": 0.9442328747560337,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9777777777777777,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 61,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.01639344262295082,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 1,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 11.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9183557343274795,
+          "harmony_compatibility_proxy": 0.9442328747560337,
+          "register_separation_semitones": 13.89090909090909,
+          "rhythmic_complementarity_proxy": 0.9576719576719577,
+          "simultaneous_attack_density": 0.042328042328042326
+        },
+        "register_separation_semitones_after": 14,
+        "register_separation_semitones_before": 13.89090909090909,
+        "rhythmic_complementarity_proxy_after": 0.9576719576719577,
+        "rhythmic_complementarity_proxy_before": 0.9576719576719577,
+        "simultaneous_attack_density_after": 0.042328042328042326,
+        "simultaneous_attack_density_before": 0.042328042328042326,
+        "timing_edits": 0,
+        "unnecessary_edit_count": 1,
+        "unnecessary_field_edits": 1,
+        "untouched_note_preservation": 0.9836065573770492,
+        "untouched_notes": 61
+      },
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "minimal"
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9180327868852459,
+        "clean_false_positive_rate": 0.08196721311475409,
+        "contour_comparisons_after": 45,
+        "contour_comparisons_before": 45,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9503745879532514,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9183557343274795,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 1.625,
+        "edit_distance_before": 0.0,
+        "edited_notes": 5,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9520104707035452,
+        "harmony_compatibility_proxy_before": 0.9442328747560337,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9777777777777777,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 61,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.010245901639344262,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.625,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.01639344262295082,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 1,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 61.625,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9183557343274795,
+          "harmony_compatibility_proxy": 0.9442328747560337,
+          "register_separation_semitones": 13.89090909090909,
+          "rhythmic_complementarity_proxy": 0.9576719576719577,
+          "simultaneous_attack_density": 0.042328042328042326
+        },
+        "register_separation_semitones_after": 14.5,
+        "register_separation_semitones_before": 13.89090909090909,
+        "rhythmic_complementarity_proxy_after": 0.9788359788359788,
+        "rhythmic_complementarity_proxy_before": 0.9576719576719577,
+        "simultaneous_attack_density_after": 0.021164021164021163,
+        "simultaneous_attack_density_before": 0.042328042328042326,
+        "timing_edits": 5,
+        "unnecessary_edit_count": 5,
+        "unnecessary_field_edits": 6,
+        "untouched_note_preservation": 0.9180327868852459,
+        "untouched_notes": 61
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9180327868852459,
+        "clean_false_positive_rate": 0.08196721311475409,
+        "contour_comparisons_after": 45,
+        "contour_comparisons_before": 45,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9185896150761828,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9183557343274795,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 0.625,
+        "edit_distance_before": 0.0,
+        "edited_notes": 5,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9438417159409188,
+        "harmony_compatibility_proxy_before": 0.9442328747560337,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 61,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.010245901639344262,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.625,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 0,
+        "pitch_error_semitones_after": 0,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 0,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 50.625,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9183557343274795,
+          "harmony_compatibility_proxy": 0.9442328747560337,
+          "register_separation_semitones": 13.89090909090909,
+          "rhythmic_complementarity_proxy": 0.9576719576719577,
+          "simultaneous_attack_density": 0.042328042328042326
+        },
+        "register_separation_semitones_after": 14.362068965517242,
+        "register_separation_semitones_before": 13.89090909090909,
+        "rhythmic_complementarity_proxy_after": 0.9761904761904762,
+        "rhythmic_complementarity_proxy_before": 0.9576719576719577,
+        "simultaneous_attack_density_after": 0.023809523809523808,
+        "simultaneous_attack_density_before": 0.042328042328042326,
+        "timing_edits": 5,
+        "unnecessary_edit_count": 5,
+        "unnecessary_field_edits": 5,
+        "untouched_note_preservation": 0.9180327868852459,
+        "untouched_notes": 61
+      },
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8688524590163934,
+        "clean_false_positive_rate": 0.13114754098360656,
+        "contour_comparisons_after": 45,
+        "contour_comparisons_before": 45,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9190168818272094,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9183557343274795,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 3.875,
+        "edit_distance_before": 0.0,
+        "edited_notes": 8,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9443867834698153,
+        "harmony_compatibility_proxy_before": 0.9442328747560337,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 61,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.014344262295081968,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.875,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.04918032786885246,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 3,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 83.875,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9183557343274795,
+          "harmony_compatibility_proxy": 0.9442328747560337,
+          "register_separation_semitones": 13.89090909090909,
+          "rhythmic_complementarity_proxy": 0.9576719576719577,
+          "simultaneous_attack_density": 0.042328042328042326
+        },
+        "register_separation_semitones_after": 14.59322033898305,
+        "register_separation_semitones_before": 13.89090909090909,
+        "rhythmic_complementarity_proxy_after": 1.0,
+        "rhythmic_complementarity_proxy_before": 0.9576719576719577,
+        "simultaneous_attack_density_after": 0.0,
+        "simultaneous_attack_density_before": 0.042328042328042326,
+        "timing_edits": 7,
+        "unnecessary_edit_count": 8,
+        "unnecessary_field_edits": 8,
+        "untouched_note_preservation": 0.8688524590163934,
+        "untouched_notes": 61
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8852459016393442,
+        "clean_false_positive_rate": 0.11475409836065574,
+        "contour_comparisons_after": 45,
+        "contour_comparisons_before": 45,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.918823413285954,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9183557343274795,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 0.875,
+        "edit_distance_before": 0.0,
+        "edited_notes": 7,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9444538355316413,
+        "harmony_compatibility_proxy_before": 0.9442328747560337,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 61,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.014344262295081968,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.875,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 0,
+        "pitch_error_semitones_after": 0,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 0,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 70.875,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9183557343274795,
+          "harmony_compatibility_proxy": 0.9442328747560337,
+          "register_separation_semitones": 13.89090909090909,
+          "rhythmic_complementarity_proxy": 0.9576719576719577,
+          "simultaneous_attack_density": 0.042328042328042326
+        },
+        "register_separation_semitones_after": 14.39655172413793,
+        "register_separation_semitones_before": 13.89090909090909,
+        "rhythmic_complementarity_proxy_after": 0.9894179894179894,
+        "rhythmic_complementarity_proxy_before": 0.9576719576719577,
+        "simultaneous_attack_density_after": 0.010582010582010581,
+        "simultaneous_attack_density_before": 0.042328042328042326,
+        "timing_edits": 7,
+        "unnecessary_edit_count": 7,
+        "unnecessary_field_edits": 7,
+        "untouched_note_preservation": 0.8852459016393442,
+        "untouched_notes": 61
+      },
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9545454545454546,
+        "clean_false_positive_rate": 0.045454545454545456,
+        "contour_comparisons_after": 27,
+        "contour_comparisons_before": 27,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9670675258667635,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9233980758758396,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 4.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9856784173631706,
+        "harmony_compatibility_proxy_before": 0.9553434214073875,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 44,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 0.09090909090909091,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 4,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 24.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9233980758758396,
+          "harmony_compatibility_proxy": 0.9553434214073875,
+          "register_separation_semitones": 16.650793650793652,
+          "rhythmic_complementarity_proxy": 0.9427083333333334,
+          "simultaneous_attack_density": 0.057291666666666664
+        },
+        "register_separation_semitones_after": 16.555555555555557,
+        "register_separation_semitones_before": 16.650793650793652,
+        "rhythmic_complementarity_proxy_after": 0.9427083333333334,
+        "rhythmic_complementarity_proxy_before": 0.9427083333333334,
+        "simultaneous_attack_density_after": 0.057291666666666664,
+        "simultaneous_attack_density_before": 0.057291666666666664,
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9545454545454546,
+        "untouched_notes": 44
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "minimal"
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9090909090909091,
+        "clean_false_positive_rate": 0.09090909090909091,
+        "contour_comparisons_after": 27,
+        "contour_comparisons_before": 27,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9643983944740036,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9233980758758396,
+        "duration_edits": 2,
+        "duration_error_beats_after": 0.018513257575757575,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.8145833333333333,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 6.814583333333333,
+        "edit_distance_before": 0.0,
+        "edited_notes": 4,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9845883865587101,
+        "harmony_compatibility_proxy_before": 0.9553434214073875,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9629629629629629,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 44,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 3,
+        "pitch_error_semitones_after": 0.13636363636363635,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 6,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 56.81458333333333,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9233980758758396,
+          "harmony_compatibility_proxy": 0.9553434214073875,
+          "register_separation_semitones": 16.650793650793652,
+          "rhythmic_complementarity_proxy": 0.9427083333333334,
+          "simultaneous_attack_density": 0.057291666666666664
+        },
+        "register_separation_semitones_after": 16.770491803278688,
+        "register_separation_semitones_before": 16.650793650793652,
+        "rhythmic_complementarity_proxy_after": 0.9427083333333334,
+        "rhythmic_complementarity_proxy_before": 0.9427083333333334,
+        "simultaneous_attack_density_after": 0.057291666666666664,
+        "simultaneous_attack_density_before": 0.057291666666666664,
+        "timing_edits": 0,
+        "unnecessary_edit_count": 4,
+        "unnecessary_field_edits": 5,
+        "untouched_note_preservation": 0.9090909090909091,
+        "untouched_notes": 44
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8409090909090909,
+        "clean_false_positive_rate": 0.1590909090909091,
+        "contour_comparisons_after": 27,
+        "contour_comparisons_before": 27,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9649682683590208,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9233980758758396,
+        "duration_edits": 2,
+        "duration_error_beats_after": 0.005681818181818182,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.25,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 10.5,
+        "edit_distance_before": 0.0,
+        "edited_notes": 7,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9842728069583979,
+        "harmony_compatibility_proxy_before": 0.9553434214073875,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9629629629629629,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 44,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.005681818181818182,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.25,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 4,
+        "pitch_error_semitones_after": 0.22727272727272727,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 10,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 90.5,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9233980758758396,
+          "harmony_compatibility_proxy": 0.9553434214073875,
+          "register_separation_semitones": 16.650793650793652,
+          "rhythmic_complementarity_proxy": 0.9427083333333334,
+          "simultaneous_attack_density": 0.057291666666666664
+        },
+        "register_separation_semitones_after": 17.714285714285715,
+        "register_separation_semitones_before": 16.650793650793652,
+        "rhythmic_complementarity_proxy_after": 0.953125,
+        "rhythmic_complementarity_proxy_before": 0.9427083333333334,
+        "simultaneous_attack_density_after": 0.046875,
+        "simultaneous_attack_density_before": 0.057291666666666664,
+        "timing_edits": 2,
+        "unnecessary_edit_count": 7,
+        "unnecessary_field_edits": 8,
+        "untouched_note_preservation": 0.8409090909090909,
+        "untouched_notes": 44
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9545454545454546,
+        "clean_false_positive_rate": 0.045454545454545456,
+        "contour_comparisons_after": 27,
+        "contour_comparisons_before": 27,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.924645790091147,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9233980758758396,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 0.25,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9554053150593348,
+        "harmony_compatibility_proxy_before": 0.9553434214073875,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 44,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.005681818181818182,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.25,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 0,
+        "pitch_error_semitones_after": 0,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 0,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 20.25,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9233980758758396,
+          "harmony_compatibility_proxy": 0.9553434214073875,
+          "register_separation_semitones": 16.650793650793652,
+          "rhythmic_complementarity_proxy": 0.9427083333333334,
+          "simultaneous_attack_density": 0.057291666666666664
+        },
+        "register_separation_semitones_after": 16.984615384615385,
+        "register_separation_semitones_before": 16.650793650793652,
+        "rhythmic_complementarity_proxy_after": 0.953125,
+        "rhythmic_complementarity_proxy_before": 0.9427083333333334,
+        "simultaneous_attack_density_after": 0.046875,
+        "simultaneous_attack_density_before": 0.057291666666666664,
+        "timing_edits": 2,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9545454545454546,
+        "untouched_notes": 44
+      },
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "creative"
+    }
+  ],
+  "overall": {
+    "clean_duration_edits": 4,
+    "clean_false_positive_rate": 0.019428571428571427,
+    "clean_motif_disturbance_runs": 0,
+    "clean_notes": 2625,
+    "clean_octave_displacement_rate": 0.0,
+    "clean_octave_displacements": 0,
+    "clean_pitch_edits": 17,
+    "clean_runs": 60,
+    "clean_timing_edits": 33,
+    "corrupted_note_improvement_rate": null,
+    "corrupted_notes": 0,
+    "edit_type_diagnostics": {},
+    "errors": 0,
+    "exact_recovery_rate": null,
+    "made_worse_runs": 15,
+    "mean_distance_after": null,
+    "mean_distance_before": null,
+    "mean_runtime_seconds": 0.2801813883331003,
+    "partial_field_recovery": null,
+    "runs": 60,
+    "total_runtime_seconds": 16.810883299986017,
+    "unnecessary_edit_count": 51,
+    "unnecessary_field_edits": 54
+  },
+  "runtime_vs_note_count": [
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 21,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "minimal",
+      "seconds": 0.055598200000531506
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 21,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "minimal",
+      "seconds": 0.061870499994256534
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 21,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        50,
+        50
+      ],
+      "preset": "minimal",
+      "seconds": 0.05287749999843072
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 21,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        75,
+        75
+      ],
+      "preset": "minimal",
+      "seconds": 0.0507999999972526
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        100,
+        100
+      ],
+      "preset": "minimal",
+      "seconds": 0.0065990000002784654
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 206,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "balanced",
+      "seconds": 0.43143509999936214
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 184,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "balanced",
+      "seconds": 0.3800716000041575
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 147,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        50,
+        50
+      ],
+      "preset": "balanced",
+      "seconds": 0.294587499993213
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 74,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        75,
+        75
+      ],
+      "preset": "balanced",
+      "seconds": 0.16437809999479214
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        100,
+        100
+      ],
+      "preset": "balanced",
+      "seconds": 0.005782199994428083
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 382,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "creative",
+      "seconds": 0.6331627999970806
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 346,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "creative",
+      "seconds": 0.5100250000032247
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 276,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        50,
+        50
+      ],
+      "preset": "creative",
+      "seconds": 0.4541981999936979
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 207,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        75,
+        75
+      ],
+      "preset": "creative",
+      "seconds": 0.3732894999993732
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 39,
+      "preservation": [
+        100,
+        100
+      ],
+      "preset": "creative",
+      "seconds": 0.005415899999206886
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 64,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "minimal",
+      "seconds": 0.17007559999910882
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 54,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "minimal",
+      "seconds": 0.1523492999986047
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 32,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        50,
+        50
+      ],
+      "preset": "minimal",
+      "seconds": 0.08444310000049882
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 18,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        75,
+        75
+      ],
+      "preset": "minimal",
+      "seconds": 0.058826000000408385
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        100,
+        100
+      ],
+      "preset": "minimal",
+      "seconds": 0.006709599998430349
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 208,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "balanced",
+      "seconds": 0.7086560000025202
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 184,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "balanced",
+      "seconds": 0.6584195000032196
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 146,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        50,
+        50
+      ],
+      "preset": "balanced",
+      "seconds": 0.5966067000044859
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 104,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        75,
+        75
+      ],
+      "preset": "balanced",
+      "seconds": 0.33213850000174716
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        100,
+        100
+      ],
+      "preset": "balanced",
+      "seconds": 0.006473500005085953
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 420,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "creative",
+      "seconds": 1.3792805999983102
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 350,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "creative",
+      "seconds": 1.1465566999977455
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 281,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        50,
+        50
+      ],
+      "preset": "creative",
+      "seconds": 0.9707187999956659
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 210,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        75,
+        75
+      ],
+      "preset": "creative",
+      "seconds": 0.7981466999990516
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 61,
+      "preservation": [
+        100,
+        100
+      ],
+      "preset": "creative",
+      "seconds": 0.006596600003831554
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "minimal",
+      "seconds": 0.012869700003648177
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "minimal",
+      "seconds": 0.014488599998003338
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        50,
+        50
+      ],
+      "preset": "minimal",
+      "seconds": 0.011444800002209377
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        75,
+        75
+      ],
+      "preset": "minimal",
+      "seconds": 0.012172999995527789
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        100,
+        100
+      ],
+      "preset": "minimal",
+      "seconds": 0.005703599999833386
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "balanced",
+      "seconds": 0.011741399997845292
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "balanced",
+      "seconds": 0.011636099996394478
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        50,
+        50
+      ],
+      "preset": "balanced",
+      "seconds": 0.010881200003495906
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        75,
+        75
+      ],
+      "preset": "balanced",
+      "seconds": 0.012538499999209307
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        100,
+        100
+      ],
+      "preset": "balanced",
+      "seconds": 0.005972500002826564
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "creative",
+      "seconds": 0.01107130000309553
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "creative",
+      "seconds": 0.010943400004180148
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        50,
+        50
+      ],
+      "preset": "creative",
+      "seconds": 0.0122646999952849
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        75,
+        75
+      ],
+      "preset": "creative",
+      "seconds": 0.011846900000819005
+    },
+    {
+      "entry": "828/828.mid@28:36",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 31,
+      "preservation": [
+        100,
+        100
+      ],
+      "preset": "creative",
+      "seconds": 0.006139199998870026
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 55,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "minimal",
+      "seconds": 0.1928948999993736
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 55,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "minimal",
+      "seconds": 0.1845792000021902
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 30,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        50,
+        50
+      ],
+      "preset": "minimal",
+      "seconds": 0.10098629999993136
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 22,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        75,
+        75
+      ],
+      "preset": "minimal",
+      "seconds": 0.06854590000148164
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        100,
+        100
+      ],
+      "preset": "minimal",
+      "seconds": 0.00690279999980703
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 220,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "balanced",
+      "seconds": 0.7042576000021654
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 184,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "balanced",
+      "seconds": 0.5489276000007521
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 147,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        50,
+        50
+      ],
+      "preset": "balanced",
+      "seconds": 0.43536909999966156
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 100,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        75,
+        75
+      ],
+      "preset": "balanced",
+      "seconds": 0.28136149999772897
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        100,
+        100
+      ],
+      "preset": "balanced",
+      "seconds": 0.005782100000942592
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 420,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "creative",
+      "seconds": 1.235110399997211
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 350,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "creative",
+      "seconds": 0.9357990999997128
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 281,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        50,
+        50
+      ],
+      "preset": "creative",
+      "seconds": 0.753172300006554
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 210,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        75,
+        75
+      ],
+      "preset": "creative",
+      "seconds": 0.632402600000205
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 44,
+      "preservation": [
+        100,
+        100
+      ],
+      "preset": "creative",
+      "seconds": 0.006988699999055825
+    }
+  ],
+  "skipped_cases": 0,
+  "worst_examples": [
+    {
+      "entry": "865/865.mid@84:92",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8409090909090909,
+        "clean_false_positive_rate": 0.1590909090909091,
+        "contour_comparisons_after": 27,
+        "contour_comparisons_before": 27,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9649682683590208,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9233980758758396,
+        "duration_edits": 2,
+        "duration_error_beats_after": 0.005681818181818182,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.25,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 10.5,
+        "edit_distance_before": 0.0,
+        "edited_notes": 7,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9842728069583979,
+        "harmony_compatibility_proxy_before": 0.9553434214073875,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9629629629629629,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 44,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.005681818181818182,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.25,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 4,
+        "pitch_error_semitones_after": 0.22727272727272727,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 10,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 90.5,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9233980758758396,
+          "harmony_compatibility_proxy": 0.9553434214073875,
+          "register_separation_semitones": 16.650793650793652,
+          "rhythmic_complementarity_proxy": 0.9427083333333334,
+          "simultaneous_attack_density": 0.057291666666666664
+        },
+        "register_separation_semitones_after": 17.714285714285715,
+        "register_separation_semitones_before": 16.650793650793652,
+        "rhythmic_complementarity_proxy_after": 0.953125,
+        "rhythmic_complementarity_proxy_before": 0.9427083333333334,
+        "simultaneous_attack_density_after": 0.046875,
+        "simultaneous_attack_density_before": 0.057291666666666664,
+        "timing_edits": 2,
+        "unnecessary_edit_count": 7,
+        "unnecessary_field_edits": 8,
+        "untouched_note_preservation": 0.8409090909090909,
+        "untouched_notes": 44
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8688524590163934,
+        "clean_false_positive_rate": 0.13114754098360656,
+        "contour_comparisons_after": 45,
+        "contour_comparisons_before": 45,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9190168818272094,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9183557343274795,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 3.875,
+        "edit_distance_before": 0.0,
+        "edited_notes": 8,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9443867834698153,
+        "harmony_compatibility_proxy_before": 0.9442328747560337,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 61,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.014344262295081968,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.875,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.04918032786885246,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 3,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 83.875,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9183557343274795,
+          "harmony_compatibility_proxy": 0.9442328747560337,
+          "register_separation_semitones": 13.89090909090909,
+          "rhythmic_complementarity_proxy": 0.9576719576719577,
+          "simultaneous_attack_density": 0.042328042328042326
+        },
+        "register_separation_semitones_after": 14.59322033898305,
+        "register_separation_semitones_before": 13.89090909090909,
+        "rhythmic_complementarity_proxy_after": 1.0,
+        "rhythmic_complementarity_proxy_before": 0.9576719576719577,
+        "simultaneous_attack_density_after": 0.0,
+        "simultaneous_attack_density_before": 0.042328042328042326,
+        "timing_edits": 7,
+        "unnecessary_edit_count": 8,
+        "unnecessary_field_edits": 8,
+        "untouched_note_preservation": 0.8688524590163934,
+        "untouched_notes": 61
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8852459016393442,
+        "clean_false_positive_rate": 0.11475409836065574,
+        "contour_comparisons_after": 45,
+        "contour_comparisons_before": 45,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.918823413285954,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9183557343274795,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 0.875,
+        "edit_distance_before": 0.0,
+        "edited_notes": 7,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9444538355316413,
+        "harmony_compatibility_proxy_before": 0.9442328747560337,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 61,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.014344262295081968,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.875,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 0,
+        "pitch_error_semitones_after": 0,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 0,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 70.875,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9183557343274795,
+          "harmony_compatibility_proxy": 0.9442328747560337,
+          "register_separation_semitones": 13.89090909090909,
+          "rhythmic_complementarity_proxy": 0.9576719576719577,
+          "simultaneous_attack_density": 0.042328042328042326
+        },
+        "register_separation_semitones_after": 14.39655172413793,
+        "register_separation_semitones_before": 13.89090909090909,
+        "rhythmic_complementarity_proxy_after": 0.9894179894179894,
+        "rhythmic_complementarity_proxy_before": 0.9576719576719577,
+        "simultaneous_attack_density_after": 0.010582010582010581,
+        "simultaneous_attack_density_before": 0.042328042328042326,
+        "timing_edits": 7,
+        "unnecessary_edit_count": 7,
+        "unnecessary_field_edits": 7,
+        "untouched_note_preservation": 0.8852459016393442,
+        "untouched_notes": 61
+      },
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9180327868852459,
+        "clean_false_positive_rate": 0.08196721311475409,
+        "contour_comparisons_after": 45,
+        "contour_comparisons_before": 45,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9503745879532514,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9183557343274795,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 1.625,
+        "edit_distance_before": 0.0,
+        "edited_notes": 5,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9520104707035452,
+        "harmony_compatibility_proxy_before": 0.9442328747560337,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9777777777777777,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 61,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.010245901639344262,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.625,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.01639344262295082,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 1,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 61.625,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9183557343274795,
+          "harmony_compatibility_proxy": 0.9442328747560337,
+          "register_separation_semitones": 13.89090909090909,
+          "rhythmic_complementarity_proxy": 0.9576719576719577,
+          "simultaneous_attack_density": 0.042328042328042326
+        },
+        "register_separation_semitones_after": 14.5,
+        "register_separation_semitones_before": 13.89090909090909,
+        "rhythmic_complementarity_proxy_after": 0.9788359788359788,
+        "rhythmic_complementarity_proxy_before": 0.9576719576719577,
+        "simultaneous_attack_density_after": 0.021164021164021163,
+        "simultaneous_attack_density_before": 0.042328042328042326,
+        "timing_edits": 5,
+        "unnecessary_edit_count": 5,
+        "unnecessary_field_edits": 6,
+        "untouched_note_preservation": 0.9180327868852459,
+        "untouched_notes": 61
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9090909090909091,
+        "clean_false_positive_rate": 0.09090909090909091,
+        "contour_comparisons_after": 27,
+        "contour_comparisons_before": 27,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9643983944740036,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9233980758758396,
+        "duration_edits": 2,
+        "duration_error_beats_after": 0.018513257575757575,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.8145833333333333,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 6.814583333333333,
+        "edit_distance_before": 0.0,
+        "edited_notes": 4,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9845883865587101,
+        "harmony_compatibility_proxy_before": 0.9553434214073875,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9629629629629629,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 44,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 3,
+        "pitch_error_semitones_after": 0.13636363636363635,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 6,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 56.81458333333333,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9233980758758396,
+          "harmony_compatibility_proxy": 0.9553434214073875,
+          "register_separation_semitones": 16.650793650793652,
+          "rhythmic_complementarity_proxy": 0.9427083333333334,
+          "simultaneous_attack_density": 0.057291666666666664
+        },
+        "register_separation_semitones_after": 16.770491803278688,
+        "register_separation_semitones_before": 16.650793650793652,
+        "rhythmic_complementarity_proxy_after": 0.9427083333333334,
+        "rhythmic_complementarity_proxy_before": 0.9427083333333334,
+        "simultaneous_attack_density_after": 0.057291666666666664,
+        "simultaneous_attack_density_before": 0.057291666666666664,
+        "timing_edits": 0,
+        "unnecessary_edit_count": 4,
+        "unnecessary_field_edits": 5,
+        "untouched_note_preservation": 0.9090909090909091,
+        "untouched_notes": 44
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9180327868852459,
+        "clean_false_positive_rate": 0.08196721311475409,
+        "contour_comparisons_after": 45,
+        "contour_comparisons_before": 45,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9185896150761828,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9183557343274795,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 0.625,
+        "edit_distance_before": 0.0,
+        "edited_notes": 5,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9438417159409188,
+        "harmony_compatibility_proxy_before": 0.9442328747560337,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 61,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.010245901639344262,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.625,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 0,
+        "pitch_error_semitones_after": 0,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 0,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 50.625,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9183557343274795,
+          "harmony_compatibility_proxy": 0.9442328747560337,
+          "register_separation_semitones": 13.89090909090909,
+          "rhythmic_complementarity_proxy": 0.9576719576719577,
+          "simultaneous_attack_density": 0.042328042328042326
+        },
+        "register_separation_semitones_after": 14.362068965517242,
+        "register_separation_semitones_before": 13.89090909090909,
+        "rhythmic_complementarity_proxy_after": 0.9761904761904762,
+        "rhythmic_complementarity_proxy_before": 0.9576719576719577,
+        "simultaneous_attack_density_after": 0.023809523809523808,
+        "simultaneous_attack_density_before": 0.042328042328042326,
+        "timing_edits": 5,
+        "unnecessary_edit_count": 5,
+        "unnecessary_field_edits": 5,
+        "untouched_note_preservation": 0.9180327868852459,
+        "untouched_notes": 61
+      },
+      "preservation": [
+        25,
+        25
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9230769230769231,
+        "clean_false_positive_rate": 0.07692307692307693,
+        "contour_comparisons_after": 25,
+        "contour_comparisons_before": 25,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 1.0,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9600228310502283,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 2.25,
+        "edit_distance_before": 0.0,
+        "edited_notes": 3,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9836716976091893,
+        "harmony_compatibility_proxy_before": 0.977070747751376,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.96,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 39,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.00641025641025641,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.25,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.05128205128205128,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 2,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 32.25,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9600228310502283,
+          "harmony_compatibility_proxy": 0.977070747751376,
+          "register_separation_semitones": 25.033333333333335,
+          "rhythmic_complementarity_proxy": 0.9556451612903226,
+          "simultaneous_attack_density": 0.04435483870967742
+        },
+        "register_separation_semitones_after": 26.464285714285715,
+        "register_separation_semitones_before": 25.033333333333335,
+        "rhythmic_complementarity_proxy_after": 0.9556451612903226,
+        "rhythmic_complementarity_proxy_before": 0.9556451612903226,
+        "simultaneous_attack_density_after": 0.04435483870967742,
+        "simultaneous_attack_density_before": 0.04435483870967742,
+        "timing_edits": 2,
+        "unnecessary_edit_count": 3,
+        "unnecessary_field_edits": 3,
+        "untouched_note_preservation": 0.9230769230769231,
+        "untouched_notes": 39
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "865/865.mid@84:92",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9545454545454546,
+        "clean_false_positive_rate": 0.045454545454545456,
+        "contour_comparisons_after": 27,
+        "contour_comparisons_before": 27,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9670675258667635,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9233980758758396,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 4.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9856784173631706,
+        "harmony_compatibility_proxy_before": 0.9553434214073875,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 44,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 0.09090909090909091,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 4,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 24.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9233980758758396,
+          "harmony_compatibility_proxy": 0.9553434214073875,
+          "register_separation_semitones": 16.650793650793652,
+          "rhythmic_complementarity_proxy": 0.9427083333333334,
+          "simultaneous_attack_density": 0.057291666666666664
+        },
+        "register_separation_semitones_after": 16.555555555555557,
+        "register_separation_semitones_before": 16.650793650793652,
+        "rhythmic_complementarity_proxy_after": 0.9427083333333334,
+        "rhythmic_complementarity_proxy_before": 0.9427083333333334,
+        "simultaneous_attack_density_after": 0.057291666666666664,
+        "simultaneous_attack_density_before": 0.057291666666666664,
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9545454545454546,
+        "untouched_notes": 44
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "minimal"
+    },
+    {
+      "entry": "105/105.mid@312:320",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9487179487179487,
+        "clean_false_positive_rate": 0.05128205128205128,
+        "contour_comparisons_after": 25,
+        "contour_comparisons_before": 25,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9966001813236628,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9600228310502283,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 2.25,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9878432685867381,
+        "harmony_compatibility_proxy_before": 0.977070747751376,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.96,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 39,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.00641025641025641,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.25,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.05128205128205128,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 2,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 22.25,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9600228310502283,
+          "harmony_compatibility_proxy": 0.977070747751376,
+          "register_separation_semitones": 25.033333333333335,
+          "rhythmic_complementarity_proxy": 0.9556451612903226,
+          "simultaneous_attack_density": 0.04435483870967742
+        },
+        "register_separation_semitones_after": 25.393939393939394,
+        "register_separation_semitones_before": 25.033333333333335,
+        "rhythmic_complementarity_proxy_after": 0.9596774193548387,
+        "rhythmic_complementarity_proxy_before": 0.9556451612903226,
+        "simultaneous_attack_density_after": 0.04032258064516129,
+        "simultaneous_attack_density_before": 0.04435483870967742,
+        "timing_edits": 1,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9487179487179487,
+        "untouched_notes": 39
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "496/496.mid@188:196",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9672131147540983,
+        "clean_false_positive_rate": 0.03278688524590164,
+        "contour_comparisons_after": 45,
+        "contour_comparisons_before": 45,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "cross_clip_harmonic_compatibility_proxy_after": 0.9349210242323163,
+        "cross_clip_harmonic_compatibility_proxy_before": 0.9183557343274795,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 2.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.948251773218451,
+        "harmony_compatibility_proxy_before": 0.9442328747560337,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 61,
+        "octave_displacements": 0,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 0.03278688524590164,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 2,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 22.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "cross_clip_harmonic_compatibility_proxy": 0.9183557343274795,
+          "harmony_compatibility_proxy": 0.9442328747560337,
+          "register_separation_semitones": 13.89090909090909,
+          "rhythmic_complementarity_proxy": 0.9576719576719577,
+          "simultaneous_attack_density": 0.042328042328042326
+        },
+        "register_separation_semitones_after": 14.072727272727272,
+        "register_separation_semitones_before": 13.89090909090909,
+        "rhythmic_complementarity_proxy_after": 0.9576719576719577,
+        "rhythmic_complementarity_proxy_before": 0.9576719576719577,
+        "simultaneous_attack_density_after": 0.042328042328042326,
+        "simultaneous_attack_density_before": 0.042328042328042326,
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9672131147540983,
+        "untouched_notes": 61
+      },
+      "preservation": [
+        0,
+        0
+      ],
+      "preset": "minimal"
+    }
+  ]
+}

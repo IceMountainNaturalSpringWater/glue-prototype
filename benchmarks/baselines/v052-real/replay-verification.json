@@ -1,0 +1,21 @@
+{
+  "algorithm_sha256": "04e1428013ad46e2f3c0b2838429d5a841763db64a6ebf5221d7d16bc2c5df96",
+  "corpora": {
+    "pop909": {
+      "replayed_cases": 45,
+      "clean_controls_matched": 120,
+      "matrix_truncated_traces": 0,
+      "entry": "253/253.mid@60:68"
+    },
+    "maestro": {
+      "replayed_cases": 45,
+      "clean_controls_matched": 120,
+      "matrix_truncated_traces": 0,
+      "entry": "2015/MIDI-Unprocessed_R2_D2-12-13-15_mid--AUDIO-from_mp3_12_R2_2015_wav--1.midi@256:264"
+    }
+  },
+  "excluded_comparison_fields": [
+    "runtime_seconds",
+    "diagnostic_seconds"
+  ]
+}

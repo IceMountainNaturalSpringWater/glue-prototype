@@ -37,6 +37,9 @@ class MusicalWeights:
     onset_distance: float = 1.5
     duration_distance: float = 1.0
     preservation: float = 8.0
+    performance_rhythm: float = 1.0
+    articulation: float = 0.5
+    octave_context: float = 1.0
 
     def __post_init__(self) -> None:
         for name in self.__dataclass_fields__:
