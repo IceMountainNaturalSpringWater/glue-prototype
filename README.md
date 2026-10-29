@@ -1,4 +1,4 @@
-# GLUE V0.5 Prototype
+# GLUE V0.5.4 Prototype
 
 GLUE is a deterministic, preservation-first MIDI analysis and repair tool. Its
 **Polish One Clip** workflow reviews possible inconsistencies inside one
@@ -11,7 +11,49 @@ standalone desktop prototype with no cloud services, accounts, telemetry, AI
 calls, or network features. Scores, chord labels, and repair suggestions are
 transparent estimates, not objective musical diagnoses.
 
-## New in V0.5
+## V0.5.4: recovery and counterfactual diagnostics
+
+[V0.5.4 measurements and limitations](docs/V054_REPAIR_QUALITY.md) distinguish
+actual recovery from candidate-availability and feasible no-collateral oracle
+bounds. The iteration adds context-conditioned scoring, expressive relationship
+evidence, corroborated octave reasoning and fixed-budget search scheduling.
+No GUI features are added. Corpus/split reports retain clean-input regressions
+and runtime costs; improved fit or candidate recall alone is not success.
+The frozen V0.5.4 quality gate is **not met**: MAESTRO's calibration recovery
+gain did not generalize (held-out exact recovery remains zero), both corpora
+have more held-out runs made worse, and runtime increased. Tuning stopped after
+evaluation; see the report before treating these changes as a quality upgrade.
+
+## V0.5.3: contextual repair candidates
+
+[Candidate-quality work and measurements](docs/V053_CANDIDATES.md) add approximate
+voice/register tracking, bounded motif/groove/articulation alternatives and
+developer-facing provenance. The GUI, explicit permissions and MIDI safeguards
+are unchanged. Corpus comparisons stay separated by dataset and split; broader
+candidate recall is not the same as reliable musical recovery.
+The frozen small-subset evaluation does **not** pass the overall quality gate:
+held-out exact recovery fell, and MAESTRO clean false positives increased despite
+eliminating clean octave revoicing. See the report before treating this as an upgrade.
+
+## Introduced in V0.5.1: offline benchmarking
+
+The [benchmark and calibration framework](docs/BENCHMARKING.md) inventories local
+POP909-style, MAESTRO-style, and reference MIDI; injects seeded errors; and measures
+recovery, collateral edits, clean-input false positives, and runtime. JSON/CSV
+reports retain per-preset and per-preservation results. No dataset downloads,
+GUI changes, repair algorithm changes, or weight tuning are included.
+
+See the [recorded synthetic baseline](docs/V051_BASELINE.md) for measured failures
+and recommendations. These are framework-validation references, not claims about
+performance on POP909, MAESTRO, or producer-rated MIDI.
+
+The [V0.5.2 real-corpus measurement checkpoint](docs/V052_REAL_CORPUS_BASELINE.md)
+now records separate POP909 and MAESTRO adapter audits, held-out manifests,
+clean/corruption results and search traces. Recovery is weak on these small
+subsets; this is diagnostic evidence, not a claim of validated musical quality.
+The in-progress engine was frozen for those measurements and was not tuned.
+
+## Musical repair introduced in V0.5
 
 The desktop Generate buttons now use one shared passage-repair engine for
 pitch, optional onset movement, and optional duration changes. **Pitch is on;

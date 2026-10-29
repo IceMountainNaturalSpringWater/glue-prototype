@@ -1,0 +1,17 @@
+{
+  "algorithm_sha256": "66e7374af98dc90556c96d64875d42803b7cea58f6b0a21149468cc7a9b98c53",
+  "pytest": {"passed": 342, "seconds": 36.13},
+  "ruff": "passed",
+  "git_diff_check": "passed; line-ending notices only",
+  "gui_launch": "GLUE_GUI_SMOKE_OK preservation_a=100 preservation_b=100",
+  "single_pair_export_reload": "GLUE_V05_SINGLE_PAIR_EXPORT_SMOKE_OK",
+  "smoke_artifacts": ".test-tmp/v053-export-smoke",
+  "replay_matched": {"pop909": 45, "maestro": 45},
+  "unchanged_source_hashes": {"pop909_sources_and_annotations": 4545, "maestro_midi": 1276},
+  "benchmark_runs": {"pop909_calibration": 540, "pop909_evaluation": 540, "maestro_calibration": 600, "maestro_evaluation": 600},
+  "benchmark_errors": 0,
+  "benchmark_skipped": 0,
+  "truncated_traces": 0,
+  "quality_gate": "NOT MET: held-out exact recovery fell; MAESTRO held-out clean false positives increased. No post-evaluation engine tuning.",
+  "committed_or_pushed": false
+}

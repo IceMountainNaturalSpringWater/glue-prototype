@@ -1,0 +1,2686 @@
+{
+  "failure_stage_mentions": {
+    "analysis": 12,
+    "scoring": 22
+  },
+  "groups": {
+    "dataset": {
+      "maestro": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.015789473684210527,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 1710,
+        "clean_octave_displacement_rate": 0.011695906432748537,
+        "clean_octave_displacements": 20,
+        "clean_pitch_edits": 27,
+        "clean_runs": 60,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 12,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.09888741333173433,
+        "partial_field_recovery": null,
+        "runs": 60,
+        "total_runtime_seconds": 5.93324479990406,
+        "unnecessary_edit_count": 27,
+        "unnecessary_field_edits": 27
+      }
+    },
+    "kind": {
+      "clean": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.015789473684210527,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 1710,
+        "clean_octave_displacement_rate": 0.011695906432748537,
+        "clean_octave_displacements": 20,
+        "clean_pitch_edits": 27,
+        "clean_runs": 60,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 12,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.09888741333173433,
+        "partial_field_recovery": null,
+        "runs": 60,
+        "total_runtime_seconds": 5.93324479990406,
+        "unnecessary_edit_count": 27,
+        "unnecessary_field_edits": 27
+      }
+    },
+    "preservation": {
+      "(0,)": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.07894736842105263,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 342,
+        "clean_octave_displacement_rate": 0.05847953216374269,
+        "clean_octave_displacements": 20,
+        "clean_pitch_edits": 27,
+        "clean_runs": 12,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 12,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.14527935833272446,
+        "partial_field_recovery": null,
+        "runs": 12,
+        "total_runtime_seconds": 1.7433522999926936,
+        "unnecessary_edit_count": 27,
+        "unnecessary_field_edits": 27
+      },
+      "(100,)": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.0,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 342,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 0,
+        "clean_runs": 12,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 0,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.0028334666652275096,
+        "partial_field_recovery": null,
+        "runs": 12,
+        "total_runtime_seconds": 0.03400159998273011,
+        "unnecessary_edit_count": 0,
+        "unnecessary_field_edits": 0
+      },
+      "(25,)": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.0,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 342,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 0,
+        "clean_runs": 12,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 0,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.1711958166658102,
+        "partial_field_recovery": null,
+        "runs": 12,
+        "total_runtime_seconds": 2.0543497999897227,
+        "unnecessary_edit_count": 0,
+        "unnecessary_field_edits": 0
+      },
+      "(50,)": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.0,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 342,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 0,
+        "clean_runs": 12,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 0,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.1177933499966457,
+        "partial_field_recovery": null,
+        "runs": 12,
+        "total_runtime_seconds": 1.4135201999597484,
+        "unnecessary_edit_count": 0,
+        "unnecessary_field_edits": 0
+      },
+      "(75,)": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.0,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 342,
+        "clean_octave_displacement_rate": 0.0,
+        "clean_octave_displacements": 0,
+        "clean_pitch_edits": 0,
+        "clean_runs": 12,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 0,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.057335074998263735,
+        "partial_field_recovery": null,
+        "runs": 12,
+        "total_runtime_seconds": 0.6880208999791648,
+        "unnecessary_edit_count": 0,
+        "unnecessary_field_edits": 0
+      }
+    },
+    "preset": {
+      "balanced": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.015789473684210527,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 570,
+        "clean_octave_displacement_rate": 0.010526315789473684,
+        "clean_octave_displacements": 6,
+        "clean_pitch_edits": 9,
+        "clean_runs": 20,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 4,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.07299853999866172,
+        "partial_field_recovery": null,
+        "runs": 20,
+        "total_runtime_seconds": 1.4599707999732345,
+        "unnecessary_edit_count": 9,
+        "unnecessary_field_edits": 9
+      },
+      "creative": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.01929824561403509,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 570,
+        "clean_octave_displacement_rate": 0.012280701754385965,
+        "clean_octave_displacements": 7,
+        "clean_pitch_edits": 11,
+        "clean_runs": 20,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 4,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.1991687899986573,
+        "partial_field_recovery": null,
+        "runs": 20,
+        "total_runtime_seconds": 3.983375799973146,
+        "unnecessary_edit_count": 11,
+        "unnecessary_field_edits": 11
+      },
+      "minimal": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.012280701754385965,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 570,
+        "clean_octave_displacement_rate": 0.012280701754385965,
+        "clean_octave_displacements": 7,
+        "clean_pitch_edits": 7,
+        "clean_runs": 20,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 4,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.02449490999788395,
+        "partial_field_recovery": null,
+        "runs": 20,
+        "total_runtime_seconds": 0.489898199957679,
+        "unnecessary_edit_count": 7,
+        "unnecessary_field_edits": 7
+      }
+    },
+    "workflow": {
+      "single": {
+        "clean_duration_edits": 0,
+        "clean_false_positive_rate": 0.015789473684210527,
+        "clean_motif_disturbance_runs": 0,
+        "clean_notes": 1710,
+        "clean_octave_displacement_rate": 0.011695906432748537,
+        "clean_octave_displacements": 20,
+        "clean_pitch_edits": 27,
+        "clean_runs": 60,
+        "clean_timing_edits": 0,
+        "corrupted_note_improvement_rate": null,
+        "corrupted_notes": 0,
+        "edit_type_diagnostics": {},
+        "errors": 0,
+        "exact_recovery_rate": null,
+        "made_worse_runs": 12,
+        "mean_distance_after": null,
+        "mean_distance_before": null,
+        "mean_runtime_seconds": 0.09888741333173433,
+        "partial_field_recovery": null,
+        "runs": 60,
+        "total_runtime_seconds": 5.93324479990406,
+        "unnecessary_edit_count": 27,
+        "unnecessary_field_edits": 27
+      }
+    }
+  },
+  "made_worse_examples": [
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8823529411764706,
+        "clean_false_positive_rate": 0.11764705882352941,
+        "contour_comparisons_after": 16,
+        "contour_comparisons_before": 16,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 24.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9852827560002533,
+        "harmony_compatibility_proxy_before": 0.9852827560002533,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 17,
+        "octave_displacements": 2,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 1.411764705882353,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 24,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 44.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9852827560002533
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.8823529411764706,
+        "untouched_notes": 17
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "minimal"
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8823529411764706,
+        "clean_false_positive_rate": 0.11764705882352941,
+        "contour_comparisons_after": 16,
+        "contour_comparisons_before": 16,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 24.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9852827560002533,
+        "harmony_compatibility_proxy_before": 0.9852827560002533,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 17,
+        "octave_displacements": 2,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 1.411764705882353,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 24,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 44.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9852827560002533
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.8823529411764706,
+        "untouched_notes": 17
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8823529411764706,
+        "clean_false_positive_rate": 0.11764705882352941,
+        "contour_comparisons_after": 16,
+        "contour_comparisons_before": 16,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 24.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9852827560002533,
+        "harmony_compatibility_proxy_before": 0.9852827560002533,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 17,
+        "octave_displacements": 2,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 1.411764705882353,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 24,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 44.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9852827560002533
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.8823529411764706,
+        "untouched_notes": 17
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9622641509433962,
+        "clean_false_positive_rate": 0.03773584905660377,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 24.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.8735294117647059,
+        "harmony_compatibility_proxy_before": 0.8735294117647059,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 2,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 0.4528301886792453,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 24,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 44.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9622641509433962,
+        "untouched_notes": 53
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "minimal"
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9245283018867925,
+        "clean_false_positive_rate": 0.07547169811320754,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 30.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 4,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9620950554134697,
+        "harmony_compatibility_proxy_before": 0.8735294117647059,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 2,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 4,
+        "pitch_error_semitones_after": 0.5660377358490566,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 30,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 70.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 4,
+        "unnecessary_field_edits": 4,
+        "untouched_note_preservation": 0.9245283018867925,
+        "untouched_notes": 53
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8867924528301887,
+        "clean_false_positive_rate": 0.11320754716981132,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 45.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 6,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9752770673486786,
+        "harmony_compatibility_proxy_before": 0.8735294117647059,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9807692307692307,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 3,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 6,
+        "pitch_error_semitones_after": 0.8490566037735849,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 45,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 105.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 6,
+        "unnecessary_field_edits": 6,
+        "untouched_note_preservation": 0.8867924528301887,
+        "untouched_notes": 53
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9047619047619048,
+        "clean_false_positive_rate": 0.09523809523809523,
+        "contour_comparisons_after": 20,
+        "contour_comparisons_before": 20,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 24.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9437888766922795,
+        "harmony_compatibility_proxy_before": 0.9437888766922795,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.95,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 21,
+        "octave_displacements": 2,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 1.1428571428571428,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 24,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 44.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9437888766922795
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9047619047619048,
+        "untouched_notes": 21
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "minimal"
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9047619047619048,
+        "clean_false_positive_rate": 0.09523809523809523,
+        "contour_comparisons_after": 20,
+        "contour_comparisons_before": 20,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 15.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9738154043175997,
+        "harmony_compatibility_proxy_before": 0.9437888766922795,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 21,
+        "octave_displacements": 1,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 0.7142857142857143,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 15,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 35.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9437888766922795
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9047619047619048,
+        "untouched_notes": 21
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9047619047619048,
+        "clean_false_positive_rate": 0.09523809523809523,
+        "contour_comparisons_after": 20,
+        "contour_comparisons_before": 20,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 15.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9738154043175997,
+        "harmony_compatibility_proxy_before": 0.9437888766922795,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 21,
+        "octave_displacements": 1,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 0.7142857142857143,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 15,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 35.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9437888766922795
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9047619047619048,
+        "untouched_notes": 21
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9565217391304348,
+        "clean_false_positive_rate": 0.043478260869565216,
+        "contour_comparisons_after": 21,
+        "contour_comparisons_before": 21,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 12.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 1,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9249122560718798,
+        "harmony_compatibility_proxy_before": 0.9249122560718798,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 23,
+        "octave_displacements": 1,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.5217391304347826,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 12,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 22.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9249122560718798
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 1,
+        "unnecessary_field_edits": 1,
+        "untouched_note_preservation": 0.9565217391304348,
+        "untouched_notes": 23
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "minimal"
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9565217391304348,
+        "clean_false_positive_rate": 0.043478260869565216,
+        "contour_comparisons_after": 21,
+        "contour_comparisons_before": 21,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 12.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 1,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9249122560718798,
+        "harmony_compatibility_proxy_before": 0.9249122560718798,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 23,
+        "octave_displacements": 1,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.5217391304347826,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 12,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 22.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9249122560718798
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 1,
+        "unnecessary_field_edits": 1,
+        "untouched_note_preservation": 0.9565217391304348,
+        "untouched_notes": 23
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9565217391304348,
+        "clean_false_positive_rate": 0.043478260869565216,
+        "contour_comparisons_after": 21,
+        "contour_comparisons_before": 21,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 12.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 1,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9249122560718798,
+        "harmony_compatibility_proxy_before": 0.9249122560718798,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 23,
+        "octave_displacements": 1,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.5217391304347826,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 12,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 22.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9249122560718798
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 1,
+        "unnecessary_field_edits": 1,
+        "untouched_note_preservation": 0.9565217391304348,
+        "untouched_notes": 23
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative"
+    }
+  ],
+  "overall": {
+    "clean_duration_edits": 0,
+    "clean_false_positive_rate": 0.015789473684210527,
+    "clean_motif_disturbance_runs": 0,
+    "clean_notes": 1710,
+    "clean_octave_displacement_rate": 0.011695906432748537,
+    "clean_octave_displacements": 20,
+    "clean_pitch_edits": 27,
+    "clean_runs": 60,
+    "clean_timing_edits": 0,
+    "corrupted_note_improvement_rate": null,
+    "corrupted_notes": 0,
+    "edit_type_diagnostics": {},
+    "errors": 0,
+    "exact_recovery_rate": null,
+    "made_worse_runs": 12,
+    "mean_distance_after": null,
+    "mean_distance_before": null,
+    "mean_runtime_seconds": 0.09888741333173433,
+    "partial_field_recovery": null,
+    "runs": 60,
+    "total_runtime_seconds": 5.93324479990406,
+    "unnecessary_edit_count": 27,
+    "unnecessary_field_edits": 27
+  },
+  "runtime_vs_note_count": [
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 14,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        0
+      ],
+      "preset": "minimal",
+      "seconds": 0.0443029000016395
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 14,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        25
+      ],
+      "preset": "minimal",
+      "seconds": 0.039435700004105456
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 6,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        50
+      ],
+      "preset": "minimal",
+      "seconds": 0.01688789999752771
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 5,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        75
+      ],
+      "preset": "minimal",
+      "seconds": 0.014586899997084402
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        100
+      ],
+      "preset": "minimal",
+      "seconds": 0.0020766999950865284
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 18,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        0
+      ],
+      "preset": "balanced",
+      "seconds": 0.04765259999840055
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 18,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        25
+      ],
+      "preset": "balanced",
+      "seconds": 0.04935519999708049
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 14,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        50
+      ],
+      "preset": "balanced",
+      "seconds": 0.04121559999475721
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 6,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        75
+      ],
+      "preset": "balanced",
+      "seconds": 0.019211499995435588
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        100
+      ],
+      "preset": "balanced",
+      "seconds": 0.002345799992326647
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 24,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        0
+      ],
+      "preset": "creative",
+      "seconds": 0.07148099999176338
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 24,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        25
+      ],
+      "preset": "creative",
+      "seconds": 0.07335200000670739
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 24,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        50
+      ],
+      "preset": "creative",
+      "seconds": 0.06439729999692645
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 18,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        75
+      ],
+      "preset": "creative",
+      "seconds": 0.05481909999798518
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 17,
+      "preservation": [
+        100
+      ],
+      "preset": "creative",
+      "seconds": 0.0024206999951275066
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 23,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        0
+      ],
+      "preset": "minimal",
+      "seconds": 0.09865469999203924
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 13,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        25
+      ],
+      "preset": "minimal",
+      "seconds": 0.06012910000572447
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 5,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        50
+      ],
+      "preset": "minimal",
+      "seconds": 0.03313929999421816
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 4,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        75
+      ],
+      "preset": "minimal",
+      "seconds": 0.04862459999276325
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        100
+      ],
+      "preset": "minimal",
+      "seconds": 0.003732999990461394
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 100,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        0
+      ],
+      "preset": "balanced",
+      "seconds": 0.4074278000043705
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 112,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        25
+      ],
+      "preset": "balanced",
+      "seconds": 0.3973961000010604
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 49,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        50
+      ],
+      "preset": "balanced",
+      "seconds": 0.1885894000006374
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 9,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        75
+      ],
+      "preset": "balanced",
+      "seconds": 0.05088709999108687
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        100
+      ],
+      "preset": "balanced",
+      "seconds": 0.0035515000054147094
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 234,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        0
+      ],
+      "preset": "creative",
+      "seconds": 0.8442761000042083
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 327,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        25
+      ],
+      "preset": "creative",
+      "seconds": 1.2033721999905538
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 235,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        50
+      ],
+      "preset": "creative",
+      "seconds": 0.8611187000060454
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 90,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        75
+      ],
+      "preset": "creative",
+      "seconds": 0.33136939999531023
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 53,
+      "preservation": [
+        100
+      ],
+      "preset": "creative",
+      "seconds": 0.0032744000054663047
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 7,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        0
+      ],
+      "preset": "minimal",
+      "seconds": 0.024751099990680814
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 7,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        25
+      ],
+      "preset": "minimal",
+      "seconds": 0.021898600010899827
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 4,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        50
+      ],
+      "preset": "minimal",
+      "seconds": 0.01545159998931922
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 3,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        75
+      ],
+      "preset": "minimal",
+      "seconds": 0.012023200004477985
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        100
+      ],
+      "preset": "minimal",
+      "seconds": 0.003321900003356859
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 14,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        0
+      ],
+      "preset": "balanced",
+      "seconds": 0.04656790000444744
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 14,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        25
+      ],
+      "preset": "balanced",
+      "seconds": 0.04510669999581296
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 12,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        50
+      ],
+      "preset": "balanced",
+      "seconds": 0.03745909999997821
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 6,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        75
+      ],
+      "preset": "balanced",
+      "seconds": 0.02039380000496749
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        100
+      ],
+      "preset": "balanced",
+      "seconds": 0.0029338000022107735
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 18,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        0
+      ],
+      "preset": "creative",
+      "seconds": 0.05766970000695437
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 18,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        25
+      ],
+      "preset": "creative",
+      "seconds": 0.05232930000056513
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 18,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        50
+      ],
+      "preset": "creative",
+      "seconds": 0.05142659999546595
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 15,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        75
+      ],
+      "preset": "creative",
+      "seconds": 0.04005250000045635
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 21,
+      "preservation": [
+        100
+      ],
+      "preset": "creative",
+      "seconds": 0.0020649999933084473
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 3,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        0
+      ],
+      "preset": "minimal",
+      "seconds": 0.01403089999803342
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 3,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        25
+      ],
+      "preset": "minimal",
+      "seconds": 0.01128309998603072
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 3,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        50
+      ],
+      "preset": "minimal",
+      "seconds": 0.011874099989654496
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 3,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        75
+      ],
+      "preset": "minimal",
+      "seconds": 0.010880000001634471
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        100
+      ],
+      "preset": "minimal",
+      "seconds": 0.0028129000129410997
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 8,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        0
+      ],
+      "preset": "balanced",
+      "seconds": 0.026000900004873984
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 8,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        25
+      ],
+      "preset": "balanced",
+      "seconds": 0.02619330000015907
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 8,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        50
+      ],
+      "preset": "balanced",
+      "seconds": 0.02564189999247901
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 5,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        75
+      ],
+      "preset": "balanced",
+      "seconds": 0.019418199997744523
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        100
+      ],
+      "preset": "balanced",
+      "seconds": 0.0026225999899907038
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 20,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        0
+      ],
+      "preset": "creative",
+      "seconds": 0.060536699995282106
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 20,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        25
+      ],
+      "preset": "creative",
+      "seconds": 0.07449849999102298
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 20,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        50
+      ],
+      "preset": "creative",
+      "seconds": 0.0663187000027392
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 20,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        75
+      ],
+      "preset": "creative",
+      "seconds": 0.06575460000021849
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "evaluations": 1,
+      "kind": "clean",
+      "notes": 23,
+      "preservation": [
+        100
+      ],
+      "preset": "creative",
+      "seconds": 0.0028432999970391393
+    }
+  ],
+  "skipped_cases": 0,
+  "worst_examples": [
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8867924528301887,
+        "clean_false_positive_rate": 0.11320754716981132,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 45.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 6,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9752770673486786,
+        "harmony_compatibility_proxy_before": 0.8735294117647059,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.9807692307692307,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 3,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 6,
+        "pitch_error_semitones_after": 0.8490566037735849,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 45,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 105.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 6,
+        "unnecessary_field_edits": 6,
+        "untouched_note_preservation": 0.8867924528301887,
+        "untouched_notes": 53
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9245283018867925,
+        "clean_false_positive_rate": 0.07547169811320754,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 30.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 4,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9620950554134697,
+        "harmony_compatibility_proxy_before": 0.8735294117647059,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 2,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 4,
+        "pitch_error_semitones_after": 0.5660377358490566,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 30,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 70.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 4,
+        "unnecessary_field_edits": 4,
+        "untouched_note_preservation": 0.9245283018867925,
+        "untouched_notes": 53
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8823529411764706,
+        "clean_false_positive_rate": 0.11764705882352941,
+        "contour_comparisons_after": 16,
+        "contour_comparisons_before": 16,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 24.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9852827560002533,
+        "harmony_compatibility_proxy_before": 0.9852827560002533,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 17,
+        "octave_displacements": 2,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 1.411764705882353,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 24,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 44.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9852827560002533
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.8823529411764706,
+        "untouched_notes": 17
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8823529411764706,
+        "clean_false_positive_rate": 0.11764705882352941,
+        "contour_comparisons_after": 16,
+        "contour_comparisons_before": 16,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 24.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9852827560002533,
+        "harmony_compatibility_proxy_before": 0.9852827560002533,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 17,
+        "octave_displacements": 2,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 1.411764705882353,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 24,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 44.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9852827560002533
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.8823529411764706,
+        "untouched_notes": 17
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.8823529411764706,
+        "clean_false_positive_rate": 0.11764705882352941,
+        "contour_comparisons_after": 16,
+        "contour_comparisons_before": 16,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 24.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9852827560002533,
+        "harmony_compatibility_proxy_before": 0.9852827560002533,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 17,
+        "octave_displacements": 2,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 1.411764705882353,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 24,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 44.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9852827560002533
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.8823529411764706,
+        "untouched_notes": 17
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "minimal"
+    },
+    {
+      "entry": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9622641509433962,
+        "clean_false_positive_rate": 0.03773584905660377,
+        "contour_comparisons_after": 52,
+        "contour_comparisons_before": 52,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 24.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.8735294117647059,
+        "harmony_compatibility_proxy_before": 0.8735294117647059,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 53,
+        "octave_displacements": 2,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 0.4528301886792453,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 24,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 44.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.8735294117647059
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9622641509433962,
+        "untouched_notes": 53
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "minimal"
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9047619047619048,
+        "clean_false_positive_rate": 0.09523809523809523,
+        "contour_comparisons_after": 20,
+        "contour_comparisons_before": 20,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 24.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9437888766922795,
+        "harmony_compatibility_proxy_before": 0.9437888766922795,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 0.95,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 21,
+        "octave_displacements": 2,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 1.1428571428571428,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 24,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 44.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9437888766922795
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9047619047619048,
+        "untouched_notes": 21
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "minimal"
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9047619047619048,
+        "clean_false_positive_rate": 0.09523809523809523,
+        "contour_comparisons_after": 20,
+        "contour_comparisons_before": 20,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 15.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9738154043175997,
+        "harmony_compatibility_proxy_before": 0.9437888766922795,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 21,
+        "octave_displacements": 1,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 0.7142857142857143,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 15,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 35.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9437888766922795
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9047619047619048,
+        "untouched_notes": 21
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "balanced"
+    },
+    {
+      "entry": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9047619047619048,
+        "clean_false_positive_rate": 0.09523809523809523,
+        "contour_comparisons_after": 20,
+        "contour_comparisons_before": 20,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 15.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 2,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9738154043175997,
+        "harmony_compatibility_proxy_before": 0.9437888766922795,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 21,
+        "octave_displacements": 1,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 2,
+        "pitch_error_semitones_after": 0.7142857142857143,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 15,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 35.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9437888766922795
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 2,
+        "unnecessary_field_edits": 2,
+        "untouched_note_preservation": 0.9047619047619048,
+        "untouched_notes": 21
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "creative"
+    },
+    {
+      "entry": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "failure_hypotheses": [
+        {
+          "certainty": "hypothesis",
+          "evidence": "Selected edits changed untouched fields; fit objective differs from recovery.",
+          "stage": "scoring"
+        },
+        {
+          "certainty": "hypothesis",
+          "evidence": "A designated clean reference received edits; requires musical review.",
+          "stage": "analysis"
+        },
+        {
+          "certainty": "observed",
+          "evidence": "A retained lower-ranked alternative is closer to truth.",
+          "stage": "scoring"
+        }
+      ],
+      "kind": "clean",
+      "metrics": {
+        "all_note_exact_accuracy": 0.9565217391304348,
+        "clean_false_positive_rate": 0.043478260869565216,
+        "contour_comparisons_after": 21,
+        "contour_comparisons_before": 21,
+        "corrupted_field_count": 0,
+        "corrupted_notes": 0,
+        "corrupted_notes_improved": 0,
+        "duration_edits": 0,
+        "duration_error_beats_after": 0.0,
+        "duration_error_beats_before": 0.0,
+        "duration_error_beats_total_after": 0.0,
+        "duration_error_beats_total_before": 0.0,
+        "edit_distance_after": 12.0,
+        "edit_distance_before": 0.0,
+        "edited_notes": 1,
+        "exact_note_recovery": null,
+        "exact_recovered_notes": 0,
+        "harmony_compatibility_proxy_after": 0.9249122560718798,
+        "harmony_compatibility_proxy_before": 0.9249122560718798,
+        "made_worse": true,
+        "melodic_contour_similarity_after": 1.0,
+        "melodic_contour_similarity_before": 1.0,
+        "motif_occurrences_after": 0,
+        "motif_occurrences_before": 0,
+        "motif_similarity_after": null,
+        "motif_similarity_before": null,
+        "note_count": 23,
+        "octave_displacements": 1,
+        "onset_error_beats_after": 0.0,
+        "onset_error_beats_before": 0.0,
+        "onset_error_beats_total_after": 0.0,
+        "onset_error_beats_total_before": 0.0,
+        "pitch_class_recovery": null,
+        "pitch_corrupted_notes": 0,
+        "pitch_edits": 1,
+        "pitch_error_semitones_after": 0.5217391304347826,
+        "pitch_error_semitones_before": 0,
+        "pitch_error_semitones_total_after": 12,
+        "pitch_error_semitones_total_before": 0,
+        "pitch_recovered_notes": 0,
+        "pitch_recovery_accuracy": null,
+        "preservation_penalized_distance": 22.0,
+        "recovered_corrupted_fields": 0,
+        "reference_descriptors": {
+          "harmony_compatibility_proxy": 0.9249122560718798
+        },
+        "timing_edits": 0,
+        "unnecessary_edit_count": 1,
+        "unnecessary_field_edits": 1,
+        "untouched_note_preservation": 0.9565217391304348,
+        "untouched_notes": 23
+      },
+      "preservation": [
+        0
+      ],
+      "preset": "balanced"
+    }
+  ]
+}

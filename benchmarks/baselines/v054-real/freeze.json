@@ -1,0 +1,18 @@
+{
+  "glue_version": "0.5.4",
+  "algorithm_sha256": "a00c900cfe8da896d851a91a8d16a625da9c8204269e90b962cf66b993ed06c8",
+  "baseline_algorithm_sha256": "66e7374af98dc90556c96d64875d42803b7cea58f6b0a21149468cc7a9b98c53",
+  "frozen_before_held_out_evaluation": true,
+  "development_split": "calibration",
+  "baseline_oracle": "benchmarks/baselines/v054-oracle-v053",
+  "baseline_held_out_oracle_policy": "Computed with original engine before changes, sealed without inspecting metrics during development.",
+  "pre_freeze_validation": {"pytest_passed": 354, "ruff": "passed", "gui_and_export_reload_smokes": "passed"},
+  "calibration_actual_exact_recovery": {"pop909": 0.001851851851851852, "maestro": 0.02},
+  "calibration_feasible_oracle": {"pop909": 0.1814814814814815, "maestro": 0.07},
+  "calibration_clean_false_positive_notes": {"pop909": 41, "maestro": 28},
+  "calibration_clean_octave_revoicings": {"pop909": 0, "maestro": 0},
+  "old_weights_changed": false,
+  "new_weights": {"performance_rhythm": 1.0, "articulation": 0.5, "octave_context": 1.0},
+  "beam_or_evaluation_limits_increased": false,
+  "stop_policy": "No algorithm changes after held-out evaluation. Report any lack of generalization or false-positive regression honestly."
+}

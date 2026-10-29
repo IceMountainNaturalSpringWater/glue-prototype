@@ -1,0 +1,698 @@
+{
+  "dataset": "maestro",
+  "discovered_files": 1276,
+  "entries": [
+    {
+      "annotations": [],
+      "density_stratum": 0,
+      "group": "johann sebastian bach / prelude and fugue in b-flat minor, wtc i, bwv 867",
+      "id": "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--1.midi@76:84",
+      "metadata": {
+        "audio_filename": "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--1.wav",
+        "canonical_composer": "Johann Sebastian Bach",
+        "canonical_title": "Prelude and Fugue in B-flat Minor, WTC I, BWV 867",
+        "duration": "352.80947625",
+        "midi_filename": "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--1.midi",
+        "split": "train",
+        "year": "2013"
+      },
+      "sources": [
+        {
+          "path": "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--1.midi",
+          "sha256": "52d4d385f9742e3d8da37a4f8d6a64ce1a6f906437594be809004afc4f6ffb94"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {},
+      "window_beats": [
+        76,
+        84
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 0,
+      "group": "johannes brahms / six pieces for piano, op. 118",
+      "id": "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--3.midi@1780:1788",
+      "metadata": {
+        "audio_filename": "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--3.wav",
+        "canonical_composer": "Johannes Brahms",
+        "canonical_title": "Six Pieces for Piano, Op. 118",
+        "duration": "1335.99759563",
+        "midi_filename": "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--3.midi",
+        "split": "train",
+        "year": "2013"
+      },
+      "sources": [
+        {
+          "path": "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--3.midi",
+          "sha256": "a384330da77e06b33b193ffa812874fab82a6663d83f854dfd325d74bbb34c90"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {},
+      "window_beats": [
+        1780,
+        1788
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 1,
+      "group": "fr\u00e9d\u00e9ric chopin / barcarolle, op. 60",
+      "id": "2009/MIDI-Unprocessed_10_R1_2009_03-05_ORIG_MID--AUDIO_10_R1_2009_10_R1_2009_03_WAV.midi@368:376",
+      "metadata": {
+        "audio_filename": "2009/MIDI-Unprocessed_10_R1_2009_03-05_ORIG_MID--AUDIO_10_R1_2009_10_R1_2009_03_WAV.wav",
+        "canonical_composer": "Fr\u00e9d\u00e9ric Chopin",
+        "canonical_title": "Barcarolle, Op. 60",
+        "duration": "553.574499844",
+        "midi_filename": "2009/MIDI-Unprocessed_10_R1_2009_03-05_ORIG_MID--AUDIO_10_R1_2009_10_R1_2009_03_WAV.midi",
+        "split": "train",
+        "year": "2009"
+      },
+      "sources": [
+        {
+          "path": "2009/MIDI-Unprocessed_10_R1_2009_03-05_ORIG_MID--AUDIO_10_R1_2009_10_R1_2009_03_WAV.midi",
+          "sha256": "c19744b6a4f03837e6d597a33e1ae718c2c79dd34893e3e50740fb640225bc4a"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {},
+      "window_beats": [
+        368,
+        376
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 1,
+      "group": "franz schubert / sonata in a d959",
+      "id": "2006/MIDI-Unprocessed_07_R2_2006_01_ORIG_MID--AUDIO_07_R2_2006_01_Track01_wav.midi@744:752",
+      "metadata": {
+        "audio_filename": "2006/MIDI-Unprocessed_07_R2_2006_01_ORIG_MID--AUDIO_07_R2_2006_01_Track01_wav.wav",
+        "canonical_composer": "Franz Schubert",
+        "canonical_title": "Sonata in A D959",
+        "duration": "670.895429531",
+        "midi_filename": "2006/MIDI-Unprocessed_07_R2_2006_01_ORIG_MID--AUDIO_07_R2_2006_01_Track01_wav.midi",
+        "split": "train",
+        "year": "2006"
+      },
+      "sources": [
+        {
+          "path": "2006/MIDI-Unprocessed_07_R2_2006_01_ORIG_MID--AUDIO_07_R2_2006_01_Track01_wav.midi",
+          "sha256": "c210ecf7cf51749b4a893d77c7e38c0c11e2e34f0c1d1070eed1c8e526e63076"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {},
+      "window_beats": [
+        744,
+        752
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 2,
+      "group": "fr\u00e9d\u00e9ric chopin / scherzo no. 2 in b-flat minor, op.31",
+      "id": "2014/MIDI-UNPROCESSED_06-08_R1_2014_MID--AUDIO_07_R1_2014_wav--3.midi@384:392",
+      "metadata": {
+        "audio_filename": "2014/MIDI-UNPROCESSED_06-08_R1_2014_MID--AUDIO_07_R1_2014_wav--3.wav",
+        "canonical_composer": "Fr\u00e9d\u00e9ric Chopin",
+        "canonical_title": "Scherzo No. 2 in B-Flat Minor, Op.31",
+        "duration": "578.37549",
+        "midi_filename": "2014/MIDI-UNPROCESSED_06-08_R1_2014_MID--AUDIO_07_R1_2014_wav--3.midi",
+        "split": "train",
+        "year": "2014"
+      },
+      "sources": [
+        {
+          "path": "2014/MIDI-UNPROCESSED_06-08_R1_2014_MID--AUDIO_07_R1_2014_wav--3.midi",
+          "sha256": "cb6a21a41f5fe96b879b76c6d33ff6c98d9199ef0dc32d0efc588d2d996efaa1"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {},
+      "window_beats": [
+        384,
+        392
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 2,
+      "group": "johann sebastian bach / prelude and fugue in d major, wtc ii, bwv 874",
+      "id": "2011/MIDI-Unprocessed_01_R1_2011_MID--AUDIO_R1-D1_02_Track02_wav.midi@100:108",
+      "metadata": {
+        "audio_filename": "2011/MIDI-Unprocessed_01_R1_2011_MID--AUDIO_R1-D1_02_Track02_wav.wav",
+        "canonical_composer": "Johann Sebastian Bach",
+        "canonical_title": "Prelude and Fugue in D Major, WTC II, BWV 874",
+        "duration": "153.460049531",
+        "midi_filename": "2011/MIDI-Unprocessed_01_R1_2011_MID--AUDIO_R1-D1_02_Track02_wav.midi",
+        "split": "train",
+        "year": "2011"
+      },
+      "sources": [
+        {
+          "path": "2011/MIDI-Unprocessed_01_R1_2011_MID--AUDIO_R1-D1_02_Track02_wav.midi",
+          "sha256": "710aef51d6005e29844a09c532713b21e630dc2fdef4df0b0627e26dd9666068"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {},
+      "window_beats": [
+        100,
+        108
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 3,
+      "group": "ludwig van beethoven / thirty-two variations in c minor, woo 80",
+      "id": "2015/MIDI-Unprocessed_R2_D2-12-13-15_mid--AUDIO-from_mp3_12_R2_2015_wav--1.midi@256:264",
+      "metadata": {
+        "audio_filename": "2015/MIDI-Unprocessed_R2_D2-12-13-15_mid--AUDIO-from_mp3_12_R2_2015_wav--1.wav",
+        "canonical_composer": "Ludwig van Beethoven",
+        "canonical_title": "Thirty-Two Variations in C Minor, WoO 80",
+        "duration": "578.201041667",
+        "midi_filename": "2015/MIDI-Unprocessed_R2_D2-12-13-15_mid--AUDIO-from_mp3_12_R2_2015_wav--1.midi",
+        "split": "train",
+        "year": "2015"
+      },
+      "sources": [
+        {
+          "path": "2015/MIDI-Unprocessed_R2_D2-12-13-15_mid--AUDIO-from_mp3_12_R2_2015_wav--1.midi",
+          "sha256": "59b86499d2bb41f379c25d4c1ad95587a0f4d7cea1be9382d80f9829c74839c8"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {},
+      "window_beats": [
+        256,
+        264
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 3,
+      "group": "sergei rachmaninoff / gy\u00f6rgy cziffra / flight of b.b.",
+      "id": "2006/MIDI-Unprocessed_12_R1_2006_01-08_ORIG_MID--AUDIO_12_R1_2006_08_Track08_wav.midi@76:84",
+      "metadata": {
+        "audio_filename": "2006/MIDI-Unprocessed_12_R1_2006_01-08_ORIG_MID--AUDIO_12_R1_2006_08_Track08_wav.wav",
+        "canonical_composer": "Sergei Rachmaninoff / Gy\u00f6rgy Cziffra",
+        "canonical_title": "Flight of B.B.",
+        "duration": "114.58321875",
+        "midi_filename": "2006/MIDI-Unprocessed_12_R1_2006_01-08_ORIG_MID--AUDIO_12_R1_2006_08_Track08_wav.midi",
+        "split": "train",
+        "year": "2006"
+      },
+      "sources": [
+        {
+          "path": "2006/MIDI-Unprocessed_12_R1_2006_01-08_ORIG_MID--AUDIO_12_R1_2006_08_Track08_wav.midi",
+          "sha256": "cad376727de76c63b2b25852b95980366aa8b1f9449f82a3fd709715292cb709"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {},
+      "window_beats": [
+        76,
+        84
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 0,
+      "group": "domenico scarlatti / sonata in f minor, k. 466",
+      "id": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi@316:324",
+      "metadata": {
+        "audio_filename": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.wav",
+        "canonical_composer": "Domenico Scarlatti",
+        "canonical_title": "Sonata in F Minor, K. 466",
+        "duration": "239.784081463",
+        "midi_filename": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi",
+        "split": "test",
+        "year": "2017"
+      },
+      "sources": [
+        {
+          "path": "2017/MIDI-Unprocessed_083_PIANO083_MID--AUDIO-split_07-09-17_Piano-e_2_-06_wav--1.midi",
+          "sha256": "6b1b9ee06ffcd1d83f8bc6f26da1518998dd34dff22a8c3caadfcb2bb19da19f"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {},
+      "window_beats": [
+        316,
+        324
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 0,
+      "group": "franz schubert / sonata in a minor, d784",
+      "id": "2018/MIDI-Unprocessed_Recital9-11_MID--AUDIO_09_R1_2018_wav--1.midi@304:312",
+      "metadata": {
+        "audio_filename": "2018/MIDI-Unprocessed_Recital9-11_MID--AUDIO_09_R1_2018_wav--1.wav",
+        "canonical_composer": "Franz Schubert",
+        "canonical_title": "Sonata in A Minor, D784",
+        "duration": "1371.54510281",
+        "midi_filename": "2018/MIDI-Unprocessed_Recital9-11_MID--AUDIO_09_R1_2018_wav--1.midi",
+        "split": "test",
+        "year": "2018"
+      },
+      "sources": [
+        {
+          "path": "2018/MIDI-Unprocessed_Recital9-11_MID--AUDIO_09_R1_2018_wav--1.midi",
+          "sha256": "2332fa00e6dface8bccb5fc7742a695713e3a7f9c61cd3741907bd4b4f29cc00"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {},
+      "window_beats": [
+        304,
+        312
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 1,
+      "group": "sergei rachmaninoff / prelude op. 32, no. 10",
+      "id": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi@444:452",
+      "metadata": {
+        "audio_filename": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.wav",
+        "canonical_composer": "Sergei Rachmaninoff",
+        "canonical_title": "Prelude Op. 32, No. 10",
+        "duration": "287.529574004",
+        "midi_filename": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi",
+        "split": "test",
+        "year": "2004"
+      },
+      "sources": [
+        {
+          "path": "2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi",
+          "sha256": "757a56223cb0aba32e8966c991050928ce5e716687de95511bcd2f89426d6090"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {},
+      "window_beats": [
+        444,
+        452
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 1,
+      "group": "robert schumann / intermezzi, opus 4",
+      "id": "2004/MIDI-Unprocessed_XP_11_R1_2004_01-02_ORIG_MID--AUDIO_11_R1_2004_02_Track02_wav.midi@1448:1456",
+      "metadata": {
+        "audio_filename": "2004/MIDI-Unprocessed_XP_11_R1_2004_01-02_ORIG_MID--AUDIO_11_R1_2004_02_Track02_wav.wav",
+        "canonical_composer": "Robert Schumann",
+        "canonical_title": "Intermezzi, Opus 4",
+        "duration": "1303.54743657",
+        "midi_filename": "2004/MIDI-Unprocessed_XP_11_R1_2004_01-02_ORIG_MID--AUDIO_11_R1_2004_02_Track02_wav.midi",
+        "split": "test",
+        "year": "2004"
+      },
+      "sources": [
+        {
+          "path": "2004/MIDI-Unprocessed_XP_11_R1_2004_01-02_ORIG_MID--AUDIO_11_R1_2004_02_Track02_wav.midi",
+          "sha256": "b7cc486aef3f97e0413aa737d31134b8abb1509d3595f066b8b56d6d8a9795d2"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {},
+      "window_beats": [
+        1448,
+        1456
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 2,
+      "group": "franz schubert / valse-caprice no. 6 from soirees de vienne",
+      "id": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi@788:796",
+      "metadata": {
+        "audio_filename": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.wav",
+        "canonical_composer": "Franz Schubert",
+        "canonical_title": "Valse-Caprice No. 6 from Soirees de Vienne",
+        "duration": "442.276534219",
+        "midi_filename": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi",
+        "split": "test",
+        "year": "2009"
+      },
+      "sources": [
+        {
+          "path": "2009/MIDI-Unprocessed_03_R1_2009_03-08_ORIG_MID--AUDIO_03_R1_2009_03_R1_2009_03_WAV.midi",
+          "sha256": "c9d4613b70a8a1681b730bc30f245cce4f555f9b8baa6e31026bc621e61712e8"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {},
+      "window_beats": [
+        788,
+        796
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 2,
+      "group": "felix mendelssohn / fantasy in f-sharp minor, op. 28 (complete)",
+      "id": "2017/MIDI-Unprocessed_059_PIANO059_MID--AUDIO-split_07-07-17_Piano-e_2-03_wav--4.midi@588:596",
+      "metadata": {
+        "audio_filename": "2017/MIDI-Unprocessed_059_PIANO059_MID--AUDIO-split_07-07-17_Piano-e_2-03_wav--4.wav",
+        "canonical_composer": "Felix Mendelssohn",
+        "canonical_title": "Fantasy in F-sharp Minor, Op. 28 (Complete)",
+        "duration": "661.205093412",
+        "midi_filename": "2017/MIDI-Unprocessed_059_PIANO059_MID--AUDIO-split_07-07-17_Piano-e_2-03_wav--4.midi",
+        "split": "test",
+        "year": "2017"
+      },
+      "sources": [
+        {
+          "path": "2017/MIDI-Unprocessed_059_PIANO059_MID--AUDIO-split_07-07-17_Piano-e_2-03_wav--4.midi",
+          "sha256": "cb793b8b07ac6b2d525bfb2d595e410de3a260ef499281875e0bec4f0fc5d8c8"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {},
+      "window_beats": [
+        588,
+        596
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 3,
+      "group": "franz liszt / concert etude \"waldesrauschen\"",
+      "id": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi@156:164",
+      "metadata": {
+        "audio_filename": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.wav",
+        "canonical_composer": "Franz Liszt",
+        "canonical_title": "Concert Etude \"Waldesrauschen\"",
+        "duration": "228.45062625",
+        "midi_filename": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi",
+        "split": "test",
+        "year": "2008"
+      },
+      "sources": [
+        {
+          "path": "2008/MIDI-Unprocessed_17_R1_2008_01-04_ORIG_MID--AUDIO_17_R1_2008_wav--3.midi",
+          "sha256": "b34529c1b53994bf9aec73d8be160ec1114e5f64d3a36617a1ca78597cccd8c6"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {},
+      "window_beats": [
+        156,
+        164
+      ]
+    },
+    {
+      "annotations": [],
+      "density_stratum": 3,
+      "group": "franz liszt / concert etude no. 2, \"gnomenreigen\", s. 145/2",
+      "id": "2011/MIDI-Unprocessed_02_R1_2011_MID--AUDIO_R1-D1_10_Track10_wav.midi@100:108",
+      "metadata": {
+        "audio_filename": "2011/MIDI-Unprocessed_02_R1_2011_MID--AUDIO_R1-D1_10_Track10_wav.wav",
+        "canonical_composer": "Franz Liszt",
+        "canonical_title": "Concert Etude No. 2, \"Gnomenreigen\", S. 145/2",
+        "duration": "154.977142031",
+        "midi_filename": "2011/MIDI-Unprocessed_02_R1_2011_MID--AUDIO_R1-D1_10_Track10_wav.midi",
+        "split": "test",
+        "year": "2011"
+      },
+      "sources": [
+        {
+          "path": "2011/MIDI-Unprocessed_02_R1_2011_MID--AUDIO_R1-D1_10_Track10_wav.midi",
+          "sha256": "c5ab91d17693bfc0f08b07c2bb6ddba8f32fb0884002a23ebbb6cb487ed015f5"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {},
+      "window_beats": [
+        100,
+        108
+      ]
+    }
+  ],
+  "excluded_variant_files": 0,
+  "provenance": "User-supplied references; quality and licensing require human review.",
+  "quarantined_entries": [
+    {
+      "annotations": [],
+      "group": "franz schubert / franz liszt / song transcriptions: aufenthalt, gretchen am spinnrade, standchen von shakespeare, der erlkonig",
+      "id": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_02_Track02_wav.midi",
+      "metadata": {
+        "audio_filename": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_02_Track02_wav.wav",
+        "canonical_composer": "Franz Schubert / Franz Liszt",
+        "canonical_title": "Song Transcriptions: Aufenthalt, Gretchen am Spinnrade, Standchen von Shakespeare, Der Erlkonig",
+        "duration": "209.410707023",
+        "midi_filename": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_02_Track02_wav.midi",
+        "split": "train",
+        "year": "2004"
+      },
+      "sources": [
+        {
+          "path": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_02_Track02_wav.midi",
+          "sha256": "07a482b5afb62133bbc977063aa4af948676fc5c839a4f557a12c6b6405f17fa"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {}
+    },
+    {
+      "annotations": [],
+      "group": "franz schubert / franz liszt / song transcriptions: aufenthalt, gretchen am spinnrade, standchen von shakespeare, der erlkonig",
+      "id": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_03_Track03_wav.midi",
+      "metadata": {
+        "audio_filename": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_03_Track03_wav.wav",
+        "canonical_composer": "Franz Schubert / Franz Liszt",
+        "canonical_title": "Song Transcriptions: Aufenthalt, Gretchen am Spinnrade, Standchen von Shakespeare, Der Erlkonig",
+        "duration": "189.921448277",
+        "midi_filename": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_03_Track03_wav.midi",
+        "split": "test",
+        "year": "2004"
+      },
+      "sources": [
+        {
+          "path": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_03_Track03_wav.midi",
+          "sha256": "fb13e8064b210132ca56a424130cb57e3ed38c74a955624d005fe542c9474343"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {}
+    },
+    {
+      "annotations": [],
+      "group": "franz schubert / franz liszt / song transcriptions: aufenthalt, gretchen am spinnrade, standchen von shakespeare, der erlkonig",
+      "id": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_04_Track04_wav.midi",
+      "metadata": {
+        "audio_filename": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_04_Track04_wav.wav",
+        "canonical_composer": "Franz Schubert / Franz Liszt",
+        "canonical_title": "Song Transcriptions: Aufenthalt, Gretchen am Spinnrade, Standchen von Shakespeare, Der Erlkonig",
+        "duration": "141.831846552",
+        "midi_filename": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_04_Track04_wav.midi",
+        "split": "train",
+        "year": "2004"
+      },
+      "sources": [
+        {
+          "path": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_04_Track04_wav.midi",
+          "sha256": "fc0b0030836a85842e244c72230770e1b47456f07b451b6852e8163d25adde93"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {}
+    },
+    {
+      "annotations": [],
+      "group": "franz schubert / franz liszt / song transcriptions: aufenthalt, gretchen am spinnrade, standchen von shakespeare, der erlkonig",
+      "id": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_05_Track05_wav.midi",
+      "metadata": {
+        "audio_filename": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_05_Track05_wav.wav",
+        "canonical_composer": "Franz Schubert / Franz Liszt",
+        "canonical_title": "Song Transcriptions: Aufenthalt, Gretchen am Spinnrade, Standchen von Shakespeare, Der Erlkonig",
+        "duration": "249.113581352",
+        "midi_filename": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_05_Track05_wav.midi",
+        "split": "test",
+        "year": "2004"
+      },
+      "sources": [
+        {
+          "path": "2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_05_Track05_wav.midi",
+          "sha256": "53160fec740e8bc55728f3248fbb9506dde38e046cfacc7ba239dca653a77aec"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {}
+    },
+    {
+      "annotations": [],
+      "group": "joseph haydn / sonata in d major, hob. xvi:24",
+      "id": "2004/MIDI-Unprocessed_XP_19_R1_2004_01-02_ORIG_MID--AUDIO_19_R1_2004_01_Track01_wav.midi",
+      "metadata": {
+        "audio_filename": "2004/MIDI-Unprocessed_XP_19_R1_2004_01-02_ORIG_MID--AUDIO_19_R1_2004_01_Track01_wav.wav",
+        "canonical_composer": "Joseph Haydn",
+        "canonical_title": "Sonata in D Major, Hob. XVI:24",
+        "duration": "208.260069392",
+        "midi_filename": "2004/MIDI-Unprocessed_XP_19_R1_2004_01-02_ORIG_MID--AUDIO_19_R1_2004_01_Track01_wav.midi",
+        "split": "validation",
+        "year": "2004"
+      },
+      "sources": [
+        {
+          "path": "2004/MIDI-Unprocessed_XP_19_R1_2004_01-02_ORIG_MID--AUDIO_19_R1_2004_01_Track01_wav.midi",
+          "sha256": "0ff36802c77648f4e97605f726b4b39217d15fdf44abe7324e5229a60f73f7c1"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {}
+    },
+    {
+      "annotations": [],
+      "group": "joseph haydn / sonata in d major, hob. xvi:24",
+      "id": "2004/MIDI-Unprocessed_XP_19_R1_2004_01-02_ORIG_MID--AUDIO_19_R1_2004_02_Track02_wav.midi",
+      "metadata": {
+        "audio_filename": "2004/MIDI-Unprocessed_XP_19_R1_2004_01-02_ORIG_MID--AUDIO_19_R1_2004_02_Track02_wav.wav",
+        "canonical_composer": "Joseph Haydn",
+        "canonical_title": "Sonata in D Major, Hob. XVI:24",
+        "duration": "272.176547504",
+        "midi_filename": "2004/MIDI-Unprocessed_XP_19_R1_2004_01-02_ORIG_MID--AUDIO_19_R1_2004_02_Track02_wav.midi",
+        "split": "test",
+        "year": "2004"
+      },
+      "sources": [
+        {
+          "path": "2004/MIDI-Unprocessed_XP_19_R1_2004_01-02_ORIG_MID--AUDIO_19_R1_2004_02_Track02_wav.midi",
+          "sha256": "bd27686280f61b95e7cbbeab9e062fc672b7ceddfc0314b336349e16a2624be1"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {}
+    },
+    {
+      "annotations": [],
+      "group": "robert schumann / romances op. 28, nos. 2 and 3",
+      "id": "2011/MIDI-Unprocessed_23_R3_2011_MID--AUDIO_R3-D8_03_Track03_wav.midi",
+      "metadata": {
+        "audio_filename": "2011/MIDI-Unprocessed_23_R3_2011_MID--AUDIO_R3-D8_03_Track03_wav.wav",
+        "canonical_composer": "Robert Schumann",
+        "canonical_title": "Romances Op. 28, Nos. 2 and 3",
+        "duration": "245.831752031",
+        "midi_filename": "2011/MIDI-Unprocessed_23_R3_2011_MID--AUDIO_R3-D8_03_Track03_wav.midi",
+        "split": "validation",
+        "year": "2011"
+      },
+      "sources": [
+        {
+          "path": "2011/MIDI-Unprocessed_23_R3_2011_MID--AUDIO_R3-D8_03_Track03_wav.midi",
+          "sha256": "f37ae6eccd59c1711acd9f015f624582b6dd187283f4a6c6c59a1a219dd08722"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {}
+    },
+    {
+      "annotations": [],
+      "group": "robert schumann / romances op. 28, nos. 2 and 3",
+      "id": "2011/MIDI-Unprocessed_23_R3_2011_MID--AUDIO_R3-D8_04_Track04_wav.midi",
+      "metadata": {
+        "audio_filename": "2011/MIDI-Unprocessed_23_R3_2011_MID--AUDIO_R3-D8_04_Track04_wav.wav",
+        "canonical_composer": "Robert Schumann",
+        "canonical_title": "Romances Op. 28, Nos. 2 and 3",
+        "duration": "438.614678906",
+        "midi_filename": "2011/MIDI-Unprocessed_23_R3_2011_MID--AUDIO_R3-D8_04_Track04_wav.midi",
+        "split": "test",
+        "year": "2011"
+      },
+      "sources": [
+        {
+          "path": "2011/MIDI-Unprocessed_23_R3_2011_MID--AUDIO_R3-D8_04_Track04_wav.midi",
+          "sha256": "bc9e59c78ba6f47b30d4e4c85bf717f1a1b5fd9c5fff99c5f69c2ad45524c826"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {}
+    },
+    {
+      "annotations": [],
+      "group": "wolfgang amadeus mozart / sonata in f major, k280",
+      "id": "2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_04_Track04_wav.midi",
+      "metadata": {
+        "audio_filename": "2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_04_Track04_wav.wav",
+        "canonical_composer": "Wolfgang Amadeus Mozart",
+        "canonical_title": "Sonata in F Major, K280",
+        "duration": "245.315515633",
+        "midi_filename": "2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_04_Track04_wav.midi",
+        "split": "test",
+        "year": "2004"
+      },
+      "sources": [
+        {
+          "path": "2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_04_Track04_wav.midi",
+          "sha256": "96a2f588d21a2b9bfc8c63d986c3c312c06da67bb49ec78eb36005de37fed5ad"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {}
+    },
+    {
+      "annotations": [],
+      "group": "wolfgang amadeus mozart / sonata in f major, k280",
+      "id": "2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_05_Track05_wav.midi",
+      "metadata": {
+        "audio_filename": "2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_05_Track05_wav.wav",
+        "canonical_composer": "Wolfgang Amadeus Mozart",
+        "canonical_title": "Sonata in F Major, K280",
+        "duration": "241.470441506",
+        "midi_filename": "2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_05_Track05_wav.midi",
+        "split": "test",
+        "year": "2004"
+      },
+      "sources": [
+        {
+          "path": "2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_05_Track05_wav.midi",
+          "sha256": "87ec97314658482ce0ee939889163660f55dfe5b2e6969e5cd049c2cbe545a38"
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {}
+    },
+    {
+      "annotations": [],
+      "group": "wolfgang amadeus mozart / sonata in f major, k280",
+      "id": "2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_06_Track06_wav.midi",
+      "metadata": {
+        "audio_filename": "2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_06_Track06_wav.wav",
+        "canonical_composer": "Wolfgang Amadeus Mozart",
+        "canonical_title": "Sonata in F Major, K280",
+        "duration": "114.696242842",
+        "midi_filename": "2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_06_Track06_wav.midi",
+        "split": "train",
+        "year": "2004"
+      },
+      "sources": [
+        {
+          "path": "2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_06_Track06_wav.midi",
+          "sha256": "573ffdfe917b1a47fed87e587f33b3dd1bd58195043ec42a92cd8ce85a4dc8fc"
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {}
+    }
+  ],
+  "root": "C:\\Users\\Kevin\\OneDrive\\CodingProjects\\glue-prototype\\benchmarks\\maestro-v3.0.0-midi\\maestro-v3.0.0",
+  "schema": 1,
+  "seed": 52,
+  "selection_exclusions": [],
+  "split_conflict_policy": "exclude entire connected piece/content groups",
+  "subset_protocol": {
+    "boundary": "only onsets inside window; complete tails, no carried notes",
+    "density_strata": 4,
+    "max_notes": 64,
+    "per_split": 8,
+    "seed": 52,
+    "selection": "stable hash, one window per composition, no repair scoring",
+    "window_beats": 8
+  }
+}

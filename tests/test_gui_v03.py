@@ -364,4 +364,4 @@ def test_v03_offscreen_smoke_runs_shared_analysis_repair_and_four_exports(
     assert "changes_b=1" in completed.stdout, diagnostic
     assert all(path.is_file() for path in (revised_a, revised_b, combined, report))
     assert len(load_midi(combined).clip.tracks) == 2
-    assert json.loads(report.read_text(encoding="utf-8"))["version"] == "0.5.0"
+    assert json.loads(report.read_text(encoding="utf-8"))["version"] == "0.5.4"

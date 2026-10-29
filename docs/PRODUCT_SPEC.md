@@ -1,5 +1,47 @@
 # GLUE V0.5 Product Specification
 
+## V0.5.4 recovery and diagnostic update
+
+The GUI, permissions, movement bounds, preset edit/evaluation budgets and MIDI
+export contract remain unchanged. Candidate scheduling now shares the fixed
+budget across fields/notes, and at most four coherent short-line onset bundles
+reuse existing generated options. Beam widths are not increased.
+
+Musical continuity and retention both use inferred register-aware voice paths.
+Competing-attack scoring requires interval tension or competing monophonic lines,
+not coincidence alone. Compensating performed onset intervals and contextual
+articulation ratios supply bounded evidence without global quantization.
+Supported onset restoration is distinguished from ordinary groove damage.
+Corroborated register/interval or motif evidence can permit octave correction
+despite legato overlap; compact chord membership counters inappropriate revoicing.
+
+New centralized objective terms are Performance rhythm (1.0), Contextual
+articulation (0.5), and Octave context (1.0). Existing coefficients are unchanged.
+Scores remain heuristic, not calibrated probabilities or listening judgments.
+
+Reference-aware oracle/rank/margin diagnostics live only in the benchmark package;
+production repair cannot import or receive ground truth. Report actual versus
+oracle recovery separately, preserve locks in aggregate reports, and expose
+unlocked results, false positives and runtime. See [V0.5.4 evidence](V054_REPAIR_QUALITY.md).
+
+## V0.5.3 candidate-evidence update
+
+The desktop contract below remains unchanged. Candidate evidence now uses
+approximate register-aware voice paths, near-simultaneous attack grouping,
+repeated four-note phrase analogues, local groove/pulse and relative articulation.
+Separate bounded target pools per editable field prevent rhythm evidence from
+displacing pitch targets. The maximum target pool per field remains 6/10/16 for
+Minimal/Balanced/Creative at zero preservation; evaluation and edit-count ceilings
+are unchanged. Per-note proposal caps are pitch 4/8/12, timing 2/4/6 and duration
+2/6/8. Timing/duration movement limits and permission defaults are unchanged.
+
+Intentional co-attacks alone do not justify timing movement. Global-key
+disagreement alone does not override locally supported chord tones. Repeated
+short neighbor figures and coherent voice contours receive additional protection;
+polyphonic octave changes require stronger evidence. Scores and objective weights
+are not broadly retuned. Up to eight linked multi-field proposals reuse the same
+full-state validator and evaluation budget. See [V0.5.3 measurements](V053_CANDIDATES.md).
+
 ## V0.5 active contract: Advanced Musical Repair
 
 V0.5 keeps Combine Two Clips as the initial tab and Polish One Clip as the

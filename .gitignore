@@ -15,3 +15,8 @@ Thumbs.db
 *.mid
 *.midi
 !sample_data/.gitkeep
+# User-supplied corpora: never bundle source MIDI, annotations, or metadata.
+benchmarks/POP909/
+benchmarks/maestro-v3.0.0-midi/
+benchmarks/maestro-v3.0.0.csv
+datasets/

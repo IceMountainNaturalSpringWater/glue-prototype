@@ -1,0 +1,23 @@
+{
+  "glue_version": "0.5.4",
+  "final_validation_date": "2026-10-28",
+  "algorithm_sha256": "a00c900cfe8da896d851a91a8d16a625da9c8204269e90b962cf66b993ed06c8",
+  "quality_gate": "not_met",
+  "interpretation": "MAESTRO calibration gains did not generalize; both corpora have more held-out runs farther from reference. Stop rule applied, with no further engine tuning.",
+  "pytest": {"passed": 355, "seconds": 29.10, "command": ".venv\\Scripts\\python.exe -m pytest --basetemp .test-tmp/v054-final-oct28"},
+  "ruff": "passed",
+  "git_diff_check": "passed",
+  "actual_search_replay": {"matched": 90, "pop909": 45, "maestro": 45, "excludes_runtime_fields": true, "artifact": "replay-verification.json"},
+  "oracle_replay": {"matched": 2280, "output": ".test-tmp/v054-oracle-replay-oct28"},
+  "independent_clean_control_matches": {"pop909": 60, "maestro": 60},
+  "unchanged_source_hashes": {"pop909_source_and_annotation_files": 4545, "maestro_midi_files": 1276},
+  "frozen_matrices_verified": 4,
+  "benchmark_errors_skipped_cases_or_truncated_traces": 0,
+  "gui_smoke": "GLUE_GUI_SMOKE_OK preservation_a=100 preservation_b=100",
+  "single_pair_export_reload_smoke": "GLUE_V05_SINGLE_PAIR_EXPORT_SMOKE_OK",
+  "smoke_output": ".test-tmp/v054-smoke-oct28",
+  "profiling_output": ".test-tmp/v054-profile-oct28",
+  "profile_note": "Instrumented Creative clean calibration runs, 59 POP909 notes and 58 MAESTRO notes, each 420 evaluations. Full-passage rescoring dominates. Not comparable to unprofiled matrix means.",
+  "engine_changes_after_held_out": false,
+  "committed_or_pushed": false
+}

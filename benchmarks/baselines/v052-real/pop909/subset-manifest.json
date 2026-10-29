@@ -1,0 +1,885 @@
+{
+  "dataset": "pop909",
+  "discovered_files": 2898,
+  "entries": [
+    {
+      "annotations": [
+        {
+          "path": "085/chord_midi.txt",
+          "sha256": "21fe8ce20b0979c2e41fab855c119e57d78b94c73f9fd1718ce1e65472fd7705"
+        },
+        {
+          "path": "085/beat_midi.txt",
+          "sha256": "f420293162feb1db7a18e98511da99ff8f6977e3154ac0931ec0aa89a2b75e5b"
+        },
+        {
+          "path": "085/key_audio.txt",
+          "sha256": "908c6c3ab8372cf7c0e217d948c228c4845c2f7c154537e22c0b72462d7f1c3c"
+        },
+        {
+          "path": "085/chord_audio.txt",
+          "sha256": "9e03f04da1f11ffe46fd2ad368a01a4d260fab57285e767199ce2ab9feb739e8"
+        }
+      ],
+      "density_stratum": 0,
+      "group": "085",
+      "id": "085/085.mid@152:160",
+      "metadata": {
+        "midi_filename": "085/085.mid"
+      },
+      "sources": [
+        {
+          "path": "085/085.mid",
+          "sha256": "2f92e181c6f37bf8fbc2e9afa8b7c95b88f5ce12873f4fa0b24037a422e51e1f",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "085/085.mid",
+          "sha256": "2f92e181c6f37bf8fbc2e9afa8b7c95b88f5ce12873f4fa0b24037a422e51e1f",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        152,
+        160
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "384/chord_midi.txt",
+          "sha256": "d7b27620cdc8d7dec4ac791c6c92c89f60628292cfce71fe1fd1f08d031c86b6"
+        },
+        {
+          "path": "384/beat_midi.txt",
+          "sha256": "fb64c3a395a7db4424adf1dceb5e80f50014a911cf7632167fb240dd2a9cfed0"
+        },
+        {
+          "path": "384/key_audio.txt",
+          "sha256": "91f195dfa88a6fac67e6c01556058f60ca439a0b704533e20e28ef58f36594de"
+        },
+        {
+          "path": "384/chord_audio.txt",
+          "sha256": "a1131cac76899f0644621d29d32f2673054bf5978b8bdcc667be88b5fcec6df5"
+        }
+      ],
+      "density_stratum": 0,
+      "group": "384",
+      "id": "384/384.mid@212:220",
+      "metadata": {
+        "midi_filename": "384/384.mid"
+      },
+      "sources": [
+        {
+          "path": "384/384.mid",
+          "sha256": "b7205a5bbb7a071fd231830f532c5cd5c2d1c1062fa3adb4c4dcf84ee580d0e3",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "384/384.mid",
+          "sha256": "b7205a5bbb7a071fd231830f532c5cd5c2d1c1062fa3adb4c4dcf84ee580d0e3",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        212,
+        220
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "277/chord_midi.txt",
+          "sha256": "0862b2c56d34c9807371249d681c89c9fc3e13a45f83be0844defc98a33f6dda"
+        },
+        {
+          "path": "277/beat_midi.txt",
+          "sha256": "7ad25deb8f86965e2fa1812185abfd15e73b6ae024ad6d8f63080ed190c3bf1e"
+        },
+        {
+          "path": "277/key_audio.txt",
+          "sha256": "ff2c958aab1f4d506ca9cb119a99d228c3f03d5ade1c49d93d640aee7fd1ec22"
+        },
+        {
+          "path": "277/chord_audio.txt",
+          "sha256": "19f3106b2fbf04321b9e54a55051b64d91be760593f22a6bcb746150d8d7e5f1"
+        }
+      ],
+      "density_stratum": 1,
+      "group": "277",
+      "id": "277/277.mid@260:268",
+      "metadata": {
+        "midi_filename": "277/277.mid"
+      },
+      "sources": [
+        {
+          "path": "277/277.mid",
+          "sha256": "72eee965aba759dfa05782545624a6198cc8b9b477cf94b572049ee61fa9da51",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "277/277.mid",
+          "sha256": "72eee965aba759dfa05782545624a6198cc8b9b477cf94b572049ee61fa9da51",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        260,
+        268
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "700/chord_midi.txt",
+          "sha256": "ab2411d1b980750ae2c4e253df07644833718043f0e6c7c374feb29b3d647850"
+        },
+        {
+          "path": "700/beat_midi.txt",
+          "sha256": "9ba3dc79832f354adfa34f77322f98136950082b9fe3f8c4cd0b2213fbaa1c5b"
+        },
+        {
+          "path": "700/key_audio.txt",
+          "sha256": "fea773e4ba972ae683a56df7b1430cb9cc25c6738d927537b12f905d82cf5ab8"
+        },
+        {
+          "path": "700/chord_audio.txt",
+          "sha256": "3e3247555266d84f36c1a08c9b20ef992c784a2ba1e53ea182185fe4c9089025"
+        }
+      ],
+      "density_stratum": 1,
+      "group": "700",
+      "id": "700/700.mid@48:56",
+      "metadata": {
+        "midi_filename": "700/700.mid"
+      },
+      "sources": [
+        {
+          "path": "700/700.mid",
+          "sha256": "c8f8d29e4bdb0fe25b2d11f73f5556a927d1950f3d0431c2b4057945d317e95d",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "700/700.mid",
+          "sha256": "c8f8d29e4bdb0fe25b2d11f73f5556a927d1950f3d0431c2b4057945d317e95d",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        48,
+        56
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "412/chord_midi.txt",
+          "sha256": "d30b7ab8f4e9cae3f3008a405bd8b1ab4ccbd22f42e2e98bb736bef686f22807"
+        },
+        {
+          "path": "412/beat_midi.txt",
+          "sha256": "70964217752c0d8910d6b3130060e41c4e9c50ec467c627614b5366ed2067299"
+        },
+        {
+          "path": "412/key_audio.txt",
+          "sha256": "7eddc23d9b7f81998bb2b8c4fd4499c44a33bd3f1a722115f79c7f2dfe0c73e2"
+        },
+        {
+          "path": "412/chord_audio.txt",
+          "sha256": "3d1e52d272cf8523e97db8ce05d7651aa3d171b5b5c620b2aa8d321b80f865f0"
+        }
+      ],
+      "density_stratum": 2,
+      "group": "412",
+      "id": "412/412.mid@220:228",
+      "metadata": {
+        "midi_filename": "412/412.mid"
+      },
+      "sources": [
+        {
+          "path": "412/412.mid",
+          "sha256": "7014e7a52fb867bfe0bf61122b008df57121b207be7b49ca05f018b7ecc8cdbf",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "412/412.mid",
+          "sha256": "7014e7a52fb867bfe0bf61122b008df57121b207be7b49ca05f018b7ecc8cdbf",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        220,
+        228
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "118/chord_midi.txt",
+          "sha256": "4535209d2b74f85c94ebc050c8eb18815dd1a6478596e31f5c3a2e7c4856e5e7"
+        },
+        {
+          "path": "118/beat_midi.txt",
+          "sha256": "1c931c4b372bd4f727a6a403996bb584e6522f141419c3d05ab1c2dae6ac91b1"
+        },
+        {
+          "path": "118/key_audio.txt",
+          "sha256": "a254466174915ed0da276c8049b3a011a792c559de8d36f0fe16a646b36ad3fd"
+        },
+        {
+          "path": "118/chord_audio.txt",
+          "sha256": "8c5a946a2dbebb0c332f402ce4444e8421fc426409fe167c1356d05e9395b7c3"
+        }
+      ],
+      "density_stratum": 2,
+      "group": "118",
+      "id": "118/118.mid@212:220",
+      "metadata": {
+        "midi_filename": "118/118.mid"
+      },
+      "sources": [
+        {
+          "path": "118/118.mid",
+          "sha256": "3b46bbb77fcc0b36b7cf8bbdac99225579631a23755f3cbf70f218f0a1c20f89",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "118/118.mid",
+          "sha256": "3b46bbb77fcc0b36b7cf8bbdac99225579631a23755f3cbf70f218f0a1c20f89",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        212,
+        220
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "253/chord_midi.txt",
+          "sha256": "36e23d426a7f2132b426f8e641f0af513068b2200217c2bb0a139ad4e06e638a"
+        },
+        {
+          "path": "253/beat_midi.txt",
+          "sha256": "d4c7194580e533d8d748e26cfdc95e8fd1c158652dcd77a2991863f051cfafbb"
+        },
+        {
+          "path": "253/key_audio.txt",
+          "sha256": "4aee550868d745ae3c75cf765c0575db71ad3b6496aec5baf916eaac056e9fc9"
+        },
+        {
+          "path": "253/chord_audio.txt",
+          "sha256": "964eaaf2f8fe4b86c454148f75c22a2a77fdf2630e201f98db946d10e171f078"
+        }
+      ],
+      "density_stratum": 3,
+      "group": "253",
+      "id": "253/253.mid@60:68",
+      "metadata": {
+        "midi_filename": "253/253.mid"
+      },
+      "sources": [
+        {
+          "path": "253/253.mid",
+          "sha256": "fdf9ac4f7e1cd358c50b5947e939f5d79225d4fa595a75cc0bbe8f49f24ae801",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "253/253.mid",
+          "sha256": "fdf9ac4f7e1cd358c50b5947e939f5d79225d4fa595a75cc0bbe8f49f24ae801",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        60,
+        68
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "536/chord_midi.txt",
+          "sha256": "c667d4f5988bac508738b909c7f9431ec4bbad4c2dd72e532d76953ad0346a5f"
+        },
+        {
+          "path": "536/beat_midi.txt",
+          "sha256": "5c688c22b14cdfdea3749da0b25a57cd641a0f954d5531bae78a193b22ae4cd0"
+        },
+        {
+          "path": "536/key_audio.txt",
+          "sha256": "6e23140771fe30c99c309c5902346b379ce4a22142038acce983b243e541f33c"
+        },
+        {
+          "path": "536/chord_audio.txt",
+          "sha256": "9ec38b43163eeaf8c0b9b343bac12ef1e05a6f7de7f143e9a9348ae8bb12d331"
+        }
+      ],
+      "density_stratum": 3,
+      "group": "536",
+      "id": "536/536.mid@152:160",
+      "metadata": {
+        "midi_filename": "536/536.mid"
+      },
+      "sources": [
+        {
+          "path": "536/536.mid",
+          "sha256": "ffad5310fd2c08d3f60830c609486338d36b7e2205ca1c014572b6583725c654",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "536/536.mid",
+          "sha256": "ffad5310fd2c08d3f60830c609486338d36b7e2205ca1c014572b6583725c654",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "calibration",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        152,
+        160
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "105/chord_midi.txt",
+          "sha256": "f41e64d555c29b2aebcd0fbeb78abc3981449af0dc81336dbbc6d1ca9edbe3e5"
+        },
+        {
+          "path": "105/beat_midi.txt",
+          "sha256": "f82f6d17f3851b70a6f7f7a562a1577eea6e944994016f14e0db739602a8b84c"
+        },
+        {
+          "path": "105/key_audio.txt",
+          "sha256": "5a8e5e7c2807bb42e01d49a1b499a1163af603fadf3676ac5bbeab7c0e93b8a4"
+        },
+        {
+          "path": "105/chord_audio.txt",
+          "sha256": "f3780869d87dad0a91e8671d0c31db6ce04eb60c37879b93a2fe2ac7d1915d5b"
+        }
+      ],
+      "density_stratum": 0,
+      "group": "105",
+      "id": "105/105.mid@312:320",
+      "metadata": {
+        "midi_filename": "105/105.mid"
+      },
+      "sources": [
+        {
+          "path": "105/105.mid",
+          "sha256": "531fb4254877cc12bcaec24e00c42aed4e8106d034ee55eb7a06129e2fd2bb85",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "105/105.mid",
+          "sha256": "531fb4254877cc12bcaec24e00c42aed4e8106d034ee55eb7a06129e2fd2bb85",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        312,
+        320
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "787/chord_midi.txt",
+          "sha256": "32a78366b5f512281a8d9ffdd37de776f45ceb5ac67da645e7174e06508ca3d6"
+        },
+        {
+          "path": "787/beat_midi.txt",
+          "sha256": "c8c2e5c427ee096eff072233f44c05caf883f9fed77ac46852fe67297e7bf153"
+        },
+        {
+          "path": "787/key_audio.txt",
+          "sha256": "9527fdd0af70f8d3e1d9ee475fd9fa7d27e86414a0d6d2c7f4868bfff970d372"
+        },
+        {
+          "path": "787/chord_audio.txt",
+          "sha256": "c24c5d8733d62c9ef2927d2970cce5cdfce3d764322b0a18754de7245d005644"
+        }
+      ],
+      "density_stratum": 0,
+      "group": "787",
+      "id": "787/787.mid@60:68",
+      "metadata": {
+        "midi_filename": "787/787.mid"
+      },
+      "sources": [
+        {
+          "path": "787/787.mid",
+          "sha256": "55658b03d58cfae6988d60a854f97469dc4fea9dd3e9b3b7f560421dc3ab0d6c",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "787/787.mid",
+          "sha256": "55658b03d58cfae6988d60a854f97469dc4fea9dd3e9b3b7f560421dc3ab0d6c",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        60,
+        68
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "865/chord_midi.txt",
+          "sha256": "2da2ec559ca74bf2158aa76502e670d0c85e69bd8e6c2f350da88877d4c3ec14"
+        },
+        {
+          "path": "865/beat_midi.txt",
+          "sha256": "eed11281aa46994e128b097faa3e92456aab486fccaa1169d48a90b6a4c34e4d"
+        },
+        {
+          "path": "865/key_audio.txt",
+          "sha256": "c0c2cd0f68b627c853ba0a241811f8b22de94462215b214feb3b22f95b81ade8"
+        },
+        {
+          "path": "865/chord_audio.txt",
+          "sha256": "95314b47443ba6d0804a2fcebf7a5874ac4367d4e42e0721aa60fa8a6fc787a3"
+        }
+      ],
+      "density_stratum": 1,
+      "group": "865",
+      "id": "865/865.mid@84:92",
+      "metadata": {
+        "midi_filename": "865/865.mid"
+      },
+      "sources": [
+        {
+          "path": "865/865.mid",
+          "sha256": "90ae654df11fe38325ec794c65262686329d318d32ef9e91b62a1194a2a683d3",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "865/865.mid",
+          "sha256": "90ae654df11fe38325ec794c65262686329d318d32ef9e91b62a1194a2a683d3",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        84,
+        92
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "087/chord_midi.txt",
+          "sha256": "f3a18e59bb3506cf97bd92d48ddfa7bef745e8bc8e582f28df1f3ac7e6c4aaa6"
+        },
+        {
+          "path": "087/beat_midi.txt",
+          "sha256": "bebedf6ff11111aad26a3ef061837696dbca3b27480a64ed858569ded81f5769"
+        },
+        {
+          "path": "087/key_audio.txt",
+          "sha256": "d608380c904c6837e1479fdd5e1465367ccbc662b7f49cfbe78f3c893e33b701"
+        },
+        {
+          "path": "087/chord_audio.txt",
+          "sha256": "6f96ee600c8389f94b3faeb7601f04ee6377e5b50dd91e96fcb3203cecbc7118"
+        }
+      ],
+      "density_stratum": 1,
+      "group": "087",
+      "id": "087/087.mid@56:64",
+      "metadata": {
+        "midi_filename": "087/087.mid"
+      },
+      "sources": [
+        {
+          "path": "087/087.mid",
+          "sha256": "e0f6ede510fe92c1f36edd0cf65e36810f221ca455bd4af85a6e3476bef02067",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "087/087.mid",
+          "sha256": "e0f6ede510fe92c1f36edd0cf65e36810f221ca455bd4af85a6e3476bef02067",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        56,
+        64
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "496/chord_midi.txt",
+          "sha256": "869df29264ca35b0dc4a374d2d736046515996d1169b94deb0acada81154d642"
+        },
+        {
+          "path": "496/beat_midi.txt",
+          "sha256": "39a42a8109e9f59008a3bf0ea699adb6180945181973f3493ac8e66687f3313f"
+        },
+        {
+          "path": "496/key_audio.txt",
+          "sha256": "0df0d2b376a4132b1b4bead43c0ad121f9dd379fe01ac07575224843381deb45"
+        },
+        {
+          "path": "496/chord_audio.txt",
+          "sha256": "1fec54a8e3315d4794a0d34060674dc9b9434db93a98146e5b5f59aac3374aad"
+        }
+      ],
+      "density_stratum": 2,
+      "group": "496",
+      "id": "496/496.mid@188:196",
+      "metadata": {
+        "midi_filename": "496/496.mid"
+      },
+      "sources": [
+        {
+          "path": "496/496.mid",
+          "sha256": "d2245115ec82b376c188ec06ed047124c0c1860074a6f2a5344d02aa5ef1d3dd",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "496/496.mid",
+          "sha256": "d2245115ec82b376c188ec06ed047124c0c1860074a6f2a5344d02aa5ef1d3dd",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        188,
+        196
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "140/chord_midi.txt",
+          "sha256": "e1a5dad02f197f3ef0175b0814cb9c158f5545476e49e8953c227f0a194e3283"
+        },
+        {
+          "path": "140/beat_midi.txt",
+          "sha256": "6eb8820ee81dd21d6dd2ac478e2fcc2a517fd5ad43192a0f1f7459598d67f788"
+        },
+        {
+          "path": "140/key_audio.txt",
+          "sha256": "70b39c016bc1f3960ffb00eaa0013ff2faa91376234ba353f7febaccf00c9378"
+        },
+        {
+          "path": "140/chord_audio.txt",
+          "sha256": "49ede1f62e5ec3ecf2e0a1b8cd1b5eb4c7a28dc9a58bd28ec06e463c40077fa3"
+        }
+      ],
+      "density_stratum": 2,
+      "group": "140",
+      "id": "140/140.mid@352:360",
+      "metadata": {
+        "midi_filename": "140/140.mid"
+      },
+      "sources": [
+        {
+          "path": "140/140.mid",
+          "sha256": "4dd505cfc904c0f42ea0faa9f69a3117297e077a3d248ad119d34cfd8e44959b",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "140/140.mid",
+          "sha256": "4dd505cfc904c0f42ea0faa9f69a3117297e077a3d248ad119d34cfd8e44959b",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        352,
+        360
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "828/chord_midi.txt",
+          "sha256": "c4b0a818c6919b49d43baee8534521f94d09428e5d93539ed7fb3c08d7f3274d"
+        },
+        {
+          "path": "828/beat_midi.txt",
+          "sha256": "73cde7331e8d59b9cf2c7c7bb33944fab00a66b923bbad89056b27d82ec7b492"
+        },
+        {
+          "path": "828/key_audio.txt",
+          "sha256": "ee23a216b6d416a138f82c63ff58adbd44400ce3b1731541669097d2fecceab1"
+        },
+        {
+          "path": "828/chord_audio.txt",
+          "sha256": "2b8659802bb9012df9900e41941e2a7ad8caad0ba181253d2492c228bd21523f"
+        }
+      ],
+      "density_stratum": 3,
+      "group": "828",
+      "id": "828/828.mid@28:36",
+      "metadata": {
+        "midi_filename": "828/828.mid"
+      },
+      "sources": [
+        {
+          "path": "828/828.mid",
+          "sha256": "2b10eeaa9b23d59b426a2c031996773cccd68b1a5cf47e1bfc6d4b08fa5f1e64",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "828/828.mid",
+          "sha256": "2b10eeaa9b23d59b426a2c031996773cccd68b1a5cf47e1bfc6d4b08fa5f1e64",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        28,
+        36
+      ]
+    },
+    {
+      "annotations": [
+        {
+          "path": "665/chord_midi.txt",
+          "sha256": "591de2794243b0c9e3a2e0c94a9544c27c7b609c74c672ab6784a5305a44f57d"
+        },
+        {
+          "path": "665/beat_midi.txt",
+          "sha256": "f4d160403c72ea029e0886b67386af407eb29e1bd0653b90f291aa39efed45d7"
+        },
+        {
+          "path": "665/key_audio.txt",
+          "sha256": "92d8450cbc7323968023afbd17eeab10cdfbf8986429dee79e878c874e280ba4"
+        },
+        {
+          "path": "665/chord_audio.txt",
+          "sha256": "1959801866efaa1cf0317b692f1f94981bbc344bf16a41f3765b30a29667ed24"
+        }
+      ],
+      "density_stratum": 3,
+      "group": "665",
+      "id": "665/665.mid@44:52",
+      "metadata": {
+        "midi_filename": "665/665.mid"
+      },
+      "sources": [
+        {
+          "path": "665/665.mid",
+          "sha256": "fecc75b5ac392bee21886b48c382ca79c1eaf14af4cc28eaac322b4340fc1bc5",
+          "tracks": [
+            1
+          ]
+        },
+        {
+          "path": "665/665.mid",
+          "sha256": "fecc75b5ac392bee21886b48c382ca79c1eaf14af4cc28eaac322b4340fc1bc5",
+          "tracks": [
+            2,
+            3
+          ]
+        }
+      ],
+      "split": "evaluation",
+      "track_roles": {
+        "": 0,
+        "BRIDGE": 2,
+        "MELODY": 1,
+        "PIANO": 3
+      },
+      "window_beats": [
+        44,
+        52
+      ]
+    }
+  ],
+  "excluded_variant_files": 1989,
+  "provenance": "User-supplied references; quality and licensing require human review.",
+  "root": "C:\\Users\\Kevin\\OneDrive\\CodingProjects\\glue-prototype\\benchmarks\\POP909\\POP909",
+  "schema": 1,
+  "seed": 52,
+  "selection_exclusions": [],
+  "subset_protocol": {
+    "boundary": "only onsets inside window; complete tails, no carried notes",
+    "density_strata": 4,
+    "max_notes": 64,
+    "per_split": 8,
+    "seed": 52,
+    "selection": "stable hash, one window per composition, no repair scoring",
+    "window_beats": 8
+  }
+}
